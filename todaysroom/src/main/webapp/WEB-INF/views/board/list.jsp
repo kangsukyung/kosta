@@ -209,7 +209,7 @@
 
 	<!--================ Start footer Area  =================-->
 	<section>
-<%-- 			<%@include file="/WEB-INF/views/footer.jsp"%> --%>
+<%-- 	<%@include file="/WEB-INF/views/footer.jsp"%> --%>
 	</section>
 	<!--================ End footer Area  =================-->
 
