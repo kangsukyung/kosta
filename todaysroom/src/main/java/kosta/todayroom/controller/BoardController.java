@@ -58,26 +58,26 @@ public class BoardController {
 	@PostMapping("/register")
 	public String BoardRegister(BoardVO board, RoomwarmingVO room, KnowhowVO know, RedirectAttributes rttr) {
 		log.info("========== INSERT ==========");
-
-		log.info("register : " + board);
-
-		if (board.getAttachList() != null) {
-			board.getAttachList().forEach(attach -> log.info(attach));
-		}
-
-		log.info("========== INSERT ==========");
-
-		service.register(board);
-
-		if (room.getRoomwarming_type() != null) {
-			service.roomRegister(room);
-		}
-
-		if (know.getKnowhow_style() != null) {
-			service.knowhowRegister(know);
-		}
-
-		rttr.addFlashAttribute("result", board.getBoard_seq());
+		
+//		log.info("register : " + board);
+//
+//		if (board.getAttachList() != null) {
+//			board.getAttachList().forEach(attach -> log.info(attach));
+//		}
+//
+//		log.info("========== INSERT ==========");
+//
+//		service.register(board);
+//
+//		if (room.getRoomwarming_type() != null) {
+//			service.roomRegister(room);
+//		}
+//
+//		if (know.getKnowhow_style() != null) {
+//			service.knowhowRegister(know);
+//		}
+//
+//		rttr.addFlashAttribute("result", board.getBoard_seq());
 
 		return "redirect:/board/list";
 	}

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -99,8 +101,14 @@
 
 						<!-- start 파일 업로드 -->
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="title"
-								name="board_thumbnail" placeholder="Thumbnail">
+							<div>
+								<input type="file" class="form-control" id="title" name="board_thumbnail">
+							</div>
+							<div class='uploadResult'>
+								<ul>
+
+								</ul>
+							</div>
 						</div>
 
 						<!-- picture -->
@@ -142,7 +150,14 @@
 							<textarea rows="30%" cols="70" class="form-control" id="contents"
 								name="board_content" placeholder="내용을 입력해주세요."></textarea>
 						</div>
-
+						
+						<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.member" var="member"/>
+						<input type="hidden" name="member_seq" value="${member.member_seq }">
+						</sec:authorize>
+						
+						<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
+						
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
 								class="button button-register w-100">글 등록</button>
@@ -260,7 +275,7 @@
 							str += "<span> "+ obj.fileName+"</span>";
 							str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' " 
 							str += "class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-							str += "<img src='/resources/img/attach.png'></a>";
+							str += "<img src='/main_resource/img/attach.png'></a>";
 							str += "</div>";
 							str +"</li>";
 						}
