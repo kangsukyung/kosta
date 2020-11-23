@@ -1,0 +1,23 @@
+@charset "EUC-KR";
+
+
+.mypage_category_list{
+	margin-top: 20px;
+}
+.mypageUpdate_box{
+	height:50px;
+	width: 100%;
+}
+.mypageUpdate_img{
+	padding-left: 10px;
+}
+.mypageUdate_type{
+	margin-top: 10px;
+}
+.mypageUdate_button_color{
+	background: #384aeb !important;
+}
+.member_secession{
+	height :20px;
+	float: right;
+}

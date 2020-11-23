@@ -1,0 +1,13 @@
+#product-inquiry-list{
+	max-width: 720px;
+    margin: 0 auto;
+}
+
+#hw-reply{
+	border : 1px black solid !important;
+}
+
+#inquiry-button{
+	border-radius: 30px;
+    padding: 7.5px 18px;
+}

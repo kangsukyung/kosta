@@ -1,0 +1,9 @@
+@charset "EUC-KR";
+
+.id_found {
+	display :inline-block !important;
+}
+.pw_found{
+	display :inline-block !important;
+	padding-left: 20px;
+}
