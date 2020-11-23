@@ -49,15 +49,14 @@ public class MemberController {
 	public String postRegister(MemberVO member, RedirectAttributes rttr) {
 
 		log.info(member.getMember_address());
-//		int check = service.register(member);
+		int check = service.register(member);
 		//
 		// if(check<=0){
 		// rttr.addFlashAttribute("member",member);
 		// return "redirect:/member/register";
 		// }
 
-//		return "/login";
-		return null;
+		return "/login";
 	}
 
 	@GetMapping("/mypage")
