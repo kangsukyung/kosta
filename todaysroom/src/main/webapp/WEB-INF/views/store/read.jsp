@@ -131,6 +131,7 @@
 							</ul>
 						</div>
 						<form action="/basket/register" method="post">
+						<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
 							<ul class="selling-option-form-content__list">
 								<c:forEach items="${list }" var="product" varStatus="status">
 									<input type="hidden" name='product_seq'
