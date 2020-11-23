@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kosta.todayroom.mapper.ProductInquiryMapper">
+	<insert id="register" parameterType="ProductInquiry">
+		insert into product_inquiry(pi_seq, pi_type, pi_content, product_seq, member_seq) values(SEQ_PRODUCT_INQUIRY_PI_SEQ.nextval, #{pi_type}, #{pi_content}, #{product_seq}, #{member_seq})
+	</insert>
+	
+	<select id="read" parameterType="int" resultType="ProductInquiry">
+		select * from product_inquiry where pi_seq=#{pi_seq} 
+	</select>
+	
+	<select id="list" resultType="ProductInquiry">
+		select * from product_inquiry order by pi_seq desc
+	</select>
+	
+	<update id="modify" parameterType="ProductInquiry">
+		update product_inquiry set pi_answer=#{pi_answer} where pi_seq=#{pi_seq}
+	</update>
+	
+	<delete id="remove" parameterType="int">
+		delete product_inquiry where pi_seq=#{pi_seq}
+	</delete>
+</mapper>
