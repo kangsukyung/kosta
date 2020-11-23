@@ -381,7 +381,7 @@
 				             
 				           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
 				           str += "<span> "+ attach.fileName+"</span><br/>";
-				           str += "<img src='/resources/img/attach.png'></a>";
+				           str += "<img src='/main_resource/img/attach.png'></a>";
 				           str += "</div>";
 				           str +"</li></div>";
 				         }
