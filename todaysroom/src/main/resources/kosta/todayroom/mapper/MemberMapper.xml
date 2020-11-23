@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.todayroom.mapper.MemberMapper">
+	
+	<select id="idCheck" resultType="kosta.todayroom.domain.MemberVO">
+	<![CDATA[
+		select * from Member where member_id=#{id}
+		]]>
+	</select>
+	
+	<select id="nickNameCheck" resultType="kosta.todayroom.domain.MemberVO">
+	<![CDATA[
+		select * from Member where MEMBER_NICKNAME=#{name}
+		]]>
+	</select>
+	
+	<insert id="register" parameterType="kosta.todayroom.domain.MemberVO">
+		insert into Member(member_seq, member_id, member_nickname,member_name,member_address,member_phone,member_email,member_rating,member_password, member_follows, member_count) 
+		values(SEQ_MEMBER_MEMBER_SEQ.nextval,#{member_id},#{member_nickname},#{member_name},#{member_address},#{member_phone},#{member_email},'1',#{member_password},'',0) 
+	</insert>
+	
+	<select id="read" resultType="kosta.todayroom.domain.MemberVO">
+	<![CDATA[
+		select * from Member where MEMBER_id=#{id}
+	]]>
+	</select>
+	
+	<update id="update">
+	<![CDATA[
+	update member 
+		set member_nickname=#{member_nickname},
+			member_name=#{member_name},
+			member_address=#{member_address},
+			member_phone=#{member_phone}, 
+			member_email=#{member_email},
+			member_profile=#{member_profile},
+			member_password=#{member_password},
+			member_path=#{member_path}
+			where member_seq=#{member_seq}
+	]]>
+	</update>	
+</mapper>
