@@ -1,0 +1,18 @@
+@charset "EUC-KR";
+#col-lg-4-detail{
+	max-width: 25.333333%;	
+}
+
+#blog_meta-list-member{
+	position: sticky;
+	top: 300px;
+	text-align: center;
+}
+
+.li_fixed_style{
+	padding: 20px;
+}
+
+.blog_meta_list_a{
+	width: 100%;
+}
