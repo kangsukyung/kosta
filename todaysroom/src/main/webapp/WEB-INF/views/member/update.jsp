@@ -27,7 +27,9 @@
 </head>
 <%@include file="../includes/header.jsp"%>
 <body>
-	<!-- ================ start banner area ================= -->	
+	<!-- ================ start banner area ================= -->
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal.member" var="member"/>	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
@@ -147,6 +149,7 @@
         		</div>
         	</div>
      </section>
+     </sec:authorize>
 
  <%@include file="../includes/footer.jsp"%>
   <script src="/resources/js/member_register.js"></script>
