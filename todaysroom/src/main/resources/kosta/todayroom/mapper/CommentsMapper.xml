@@ -5,7 +5,7 @@
 <mapper namespace="kosta.todayroom.mapper.CommentsMapper">
 
 	<!-- 댓글 조회 -->
-	<!-- <select id="commentsList" resultType="com.kosta.domain.CommentsVO">
+	<!-- <select id="commentsList" resultType="kosta.todayroom.domain.CommentsVO">
 		select * from comments
 	</select> -->
 	

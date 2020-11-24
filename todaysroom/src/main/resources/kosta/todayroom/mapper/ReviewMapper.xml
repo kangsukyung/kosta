@@ -5,7 +5,7 @@
 <mapper namespace="kosta.todayroom.mapper.ReviewMapper">
 
 	<!-- 댓글 조회 -->
-	<select id="reviewList" resultType="com.kosta.domain.ReviewVO">
+	<select id="reviewList" resultType="kosta.todayroom.domain.ReviewVO">
 		select * from review
 	</select>
 	
