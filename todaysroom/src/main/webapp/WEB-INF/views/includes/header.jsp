@@ -64,11 +64,11 @@
                 <ul class="dropdown-menu">
                 <c:choose>
 					<c:when test="${member!=null }">
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Member/OneInquiry_Form.do">1:1 문의</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/oneInquriy/register">1:1 문의</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">1:1 문의 내역</a></li>
 					</c:when>
 					<c:otherwise>
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Member/MemberLogin_Action.do">1:1 문의</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/oneInquriy/register">1:1 문의</a></li>
                   <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Member/MemberLogin_Action.do">1:1 문의 내역</a></li>
 					</c:otherwise>                
                 </c:choose>
