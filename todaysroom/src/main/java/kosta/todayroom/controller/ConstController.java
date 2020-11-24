@@ -23,8 +23,8 @@ public class ConstController {
 	@GetMapping("/register")
 	public void register(){}
 	
-	@PostMapping(value="/register", produces="text/html; charset=utf-8")
+	@PostMapping(value="/register", produces="text/plain; charset=utf-8")
 	public @ResponseBody String register(ConstVO constVO){
-		return service.register(constVO);
+		return ""+service.register(constVO);
 	}
 }

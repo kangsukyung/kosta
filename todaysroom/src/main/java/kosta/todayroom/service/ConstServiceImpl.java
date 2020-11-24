@@ -16,18 +16,18 @@ public class ConstServiceImpl implements ConstService {
 	ConstMapper mapper;
 	
 	@Override
-	public String register(ConstVO constVO) {
+	public int register(ConstVO constVO) {
 		// TODO Auto-generated method stub
 		int re = mapper.register(constVO);
-		String result;
+//		String result;
+//		
+//		if(re>0) {
+//			result="<script>alert('신청되었습니다.'); location.href='/const/register'</script>";
+//		}else {
+//			result="<script>alert('양식을 다시 확인해주세요.'); history.back();</script>";
+//		}
 		
-		if(re>0) {
-			result="<script>alert('신청되었습니다.'); location.href='/const/register'</script>";
-		}else {
-			result="<script>alert('양식을 다시 확인해주세요.'); history.back();</script>";
-		}
-		
-		return result;
+		return re;
 	}
 
 }
