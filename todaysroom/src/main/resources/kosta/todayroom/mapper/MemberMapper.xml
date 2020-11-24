@@ -41,4 +41,16 @@
 			where member_seq=#{member_seq}
 	]]>
 	</update>	
+	
+	<update id="ratingUpdate" parameterType="int">
+		update member
+		set member_rating=#{num}
+		where member_seq=#{member}
+	</update>
+	
+	<select id="Check" resultType="kosta.todayroom.domain.MemberVO">
+		<![CDATA[
+			select * from Member where member_seq=#{seq}
+		]]>
+	</select>
 </mapper>

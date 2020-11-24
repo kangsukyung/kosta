@@ -1,5 +1,7 @@
 package kosta.todayroom.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import kosta.todayroom.domain.MemberVO;
 
 public interface MemberMapper {
@@ -8,4 +10,6 @@ public interface MemberMapper {
 	public int register(MemberVO member);
 	public MemberVO read(String id);
 	public int update(MemberVO member);
+	public int ratingUpdate(@Param("member") int member , @Param("num") int num);
+	public MemberVO Check(int seq);
 }
