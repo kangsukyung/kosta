@@ -85,9 +85,10 @@
 	        	<a class="review_sidebar_alig_jsb">추천순</a>
 	        	<a class="review_sidebar_alig_jsb">최신순</a>
 	        	<a class="review_sidebar_alig_jsb">평점</a>
+	        	<!-- review list 시작 -->
 	            <c:forEach var="r" items="${list2.list}">
 	            <div class="production-review-item__container">
-		            <article class="row blog_item blog_item_jsb">
+		            <%-- <article class="row blog_item blog_item_jsb">
 		            <div class="thumb">
 						<img src="${pageContext.request.contextPath}/main_resource/img/blog/c1.jpg" alt=""><!-- user profile -->
 					</div>
@@ -120,9 +121,11 @@
 			                </div>
 			            </div>
 		            </div>
-		            </article>
+		            </article> --%>
 	            </div>
 	            </c:forEach>
+	            <!-- end review list -->
+	            <!-- paging start -->
 	            <nav class="blog-pagination justify-content-center d-flex">
 	                <ul class="pagination">
 	                    <c:if test="${list2.startPage > 5 }">
@@ -154,6 +157,7 @@
 						</c:if>
 	                </ul>
 	            </nav>
+	            <!-- end paging -->
 	        </div>
         </c:if>
         <c:if test="${list2.totalCount == 0 || list2.totalCount == null}">
