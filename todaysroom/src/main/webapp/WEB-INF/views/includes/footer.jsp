@@ -5,14 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-  <link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
-  <link rel="stylesheet" href="/resources/vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="/resources/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="/resources/vendors/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="/resources/vendors/nice-select/nice-select.css">
-  <link rel="stylesheet" href="/resources/vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="/resources/vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="/resources/css/style.css">
+  <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
+  <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/main_resource/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="/main_resource/css/style.css">
   
 </head>
 <body>
@@ -93,14 +93,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> by Bu
 		</div>
 	</footer>
 	
-  <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="/resources/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="/resources/vendors/skrollr.min.js"></script>
-  <script src="/resources/vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="/resources/vendors/nice-select/jquery.nice-select.min.js"></script>
-  <script src="/resources/vendors/jquery.ajaxchimp.min.js"></script>
-  <script src="/resources/vendors/mail-script.js"></script>
-  <script src="/resources/js/main.js"></script>
+  <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="/main_resource/vendors/skrollr.min.js"></script>
+  <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
+  <script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+  <script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
+  <script src="/main_resource/vendors/mail-script.js"></script>
+  <script src="/main_resource/js/main.js"></script>
 	
 </body>
 </html>

@@ -75,7 +75,7 @@
 						</c:choose>					
 					</c:if>
 					<c:if test="${member.member_profile ==null}">
-						<a href="/member/update"><img class="author_img rounded-circle" src="/resources/img/member_basic.png" alt="" width="130" height="130"></a>
+						<a href="/member/update"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
 					</c:if>
 							<h4 style=" padding-top: 10px;"><sec:authentication property="principal.member.member_id"/>님 프로필</h4>
 							<div class="social_icon">
