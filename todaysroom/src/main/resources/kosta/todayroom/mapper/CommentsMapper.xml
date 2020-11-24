@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.todayroom.mapper.CommentsMapper">
+
+	<!-- 댓글 조회 -->
+	<!-- <select id="commentsList" resultType="com.kosta.domain.CommentsVO">
+		select * from comments
+	</select> -->
+	
+	<!-- 댓글 조회(+페이징) -->
+	<select id="commentsList" resultType="kosta.todayroom.domain.CommentsVO">
+
+ 	 <![CDATA[
+		 select comments_seq, board_seq, comments_content, member_seq, comments_date,comments_update
+		 from 
+		   (
+		    select /*+INDEX(comments idx_comments) */
+		      rownum rn,  comments_seq, board_seq, comments_content, member_seq, comments_date, comments_update
+		    from comments
+		    where board_seq =  #{board_seq}
+		    and comments_seq > 0
+		    and rownum <= #{cri.pageNum} * #{cri.amount}
+		   ) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+	]]>
+	
+	</select>
+	
+	<!-- 댓글 쓰기 -->
+	<insert id="commentsRegister" parameterType="kosta.todayroom.domain.CommentsVO">
+		insert into comments(comments_seq, comments_content, board_seq, member_seq, admin_seq, comments_date, comments_update) 
+		values(seq_comments_comments_seq.nextval, #{comments_content},#{board_seq},#{member_seq},#{admin_seq}, sysdate, null)
+	</insert>
+	
+	<!-- 댓글 한개에 대한 디테일 -->
+	<select id="commentsRead" resultType="kosta.todayroom.domain.CommentsVO">
+		select * from comments
+		where comments_seq = #{comments_seq}
+	</select>
+	
+	<!-- 수정 -->
+	<update id="commentsModify">
+		update comments 
+		set comments_content=#{comments_content}, comments_update = sysdate
+		where comments_seq = #{comments_seq}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="commentsRemove">
+		delete from comments where comments_seq = #{comments_seq}
+	</delete>
+	
+	<!-- 한 글에 대한 댓글 수 -->
+	<select id="countByBoard" resultType="int">
+		<![CDATA[
+			select count(comments_seq) from comments where board_seq = #{board_seq}
+		]]>
+</select>
+</mapper>
