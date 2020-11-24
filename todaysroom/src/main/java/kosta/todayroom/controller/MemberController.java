@@ -126,6 +126,8 @@ public class MemberController {
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getFile(String fileId){
+		log.info(fileId);
+		log.warn(fileId);
 		
 		MemberVO member=service.idCheck(fileId);
 		String fileName=member.getMember_path()+"\\"+member.getMember_profile();

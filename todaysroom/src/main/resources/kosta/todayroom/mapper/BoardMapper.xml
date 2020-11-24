@@ -34,7 +34,7 @@
 			select SEQ_BOARD_BOARD_SEQ.nextval from dual
 		</selectKey>
 		insert into board values(#{board_seq},
-		1,
+		#{member_seq},
 		#{board_title},
 		#{board_content}, sysdate,
 		#{board_picture},

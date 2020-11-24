@@ -9,15 +9,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Aroma Shop - Home</title>
-  <link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
-  <link rel="stylesheet" href="/resources/vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="/resources/vendors/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="/resources/vendors/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="/resources/vendors/nice-select/nice-select.css">
-  <link rel="stylesheet" href="/resources/vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="/resources/vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="/resources/css/style.css">
-  <link rel="stylesheet" href="/resources/css/header.css">
+  <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
+  <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="/main_resource/css/style.css">
+  <link rel="stylesheet" href="/main_resource/css/header.css">
     
 </head>
 <body>
@@ -25,7 +25,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/board/listAction.do"><img src="/resources/img/logo.png" alt=""></a>
+          <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/board/listAction.do"><img src="main_resource/img/logo.png" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -106,15 +106,15 @@
 	</form>
   </header>
   
-  <script src="/resources/vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="/resources/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="/resources/vendors/skrollr.min.js"></script>
-  <script src="/resources/vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="/resources/vendors/nice-select/jquery.nice-select.min.js"></script>
-  <script src="/resources/vendors/jquery.ajaxchimp.min.js"></script>
-  <script src="/resources/vendors/mail-script.js"></script>
-  <script src="/resources/js/main.js"></script>
-  <script src="/resources/js/header.js"></script>
+  <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+  <script src="/main_resource/vendors/skrollr.min.js"></script>
+  <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
+  <script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+  <script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
+  <script src="/main_resource/vendors/mail-script.js"></script>
+  <script src="/main_resource/js/main.js"></script>
+  <script src="/main_resource/js/header.js"></script>
   <script>
   $(document).ready(function(e){
   $("#Member_out").click(function() {

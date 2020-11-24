@@ -13,21 +13,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>마이페이지 설정</title>
-  <link rel="stylesheet" href="/resources/main_resource/vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/linericon/style.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/nice-select/nice-select.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/nouislider/nouislider.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
 
-  <link rel="stylesheet" href="/resources/main_resource/css/style.css">
-  <link rel="stylesheet" href="/resources/css/member_mypage.css">
+  <link rel="stylesheet" href="/main_resource/css/style.css">
+  <link rel="stylesheet" href="/main_resource/css/member_mypage.css">
 </head>
 <%@include file="../includes/header.jsp"%>
 <body>
-	<!-- ================ start banner area ================= -->	
+	<!-- ================ start banner area ================= -->
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal.member" var="member"/>	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
@@ -69,7 +71,7 @@
 					</c:if>
 					
 					<c:if test="${member.member_profile ==null}">
-						<a href="/member/update"><img class="author_img rounded-circle" src="/resources/img/member_basic.png"alt="" width="130" height="130"></a>
+						<a href="/member/update"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png"alt="" width="130" height="130"></a>
 					</c:if>
 							<h4 style=" padding-top: 10px;">${member.member_nickname}님 프로필</h4>
 							<div class="social_icon">
@@ -131,7 +133,7 @@
 						</c:choose>					
 					</c:if>
 					<c:if test="${member.member_profile ==null}">
-		    			<img class="author_img rounded-circle mypageUpdate_img" src="/resources/img/member_basic.png" alt="" width="200px" height="200">
+		    			<img class="author_img rounded-circle mypageUpdate_img" src="/main_resource/img/member_basic.png" alt="" width="200px" height="200">
 					</c:if>
 							<div class="col-md-10 form-group">
 								<input type="file" class="mypageUdate_type" name="profile" id="fileChange" accept=".gif, .jpg, .png">
@@ -147,9 +149,10 @@
         		</div>
         	</div>
      </section>
+     </sec:authorize>
 
  <%@include file="../includes/footer.jsp"%>
-  <script src="/resources/js/member_register.js"></script>
+  <script src="/main_resource/js/member_register.js"></script>
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
   	

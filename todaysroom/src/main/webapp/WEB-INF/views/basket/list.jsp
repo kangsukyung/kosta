@@ -68,7 +68,7 @@
                               <td>
                                   <div class="media">
                                       <div class="d-flex">
-                                          <img src="/main_resource/upload/${basket.productvo.product_fname}" alt="">
+                                          <img src="/display?fileName=${basket.productvo.product_fname}" alt="">
                                       </div>
                                       <div class="media-body">
                                           <a href="/store/read?store_seq=${basket.productvo.store_seq }">

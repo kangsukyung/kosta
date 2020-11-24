@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class MemberVO implements Serializable{
-	private long member_seq;
+	private int member_seq;
 	private String member_id;
 	private String member_nickname;
 	private String member_name;
@@ -17,7 +17,7 @@ public class MemberVO implements Serializable{
 	private String member_password;
 	private String member_follows;
 	private String member_profile;
-	private long member_count;
+	private int member_count;
 	private String member_path;
 }
 
