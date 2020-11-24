@@ -13,9 +13,9 @@
   <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
   
   <title>Aroma Shop - Login</title>
-  <link rel="icon" href="/resources/img/Fevicon.png" type="image/png">
-  <link rel="stylesheet" href="/resources/css/member_idpwfound.css">
-  <link rel="stylesheet" href="/resources/css/member_signup.css">
+  <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
+  <link rel="stylesheet" href="/main_resource/css/member_idpwfound.css">
+  <link rel="stylesheet" href="/main_resource/css/member_signup.css">
 </head>
 
 <%@include file="../includes/header.jsp"%>
@@ -87,7 +87,7 @@
 </body>
 <%@include file="../includes/footer.jsp"%>
 
-<script src="/resources/js/member_register.js"></script>
+<script src="/main_resource/js/member_register.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>

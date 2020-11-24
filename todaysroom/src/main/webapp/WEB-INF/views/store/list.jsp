@@ -170,12 +170,11 @@
           <!-- End Filter Bar -->
           <!-- Start Best Seller -->
           <section class="lattest-product-area pb-40 category-list ">
-                
  			<c:forEach items="${list }" var="store">                  
             <div class="row row_product_hw col-lg-4">
                 <div class="card text-center card-product">
                   <div class="card-product__img">
-                    <img class="card-img" src="/main_resource/upload/${store.store_picture}" alt="상품이미지">
+                    <img class="card-img" src="/display?fileName=${store.store_picture}" alt="상품이미지">
                     <ul class="card-product__imgOverlay">
                       <li><button><i class="ti-search"></i></button></li>
                       <li><button><i class="ti-shopping-cart"></i></button></li>

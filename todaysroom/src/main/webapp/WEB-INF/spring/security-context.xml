@@ -18,6 +18,10 @@
 		
 		<security:intercept-url pattern="/member/register"
 			access="permitAll"/>
+		<security:intercept-url pattern="/board/register"
+			access="permitAll"/>
+		<security:intercept-url pattern="/board/list"
+			access="permitAll"/>
 		<security:intercept-url pattern="/member/mypage"
 			access="hasRole('ROLE_1')"/>
 		<security:intercept-url pattern="/member/update"

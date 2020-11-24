@@ -8,17 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Aroma Shop - Product Details</title>
-<link rel="icon"
-	href="/main_resource/img/Fevicon.png"
-	type="image/png">
+<link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
 <link rel="stylesheet"
 	href="/main_resource/vendors/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/main_resource/vendors/fontawesome/css/all.min.css">
 <link rel="stylesheet"
 	href="/main_resource/vendors/themify-icons/themify-icons.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/linericon/style.css">
+<link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
 <link rel="stylesheet"
 	href="/main_resource/vendors/nice-select/nice-select.css">
 <link rel="stylesheet"
@@ -26,17 +23,14 @@
 <link rel="stylesheet"
 	href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
 
-<link rel="stylesheet"
-	href="/main_resource/css/style.css">
-<link rel="stylesheet"
-	href="/main_resource/css/store.css">
-<link rel="stylesheet"
-	href="/main_resource/css/product_inquiry.css">
+<link rel="stylesheet" href="/main_resource/css/style.css">
+<link rel="stylesheet" href="/main_resource/css/store.css">
+<link rel="stylesheet" href="/main_resource/css/product_inquiry.css">
 </head>
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<!--================ End Header Menu Area =================-->
- <jsp:include page="/WEB-INF/header.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
 	<!-- ================ start banner area ================= -->
 
 	<section class="blog-banner-area" id="blog">
@@ -67,8 +61,7 @@
 						<div class="single-prd-item">
 
 							<img class="img-fluid"
-								src="/main_resource/upload/${store.store_picture}"
-								alt="">
+								src="/display?fileName=${store.store_picture}" alt="">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -124,7 +117,7 @@
 											<div class="production-select-item__index">${status.count }</div>
 											<div class="production-select-item__image">
 												<img class="image" id="product_image" alt=""
-													src="/main_resource/upload/${product.product_fname}">
+													src="/display?fileName=${product.product_fname}">
 											</div>
 											<div class="production-select-item__contents">
 												<span class="production-select-item__contents__name"
@@ -137,58 +130,59 @@
 								</c:forEach>
 							</ul>
 						</div>
-					<form action="/basket/register" method="post" >
-						<ul class="selling-option-form-content__list">
-							<c:forEach items="${list }" var="product" varStatus="status">
-								<input type="hidden" name='product_seq' value="${product.product_seq }">
-								<li><article class="selling-option-item"
-										id="${status.count }">
-										<h1 class="selling-option-item__production">${product.product_name }</h1>
-										<button class="selling-option-item__delete" type="button"
-											aria-label="삭제">
-											<svg width="12" height="12" viewBox="0 0 12 12"
-												fill="currentColor" preserveAspectRatio="xMidYMid meet">
-											<path fill-rule="nonzero"
-													d="M6 4.6L10.3.3l1.4 1.4L7.4 6l4.3 4.3-1.4 1.4L6 7.4l-4.3 4.3-1.4-1.4L4.6 6 .3 1.7 1.7.3 6 4.6z"></path></svg>
-										</button>
-										<div class="selling-option-item__controls"
+						<form action="/basket/register" method="post">
+							<ul class="selling-option-form-content__list">
+								<c:forEach items="${list }" var="product" varStatus="status">
+									<input type="hidden" name='product_seq'
+										value="${product.product_seq }">
+									<li><article class="selling-option-item"
 											id="${status.count }">
-											<div class="selling-option-item__quantity">
-												<div class="input-group select-input option-count-input">
-													<select class="form-control" id="${status.count }"><option
-															value="0">수량</option>
-														<option value="1">1</option>
-														<option value="2">2</option>
-														<option value="3">3</option>
-														<option value="4">4</option>
-														<option value="5">5</option>
-														<option value="6">6</option>
-														<option value="7">7</option>
-														<option value="8">8</option>
-													</select>
+											<h1 class="selling-option-item__production">${product.product_name }</h1>
+											<button class="selling-option-item__delete" type="button"
+												aria-label="삭제">
+												<svg width="12" height="12" viewBox="0 0 12 12"
+													fill="currentColor" preserveAspectRatio="xMidYMid meet">
+											<path fill-rule="nonzero"
+														d="M6 4.6L10.3.3l1.4 1.4L7.4 6l4.3 4.3-1.4 1.4L6 7.4l-4.3 4.3-1.4-1.4L4.6 6 .3 1.7 1.7.3 6 4.6z"></path></svg>
+											</button>
+											<div class="selling-option-item__controls"
+												id="${status.count }">
+												<div class="selling-option-item__quantity">
+													<div class="input-group select-input option-count-input">
+														<select class="form-control" id="${status.count }"><option
+																value="0">수량</option>
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
 												</div>
+												<p class="selling-option-item__price">
+													<span class="selling-option-item__price__number"
+														id="${status.count }">0</span>원 <span
+														class="product-one-price" hidden="">${product.product_price }</span>
+												</p>
 											</div>
-											<p class="selling-option-item__price">
-												<span class="selling-option-item__price__number"
-													id="${status.count }">0</span>원 <span
-													class="product-one-price" hidden="">${product.product_price }</span>
-											</p>
-										</div>
-									</article></li>
-							</c:forEach>
-						</ul>
-						<p class="selling-option-form-content__price">
-							<span class="selling-option-form-content__price__left">총
-								주문금액</span><span class="selling-option-form-content__price__right"><span
-								class="selling-option-form-content__price__number">0</span>원</span>
-						</p>
+										</article></li>
+								</c:forEach>
+							</ul>
+							<p class="selling-option-form-content__price">
+								<span class="selling-option-form-content__price__left">총
+									주문금액</span><span class="selling-option-form-content__price__right"><span
+									class="selling-option-form-content__price__number">0</span>원</span>
+							</p>
 
-						<div class="product_count">
-							<button class="button normal-btn" type="submit">장바구니에 담기</button>						<a
+							<div class="product_count">
+								<button class="button normal-btn" type="submit">장바구니에
+									담기</button>
+								<a class="button primary-btn" href="#">구매하기</a>
 
-								class="button primary-btn" href="#">구매하기</a>
-
-						</div>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -269,10 +263,7 @@
 					aria-labelledby="contact-tab">
 					<div class="row">
 						<div class="col-lg-6">
-							<div class="comment_list">
-								
-
-							</div>
+							<div class="comment_list"></div>
 						</div>
 					</div>
 					<div class="tab-pane fade show active" id="review" role="tabpanel"
@@ -412,7 +403,7 @@
 				</div>
 			</div>
 	</section>
-<%-- 	<section>
+	<%-- 	<section>
 	<jsp:include page="../review/review.jsp"></jsp:include>
 	</section> --%>
 	<!--================End Product Description Area =================-->
@@ -425,28 +416,20 @@
 
 	<!--================ End footer Area  =================-->
 	<section>
-	 	<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
-	</section>	
+		<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
+	</section>
 
 
-	<script
-		src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
-	<script
-		src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-	<script
-		src="/main_resource/vendors/skrollr.min.js"></script>
-	<script
-		src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="/main_resource/vendors/skrollr.min.js"></script>
+	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
 	<script
 		src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
-	<script
-		src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
-	<script
-		src="/main_resource/vendors/mail-script.js"></script>
-	<script
-		src="/main_resource/js/main.js"></script>
-	<script
-		src="/main_resource/js/store_read.js"></script>
+	<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
+	<script src="/main_resource/vendors/mail-script.js"></script>
+	<script src="/main_resource/js/main.js"></script>
+	<script src="/main_resource/js/store_read.js"></script>
 	<script type="text/javascript"
 		src="/main_resource/js/product_inquiry.js"></script>
 
