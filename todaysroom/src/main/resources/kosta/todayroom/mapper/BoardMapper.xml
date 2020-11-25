@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.todayroom.mapper.BoardMapper">
+
+	<select id="List" resultType="kosta.todayroom.domain.BoardVO">
+		select * from board order by
+		board_seq desc
+	</select>
+
+	<select id="ListPaging" resultType="kosta.todayroom.domain.BoardVO">
+		<![CDATA[
+		select * 
+		from ( 
+				select /*+ index_desc (board pk_board) */ 
+					rownum rn, board_seq, member_seq, board_title, board_content, board_date, board_picture,
+					board_thumbnail, board_classification, board_views, board_scraps
+				from 
+					board 
+				where rownum <= #{pageNum} * #{amount}
+			) 
+		where rn > (#{pageNum} -1 ) * #{amount}
+		]]>
+	</select>
+
+	<select id="boardTotalCount" resultType="int">
+		select count(*) from
+		board
+	</select>
+
+	<insert id="insert">
+		<selectKey keyProperty="board_seq" order="BEFORE" resultType="int">
+			select SEQ_BOARD_BOARD_SEQ.nextval from dual
+		</selectKey>
+		insert into board values(#{board_seq},
+		#{member_seq},
+		#{board_title},
+		#{board_content}, sysdate,
+		#{board_picture},
+		#{board_thumbnail},
+		#{board_classification}, '0',
+		'0')
+	</insert>
+
+	<insert id="roomWarmingInsert">
+		insert into roomwarming
+		values(SEQ_BOARD_BOARD_SEQ.CURRVAL, #{roomwarming_classification},
+		#{roomwarming_space},
+		#{roomwarming_style}, #{roomwarming_color},
+		#{roomwarming_budget}, #{roomwarming_type})
+	</insert>
+
+	<insert id="knowhowInsert">
+		insert into knowhow
+		values(SEQ_BOARD_BOARD_SEQ.CURRVAL, #{knowhow_style})
+	</insert>
+
+
+
+	<select id="read" resultType="kosta.todayroom.domain.BoardVO">
+		select * from board where board_seq
+		= #{board_seq}
+	</select>
+
+	<update id="update">
+		update board set board_title = #{board_title},
+		board_content = #{board_content} where board_seq = #{board_seq}
+	</update>
+<!-- 	<update id="updateRoom"> -->
+<!-- 		update roomwarming set board_title = #{board_title}, -->
+<!-- 		board_content = #{board_content} where board_seq = #{board_seq} -->
+<!-- 	</update> -->
+<!-- 	<update id="updatekNowhow"> -->
+<!-- 		update knowhow set board_title = #{board_title}, -->
+<!-- 		board_content = #{board_content} where board_seq = #{board_seq} -->
+<!-- 	</update> -->
+
+	<delete id="delete">
+		delete from board where board_seq = #{board_seq}
+	</delete>
+	
+	<delete id="deleteRoom">
+		delete from roomwarming where board_seq = #{board_seq}
+	</delete>
+	
+	<delete id="deleteKnowhow">
+		delete from knowhow where board_seq = #{board_seq}
+	</delete>
+
+	<select id="memberList" resultType="kosta.todayroom.domain.MemberVO">
+		select * from member
+	</select>
+
+	<select id="member" resultType="kosta.todayroom.domain.MemberVO">
+		select * from member m, board b
+		where m.member_seq = b.member_seq and
+		board_seq = #{board_seq}
+	</select>
+
+	<select id="roomwarming" resultType="kosta.todayroom.domain.RoomwarmingVO">
+		select * from roomwarming r, board b where r.board_seq = b.board_seq
+		and b.board_seq = #{board_seq}
+	</select>
+
+	<select id="knowhow" resultType="kosta.todayroom.domain.KnowhowVO">
+		select * from knowhow k, board b where k.board_seq = b.board_seq and
+		b.board_seq = #{board_seq}
+	</select>
+
+</mapper>
