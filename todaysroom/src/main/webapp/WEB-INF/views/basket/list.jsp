@@ -88,7 +88,7 @@
                               <td>
                                   <div class="product_count">
                                       <span class="product_price_hidden" id="${status.count }" hidden="">${basket.productvo.product_price }</span>
-                                      <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
+                                      <input type="text" name="qty" id="sst" maxlength="12" value="${basket.basket_quantity }" title="Quantity:"
                                           class="input-text">
                                       <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
                                           class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
@@ -98,7 +98,7 @@
                               </td>
                               <td>
                               <h5>
-                                  <span class="product_one_price" id="${status.count }">${basket.productvo.product_price }</span>원
+                                  <span class="product_one_price" id="${status.count }" data-price="${basket.productvo.product_price * basket.basket_quantity }">${basket.productvo.product_price * basket.basket_quantity }</span>원
                               </h5>
                               </td>
                           </tr>
@@ -211,6 +211,85 @@
   <script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
   <script src="/main_resource/vendors/mail-script.js"></script>
   <script src="/main_resource/js/main.js"></script>
-  <script src="/main_resource/js/basket_list.js"></script>
+  <script type="text/javascript">
+  $(function() {
+		var totalCost = 0;
+		
+	    var csrfHeaderName = "${_csrf.headerName}";
+	    var csrfTokenValue = "${_csrf.token}";
+	   
+	    
+	    var loadPrice = 0;
+		$(".tbody_class .product_one_price").each(function(i, items) {
+			var item = $(items);
+			loadPrice += parseInt(item.text());
+		});
+		$(".product_total_price").html(loadPrice);
+		
+		
+		   $(".product_count").on("change", "input", function() {
+		   //상품 한 개 가격
+		   var productOneCost = Number($(this).parent().find(".product_price_hidden").text());
+		   //상품의 가격
+		   var productCost = productOneCost * $(this).val();
+		   
+		   $(this).parent().parent().parent().find(".product_one_price").text(productCost);
+		   
+		    loadPrice = 0;
+			$(".tbody_class .product_one_price").each(function(i, items) {
+				var item = $(items);
+				loadPrice += parseInt(item.text());
+			});
+			$(".product_total_price").html(loadPrice);
+	   })
+	   
+	   
+	   	$(".product_count").on("click", "button", function() {
+//	 	   var form_id = $(this).attr('id');
+	 	   //상품 한 개 가격
+	 	   var productOneCost = Number($(this).parent().find(".product_price_hidden").text());
+	 	   //상품의 가격
+	 	   var productCost = productOneCost * $(this).parent().find(".input-text").val();
+	 	   
+	 	   $(this).parent().parent().parent().find(".product_one_price").text(productCost);
+	 		
+
+		    loadPrice = 0;
+			$(".tbody_class .product_one_price").each(function(i, items) {
+				var item = $(items);
+				loadPrice += parseInt(item.text());
+			});
+			$(".product_total_price").html(loadPrice);
+	   	})
+	   
+	   	$(".tbody_class .carted-product__delete").on("click", function() {
+
+	   		var basket_seq = $(this).data("basket_seq");
+	   		var targetTr = $(this).closest("tr");
+			$.ajax({
+				type : 'delete',
+				url : '/basket/' + basket_seq,
+				beforeSend: function(xhr) {
+					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+				},
+				success : function(result) {
+					targetTr.remove();
+					
+				},
+				error: function(request, status, error) {{
+					alert("code:"+request.status+"\n"
+							+"message:"+request.responseText+"\n"
+							+"error:" +error); 
+					}
+				}
+			}) //end ajax
+			
+			
+		})
+	   	
+	   	
+	})
+
+  </script>
 </body>
 </html>
