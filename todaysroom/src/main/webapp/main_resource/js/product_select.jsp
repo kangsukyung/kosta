@@ -1,8 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <input type="hidden" name='product_seq' value="${product.product_seq }">
 								<li><article class="selling-option-item" id="${status.count }">
 										<h1 class="selling-option-item__production">${list[0].product_name }</h1>
 										<button class="selling-option-item__delete" type="button"
-											aria-label="삭제">
+											aria-label="ì­ì ">
 											<svg width="12" height="12" viewBox="0 0 12 12"
 												fill="currentColor" preserveAspectRatio="xMidYMid meet">
 											<path fill-rule="nonzero"
@@ -13,7 +17,7 @@
 											<div class="selling-option-item__quantity">
 												<div class="input-group select-input option-count-input">
 													<select class="form-control" id="${status.count }"><option
-															value="0">수량</option>
+															value="0">ìë</option>
 														<option value="1">1</option>
 														<option value="2">2</option>
 														<option value="3">3</option>
@@ -27,7 +31,7 @@
 											</div>
 											<p class="selling-option-item__price">
 												<span class="selling-option-item__price__number"
-													id="${status.count }">0</span>원 <span
+													id="${status.count }">0</span>ì <span
 													class="product-one-price" hidden="">${list.product_price }</span>
 											</p>
 										</div>
