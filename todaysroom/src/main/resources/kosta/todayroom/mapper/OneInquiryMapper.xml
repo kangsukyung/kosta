@@ -5,6 +5,6 @@
 <mapper namespace="kosta.todayroom.mapper.OneInquiryMapper">
 	
 	<insert id="register" parameterType="kosta.todayroom.domain.One_inquiryVO">
-		insert into One_inquiryVO values(SEQ_ONE_INQUIRY_OI_SEQ.nextval, #{oi_title}, #{oi_content}, #{oi_answer}, #{member_seq}, #{admin_seq} ) 
+		insert into One_inquiry values(SEQ_ONE_INQUIRY_OI_SEQ.nextval, #{oi_title}, #{oi_content}, #{oi_answer}, #{member_seq}, #{admin_seq} ) 
 	</insert>
 </mapper>
