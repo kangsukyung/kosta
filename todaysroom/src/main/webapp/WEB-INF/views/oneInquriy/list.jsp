@@ -9,7 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 </head>
 	 <%@include file="../includes/header.jsp"%>
 	 
@@ -34,6 +33,8 @@
 	<!-- ================ end banner area ================= -->
 	 
 	<!--================ End Header Menu Area =================-->
+	<sec:authorize access="isAuthenticated()">
+		<sec:authentication property="principal.member" var="member"/>
 	<section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
@@ -41,8 +42,6 @@
           <div class="sidebar-categories">
             <div class="head">프로필</div>
             <ul class="main-categories">
-				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="principal.member" var="member"/>
 					<div>
 					
 					<c:if test="${member.member_profile !=null}">
@@ -67,7 +66,7 @@
 								<a href="#"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
 					</div>
-				</sec:authorize>
+				
             </ul>
           </div>
           <div class="sidebar-filter">
@@ -91,32 +90,61 @@
 		        
 		  <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">
-          <div class="tracking_box_inner">
-              <p style="font-size: 20px; margin-bottom: 10px;">코로나19로 인해 고객센터를 잠정적으로 축소하여 운영중입니다.</p>
-              <p style="font-size: 20px; margin-bottom: 10px;">전화 및 1:1문의하기 상담이 지연되고 있는 점 너른 양해 부탁드립니다.</p>
-              <p style="font-size: 20px; margin-bottom: 10px;">순차적으로 최대한 빠르게 안내해 드리도록 노력하겠습니다.</p>
-			<br>
-              <form class="row tracking_form" action="/oneInquriy/register" method="post">
-				<sec:authentication property="principal.member" var="member" />
-				  <input type="hidden" name="member_seq" value="${member.member_seq }">
-				  <input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
-				  
-                  <div class="col-md-12 form-group">
-                      <input type="text" class="form-control" id="oi_title" name="oi_title" placeholder="제목" onfocus="this.placeholder = ''" onblur="this.placeholder = '제목'">
-                  </div>
-                  <div class="col-md-12 form-group">
-                   <textarea class="form-control" id="oi_content" name="oi_content" style="height: 400px;" placeholder="문의내용" onfocus="this.placeholder = ''" onblur="this.placeholder = '문의내용'"></textarea>
-                  </div>
-                  <div class="col-md-12 form-group">
-                      <button type="submit" value="submit" class="button button-tracking" style="width: 100%;">문의하기</button>
-                  </div>
-              </form>
-          </div>
+          <div class="panel panel-default" style="border: 1px solid #f5f5f5;">
+			<div class="panel-heading" style="background-color: #f5f5f5; padding-bottom: 20px; color: #384aeb;">
+				1:1문의 내역
+				<button id='regBtn' type="button" class="btn btn-xs pull-right" onclick="location.href='/oneInquriy/register'" style=" float: right; height: 40px; font-size: 15px; color: #384aeb;" >1:1문의</button>
+			</div>
+          			<div class="panel-body">
+					<table class="table table-striped table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>#번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+						</tr>
+					</thead>
+					<c:forEach items="${list}" var="list">
+						<tr>
+							<td>${list.oi_seq}</td>
+							<td><a href="#">${list.oi_title }</a></td>
+
+							<td>${member.member_nickname }</td>
+							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.oi_date}" /></td>
+						</tr>
+					</c:forEach>
+				</table>
+				<div class='pull-right'>
+					<ul class="pagination">
+
+ 						<c:if test="${pageMaker.prev}">
+							<li class="paginate_button previous"><a
+								href="${pageMaker.startPage -1}">Previous</a></li>
+						</c:if>
+
+						<c:forEach var="num" begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}">
+							<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">	
+								<a href="${num}">${num}</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next}">
+							<li class="paginate_button next"><a
+								href="${pageMaker.endPage +1 }">Next</a></li>
+						</c:if>
+
+					</ul>
+				</div>
+				</div>
+				</div>
           </section>
           </div>
        		</div>
         </div>
    </section>
+   </sec:authorize>
 	<!-- ================ start banner area ================= -->	
   
 

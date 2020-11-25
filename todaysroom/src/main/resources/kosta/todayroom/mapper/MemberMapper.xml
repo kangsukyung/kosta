@@ -27,7 +27,7 @@
 	]]>
 	</select>
 	
-	<update id="update">
+	<update id="modify">
 	<![CDATA[
 	update member 
 		set member_nickname=#{member_nickname},

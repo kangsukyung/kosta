@@ -67,7 +67,7 @@
 						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
 						<c:choose>
 							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-								<a href="/member/update"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" alt="" width="130" height="130"></a>
+								<a href="/member/modify"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" alt="" width="130" height="130"></a>
 							</c:when>
 							<c:otherwise>
 								<c:out value="NO IMAGE"></c:out>
@@ -75,7 +75,7 @@
 						</c:choose>					
 					</c:if>
 					<c:if test="${member.member_profile ==null}">
-						<a href="/member/update"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
+						<a href="/member/modify"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
 					</c:if>
 							<h4 style=" padding-top: 10px;"><sec:authentication property="principal.member.member_id"/>님 프로필</h4>
 							<div class="social_icon">
@@ -92,7 +92,7 @@
  				<ul class="list cat-list mypage_category_list">
 					<li><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do" class="d-flex justify-content-between"><p>프로필</p></a></li>
 					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
-					<li><a href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do" class="d-flex justify-content-between"><p>설정</p></a></li>
+					<li><a href="/member/modify" class="d-flex justify-content-between"><p>설정</p></a></li>
 					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
 						<li><a href="/contractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
 					</sec:authorize>

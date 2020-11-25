@@ -99,7 +99,7 @@
         <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">
             		<a href="" style="float:right;">회원탈퇴</a>
-						<form class="row login_form" action="/member/update"  method="post" enctype="multipart/form-data">
+						<form class="row login_form" action="/member/modify"  method="post" enctype="multipart/form-data">
 							<input type="hidden" name="member_seq" value="${member.member_seq }">
 							<input type="hidden" name="member_id" value="${member.member_id }">
 							<input type="hidden" name="member_path" value="${member.member_path }">

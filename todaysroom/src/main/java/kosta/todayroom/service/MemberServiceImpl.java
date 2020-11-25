@@ -42,9 +42,9 @@ public class MemberServiceImpl implements MemberService{
 
 	@Transactional
 	@Override
-	public int update(MemberVO vo) {
+	public int modify(MemberVO vo) {
 		
-		int check=mapper.update(vo);
+		int check=mapper.modify(vo);
 		
 		if(check>0){
 			MemberVO member=mapper.read(vo.getMember_id());

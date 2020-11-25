@@ -5,6 +5,28 @@
 <mapper namespace="kosta.todayroom.mapper.OneInquiryMapper">
 	
 	<insert id="register" parameterType="kosta.todayroom.domain.One_inquiryVO">
-		insert into One_inquiry values(SEQ_ONE_INQUIRY_OI_SEQ.nextval, #{oi_title}, #{oi_content}, #{oi_answer}, #{member_seq}, #{admin_seq} ) 
+		insert into One_inquiry values(SEQ_ONE_INQUIRY_OI_SEQ.nextval, #{oi_title}, #{oi_content}, #{oi_answer}, #{member_seq}, #{admin_seq}, sysdate) 
 	</insert>
+
+	<!-- <select id="read" resultType="kosta.todayroom.domain.One_inquiryVO">
+		select * from One_inquiry where member_seq=#{seq}
+	</select> -->
+	
+	<select id="read" parameterType="int" resultType="kosta.todayroom.domain.One_inquiryVO">
+		
+		<![CDATA[
+		select oi_seq, oi_title, oi_date, member_seq
+		from ( select /*+INDEX_DESC(ONE_INQUIRY PK_ONE_INQUIRY)*/ 
+				rownum rn, oi_seq, oi_title, oi_date, member_seq
+					from ONE_INQUIRY
+					where rownum <= #{pageNum} * #{amount}
+				)
+			where rn>(#{pageNum}-1)* #{amount} 
+		]]>
+			AND member_seq=#{seq}
+	</select>
+	
+	<select id="total" resultType="int">
+		select count(*) from ONE_INQUIRY where member_seq=#{seq}
+	</select>
 </mapper>
