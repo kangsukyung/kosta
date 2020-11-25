@@ -5,7 +5,7 @@ import java.util.List;
 import kosta.todayroom.domain.BasketVO;
 
 public interface BasketService {
-	public List<BasketVO> list();
+	public List<BasketVO> list(int member_seq);
 	
 	public BasketVO read();
 	
