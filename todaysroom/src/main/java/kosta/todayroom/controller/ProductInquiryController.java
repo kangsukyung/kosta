@@ -46,13 +46,25 @@ public class ProductInquiryController {
 		return ""+service.register(product_inquiryVO);
 	}
 	
-	@PostMapping("/modify")
-	public void ProductInquiryModify(ProductInquiryVO product_inquiryVO, Model model){
-		model.addAttribute("result", service.modify(product_inquiryVO));
+	@PostMapping(value = "/modify", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public @ResponseBody ProductInquiryVO ProductInquiryModify(ProductInquiryVO product_inquiryVO){
+		int result = service.modify(product_inquiryVO);
+		
+		if(result > 0){
+			return service.read(product_inquiryVO.getPi_seq());
+		}else{
+			return null;
+		}
 	}
 	
 	@PostMapping("/remove/{pi_seq}")
-	public void ProductInquiryRemove(@PathVariable int pi_seq, Model model){
-		model.addAttribute("result", service.remove(pi_seq));
+	public @ResponseBody String ProductInquiryRemove(@PathVariable int pi_seq){
+		int result = service.remove(pi_seq);
+		
+		if(result > 0){
+			return ""+pi_seq;
+		}else{
+			return null;
+		}		
 	}
 }

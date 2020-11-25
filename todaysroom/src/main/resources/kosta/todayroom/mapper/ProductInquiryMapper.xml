@@ -17,7 +17,7 @@
 	</select>
 	
 	<update id="modify" parameterType="ProductInquiry">
-		update product_inquiry set pi_answer=#{pi_answer} where pi_seq=#{pi_seq}
+		update product_inquiry set pi_type=#{pi_type}, pi_content=#{pi_content} where pi_seq=#{pi_seq}
 	</update>
 	
 	<delete id="remove" parameterType="int">

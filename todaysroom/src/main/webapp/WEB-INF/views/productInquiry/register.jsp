@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet"
-	href="/resources/main_resource/vendors/bootstrap/bootstrap.min.css">
-<script src="/resources/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+	href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script
-	src="/resources/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-<script type="text/javascript" src="/resources/main_resource/js/product_inquiry.js"></script> 
+	src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/main_resource/js/product_inquiry.js"></script> 
 </head>
 <body>
 	<button type="button" class="btn btn-primary" data-toggle="modal"
@@ -48,8 +48,10 @@
 							<label for="message-text" class="control-label">문의내용</label>
 							<textarea class="form-control" id="message-text" name="pi_content"></textarea>
 						</div>
-						<input hidden="hidden" name="member_seq" value="1"> <!-- value 값 추후 조정 필요 -->
+						<input hidden="hidden" name="member_seq" value="22"> <!-- value 값 추후 조정 필요 -->
 						<input hidden="hidden" name="product_seq" value="1">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<!--csrf 토큰 처리 -->
 					</form>
 					<div>문의내용에 대한 답변은 ‘마이페이지 &gt; 나의 쇼핑 &gt; 나의 문의내역’ 또는 ‘상품
 						상세페이지’에서 확인 가능합니다.</div>
