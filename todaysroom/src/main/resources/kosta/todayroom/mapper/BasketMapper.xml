@@ -7,22 +7,10 @@
  <mapper namespace="kosta.todayroom.mapper.BasketMapper">
   <insert id="register">
   	<foreach collection="list" item="item" index="index" open="INSERT ALL" close="SELECT * FROM DUAL">
-  		into basket values (seq_basket_basket_seq.nextval, #{item.basket_quantity}, #{item.product_seq})
+  		into basket values (seq_basket_basket_seq.nextval, #{item.basket_quantity}, #{item.product_seq}, #{item.member_seq})
   	</foreach>
   </insert>
-<!--   
-  <resultMap type="kosta.todayroom.domain.ProductVO" id="productMap">
-  	<id property="product_seq" column="product_seq"></id>
-  	<result property="product_name" column="product_name"></result>
-  	<result property="product_price" column="product_price"></result>
-  	<result property="product_fname" column="product_fname"></result>
-  	<result property="store_seq" column="store_seq"></result>
-  	<collection javaType="BasketVO" property="basketVO">
-  		<id c
-  	</collection>
-  </resultMap>
   
-   -->
   <resultMap type="kosta.todayroom.domain.BasketVO" id="basketMap">
   	<id property="basket_seq" column="basket_seq"></id>
   	<result property="basket_quantity" column="basket_quantity"></result>
@@ -40,6 +28,7 @@
   	select * 
   	from basket b, product p
   	where b.product_seq = p.product_seq
+  	and b.member_seq = #{member_seq}
   </select>
   
   <update id="update">

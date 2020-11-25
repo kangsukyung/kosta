@@ -16,9 +16,9 @@ public class BasketServiceImpl implements BasketService {
 	private BasketMapper mapper;
 	
 	@Override
-	public List<BasketVO> list() {
+	public List<BasketVO> list(int member_seq) {
 		// TODO Auto-generated method stub
-		return mapper.list();
+		return mapper.list(member_seq);
 	}
 
 	@Override

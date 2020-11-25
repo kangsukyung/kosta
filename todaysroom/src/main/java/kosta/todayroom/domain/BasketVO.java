@@ -11,6 +11,7 @@ public class BasketVO {
 	private int basket_seq;
 	private int basket_quantity;
 	private int product_seq;
+	private int member_seq;
 	
 	private ProductVO productvo;
 }
