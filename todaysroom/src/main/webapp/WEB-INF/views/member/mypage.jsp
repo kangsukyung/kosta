@@ -88,20 +88,20 @@
             </ul>
           </div>
           <div class="sidebar-filter">
-            <div class="top-filter-head">카테고리</div>
+            <div class="top-filter-head" style="margin-bottom: 10px;">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
 					<li><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do" class="d-flex justify-content-between"><p>프로필</p></a></li>
 					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
 					<li><a href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do" class="d-flex justify-content-between"><p>설정</p></a></li>
-					<c:if test="${member.member_rating eq '1' || member.member_rating eq '2'}">
-					<li><a href="/constractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
-					</c:if>
-					<c:if test="${member.member_rating eq '1' || member.member_rating eq '3'}">
-					<li><a href="${pageContext.request.contextPath}/Member/VendorSignup_form.do" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
-					</c:if>
-					<c:if test="${member.member_rating eq '2' }">
-					<li><a href="${pageContext.request.contextPath}/Product/ProductListAction.do" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
-					</c:if>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
+						<li><a href="/contractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_3')">
+						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_2')">
+						<li><a href="${pageContext.request.contextPath}/Product/ProductListAction.do" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+					</sec:authorize>
 				</ul>
           </div>
         </div>

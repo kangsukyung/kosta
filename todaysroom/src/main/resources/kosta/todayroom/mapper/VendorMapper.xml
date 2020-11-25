@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.todayroom.mapper.VendorMapper">
+	
+	<insert id="register" parameterType="kosta.todayroom.domain.VendorVO">
+		insert into vendor values(SEQ_VENDOR_VENDOR_SEQ.nextval, #{vendor_name}, #{vendor_license}, #{vendor_category},#{vendor_address}, #{member_seq}, #{admin_seq} ) 
+	</insert>
+	
+	<select id="read" parameterType="int" resultType="kosta.todayroom.domain.VendorVO">
+		select * from vendor where member_seq=#{seq}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from vendor where member_seq = #{seq}
+	</delete>
+</mapper>
