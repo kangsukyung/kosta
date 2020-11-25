@@ -35,7 +35,7 @@
   <!--================Tracking Box Area =================-->
   <section class="tracking_box_area section-margin--small">
       <div class="container">
-          <div class="tracking_box_inner" style="padding-left: 150px;">
+          <div class="tracking_box_inner" style="padding-left: 250px;">
               <p style="font-size: 20px; margin-bottom: 10px;">코로나19로 인해 고객센터를 잠정적으로 축소하여 운영중입니다.</p>
               <p style="font-size: 20px; margin-bottom: 10px;">전화 및 1:1문의하기 상담이 지연되고 있는 점 너른 양해 부탁드립니다.</p>
               <p style="font-size: 20px; margin-bottom: 10px;">순차적으로 최대한 빠르게 안내해 드리도록 노력하겠습니다.</p>

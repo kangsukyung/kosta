@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.todayroom.mapper.OneInquiryMapper">
+	
+	<insert id="register" parameterType="kosta.todayroom.domain.One_inquiryVO">
+		insert into One_inquiryVO values(SEQ_ONE_INQUIRY_OI_SEQ.nextval, #{oi_title}, #{oi_content}, #{oi_answer}, #{member_seq}, #{admin_seq} ) 
+	</insert>
+</mapper>
