@@ -11,7 +11,7 @@
   <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
 
   <title>Aroma Shop - Login</title>
-  <link rel="stylesheet" href="/resources/css/member_idpwfound.css"> 
+  <link rel="stylesheet" href="/main_resource/css/member_idpwfound.css"> 
     
  </head>
 	<%@include file="includes/header.jsp"%>

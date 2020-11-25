@@ -3,7 +3,10 @@ package kosta.todayroom.controller;
 import java.io.File;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,6 +16,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +35,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kosta.todayroom.domain.CustomUser;
 import kosta.todayroom.domain.MemberVO;
+import kosta.todayroom.security.CustomUserDetailsService;
 import kosta.todayroom.service.MemberService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -41,6 +53,7 @@ public class MemberController {
 	@Setter(onMethod_ = @Autowired)
 	private HttpServletRequest request;
 
+	
 	@GetMapping("/register")
 	public void getRegister() {
 	}
@@ -68,7 +81,7 @@ public class MemberController {
 	}
 
 	@PostMapping("/update")
-	public String update(@RequestParam("profile") MultipartFile profile, MemberVO vo) {
+	public String update(@RequestParam("profile") MultipartFile profile, MemberVO vo, Principal principal) {
 		log.info(profile.toString());
 		log.warn(profile.toString());
 		String uploadFolder = "C:\\upload";
@@ -120,7 +133,20 @@ public class MemberController {
 				}
 			}
 		}
-
+		
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
+//		User user = (User) authentication.getPrincipal();
+//		Authentication authentication=new UsernamePasswordAuthenticationToken(principal, credentials)
+//		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+//		log.warn(auths.getAuthorities());
+//		log.warn(SecurityContextHolder.getContext().getAuthentication());
+//		log.warn(authorities);
+		
+		MemberVO mv=service.idCheck(vo.getMember_id());
+		User user=new CustomUser(mv);
+		Authentication auth = new UsernamePasswordAuthenticationToken(user,user.getPassword(),user.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
+		
 		return "redirect:/member/update";
 	}
 	

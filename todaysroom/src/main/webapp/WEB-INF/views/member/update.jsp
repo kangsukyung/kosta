@@ -28,8 +28,6 @@
 <%@include file="../includes/header.jsp"%>
 <body>
 	<!-- ================ start banner area ================= -->
-	<sec:authorize access="isAuthenticated()">
-		<sec:authentication property="principal.member" var="member"/>	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
@@ -49,6 +47,8 @@
 
 
 	<!-- ================ category section start ================= -->		  
+  <sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.member" var="member"/>	
   <section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
@@ -75,7 +75,7 @@
 					</c:if>
 							<h4 style=" padding-top: 10px;">${member.member_nickname}님 프로필</h4>
 							<div class="social_icon">
-							<br>
+							<br>	
 								<a href="#"> <i class="ti-heart"> 좋아요</i></a> 
 								<a href="#"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
@@ -85,7 +85,7 @@
           <div class="sidebar-filter">
             <div class="top-filter-head">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
-					<li><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do"><p>프로필</p></a></li>
+					<li><a href="/member/mypage"><p>프로필</p></a></li>
 					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
 					<li><a href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do" class="d-flex justify-content-between"><p>설정</p></a></li>
 					<li><a href="${pageContext.request.contextPath}/Member/ConstractorSignup_form.do" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
@@ -155,7 +155,21 @@
   <script src="/main_resource/js/member_register.js"></script>
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
-  	
+  $(document).ready(function name() {
+		$(".memberName_btn").click(function() {
+	        
+	        var userName =  $("#member_nickname").val(); 
+	        memberRegister.nameCheck(userName, function(result) {
+	        	
+	        	if(result=='0'){
+	        		alert("사용할수 있는 별명입니다.");
+	        	}else{
+		        	alert("사용중인 별명입니다.");
+	        	}
+			});
+	    });
+	});
+  
 	function imgRead() {
 		var file1=$("#fileChange").val();
 /* 		var fReader=new FileReader();

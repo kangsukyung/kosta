@@ -7,4 +7,5 @@ public interface MemberService {
 	public MemberVO nickNameCheck(String name);
 	public int register(MemberVO member);
 	public int update(MemberVO member);
+	public MemberVO Check(int seq);
 }

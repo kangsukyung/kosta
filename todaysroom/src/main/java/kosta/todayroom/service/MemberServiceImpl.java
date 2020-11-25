@@ -55,4 +55,9 @@ public class MemberServiceImpl implements MemberService{
 		return check;
 	}
 
+	@Override
+	public MemberVO Check(int seq) {
+		return mapper.Check(seq);
+	}
+
 }
