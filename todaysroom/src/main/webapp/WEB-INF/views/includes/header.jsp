@@ -77,7 +77,7 @@
               <li class="nav-item" id="hw-shopping-cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
 	
 		<sec:authorize access="isAuthenticated()">
-              <li class="nav-item"><a href="/member/modify" class="msk-id"><button onclick=""><sec:authentication property="principal.member.member_id"/></button></a></li>
+              <li class="nav-item"><a href="/member/mypage" class="msk-id"><button onclick=""><sec:authentication property="principal.member.member_id"/></button></a></li>
               <li class="nav-item"><a id="Member_out"class="msk-id" href="#">로그아웃</a></li>
 		</sec:authorize>	
 		<sec:authorize access="isAnonymous()">
@@ -98,7 +98,7 @@
       </nav>
     </div>
     <form id="logout-form" action="/customLogout" method="POST">
-			   	<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 	</form>
   </header>
   

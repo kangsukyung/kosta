@@ -1,6 +1,7 @@
 package kosta.todayroom.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.security.Principal;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -52,7 +54,7 @@ public class MemberController {
 
 	@Setter(onMethod_ = @Autowired)
 	private HttpServletRequest request;
-
+	
 	
 	@GetMapping("/register")
 	public void getRegister() {
@@ -150,10 +152,15 @@ public class MemberController {
 		return "redirect:/member/modify";
 	}
 	
+	@PostMapping("/secession")
+	public String secession(@RequestParam("member_seq") int member_seq){
+		log.warn(member_seq);
+		service.ratingUpdate(member_seq, 0);
+		return "/logout";
+	}
+	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getFile(String fileId){
-//		log.info(fileId);
-//		log.warn(fileId);
 		
 		MemberVO member=service.idCheck(fileId);
 		String fileName=member.getMember_path()+"\\"+member.getMember_profile();

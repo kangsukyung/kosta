@@ -12,4 +12,5 @@ public interface MemberMapper {
 	public int modify(MemberVO member);
 	public int ratingUpdate(@Param("member") int member , @Param("num") int num);
 	public MemberVO Check(int seq);
+	public int countUpdate(@Param("seq") int seq , @Param("num") int num);
 }

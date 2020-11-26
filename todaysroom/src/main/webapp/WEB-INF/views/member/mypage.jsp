@@ -88,7 +88,7 @@
           <div class="sidebar-filter">
             <div class="top-filter-head" style="margin-bottom: 10px;">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
-					<li><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do" class="d-flex justify-content-between"><p>프로필</p></a></li>
+					<li><a href="/member/mypage" class="d-flex justify-content-between"><p>마이페이지</p></a></li>
 					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
 					<li><a href="/member/modify" class="d-flex justify-content-between"><p>설정</p></a></li>
 					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
