@@ -9,19 +9,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Aroma Shop - Product Details</title>
 <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
-<link rel="stylesheet"
-	href="/main_resource/vendors/bootstrap/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
 <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/nice-select/nice-select.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+<link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
 
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/store.css">
@@ -259,6 +253,7 @@
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
+				<jsp:include page="../review/review.jsp"></jsp:include>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
@@ -424,14 +419,12 @@
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script
-		src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
 	<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
 	<script src="/main_resource/vendors/mail-script.js"></script>
 	<script src="/main_resource/js/main.js"></script>
 	<script src="/main_resource/js/store_read.js"></script>
-	<script type="text/javascript"
-		src="/main_resource/js/product_inquiry.js"></script>
-
+	<script type="text/javascript" src="/main_resource/js/product_inquiry.js"></script>
+	<!-- <script src="/main_resource/js/review.js"></script> -->
 </body>
 </html>
