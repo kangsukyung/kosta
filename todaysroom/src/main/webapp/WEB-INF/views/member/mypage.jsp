@@ -16,18 +16,16 @@
   <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
   
   <title>마이페이지 프로필</title>
-  <link rel="icon" href="/resources/main_resource/img/Fevicon.png" type="image/png">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/linericon/style.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/nice-select/nice-select.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/nouislider/nouislider.min.css">
-
-  <link rel="stylesheet" href="/resources/main_resource/css/style.css">
-  <link rel="stylesheet" href="/resources/css/member_mypage.css">
+  <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
+  <link rel="stylesheet" href="/main_resource/css/style.css">
+  <link rel="stylesheet" href="/main_resource/css/member_mypage.css">
 </head>
  <%@include file="../includes/header.jsp"%>
 <body>

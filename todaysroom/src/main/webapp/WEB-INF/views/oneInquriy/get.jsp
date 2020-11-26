@@ -16,13 +16,14 @@
   <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
   <link rel="stylesheet" href="/main_resource/css/style.css">
   <link rel="stylesheet" href="/main_resource/css/member_mypage.css">
+  <link rel="stylesheet" href="/main_resource/css/oneInquriys.css">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
 </head>
 	 <%@include file="../includes/header.jsp"%>
-	 
+	 <sec:authentication property="principal.member" var="member"/>
 	 <section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
@@ -101,38 +102,115 @@
 		        
 		  <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">
-          <div class="tracking_box_inner">
-              <p style="font-size: 20px; margin-bottom: 10px;">코로나19로 인해 고객센터를 잠정적으로 축소하여 운영중입니다.</p>
-              <p style="font-size: 20px; margin-bottom: 10px;">전화 및 1:1문의하기 상담이 지연되고 있는 점 너른 양해 부탁드립니다.</p>
-              <p style="font-size: 20px; margin-bottom: 10px;">순차적으로 최대한 빠르게 안내해 드리도록 노력하겠습니다.</p>
-			<br>
-              <form class="row tracking_form" action="/oneInquriy/register" method="post">
-				<sec:authentication property="principal.member" var="member" />
-				  <input type="hidden" name="member_seq" value="${member.member_seq }">
-				  <input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
-				  
-                  <div class="col-md-12 form-group">
-                      <input type="text" class="form-control" id="oi_title" name="oi_title" placeholder="제목" onfocus="this.placeholder = ''" onblur="this.placeholder = '제목'">
-                  </div>
-                  <div class="col-md-12 form-group">
-                   <textarea class="form-control" id="oi_content" name="oi_content" style="height: 400px;" placeholder="문의내용" onfocus="this.placeholder = ''" onblur="this.placeholder = '문의내용'"></textarea>
-                  </div>
-                  <div class="col-md-12 form-group">
-                      <button type="submit" value="submit" class="button button-tracking" style="width: 100%;">문의하기</button>
-                  </div>
-              </form>
-          </div>
+          <div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header" style="margin: 0px; padding-bottom: 40px;">문의 상세내역</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">내용</div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
+
+          <div class="form-group">
+        <label>글번호</label> <input class="form-control" id="seq" name='seq'
+            value="${one.oi_seq }" readonly="readonly">
+        </div>
+
+        <div class="form-group">
+          <label>제목</label> <input class="form-control" id="title" name='title'
+            value="${one.oi_title }" >
+        </div>
+
+        <div class="form-group">
+          <label>내용</label>
+          <textarea class="form-control" rows="3" id="cotent" style="padding-bottom: 100px;"
+          name='content'><c:out value="${one.oi_content}" /></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>작성자</label> <input class="form-control" name='name'
+            value="${member.member_nickname }" readonly="readonly">
+        </div>
+        
+        <div class="form-group">
+        
+          <label>날짜</label> <input class="form-control" name='oi_date'
+         value=<fmt:formatDate pattern="yyyy-MM-dd" value="${one.oi_date }"/>  
+         readonly="readonly">
+        </div>
+
+<button data-oper='modify' class="btn btn-default" id="modifyButton" style="background-color: #e9ecef;">수정</button>
+<button data-oper='list' class="btn btn-info" id="listButton">목록</button>
+<button data-oper='delete' class="btn btn-info" id="deleteButton"style="background: #c5322d;">삭제</button>
+
+<form id='listForm' action="/oneInquriy/list" method="get">
+  <input type='hidden' name='pageNum' value="${cri.pageNum}">
+</form>
+
+<form id='deleteForm' action="/oneInquriy/delete" method="get">
+  <input type='hidden' name='seq' value="${one.oi_seq }">
+</form>
+
+<form id='modifyForm' action="/oneInquriy/modify" method="post">
+   <input type='hidden' name='oi_seq' value="${one.oi_seq}">
+  <input type='hidden' id='oi_title' name='oi_title'>
+  <input type='hidden' id='oi_content' name='oi_content'>   	
+  <input type='hidden' name='pageNum' value="${cri.pageNum}">
+  <input type='hidden' name='amount' value="${cri.amount}">
+  <input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
+</form>
+
+      </div>
+      <!--  end panel-body -->
+    </div>
+    <!--  end panel-body -->
+  </div>
+  <!-- end panel -->
+</div>
           </section>
           </div>
        		</div>
         </div>
    </section>
-	<!-- ================ start banner area ================= -->	
   
 
-
-
-  <!--================ Start footer Area  =================-->	
   <%@include file="../includes/footer.jsp"%>
-  
+ 
+ <script>
+  $(document).ready(function(e){
+
+	  $("#listButton").click(function() {
+		  document.getElementById('listForm').submit();
+   		});
+	  
+	  $("#deleteButton").click(function() {
+		  if (confirm("삭제하시겠습니까?") == true){  
+				  document.getElementById('deleteForm').submit();
+			  }else{ 
+			      return;
+			  }
+		});
+		
+	  $("#modifyButton").click(function() {
+		  if (confirm("수정하시겠습니까?") == true){  
+		  var title=$("#title").val();
+		  var content=$("#cotent").val();
+		  
+		  document.getElementById("oi_title").value = title;
+		  document.getElementById("oi_content").value = content;
+
+		  document.getElementById('modifyForm').submit();
+		  }else{ 
+		      return;
+		  }
+	  });	  	
+  })
+  </script>
 </html>

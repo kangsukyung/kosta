@@ -61,16 +61,14 @@
               	<li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"aria-expanded="false">고객센터</a>
                 <ul class="dropdown-menu">
-                <c:choose>
-					<c:when test="${member!=null }">
-                  <li class="nav-item"><a class="nav-link" href="/oneInquriy/register">1:1 문의</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">1:1 문의 내역</a></li>
-					</c:when>
-					<c:otherwise>
+                <sec:authorize access="isAnonymous()">
+                  <li class="nav-item"><a class="nav-link" href="/login">1:1 문의</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/login">1:1 문의 내역</a></li>
+                 </sec:authorize>
+                 <sec:authorize access="isAuthenticated()">
                   <li class="nav-item"><a class="nav-link" href="/oneInquriy/register">1:1 문의</a></li>
                   <li class="nav-item"><a class="nav-link" href="/oneInquriy/list">1:1 문의 내역</a></li>
-					</c:otherwise>                
-                </c:choose>
+                  </sec:authorize>
                 </ul>
               </li>
             </ul>
