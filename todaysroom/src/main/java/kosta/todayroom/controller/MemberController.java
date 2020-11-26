@@ -28,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,6 +75,15 @@ public class MemberController {
 
 	@GetMapping("/mypage")
 	public void mypage() {
+	}
+	
+	@GetMapping("/users/{member_seq}")
+	public String users(@PathVariable("member_seq") int member_seq ,Model model) {
+		MemberVO user = service.Check(member_seq);
+		
+		model.addAttribute("user", user);
+		
+		return "/member/users";
 	}
 
 	@GetMapping("/modify")
