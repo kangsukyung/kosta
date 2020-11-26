@@ -37,9 +37,13 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("/list")
-	public void BoardList(Criteria cri, Model model) {
+	public void BoardList(Criteria cri, @RequestParam(value="filter", required=false) String filter, Model model) {
 		log.info("list..........");
-
+		
+		if (filter != null) {
+			cri.setFilter(filter);
+		}
+		
 		model.addAttribute("board", service.boardList(cri));
 
 		int total = service.boardTotalCount(cri);
@@ -59,25 +63,25 @@ public class BoardController {
 	public String BoardRegister(BoardVO board, RoomwarmingVO room, KnowhowVO know, RedirectAttributes rttr) {
 		log.info("========== INSERT ==========");
 		
-//		log.info("register : " + board);
-//
-//		if (board.getAttachList() != null) {
-//			board.getAttachList().forEach(attach -> log.info(attach));
-//		}
-//
-//		log.info("========== INSERT ==========");
-//
-//		service.register(board);
-//
-//		if (room.getRoomwarming_type() != null) {
-//			service.roomRegister(room);
-//		}
-//
-//		if (know.getKnowhow_style() != null) {
-//			service.knowhowRegister(know);
-//		}
-//
-//		rttr.addFlashAttribute("result", board.getBoard_seq());
+		log.info("register : " + board);
+
+		if (board.getAttachList() != null) {
+			board.getAttachList().forEach(attach -> log.info(attach));
+		}
+
+		log.info("========== INSERT ==========");
+
+		service.register(board);
+
+		if (room.getRoomwarming_type() != null) {
+			service.roomRegister(room);
+		}
+
+		if (know.getKnowhow_style() != null) {
+			service.knowhowRegister(know);
+		}
+
+		rttr.addFlashAttribute("result", board.getBoard_seq());
 
 		return "redirect:/board/list";
 	}
@@ -139,11 +143,20 @@ public class BoardController {
 	@GetMapping(value = "/readAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<BoardAttachVO>> readAttachList(int board_seq) {
-
+	
 		log.info("readAttachList : " + board_seq);
 
 		return new ResponseEntity<>(service.readAttachList(board_seq), HttpStatus.OK);
 	}
+	
+//	public ResponseEntity<BoardAttachVO> readThumbnail(int board_seq, String fileName) {
+//		BoardVO board = new BoardVO();
+//		board = service.read(board_seq);
+//		
+//		fileName = board.getBoard_thumbnail();
+//		
+//		return new ResponseEntity<>(service.readThumbnail(board_seq, fileName), HttpStatus.OK);
+//	}
 
 	// 파일 삭제 처리
 	private void deleteFiles(List<BoardAttachVO> attachList) {

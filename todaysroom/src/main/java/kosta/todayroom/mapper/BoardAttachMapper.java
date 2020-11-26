@@ -13,6 +13,9 @@ public interface BoardAttachMapper {
 	public List<BoardAttachVO> findByBoardSeq(int board_seq);
 
 	public void deleteAll(int board_seq);
+	
+	public BoardAttachVO readThumbnail(int board_seq, String fileName);
+	
 //
 //	public List<BoardAttachVO> getOldFiles();
 

@@ -22,7 +22,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<section>
-<%-- 			<%@include file="/WEB-INF/views/header.jsp"%> --%>
+		<%@include file="../../header.jsp" %>
 	</section>
 	<!--================ End Header Menu Area =================-->
 
@@ -54,22 +54,22 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">Post Catgories</h4>
 							<ul class="list cat-list">
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="/board/list" class="d-flex justify-content-between">
 										<p>HOME</p>
 										<p>
 											<c:out value="${pageMaker.total }" />
 										</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="/board/list?filter=bang" class="d-flex justify-content-between">
 										<p>방들이</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="/board/list?filter=bang" class="d-flex justify-content-between">
 										<p>전문가방들이</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="/board/list?filter=knowhow" class="d-flex justify-content-between">
 										<p>노하우</p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
+								<li><a href="/board/list?filter=qa" class="d-flex justify-content-between">
 										<p>질문과답변</p>
 								</a></li>
 							</ul>
@@ -113,10 +113,12 @@
 							</form>
 
 						</nav>
-
+		
+					<div>
 						<c:forEach var="board" items="${board }">
 							<c:forEach var="member" items="${memberList }">
 								<c:if test="${board.member_seq eq member.member_seq }">
+								<div class="board_member">
 									<article class="row blog_item">
 										<div class="col-md-3">
 											<div class="blog_info text-right">
@@ -143,9 +145,11 @@
 										</div>
 										<div class="col-md-9">
 											<div class="blog_post">
-												<img
-													src="${pageContext.request.contextPath}/main_resource/img/blog/main-blog/m-blog-1.jpg"
-													alt="">
+												<div class="img_post_plz">
+												
+												</div>
+												<input class="imgBoardID" type="hidden" name="imgBoardSeq" value="${board.board_seq}">
+												<input class="imgBoardID" type="hidden" name="imgBoardThumbnail" value="${board.board_thumbnail}">
 												<div class="blog_details">
 													<a class="move" href="<c:out value='${board.board_seq }'/>">
 														<h2>
@@ -160,9 +164,11 @@
 											</div>
 										</div>
 									</article>
+								</div>
 								</c:if>
 							</c:forEach>
 						</c:forEach>
+					</div>
 
 
 						<nav class="blog-pagination justify-content-center d-flex">
@@ -209,7 +215,7 @@
 
 	<!--================ Start footer Area  =================-->
 	<section>
-<%-- 	<%@include file="/WEB-INF/views/footer.jsp"%> --%>
+		<%@include file="../../footer.jsp"%>
 	</section>
 	<!--================ End footer Area  =================-->
 
@@ -248,7 +254,107 @@
 				actionForm.attr("action", "/board/get");
 				actionForm.submit();
 			});
+			
+			
+			
+			
+			//리스트 이미지
+			(function(){
+// 				var board_list1234 = '<c:out value="${board}"/>';
+				
+// 				console.log(board_list1234);
+
+				
+				let board_thumb = new Map();
+				
+				var str = "";
+				var board_list = $("input[name='imgBoardSeq']").get();
+				var board_thumbnail_list = $("input[name='imgBoardThumbnail']").get();
+				var board_thumbnail_list123 = $("input[value='3.png']").val();
+				
+				console.log(board_thumbnail_list123);
+				
+				for (var int = 0; int < board_list.length; int++) {
+					board_thumb.set(board_list[int].value, board_thumbnail_list[int].value);
+				}
+				
+				
+				board_thumb.forEach((value, key, map) => {
+					var imgvalue = $("input[value='"+value+"']").val();
+					$.getJSON("/board/readAttachList", {board_seq : key}, function(arr) {
+						$(arr).each(function(i, attach) {
+							if (attach.fileName==value) {
+								
+								var imgseq = $("input[value='"+key+"']").val();
+								console.log("=======")
+								console.log(imgseq);
+								
+								if (key == imgseq) {
+									if (str == null || str.length == 0) {
+										var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
+										str = "<img src='/board/display?fileName="+thumbnailPath+"'>";
+										$("input[value='"+key+"']").before(str);
+									}
+								}
+							}
+						});
+						
+						str = "";
+					});
+					
+				});
+				
+// 				$.each(board_thumb, function (index, item) {
+// 					console.log(item);
+					
+// 					var result = "";
+					
+// 					$.getJSON("/board/readAttachList", {board_seq: item.value}, function(arr) {
+						
+// 						$(arr).each(function(i, attach) {
+							
+// 							$(board_thumbnail_list).each(function(i, thumbnail) {
+
+// 								if (attach.fileName == thumbnail.value) {
+									
+// 									var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
+// 									str += "<img src='/board/display?fileName="+thumbnailPath+"'>";
+// 									console.log("count");
+// 									$(".blog_post").prepend(str);
+// 									str = "";
+// 								}
+// 							})
+
+// 						});
+// 					});
+// 				});
+
+
+// 				var board_seq = $("input[name='imgBoardSeq']").val();
+
+// 				alert(board_seq);
+// 				console.log("=====");
+				
+// 				$.getJSON("/board/readAttachList", {board_seq: board_seq}, function(arr){
+// 				       console.log(arr);
+				       
+// 				       var str = "";
+// 				       $(arr).each(function(i, attach){
+				         
+// 				    	   if (i == 0) {
+// 				    		   var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
+// 				    		   str += "<img src='/board/display?fileName="+thumbnailPath+"'>";
+// 				    	   }
+// 				    	   $(".blog_post").prepend(str);
+				      
+// 				       });
+				
+// 				});//end getjson
+			
+			})();
+
 		});
+		
 	</script>
 
 </body>

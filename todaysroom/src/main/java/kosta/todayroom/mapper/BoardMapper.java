@@ -15,19 +15,19 @@ public interface BoardMapper {
 	public RoomwarmingVO roomwarming(int board_seq);
 	public KnowhowVO knowhow(int board_seq);
 	
-	public int insert(BoardVO board);
-	public int roomWarmingInsert(RoomwarmingVO room);
-	public int knowhowInsert(KnowhowVO know);
+	public int register(BoardVO board);
+	public int roomWarmingRegister(RoomwarmingVO room);
+	public int knowhowRegister(KnowhowVO know);
 	
 	
 	public BoardVO read(int board_seq);
-	public int update(BoardVO board);
+	public int modify(BoardVO board);
 //	public int updateRoom(RoomwarmingVO room);
 //	public int updatekNowhow(KnowhowVO knowhow);
 	
-	public int delete(int board_seq);
-	public int deleteRoom(int board_seq);
-	public int deleteKnowhow(int board_seq);
+	public int remove(int board_seq);
+	public int removeRoom(int board_seq);
+	public int removeKnowhow(int board_seq);
 	
 	
 	public List<MemberVO> memberList();

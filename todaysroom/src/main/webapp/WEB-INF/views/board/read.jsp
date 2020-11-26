@@ -82,10 +82,10 @@
 
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="blog">
-		<div class="container h-100"
-			style="background-image: url('/main_resource/img/blog/feature-img1.jpg');">
+		<div class="container h-100" id="containerH100"
+			style="background-image: url('/main_resource/img/blog/feature-img1.jpg'); background-repeat: round; background-size: cover;">
 			<div class="blog-banner">
-				<div class="text-center" style="background-color: white;">
+				<div class="text-center" style="background-color: white; opacity:0.7;">
 					<h1>
 						<c:out value="${board.board_title }" />
 					</h1>
@@ -152,8 +152,7 @@
 					<div class="single-post row">
 						<div class="col-lg-12">
 							<div class="feature-img">
-								<img class="img-fluid"
-									src="/main_resource/img/blog/feature-img1.jpg" alt="">
+
 							</div>
 						</div>
 						<div class="col-lg-3  col-md-3">
@@ -208,11 +207,6 @@
 								has the willpower to actually sit through a self-imposed MCSE
 								training.</div>
 							<div class="row" id="picture_row">
-								<div class="col-6">
-									<img class="img-fluid"
-										src="/main_resource/img/blog/post-img2.jpg"
-										alt="">
-								</div>
 								<div class="col-lg-12 mt-4">
 									<p>MCSE boot camps have its supporters and its detractors.
 										Some people do not understand why you should have to spend
@@ -263,7 +257,7 @@
 								</div>
 								<div class="thumb">
 									<a href="#"> <img class="img-fluid"
-										src="${pageContext.request.contextPath}/main_resource/img/blog/next.jpg"
+										src="/main_resource/img/blog/next.jpg"
 										alt="">
 									</a>
 								</div>
@@ -354,6 +348,8 @@
 				formObj.empty();
 
 				formObj.append(intput_board_seq);
+				var token = "<input type='hidden' "+"name='${_csrf.parameterName}' "+"value='${_csrf.token}'/>";
+				formObj.append(token);
 
 				formObj.submit();
 			});
@@ -366,31 +362,43 @@
 				       console.log(arr);
 				       
 				       var str = "";
+				       var str2 = "";
+				       var str3 = "";
 				       
 				       $(arr).each(function(i, attach){
-				       
 				         //image type
-				         if(attach.fileType){
-				           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
-				           
-				           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
-				           str += "<img src='/display?fileName="+fileCallPath+"'>";
-				           str += "</div>";
-				           str +"</li></div>";
-				         }else{
-				             
-				           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
-				           str += "<span> "+ attach.fileName+"</span><br/>";
-				           str += "<img src='/main_resource/img/attach.png'></a>";
-				           str += "</div>";
-				           str +"</li></div>";
-				         }
+				         if (i > 0) {
+							
+					         if(attach.fileType){
+					           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
+					           
+					           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
+					           str += "<img src='/board/display?fileName="+fileCallPath+"'>";
+					           str += "</div>";
+					           str +"</li></div>";
+					         }else{
+					             
+					           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
+					           str += "<span> "+ attach.fileName+"</span><br/>";
+					           str += "<img src='/main_resource/img/attach.png'></a>";
+					           str += "</div>";
+					           str += "</li></div>";
+					         }
+					         
+						}
+				         
+				         if (i == 0) {
+					         var thumbnailPath = encodeURIComponent(attach.uploadPath + "/"+attach.uuid +"_"+attach.fileName);
+					         str2 += "<img style='width:90%; height:90%;'" + " class='img-fluid'" + " src='/board/display?fileName="+thumbnailPath+"'>";
+					         str3 = thumbnailPath;
+						}
 				       
 				         $("#picture_row").prepend(str);
-				       
 				         str = "";
 				       });
 				       
+				         $(".feature-img").append(str2);
+				         $("#containerH100").css({'background-image':"url(/board/display?fileName="+str3+")"});
 				       
 				       
 				     });//end getjson

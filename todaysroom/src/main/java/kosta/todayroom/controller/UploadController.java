@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +30,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 
 @Controller
 @Log4j
+@RequestMapping("/board/*")
 public class UploadController {
 	// 년/월/일 폴더의 생성
 	private String getFolder() {
@@ -127,6 +129,7 @@ public class UploadController {
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName) {
+		log.warn(fileName);
 
 		log.info("fileName: " + fileName);
 
