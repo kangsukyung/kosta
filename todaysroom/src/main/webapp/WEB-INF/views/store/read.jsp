@@ -10,19 +10,13 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Aroma Shop - Product Details</title>
 <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
-<link rel="stylesheet"
-	href="/main_resource/vendors/bootstrap/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
 <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/nice-select/nice-select.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+<link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
 
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/store.css">
@@ -109,37 +103,68 @@
 						</div>
 
 						<div class="production-select-dropdown__list-container">
-							<ul class="production-select-list production-select-dropdown__list">
+							<ul
+								class="production-select-list production-select-dropdown__list">
 								<c:forEach items="${list }" var="product" varStatus="status">
-									<li class="production-select-list__item">
-									<input type="hidden" name='product_seq' value="${product.product_seq }">
-									<button value="${status.count}" class="production-select-item" id="product_seq" type="button">
+									<li class="production-select-list__item"><button
+											value="${status.count}" class="production-select-item"
+											id="product_seq" type="button">
 											<div class="production-select-item__index">${status.count }</div>
 											<div class="production-select-item__image">
-												<img class="image" id="product_image" alt="" src="/display?fileName=${product.product_fname}">
+												<img class="image" id="product_image" alt=""
+													src="/display?fileName=${product.product_fname}">
 											</div>
 											<div class="production-select-item__contents">
-												<span class="production-select-item__contents__name" id="product_name"> ${product.product_name }</span>
-												<span class="production-item-price production-select-item__contents__price">
-												<span class="production-item-price__price" id="product_price">${product.product_price }원
-													</span>
-												</span>
+												<span class="production-select-item__contents__name"
+													id="product_name"> ${product.product_name }</span><span
+													class="production-item-price production-select-item__contents__price"><span
+													class="production-item-price__price" id="product_price">${product.product_price }
+														원</span></span>
 											</div>
-										</button>
-									</li>
+										</button></li>
 								</c:forEach>
 							</ul>
 						</div>
 						<form action="/basket/register" method="post">
-						<sec:authorize access="isAuthenticated()">
-		                  <sec:authentication property="principal.member" var="member"/>
-		                  <input type="hidden" name="member_seq" value="${member.member_seq }">
-		                </sec:authorize>
-						<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
 							<ul class="selling-option-form-content__list">
-								<div class="checkpoint">
-
-								</div>
+								<c:forEach items="${list }" var="product" varStatus="status">
+									<input type="hidden" name='product_seq'
+										value="${product.product_seq }">
+									<li><article class="selling-option-item"
+											id="${status.count }">
+											<h1 class="selling-option-item__production">${product.product_name }</h1>
+											<button class="selling-option-item__delete" type="button"
+												aria-label="삭제">
+												<svg width="12" height="12" viewBox="0 0 12 12"
+													fill="currentColor" preserveAspectRatio="xMidYMid meet">
+											<path fill-rule="nonzero"
+														d="M6 4.6L10.3.3l1.4 1.4L7.4 6l4.3 4.3-1.4 1.4L6 7.4l-4.3 4.3-1.4-1.4L4.6 6 .3 1.7 1.7.3 6 4.6z"></path></svg>
+											</button>
+											<div class="selling-option-item__controls"
+												id="${status.count }">
+												<div class="selling-option-item__quantity">
+													<div class="input-group select-input option-count-input">
+														<select class="form-control" id="${status.count }"><option
+																value="0">수량</option>
+															<option value="1">1</option>
+															<option value="2">2</option>
+															<option value="3">3</option>
+															<option value="4">4</option>
+															<option value="5">5</option>
+															<option value="6">6</option>
+															<option value="7">7</option>
+															<option value="8">8</option>
+														</select>
+													</div>
+												</div>
+												<p class="selling-option-item__price">
+													<span class="selling-option-item__price__number"
+														id="${status.count }">0</span>원 <span
+														class="product-one-price" hidden="">${product.product_price }</span>
+												</p>
+											</div>
+										</article></li>
+								</c:forEach>
 							</ul>
 							<p class="selling-option-form-content__price">
 								<span class="selling-option-form-content__price__left">총
@@ -153,7 +178,6 @@
 								<a class="button primary-btn" href="#">구매하기</a>
 
 							</div>
-
 						</form>
 					</div>
 				</div>
@@ -230,6 +254,7 @@
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
+				<jsp:include page="../review/review.jsp"></jsp:include>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
@@ -395,14 +420,12 @@
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script
-		src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
 	<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
 	<script src="/main_resource/vendors/mail-script.js"></script>
 	<script src="/main_resource/js/main.js"></script>
 	<script src="/main_resource/js/store_read.js"></script>
-	<script type="text/javascript"
-		src="/main_resource/js/product_inquiry.js">	</script>
-
+	<script type="text/javascript" src="/main_resource/js/product_inquiry.js"></script>
+	<!-- <script src="/main_resource/js/review.js"></script> -->
 </body>
 </html>

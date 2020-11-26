@@ -9,17 +9,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="icon" href="../../..//main_resource/img/Fevicon.png" type="image/png">
-  <link rel="stylesheet" href="../../..//main_resource/vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="../../..//main_resource/vendors/fontawesome/css/all.min.css">
-	<link rel="stylesheet" href="../../..//main_resource/vendors/themify-icons/themify-icons.css">
-	<link rel="stylesheet" href="../../..//main_resource/vendors/linericon/style.css">
-  <link rel="stylesheet" href="../../..//main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="../../..//main_resource/vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="../../..//main_resource/vendors/nice-select/nice-select.css">
+<!-- 	<link rel="icon" href="../../../main_resource/img/Fevicon.png" type="image/png">
+  <link rel="stylesheet" href="../../../main_resource/vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="../../../main_resource/vendors/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="../../../main_resource/vendors/themify-icons/themify-icons.css">
+	<link rel="stylesheet" href="../../../main_resource/vendors/linericon/style.css">
+  <link rel="stylesheet" href="../../../main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="../../../main_resource/vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="../../../main_resource/vendors/nice-select/nice-select.css">
 
-  <link rel="stylesheet" href="../../..//main_resource/css/style.css">
-  <link rel="stylesheet" href="../../..//main_resource/css/review.css">
+  <link rel="stylesheet" href="../../../main_resource/css/style.css"> -->
+  <link rel="stylesheet" href="../../../main_resource/css/review.css">
   
 
 
@@ -64,7 +64,7 @@
 
 	<!-- review list start-->
 	<div class="col-lg-8 review_sidebar_jsb">
-		<c:if test="${list2.totalCount > 0}">
+		<%-- <c:if test="${list2.totalCount > 0}"> --%>
 			<div class="review_sidebar_count_jsb" >
 				<h4 >리뷰  ${list2.totalCount}개</h4>
 			</div>
@@ -86,7 +86,7 @@
 	        	<a class="review_sidebar_alig_jsb">최신순</a>
 	        	<a class="review_sidebar_alig_jsb">평점</a>
 	        	<!-- review list 시작 -->
-	            <c:forEach var="r" items="${list2.list}">
+	            <%-- <c:forEach var="r" items="${list2.list}"> --%>
 	            <div class="production-review-item__container">
 		            <%-- <article class="row blog_item blog_item_jsb">
 		            <div class="thumb">
@@ -123,10 +123,10 @@
 		            </div>
 		            </article> --%>
 	            </div>
-	            </c:forEach>
+	            <%-- </c:forEach> --%>
 	            <!-- end review list -->
 	            <!-- paging start -->
-	            <nav class="blog-pagination justify-content-center d-flex">
+	            <%-- <nav class="blog-pagination justify-content-center d-flex">
 	                <ul class="pagination">
 	                    <c:if test="${list2.startPage > 5 }">
 							<li class="page-item">
@@ -156,26 +156,26 @@
 							</li>
 						</c:if>
 	                </ul>
-	            </nav>
+	            </nav> --%>
 	            <!-- end paging -->
 	        </div>
-        </c:if>
+        <%-- </c:if>
         <c:if test="${list2.totalCount == 0 || list2.totalCount == null}">
 			리뷰가 없어요 작성해주세요
 			<a id="popup_open_btn">리뷰쓰기</a>
-        </c:if>
+        </c:if> --%>
     </div>
               <!-- review list end -->
               
- <script src="../../..//main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
- <script src="../../..//main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
- <script src="../../..//main_resource/vendors/skrollr.min.js"></script>
- <script src="../../..//main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
- <script src="../../..//main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
- <script src="../../..//main_resource/vendors/jquery.ajaxchimp.min.js"></script>
- <script src="../../..//main_resource/vendors/mail-script.js"></script>
- <script src="../../..//main_resource/js/main.js"></script>
- <script src="../../..//main_resource/js/review.js"></script>
+ <!-- <script src="../../../main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+ <script src="../../../main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+ <script src="../../../main_resource/vendors/skrollr.min.js"></script>
+ <script src="../../../main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
+ <script src="../../../main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+ <script src="../../../main_resource/vendors/jquery.ajaxchimp.min.js"></script>
+ <script src="../../../main_resource/vendors/mail-script.js"></script>
+ <script src="../../../main_resource/js/main.js"></script> -->
+ <script src="../../../main_resource/js/review.js"></script>
 
 </body>
 </html>

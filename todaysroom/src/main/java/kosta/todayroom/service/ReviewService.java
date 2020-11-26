@@ -22,9 +22,9 @@ public interface ReviewService {
 		//리뷰 목록
 //		public List<ReviewVO> reviewList();
 		
-		//리뷰 목록(+페이징)
+		//리뷰 목록
 		public List<ReviewVO> reviewList(Criteria cri, int store_seq);
 		
-		
+		//리뷰 목록(+페이징)
 		public ReviewPageVO ReviewListPage(Criteria cri, int store_seq);
 	}

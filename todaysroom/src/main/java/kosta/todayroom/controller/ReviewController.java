@@ -19,6 +19,7 @@ import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.ReviewPageVO;
 import kosta.todayroom.domain.ReviewVO;
 import kosta.todayroom.service.ReviewService;
+import kosta.todayroom.service.ReviewServiceImpl;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -27,7 +28,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/review/")
 public class ReviewController {
 	@Setter(onMethod_=@Autowired)
-	private ReviewService service;
+	private ReviewServiceImpl service;
 	
 	@PostMapping(value = "/register", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> reviewRegister(@RequestBody ReviewVO vo) {
@@ -47,7 +48,8 @@ public class ReviewController {
 			log.info("getList............");
 			Criteria cri = new Criteria(page,10);
 			log.info("cri : "+cri);
-			
+			log.info("page:::::::::::::"+page);
+			log.info("store_seqqqqqqqqq : "+store_seq);
 			return new ResponseEntity<>(service.ReviewListPage(cri, store_seq),HttpStatus.OK);
 		}
 		
