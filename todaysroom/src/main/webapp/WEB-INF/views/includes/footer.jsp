@@ -7,7 +7,6 @@
 <title>Insert title here</title>
   <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
   <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="/main_resource/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
   <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
   <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">

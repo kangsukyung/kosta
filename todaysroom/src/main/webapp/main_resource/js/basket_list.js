@@ -1,5 +1,8 @@
 $(function() {
 	var totalCost = 0;
+    var csrfHeaderName = "${_csrf.headerName}";
+    var csrfTokenValue = "${_csrf.token}";	
+	
 	
 	   $(".product_count").on("change", "input", function() {
 		   
@@ -43,12 +46,14 @@ $(function() {
 		$.ajax({
 			type : 'delete',
 			url : '/basket/' + basket_seq,
-			success : function(result, status, xhr) {
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+			},
+			success : function(result) {
 				targetTr.remove();
 				
 			},
 			error: function(request, status, error) {{
-				alert(basket_seq);
 				alert("code:"+request.status+"\n"
 						+"message:"+request.responseText+"\n"
 						+"error:" +error); 
@@ -58,5 +63,11 @@ $(function() {
 	})
    	
    	
-   	
 })
+
+$(document).ajaxSend(function(e, xhr, options) {
+         var csrfHeaderName = "${_csrf.headerName}";
+         var csrfTokenValue = "${_csrf.token}";
+         
+         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+      });

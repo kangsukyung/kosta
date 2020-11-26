@@ -76,14 +76,14 @@ public class MemberController {
 	public void mypage() {
 	}
 
-	@GetMapping("/update")
+	@GetMapping("/modify")
 	public void updateForm() {
 	}
 
-	@PostMapping("/update")
-	public String update(@RequestParam("profile") MultipartFile profile, MemberVO vo, Principal principal) {
-		log.info(profile.toString());
-		log.warn(profile.toString());
+	@PostMapping("/modify")
+	public String update(@RequestParam("profile") MultipartFile profile, MemberVO vo) {
+//		log.info(profile.toString());
+//		log.warn(profile.toString());
 		String uploadFolder = "C:\\upload";
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
@@ -99,11 +99,11 @@ public class MemberController {
 		if (profile.getOriginalFilename().equals("")) {
 			if (vo.getMember_path().equals("")&& vo.getMember_profile().equals("")) {
 				vo.setMember_profile("");
-				service.update(vo);
+				service.modify(vo);
 			} else {
 				vo.setMember_profile("");
 				vo.setMember_path("");
-				int num = service.update(vo);
+				int num = service.modify(vo);
 				if (num > 0) {
 					try {
 						file = new File("C:\\upload\\" + voPath + "\\" + URLDecoder.decode(proname, "UTF-8"));
@@ -119,7 +119,7 @@ public class MemberController {
 
 			vo.setMember_profile(pro);
 			vo.setMember_path(uploadFolderPath);
-			int num = service.update(vo);
+			int num = service.modify(vo);
 
 			if (num > 0) {
 				File saveFile = new File(uploadPath, pro);
@@ -147,26 +147,26 @@ public class MemberController {
 		Authentication auth = new UsernamePasswordAuthenticationToken(user,user.getPassword(),user.getAuthorities());
 		SecurityContextHolder.getContext().setAuthentication(auth);
 		
-		return "redirect:/member/update";
+		return "redirect:/member/modify";
 	}
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getFile(String fileId){
-		log.info(fileId);
-		log.warn(fileId);
+//		log.info(fileId);
+//		log.warn(fileId);
 		
 		MemberVO member=service.idCheck(fileId);
 		String fileName=member.getMember_path()+"\\"+member.getMember_profile();
 
 		File file=new File("C:\\upload\\", fileName);
-		log.info("file:"+file);
+//		log.info("file:"+file);
 		ResponseEntity<byte[]> result=null;
 		
 		try {
 			HttpHeaders header=new HttpHeaders();
 			header.add("Content-Type", Files.probeContentType(file.toPath()));
 			result=new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-			log.info(result);
+//			log.info(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
