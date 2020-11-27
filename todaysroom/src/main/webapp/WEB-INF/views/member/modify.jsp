@@ -98,7 +98,12 @@
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">
-            		<a href="" style="float:right;">회원탈퇴</a>
+            		<a id="memberSecession" href="#" style="float:right;">회원탈퇴</a>
+            		    <form id="Secession-form" action="/member/secession" method="Post">
+								<input type="hidden" name="member_seq" value="${member.member_seq }"/>
+								<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
+						</form>
+						
 						<form class="row login_form" action="/member/modify"  method="post" enctype="multipart/form-data">
 							<input type="hidden" name="member_seq" value="${member.member_seq }">
 							<input type="hidden" name="member_id" value="${member.member_id }">
@@ -106,7 +111,7 @@
 							<input type="hidden" name="member_profile" value="${member.member_profile }">
 							<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
 							
-							<div class="col-md-12 form-group member_signup"><h5 style="font-size: 15px;float: left;padding-top: 12px;"></h5><input type="text" class="form-control-member_singup" id="member_nickname" name="member_nickname"  placeholder="별명" onfocus="this.placeholder = ''" onblur="this.placeholder = '별명'" value=" ${member.member_nickname}">
+							<div class="col-md-12 form-group member_signup"><h5 style="font-size: 15px;float: left;padding-top: 12px;"></h5><input type="text" class="form-control-member_singup" id="member_nickname" name="member_nickname"  placeholder="별명" onfocus="this.placeholder = ''" onblur="this.placeholder = '별명'" value="${member.member_nickname}">
 							<button type="button" class="memberName_btn">중복확인</button></div>
 							<div class="col-md-12 form-group"><input type="text" class="form-control" id="member_name" name="member_name" placeholder="이름" onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" value="${member.member_name}"></div>
 							<div class="col-md-12 form-group member_signup" ><input type="text" class="form-control-member_singup" id="member_address" name="member_address" placeholder="주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '주소'" value="${member.member_address}" style="padding-left: 10px;"><button type="button" onclick="openZipSearch(member_address)">주소찾기</button></div>
@@ -156,6 +161,14 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
   $(document).ready(function name() {
+	 $("#memberSecession").click(function() {
+		  if (confirm("회원탈퇴하시겠습니까?") == true){  
+			document.getElementById('Secession-form').submit();
+		  }else{ 
+		      return;
+		  }
+	  });
+	  
 		$(".memberName_btn").click(function() {
 	        
 	        var userName =  $("#member_nickname").val(); 

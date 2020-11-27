@@ -53,4 +53,9 @@
 			select * from Member where member_seq=#{seq}
 		]]>
 	</select>
+	<update id="countUpdate" parameterType="int">
+		update member
+		set member_count=#{num}
+		where member_seq=#{seq}
+	</update>
 </mapper>

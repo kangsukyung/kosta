@@ -8,4 +8,6 @@ public interface MemberService {
 	public int register(MemberVO member);
 	public int modify(MemberVO member);
 	public MemberVO Check(int seq);
+	public int countUpdate(int seq , int num);
+	public int ratingUpdate(int member, int num);
 }

@@ -17,13 +17,13 @@
   <link rel="stylesheet" href="/main_resource/css/style.css">
   <link rel="stylesheet" href="/main_resource/css/member_mypage.css">
   <link rel="stylesheet" href="/main_resource/css/oneInquriys.css">
-
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 	 <%@include file="../includes/header.jsp"%>
-	 
+	 <sec:authentication property="principal.member" var="member"/>
 	 <section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
@@ -45,7 +45,6 @@
 	<!-- ================ end banner area ================= -->
 	 
 	<!--================ End Header Menu Area =================-->
-	<sec:authentication property="principal.member" var="member"/>
 	<section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
@@ -53,6 +52,8 @@
           <div class="sidebar-categories">
             <div class="head">프로필</div>
             <ul class="main-categories">
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal.member" var="member"/>
 					<div>
 					
 					<c:if test="${member.member_profile !=null}">
@@ -77,7 +78,7 @@
 								<a href="#"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
 					</div>
-				
+				</sec:authorize>
             </ul>
           </div>
           <div class="sidebar-filter">
@@ -101,80 +102,115 @@
 		        
 		  <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">
-          <div style="border: 1px solid #f5f5f5;">
-			<div style="background-color: #f5f5f5; padding-bottom: 20px; color: #384aeb;">
-				1:1문의 내역
-				<button id='regBtn' type="button" onclick="location.href='/oneInquriy/register'" style="border: 1px; float: right; height: 40px; font-size: 15px; color: #384aeb;" >1:1문의</button>
-			</div>
-          			<div >
-					<table class="table table-striped table-bordered table-hover">
-					<thead>
-						<tr>
-							<th>#번호</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일</th>
-						</tr>
-					</thead>
-					<c:forEach items="${list}" var="list">
-						<tr>
-							<td>${list.oi_seq}</td>
-							<td><a href="/oneInquriy/get?seq=${list.oi_seq}&pageNum=${pageMaker.cri.pageNum} &amount=${pageMaker.cri.amount}">${list.oi_title}</a></td>
+          <div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header" style="margin: 0px; padding-bottom: 40px;">문의 상세내역</h1>
+  </div>
+  <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
 
-							<td>${member.member_nickname }</td>
-							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.oi_date}" /></td>
-						</tr>
-					</c:forEach>
-				</table>
-				<div class='pull-right'>
-					<ul class="pagination">
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-default">
 
- 						<c:if test="${pageMaker.prev}">
-							<li class="paginate_button previous"><a
-								href="${pageMaker.startPage -1}">Previous</a></li>
-						</c:if>
+      <div class="panel-heading">내용</div>
+      <!-- /.panel-heading -->
+      <div class="panel-body">
 
-						<c:forEach var="num" begin="${pageMaker.startPage}"
-							end="${pageMaker.endPage}">
-							<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} "> <a href="${num}">${num}</a> </li>
-						</c:forEach>
+          <div class="form-group">
+        <label>글번호</label> <input class="form-control" id="seq" name='seq'
+            value="${one.oi_seq }" readonly="readonly">
+        </div>
 
-						<c:if test="${pageMaker.next}">
-							<li class="paginate_button next"><a href="${pageMaker.endPage +1 }">Next</a></li>
-						</c:if>
+        <div class="form-group">
+          <label>제목</label> <input class="form-control" id="title" name='title'
+            value="${one.oi_title }" >
+        </div>
 
-					</ul>
-				</div>
-			<form id='actionForm' action="/oneInquriy/list" method='get'>
-				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
-				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
-			</form>
-				</div>
-				</div>
+        <div class="form-group">
+          <label>내용</label>
+          <textarea class="form-control" rows="3" id="cotent" style="padding-bottom: 100px;"
+          name='content'><c:out value="${one.oi_content}" /></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>작성자</label> <input class="form-control" name='name'
+            value="${member.member_nickname }" readonly="readonly">
+        </div>
+        
+        <div class="form-group">
+        
+          <label>날짜</label> <input class="form-control" name='oi_date'
+         value=<fmt:formatDate pattern="yyyy-MM-dd" value="${one.oi_date }"/>  
+         readonly="readonly">
+        </div>
+
+<button data-oper='modify' class="btn btn-default" id="modifyButton" style="background-color: #e9ecef;">수정</button>
+<button data-oper='list' class="btn btn-info" id="listButton">목록</button>
+<button data-oper='delete' class="btn btn-info" id="deleteButton"style="background: #c5322d;">삭제</button>
+
+<form id='listForm' action="/oneInquriy/list" method="get">
+  <input type='hidden' name='pageNum' value="${cri.pageNum}">
+</form>
+
+<form id='deleteForm' action="/oneInquriy/delete" method="get">
+  <input type='hidden' name='seq' value="${one.oi_seq }">
+</form>
+
+<form id='modifyForm' action="/oneInquriy/modify" method="post">
+   <input type='hidden' name='oi_seq' value="${one.oi_seq}">
+  <input type='hidden' id='oi_title' name='oi_title'>
+  <input type='hidden' id='oi_content' name='oi_content'>   	
+  <input type='hidden' name='pageNum' value="${cri.pageNum}">
+  <input type='hidden' name='amount' value="${cri.amount}">
+  <input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
+</form>
+
+      </div>
+      <!--  end panel-body -->
+    </div>
+    <!--  end panel-body -->
+  </div>
+  <!-- end panel -->
+</div>
           </section>
           </div>
        		</div>
         </div>
    </section>
-   
-	<!-- ================ start banner area ================= -->	
   
 
-
-
-  <!--================ Start footer Area  =================-->	
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(".paginate_button a").on("click", function(e) {
-			e.preventDefault();
-			console.log('click');
-			var actionForm=$("#actionForm");
-	
-			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-			actionForm.submit();
-		});
-});
-</script>
-  
   <%@include file="../includes/footer.jsp"%>
+ 
+ <script>
+  $(document).ready(function(e){
+
+	  $("#listButton").click(function() {
+		  document.getElementById('listForm').submit();
+   		});
+	  
+	  $("#deleteButton").click(function() {
+		  if (confirm("삭제하시겠습니까?") == true){  
+				  document.getElementById('deleteForm').submit();
+			  }else{ 
+			      return;
+			  }
+		});
+		
+	  $("#modifyButton").click(function() {
+		  if (confirm("수정하시겠습니까?") == true){  
+		  var title=$("#title").val();
+		  var content=$("#cotent").val();
+		  
+		  document.getElementById("oi_title").value = title;
+		  document.getElementById("oi_content").value = content;
+
+		  document.getElementById('modifyForm').submit();
+		  }else{ 
+		      return;
+		  }
+	  });	  	
+  })
+  </script>
 </html>
