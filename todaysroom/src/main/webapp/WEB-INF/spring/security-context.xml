@@ -15,7 +15,6 @@
 
 		<security:intercept-url pattern="/login"
 			access="permitAll"/>
-		
 		<security:intercept-url pattern="/member/register"
 			access="permitAll"/>
 		<security:intercept-url pattern="/board/register"
@@ -23,9 +22,12 @@
 		<security:intercept-url pattern="/board/list"
 			access="permitAll"/>
 		<security:intercept-url pattern="/member/mypage"
-			access="hasRole('ROLE_1')"/>
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
 		<security:intercept-url pattern="/member/update"
-			access="hasRole('ROLE_1')"/>
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		<security:intercept-url pattern="/contractor/register"
+			access="hasAnyRole('ROLE_1,ROLE_2')"/>
+			
 		<security:form-login login-page="/login" authentication-success-handler-ref="customLoginSuccess" 
 												 authentication-failure-handler-ref="customLoginFail"/>
 		

@@ -3,7 +3,10 @@ package kosta.todayroom.controller;
 import java.io.File;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,11 +16,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +36,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kosta.todayroom.domain.CustomUser;
 import kosta.todayroom.domain.MemberVO;
+import kosta.todayroom.security.CustomUserDetailsService;
 import kosta.todayroom.service.MemberService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -41,6 +54,7 @@ public class MemberController {
 	@Setter(onMethod_ = @Autowired)
 	private HttpServletRequest request;
 
+	
 	@GetMapping("/register")
 	public void getRegister() {
 	}
@@ -62,15 +76,24 @@ public class MemberController {
 	@GetMapping("/mypage")
 	public void mypage() {
 	}
+	
+	@GetMapping("/users/{member_seq}")
+	public String users(@PathVariable("member_seq") int member_seq ,Model model) {
+		MemberVO user = service.Check(member_seq);
+		
+		model.addAttribute("user", user);
+		
+		return "/member/users";
+	}
 
-	@GetMapping("/update")
+	@GetMapping("/modify")
 	public void updateForm() {
 	}
 
-	@PostMapping("/update")
+	@PostMapping("/modify")
 	public String update(@RequestParam("profile") MultipartFile profile, MemberVO vo) {
-		log.info(profile.toString());
-		log.warn(profile.toString());
+//		log.info(profile.toString());
+//		log.warn(profile.toString());
 		String uploadFolder = "C:\\upload";
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
@@ -86,11 +109,11 @@ public class MemberController {
 		if (profile.getOriginalFilename().equals("")) {
 			if (vo.getMember_path().equals("")&& vo.getMember_profile().equals("")) {
 				vo.setMember_profile("");
-				service.update(vo);
+				service.modify(vo);
 			} else {
 				vo.setMember_profile("");
 				vo.setMember_path("");
-				int num = service.update(vo);
+				int num = service.modify(vo);
 				if (num > 0) {
 					try {
 						file = new File("C:\\upload\\" + voPath + "\\" + URLDecoder.decode(proname, "UTF-8"));
@@ -106,7 +129,7 @@ public class MemberController {
 
 			vo.setMember_profile(pro);
 			vo.setMember_path(uploadFolderPath);
-			int num = service.update(vo);
+			int num = service.modify(vo);
 
 			if (num > 0) {
 				File saveFile = new File(uploadPath, pro);
@@ -120,27 +143,47 @@ public class MemberController {
 				}
 			}
 		}
-
-		return "redirect:/member/update";
+		
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
+//		User user = (User) authentication.getPrincipal();
+//		Authentication authentication=new UsernamePasswordAuthenticationToken(principal, credentials)
+//		Authentication auth=SecurityContextHolder.getContext().getAuthentication();
+//		log.warn(auths.getAuthorities());
+//		log.warn(SecurityContextHolder.getContext().getAuthentication());
+//		log.warn(authorities);
+		
+		MemberVO mv=service.idCheck(vo.getMember_id());
+		User user=new CustomUser(mv);
+		Authentication auth = new UsernamePasswordAuthenticationToken(user,user.getPassword(),user.getAuthorities());
+		SecurityContextHolder.getContext().setAuthentication(auth);
+		
+		return "redirect:/member/modify";
+	}
+	
+	@PostMapping("/secession")
+	public String secession(@RequestParam("member_seq") int member_seq){
+		log.warn(member_seq);
+		service.ratingUpdate(member_seq, 0);
+		return "/logout";
 	}
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getFile(String fileId){
-		log.info(fileId);
-		log.warn(fileId);
+//		log.info(fileId);
+//		log.warn(fileId);
 		
 		MemberVO member=service.idCheck(fileId);
 		String fileName=member.getMember_path()+"\\"+member.getMember_profile();
 
 		File file=new File("C:\\upload\\", fileName);
-		log.info("file:"+file);
+//		log.info("file:"+file);
 		ResponseEntity<byte[]> result=null;
 		
 		try {
 			HttpHeaders header=new HttpHeaders();
 			header.add("Content-Type", Files.probeContentType(file.toPath()));
 			result=new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-			log.info(result);
+//			log.info(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

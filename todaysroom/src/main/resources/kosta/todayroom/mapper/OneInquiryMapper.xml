@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.todayroom.mapper.OneInquiryMapper">
+	
+	<insert id="register" parameterType="kosta.todayroom.domain.One_inquiryVO">
+		insert into One_inquiry values(SEQ_ONE_INQUIRY_OI_SEQ.nextval, #{oi_title}, #{oi_content}, #{oi_answer}, #{member_seq}, #{admin_seq}, sysdate) 
+	</insert>
+
+	 <select id="getRead" resultType="kosta.todayroom.domain.One_inquiryVO">
+		select * from One_inquiry where oi_seq=#{seq}
+	</select> 
+	
+	<select id="read" parameterType="int" resultType="kosta.todayroom.domain.One_inquiryVO">
+		
+		<![CDATA[
+		select oi_seq, oi_title, oi_date, member_seq
+		from ( select /*+INDEX_DESC(ONE_INQUIRY PK_ONE_INQUIRY)*/ 
+				rownum rn, oi_seq, oi_title, oi_date, member_seq
+					from ONE_INQUIRY
+					where rownum <= #{pageNum} * #{amount}
+				)
+			where rn>(#{pageNum}-1)* #{amount} 
+		]]>
+			AND member_seq=#{seq}
+	</select>
+	
+	<select id="total" resultType="int">
+		select count(*) from ONE_INQUIRY where member_seq=#{seq}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from ONE_INQUIRY where oi_seq=#{seq}
+	</delete>
+	<update id="modify" parameterType="kosta.todayroom.domain.One_inquiryVO">
+		update ONE_INQUIRY
+		set oi_title=#{oi_title},
+			oi_content=#{oi_content}
+		where oi_seq=#{oi_seq}
+	</update>
+</mapper>

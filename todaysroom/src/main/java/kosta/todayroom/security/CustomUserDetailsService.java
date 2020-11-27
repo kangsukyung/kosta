@@ -25,7 +25,8 @@ public class CustomUserDetailsService implements UserDetailsService{
 		log.warn("Load User By userName: "+ username);
 		
 		MemberVO vo=memberMapper.read(username);
-		
+		log.warn(vo);
+		log.warn("111");
 //		ArrayList<SimpleGrantedAuthority> auth=new ArrayList<>();
 //		auth.add(new SimpleGrantedAuthority(vo.getMember_rating()));
 		

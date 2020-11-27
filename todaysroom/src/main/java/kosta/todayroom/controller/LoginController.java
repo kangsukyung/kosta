@@ -13,5 +13,7 @@ public class LoginController {
 	
 	@GetMapping("/login")
 	public void loginForm(){}
-
+	
+	@GetMapping("/logout")
+	public void logout(){}
 }
