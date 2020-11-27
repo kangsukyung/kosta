@@ -1,5 +1,5 @@
 $(function() {
-	var totalCost = 0;
+
 	
 	$('.production-select-dropdown__button').click(function(event) {
 		if($('.production-select-dropdown__list-container').hasClass('open')) {
@@ -9,7 +9,7 @@ $(function() {
 			$('.production-select-dropdown__list-container').addClass('open');
 		};
 	})
-	
+
 
  $(".production-select-list__item").on("click","button", function() {
 	   //상품 클릭하면 장바구니 옵션 폼 생성
@@ -71,6 +71,7 @@ $(function() {
    //장바구니 계산값 출력
    $(".checkpoint").on("change", ".form-control", function() {
 	   var form_id = $(this).attr('id');
+
 	   
 	   //물건의 개수 저장
 	   var product_quantity = $(this).find(":selected").val();
@@ -82,24 +83,21 @@ $(function() {
 	   
 	   //상품의 가격
 	   var productCost = productOneCost * $(this).val();
-//	   totalCost = totalCost + parseInt($(this).val() * productOneCost);
-	   
-	   //총 결제 금액 버그있음
-	   totalCost += productCost;
-	   $(".selling-option-form-content__price .selling-option-form-content__price__number").text(totalCost);
 		
 	   if($(this).val() > 0) {
 		   $(this).parent().parent().parent().find(".selling-option-item__price").find(".selling-option-item__price__number").text(productCost);
 	   }
 	   
+	   var totalCost = 0;
+	   //총 가격 계산
+	   $(".checkpoint .selling-option-item__price").each(function(i, items) {
+		   var item = $(items);
+		   totalCost += parseInt(item.text());
+	   })
+	   $(".selling-option-form-content__price .selling-option-form-content__price__number").text(totalCost);
 
    })
-	
-   
-   $(".checkpoint").on("click", "", function() {
-	   
-	   
-   }) 
+
    
    
    
