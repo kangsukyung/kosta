@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosta.todayroom.domain.ContractorVO;
+import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.VendorVO;
 import kosta.todayroom.mapper.BoardMapper;
 import kosta.todayroom.mapper.ContractorMapper;
@@ -53,9 +54,9 @@ public class ContractorServiceImpl implements ContractorService{
 	}
 
 	@Override
-	public LinkedHashMap<Integer, HashMap<String, String>> list() {
+	public LinkedHashMap<Integer, HashMap<String, String>> list(Criteria cri) {
 		// TODO Auto-generated method stub
-		List<ContractorVO> original_list = mapper.list();
+		List<ContractorVO> original_list = mapper.list(cri);
 		HashMap<String, String> tempMap = null;
 		ContractorVO tempVO = null;
 		int member_seq;

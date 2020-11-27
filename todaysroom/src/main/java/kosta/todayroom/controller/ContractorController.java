@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kosta.todayroom.domain.ContractorVO;
+import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.CustomUser;
 import kosta.todayroom.domain.MemberVO;
+import kosta.todayroom.domain.PageDTO;
 import kosta.todayroom.service.ContractorService;
 import kosta.todayroom.service.MemberService;
 import lombok.Setter;
@@ -57,7 +59,8 @@ public class ContractorController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model){
-		model.addAttribute("list", service.list());
+	public void list(Criteria cri, Model model){
+		model.addAttribute("list", service.list(cri));
+		model.addAttribute("pageMaker", new PageDTO(cri, 11));
 	}
 }
