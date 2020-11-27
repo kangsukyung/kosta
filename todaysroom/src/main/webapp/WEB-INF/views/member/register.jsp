@@ -64,7 +64,7 @@
 							<div class="col-md-12 form-group"><input type="text" class="form-control" id="member_name" name="member_name" placeholder="이름" onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'"></div>
 							<div class="col-md-12 form-group member_signup"><input type="text" class="form-control-member_singup" id="member_address" name="member_address" placeholder="주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '주소'"><button type="button" onclick="openZipSearch(member_address)">주소찾기</button></div>
 							
-            				<div class="col-md-12 form-group"><input type="tel" class="form-control"  id="member_phone" name="member_phone" placeholder="전화번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '전화번호'"></div>
+            				<div class="col-md-12 form-group"><input type="tel" class="form-control"  id="member_phone" name="member_phone" placeholder="휴대폰번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '휴대폰번호'"></div>
     			          	<font class="member_font_padding" id="phone_check" size="2"></font>
 							<div class="col-md-12 form-group"><input type="text" class="form-control" id="member_email" name="member_email" placeholder="이메일 주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 주소'"></div>
     			          	<font class="member_font_padding" id="mail_check" size="2"></font>
