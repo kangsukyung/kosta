@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/ksk_style.css">
 </head>
 <body>	
- 	<jsp:include page="../../header.jsp"></jsp:include>
+ 	<jsp:include page="../header.jsp"></jsp:include>
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
@@ -113,31 +113,31 @@
 								</div> -->
 
 								<div class="desc">
-									<c:forEach var="productItem" items="${list}">
-										<%-- <c:if test="${product.product_fname != null }">
-											<c:set var="head"
-												value="${fn:substring(product.product_fname, 0, fn:length(productVO.product_fname)-4) }"></c:set>
-											<c:set var="pattern"
-												value="${fn:substring(product.product_fname, fn:length(head) +1, fn:length(productVO.product_fname)) }"></c:set>
-
-											<c:choose>
-												<c:when
-													test="${pattern == 'png' || pattern == 'gif' || pattern == 'PNG' }">
-													<img src="/kosta1200/upload/${head }_small.${pattern}">
-												</c:when>
-												<c:otherwise>
-													<c:out value="NO IMAGE"></c:out>
-												</c:otherwise>
-											</c:choose>
-
-										</c:if> --%>
+									<c:forEach var="product" items="${list}">
+															<%-- <c:if test="${product.product_fname != null }">
+																<c:set var="head"
+																	value="${fn:substring(product.product_fname, 0, fn:length(productVO.product_fname)-4) }"></c:set>
+																<c:set var="pattern"
+																	value="${fn:substring(product.product_fname, fn:length(head) +1, fn:length(productVO.product_fname)) }"></c:set>
+					
+																<c:choose>
+																	<c:when
+																		test="${pattern == 'png' || pattern == 'gif' || pattern == 'PNG' }">
+																		<img src="/kosta1200/upload/${head }_small.${pattern}">
+																	</c:when>
+																	<c:otherwise>
+																		<c:out value="NO IMAGE"></c:out>
+																	</c:otherwise>
+																</c:choose>
+					
+															</c:if> --%>
 										<div id="product_list_in_list">
-											<label>상품번호 : ${productItem.product_seq }<br></label>
-											 <label>상품명  : ${productItem.product_name }<br></label>
-											 <label>가 격 : ${productItem.product_price }<br></label>
+											<label>상품번호 : ${product.product_seq }<br></label>
+											 <label>상품명  : ${product.product_name }<br></label>
+											 <label>가 격 : ${product.product_price }<br></label>
 											
-											<a href="/product/modify?product_seq=<c:out value="${productItem.product_seq}"/>">수정하기</a>
-											<a href="/product/remove?product_seq=<c:out value="${productItem.product_seq}"/>">삭제하기</a>
+											<a href="/product/modify?product_seq=<c:out value="${product.product_seq}"/>">수정하기</a>
+											<a href="/product/remove?product_seq=<c:out value="${product.product_seq}"/>">삭제하기</a>
 											<%-- <a href="/product/remove?product_seq=${product.product_seq}">삭제하기</a> --%>
 										</div>
 									</c:forEach>
@@ -163,7 +163,7 @@
         	</div>
      </section>
 
- <jsp:include page="../../footer.jsp"></jsp:include>
+ <jsp:include page="../footer.jsp"></jsp:include>
 
 
   <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>

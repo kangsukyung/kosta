@@ -5,24 +5,44 @@
 <mapper namespace="kosta.todayroom.mapper.ProductMapper">
 
 
-<select id="getList" resultType="kosta.todayroom.domain.StoreVO">
+<select id="ProductStoregetList" resultType="kosta.todayroom.domain.StoreVO">
 	select * from store
 </select>
 
-<insert id="ProductRegister">
-	insert into store (store_seq, member_seq, store_title, store_content, store_name, store_picture)
-	values(SEQ_STORE_STORE_SEQ.nextval, 2, #{store_title}, #{store_content}, #{store_name}, #{store_picture})
+
+<select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
+	select * from product
+</select>
+
+
+
+<insert id="ProductStoreRegister">
+		insert into store (store_seq, member_seq, store_title, store_content, store_name)
+		values(SEQ_STORE_STORE_SEQ.nextval, 42, #{store_title}, #{store_content}, #{store_name})
 </insert>
 
-<select id="ProductRead" resultType="kosta.todayroom.domain.StoreVO">
+
+<insert id="ProductItemRegister">
+insert into product(product_seq,store_seq,product_name,product_price)
+select SEQ_PRODUCT_PRODUCT_SEQ.NEXTVAL, SEQ_STORE_STORE_SEQ.CURRVAL, A.* from(
+ <foreach item="item" collection="list" separator="UNION ALL " >
+   select #{item.product_name} as product_name,
+        #{item.product_price} as product_price
+   from dual
+ </foreach>) A
+</insert>
+
+
+
+<select id="ProductStoreRead" resultType="kosta.todayroom.domain.StoreVO">
 	select * from store where store_seq = #{store_seq}
 </select>
 
-<delete id="ProductRemove">
+<delete id="ProductStoreRemove">
 	delete from store where store_seq = #{store_seq}
 </delete>
 
-<update id="ProductModify">
+<update id="ProductStoreModify">
 	update store
 	set store_title = #{store_title},
 	store_content = #{store_content}

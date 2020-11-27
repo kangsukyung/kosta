@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ksk_style.css">
 </head>
 <body>	
-	<jsp:include page="../../header.jsp"/>
+	<jsp:include page="../header.jsp"/>
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="blog">
 		<div class="container h-100">
@@ -134,7 +134,7 @@
 
 
 
-	<jsp:include page="../../footer.jsp"></jsp:include>
+	<jsp:include page="../footer.jsp"></jsp:include>
 
 
 	<script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
