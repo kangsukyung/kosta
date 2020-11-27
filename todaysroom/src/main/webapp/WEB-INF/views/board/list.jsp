@@ -55,22 +55,22 @@
 							<h4 class="widget_title">Post Catgories</h4>
 							<ul class="list cat-list">
 								<li><a href="/board/list" class="d-flex justify-content-between">
-										<p>HOME</p>
-										<p>
-											<c:out value="${pageMaker.total }" />
-										</p>
+										<p>HOME</p><p><c:if test="${pageMaker.cri.filter eq null }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
 								<li><a href="/board/list?filter=bang" class="d-flex justify-content-between">
-										<p>방들이</p>
+										<p>방들이</p><p><c:if test="${pageMaker.cri.filter eq 'bang' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
 								<li><a href="/board/list?filter=bang" class="d-flex justify-content-between">
-										<p>전문가방들이</p>
+										<p>전문가방들이</p><p><c:if test="${pageMaker.cri.filter eq 'bang' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
 								<li><a href="/board/list?filter=knowhow" class="d-flex justify-content-between">
-										<p>노하우</p>
+										<p>노하우</p><p><c:if test="${pageMaker.cri.filter eq 'knowhow' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
 								<li><a href="/board/list?filter=qa" class="d-flex justify-content-between">
-										<p>질문과답변</p>
+										<p>질문과답변</p><p><c:if test="${pageMaker.cri.filter eq 'qa' }"><c:out value="${pageMaker.total}"/></c:if></p>
+								</a></li>
+								<li><a href="/board/register" class="d-flex justify-content-between">
+										<p>글 삭제 잠시만 쓸게욤~</p>
 								</a></li>
 							</ul>
 						</aside>
@@ -156,7 +156,11 @@
 															<c:out value="${board.board_title }" />
 														</h2>
 													</a>
-													<p>${board.board_content }</p>
+													<p style="width: 200px; 
+															  text-overflow: ellipsis; 
+															  white-space: nowrap; 
+															  overflow: hidden; 
+															  display: block;">${board.board_content }</p>
 													<a class="button button-blog"
 														href='/board/read?board_seq=<c:out value="${board.board_seq }"/>'>View
 														More</a>
@@ -225,8 +229,7 @@
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script
-		src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
 	<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
 	<script src="/main_resource/vendors/mail-script.js"></script>
 	<script src="/main_resource/js/main.js"></script>
@@ -255,15 +258,8 @@
 				actionForm.submit();
 			});
 			
-			
-			
-			
 			//리스트 이미지
 			(function(){
-// 				var board_list1234 = '<c:out value="${board}"/>';
-				
-// 				console.log(board_list1234);
-
 				
 				let board_thumb = new Map();
 				
@@ -271,8 +267,6 @@
 				var board_list = $("input[name='imgBoardSeq']").get();
 				var board_thumbnail_list = $("input[name='imgBoardThumbnail']").get();
 				var board_thumbnail_list123 = $("input[value='3.png']").val();
-				
-				console.log(board_thumbnail_list123);
 				
 				for (var int = 0; int < board_list.length; int++) {
 					board_thumb.set(board_list[int].value, board_thumbnail_list[int].value);
@@ -286,8 +280,6 @@
 							if (attach.fileName==value) {
 								
 								var imgseq = $("input[value='"+key+"']").val();
-								console.log("=======")
-								console.log(imgseq);
 								
 								if (key == imgseq) {
 									if (str == null || str.length == 0) {
@@ -303,53 +295,6 @@
 					});
 					
 				});
-				
-// 				$.each(board_thumb, function (index, item) {
-// 					console.log(item);
-					
-// 					var result = "";
-					
-// 					$.getJSON("/board/readAttachList", {board_seq: item.value}, function(arr) {
-						
-// 						$(arr).each(function(i, attach) {
-							
-// 							$(board_thumbnail_list).each(function(i, thumbnail) {
-
-// 								if (attach.fileName == thumbnail.value) {
-									
-// 									var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
-// 									str += "<img src='/board/display?fileName="+thumbnailPath+"'>";
-// 									console.log("count");
-// 									$(".blog_post").prepend(str);
-// 									str = "";
-// 								}
-// 							})
-
-// 						});
-// 					});
-// 				});
-
-
-// 				var board_seq = $("input[name='imgBoardSeq']").val();
-
-// 				alert(board_seq);
-// 				console.log("=====");
-				
-// 				$.getJSON("/board/readAttachList", {board_seq: board_seq}, function(arr){
-// 				       console.log(arr);
-				       
-// 				       var str = "";
-// 				       $(arr).each(function(i, attach){
-				         
-// 				    	   if (i == 0) {
-// 				    		   var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
-// 				    		   str += "<img src='/board/display?fileName="+thumbnailPath+"'>";
-// 				    	   }
-// 				    	   $(".blog_post").prepend(str);
-				      
-// 				       });
-				
-// 				});//end getjson
 			
 			})();
 

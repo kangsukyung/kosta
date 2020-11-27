@@ -2,6 +2,7 @@
 	pageEncoding="EUC-KR"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,17 +11,12 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Aroma Shop - Blog Details</title>
 <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
-<link rel="stylesheet"
-	href="/main_resource/vendors/bootstrap/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
 <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/board_listdetail.css">
 
@@ -83,7 +79,7 @@
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="blog">
 		<div class="container h-100" id="containerH100"
-			style="background-image: url('/main_resource/img/blog/feature-img1.jpg'); background-repeat: round; background-size: cover;">
+			style="background-image: url('/main_resource/img/blog/feature-img1.jpg'); background-position: center;">
 			<div class="blog-banner">
 				<div class="text-center" style="background-color: white; opacity:0.7;">
 					<h1>
@@ -133,16 +129,24 @@
 								<div class="blog_meta_list_div">${board.board_scraps }
 									Scraps</div>
 						</a></li>
-						<li class="li_fixed_style"><a
-							href="/board/modify?board_seq=${board.board_seq }"
-							class="blog_meta_list_a"> <i class="lnr lnr-cog"></i>
-								<div class="blog_meta_list_div">Update</div>
-						</a></li>
-						<li class="li_fixed_style"><a id="removeBoard"
-							href="/board/remove?board_seq=${board.board_seq }"
-							class="blog_meta_list_a"> <i class="lnr lnr-trash"></i>
-								<div class="blog_meta_list_div">Delete</div>
-						</a></li>
+						
+						
+						<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.member" var="member"/>
+							<c:if test="${member.member_seq eq board.member_seq }">
+								<li class="li_fixed_style"><a
+									href="/board/modify?board_seq=${board.board_seq }"
+									class="blog_meta_list_a"> <i class="lnr lnr-cog"></i>
+										<div class="blog_meta_list_div">Update</div>
+								</a></li>
+						
+								<li class="li_fixed_style"><a id="removeBoard"
+									href="/board/remove?board_seq=${board.board_seq }"
+									class="blog_meta_list_a"> <i class="lnr lnr-trash"></i>
+										<div class="blog_meta_list_div">Delete</div>
+								</a></li>
+							</c:if>
+						</sec:authorize>
 					</ul>
 				</div>
 
@@ -200,14 +204,10 @@
 							<p class="excert">${board.board_content }</p>
 						</div>
 						<div class="col-lg-12">
-							<div class="quotes">MCSE boot camps have its supporters and
-								its detractors. Some people do not understand why you should
-								have to spend money on boot camp when you can get the MCSE study
-								materials yourself at a fraction of the camp price. However, who
-								has the willpower to actually sit through a self-imposed MCSE
-								training.</div>
+							<div class="quotes"><h1><c:out value="${board.board_title}"/></h1></div>
 							<div class="row" id="picture_row">
 								<div class="col-lg-12 mt-4">
+									<p><c:out value="${board.board_content}"/></p>
 									<p>MCSE boot camps have its supporters and its detractors.
 										Some people do not understand why you should have to spend
 										money on boot camp when you can get the MCSE study materials

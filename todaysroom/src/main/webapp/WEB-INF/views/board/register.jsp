@@ -9,29 +9,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Aroma Shop - Login</title>
 <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
-<link rel="stylesheet"
-	href="/main_resource/vendors/bootstrap/bootstrap.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/fontawesome/css/all.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
 <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/nice-select/nice-select.css">
-<link rel="stylesheet"
-	href="/main_resource/vendors/nouislider/nouislider.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+<link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+<link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/board.css">
 <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/main_resource/vendors/skrollr.min.js"></script>
 <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-<script
-	src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
 <script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
 <script src="/main_resource/vendors/mail-script.js"></script>
 <script src="/main_resource/js/main.js"></script>
@@ -72,6 +64,35 @@
 			line-height: 500px; 
 			vertical-align:middle;
 		}
+		
+		#form-group-file-upload label {
+			width: 100%;
+			display: inline-block; 
+			padding: .5em .75em; 
+			color: #777;
+		    font-family: fantasy;
+		    font-size: x-large; 
+			line-height: normal; 
+			vertical-align: middle; 
+			background-color: #fdfdfd; 
+			cursor: pointer; 
+			border: 1px solid #ebebeb; 
+			border-bottom-color: #ced4da; 
+			border-radius: .25em;
+		}
+
+		#form-group-file-upload input[type="file"] { /* 파일 필드 숨기기 */ 
+			position: absolute; 
+			width: 1px; 
+			height: 1px; 
+			padding: 0; 
+			margin: -1px; 
+			overflow: hidden; 
+			clip:rect(0,0,0,0); 
+			border: 0; 
+		}
+
+
 	</style>
 <body>
 	<section> <%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
@@ -137,7 +158,7 @@
 						<!-- start 파일 업로드 -->
 						<!-- picture -->
 						<div class="row">
-							<div class="col-md-12 form-group">
+							<div class="col-md-12 form-group" style="position: relative;">
 								<div class="panel panel-default">
 
 									<div class="panel-heading"></div>
@@ -145,7 +166,9 @@
 									<div class="panel-body">
 										
 										<div id="dropZone" style="width: 100%; height: 500px; border: 1px solid #ced4da; border-radius: 0.25em;">
-											<div id="fileDragDesc"> (썸네일 이미지 등록) 파일을 드래그 해주세요. </div>
+											<div id="fileDragDesc">
+												<p style="font-family: fantasy; font-size: xx-large; font-weight: bold;">썸네일 사진을 마우스로 끌어서 넣어주세요!</p>
+											</div>
 											<div><input type='hidden' name='attachList.uuid' value=''></div>
 
 										</div>
@@ -153,8 +176,9 @@
 											<br><br>
 										</div>
 									
-										<div class="form-group uploadDiv">
-											<input type="file" class="form-control" name='board_picture' multiple>
+										<div class="form-group uploadDiv" id="form-group-file-upload">
+											<label for="multifileupload">본문 이미지를 추가하시려면 클릭하세요!</label>
+											<input type="file" class="form-control" id="multifileupload" name='board_picture' multiple>
 										</div>
 
 										<div class='uploadResult'>
@@ -177,9 +201,16 @@
 
 						<div class="col-md-12 form-group">
 							<input type="text" class="form-control" id="title"
-								name="board_title" placeholder="제목을 입력해주세요.">
+								name="board_title" placeholder="제목을 입력해주세요." style="width: 882px;
+																					    position: absolute;
+																					    padding-bottom: 21px;
+																					    font-size: 24px;">
+							<span style="color: #aaa;
+    									 position: absolute;
+    									 left: 92%;
+    									 margin-top: 10px;" id="counter">(0 / 30)</span>
 						</div>
-
+						<br>
 						<div class="col-md-12 form-group">
 							<textarea rows="30%" cols="70" class="form-control" id="contents"
 								name="board_content" placeholder="내용을 입력해주세요."></textarea>
@@ -218,6 +249,18 @@
 		});
 		
 		$(document).ready(function(e) {
+			
+			$("#title").keyup(function(e) {
+				var content = $(this).val();
+				
+				$('#counter').html("("+content.length+" / 30)");//글자수 실시간 카운팅
+				
+				if (content.length > 30){
+			        alert("최대 30자까지 입력 가능합니다.");
+			        $(this).val(content.substring(0, 30));
+			        $('#counter').html("(30 / 30)");
+			    }
+			});
 
 			var formObj = $("form[role='form']");
 			
@@ -375,28 +418,6 @@
 			});
 			
 			
-			//첨부파일 삭제 처리
-			$(".uploadResult").on("click", "button", function(e){
-				console.log("delete file");
-			      
-			    var targetFile = $(this).data("file");
-			    var type = $(this).data("type");
-			    
-			    var targetLi = $(this).closest("li");
-			    
-			    $.ajax({
-			      url: '/board/deleteFile',
-			      data: {fileName: targetFile, type:type},
-			      dataType:'text',
-			      type: 'POST',
-			        success: function(result){
-			           alert(result);
-			           
-			           targetLi.remove();
-			        }
-			    }); //$.ajax
-			});
-			
 			
 			$(function() {
 				// 파일 드롭 다운
@@ -423,7 +444,7 @@
 					e.stopPropagation();
 					e.preventDefault();
 					// 드롭다운 영역 css
-					dropZone.css('background-color', '#E3F2FC');
+					dropZone.css('background-color', '#b7e2ff');
 				});
 				dropZone.on('drop', function(e) {
 					e.preventDefault();

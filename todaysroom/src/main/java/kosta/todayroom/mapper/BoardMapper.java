@@ -3,14 +3,14 @@ package kosta.todayroom.mapper;
 import java.util.List;
 
 import kosta.todayroom.domain.BoardVO;
-import kosta.todayroom.domain.Criteria;
+import kosta.todayroom.domain.BoardCriteria;
 import kosta.todayroom.domain.KnowhowVO;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.domain.RoomwarmingVO;
 
 public interface BoardMapper {
 	public List<BoardVO> List();
-	public List<BoardVO> ListPaging(Criteria cri);
+	public List<BoardVO> ListPaging(BoardCriteria cri);
 	
 	public RoomwarmingVO roomwarming(int board_seq);
 	public KnowhowVO knowhow(int board_seq);
@@ -33,6 +33,6 @@ public interface BoardMapper {
 	public List<MemberVO> memberList();
 	public MemberVO member(int member_seq);
 	
-	public int boardTotalCount(Criteria cri);
+	public int boardTotalCount(BoardCriteria cri);
 	
 }

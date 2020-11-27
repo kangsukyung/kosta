@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kosta.todayroom.domain.BoardAttachVO;
 import kosta.todayroom.domain.BoardVO;
-import kosta.todayroom.domain.Criteria;
+import kosta.todayroom.domain.BoardCriteria;
 import kosta.todayroom.domain.KnowhowVO;
 import kosta.todayroom.domain.PageDTO;
 import kosta.todayroom.domain.RoomwarmingVO;
@@ -37,7 +38,7 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("/list")
-	public void BoardList(Criteria cri, @RequestParam(value="filter", required=false) String filter, Model model) {
+	public void BoardList(BoardCriteria cri, @RequestParam(value="filter", required=false) String filter, Model model) {
 		log.info("list..........");
 		
 		if (filter != null) {
@@ -47,18 +48,20 @@ public class BoardController {
 		model.addAttribute("board", service.boardList(cri));
 
 		int total = service.boardTotalCount(cri);
-
+		
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 
 		model.addAttribute("memberList", service.memberList());
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void BoardRegister() {
 		log.info("register..........");
 	}
 
 	@Transactional
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String BoardRegister(BoardVO board, RoomwarmingVO room, KnowhowVO know, RedirectAttributes rttr) {
 		log.info("========== INSERT ==========");

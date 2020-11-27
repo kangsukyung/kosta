@@ -12,9 +12,9 @@ public class PageDTO {
   private boolean prev, next;
 
   private int total;
-  private Criteria cri;
+  private BoardCriteria cri;
 
-  public PageDTO(Criteria cri, int total) {
+  public PageDTO(BoardCriteria cri, int total) {
 
     this.cri = cri;
     this.total = total;

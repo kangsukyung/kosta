@@ -10,7 +10,7 @@ import lombok.ToString;
 @ToString
 @Setter
 @Getter
-public class Criteria {
+public class BoardCriteria {
 
   private int pageNum;
   private int amount;
@@ -20,11 +20,11 @@ public class Criteria {
   
   private String filter;
 
-  public Criteria() {
+  public BoardCriteria() {
     this(1, 10);
   }
   
-  public Criteria(int pageNum, int amount) {
+  public BoardCriteria(int pageNum, int amount) {
     this.pageNum = pageNum;
     this.amount = amount;
   }

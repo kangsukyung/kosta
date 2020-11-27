@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kosta.todayroom.domain.BoardAttachVO;
 import kosta.todayroom.domain.BoardVO;
-import kosta.todayroom.domain.Criteria;
+import kosta.todayroom.domain.BoardCriteria;
 import kosta.todayroom.domain.KnowhowVO;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.domain.RoomwarmingVO;
@@ -59,7 +59,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> boardList(Criteria cri) {
+	public List<BoardVO> boardList(BoardCriteria cri) {
 
 		log.info("getList..........");
 
@@ -111,7 +111,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardTotalCount(Criteria cri) {
+	public int boardTotalCount(BoardCriteria cri) {
 
 		log.info("boardTotalCount..........");
 

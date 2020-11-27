@@ -17,7 +17,7 @@
 					rownum rn, board_seq, member_seq, board_title, board_content, board_date, board_picture,
 					board_thumbnail, board_classification, board_views, board_scraps
 				from 
-					board 
+					board
 				where ]]>
 				<if test="filter != null">board_classification = #{filter} and</if>
 				<![CDATA[
@@ -28,8 +28,8 @@
 	</select>
 
 	<select id="boardTotalCount" resultType="int">
-		select count(*) from
-		board
+		select count(*) from board
+		<if test="filter != null">where board_classification = #{filter}</if>
 	</select>
 
 	<insert id="register">

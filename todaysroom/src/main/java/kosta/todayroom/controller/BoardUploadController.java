@@ -31,7 +31,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Log4j
 @RequestMapping("/board/*")
-public class UploadController {
+public class BoardUploadController {
 	// 년/월/일 폴더의 생성
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
