@@ -22,7 +22,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<section>
-		<%@include file="../../header.jsp" %>
+		<%@include file="../includes/header.jsp" %>
 	</section>
 	<!--================ End Header Menu Area =================-->
 
@@ -219,7 +219,7 @@
 
 	<!--================ Start footer Area  =================-->
 	<section>
-		<%@include file="../../footer.jsp"%>
+		<%@include file="../includes/footer.jsp"%>
 	</section>
 	<!--================ End footer Area  =================-->
 
