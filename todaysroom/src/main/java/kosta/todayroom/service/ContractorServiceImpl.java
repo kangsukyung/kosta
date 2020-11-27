@@ -56,8 +56,8 @@ public class ContractorServiceImpl implements ContractorService{
 	public LinkedHashMap<Integer, HashMap<String, String>> list() {
 		// TODO Auto-generated method stub
 		List<ContractorVO> original_list = mapper.list();
-		ContractorVO tempVO = null;
 		HashMap<String, String> tempMap = null;
+		ContractorVO tempVO = null;
 		int member_seq;
 		LinkedHashMap<Integer, HashMap<String, String>> list = new LinkedHashMap<>();
 		
@@ -71,7 +71,7 @@ public class ContractorServiceImpl implements ContractorService{
 			tempMap.put("member_profile", mapper.readMemberProfile(member_seq));
 			tempMap.put("board_thumbnail", mapper.readBoardThumbnail(member_seq));
 			
-			list.put(member_seq, tempMap);
+			list.put(i, tempMap);	//추후, i를 member_seq로 변경해줄 것.
 		}
 		
 		return list;

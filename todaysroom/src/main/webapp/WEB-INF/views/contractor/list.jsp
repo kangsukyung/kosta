@@ -27,21 +27,24 @@
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <body>
 	<div id="contractor-list-container">
-	<h2>시공업체 리스트</h2>
+		<h2>시공업체 리스트</h2>
 
-	<ul>
-		<c:forEach items="${list }" var="item">
-			<li class="list-items">
-				<a href="/member/users/${item.key }"></a>
-				<div class="img-wrap"><img src="${item.value.board_thumbnail }"></div>
-				<div class="content-wrap">
-					<img src="${item.value.member_profile }">
-					<div class="bname">${item.value.contractor_bname }</div>
-					<div class="address">${item.value.contractor_address }</div>
-				</div>
-			</li>
-		</c:forEach>
-	</ul>
+		<ul>
+			<c:forEach items="${list }" var="item">
+				<li class="list-items"><a href="/member/users/${item.key }"></a>
+					<div class="img-wrap">
+						<img src="${item.value.board_thumbnail }">
+					</div>
+					<div class="content-wrap">
+						<img src="${item.value.member_profile }">
+						<div class="bname">${item.value.contractor_bname }</div>
+						<div class="address">${item.value.contractor_address }</div>
+					</div></li>
+			</c:forEach>
+		</ul>
+		
+		
+		
 	</div>
 
 	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
