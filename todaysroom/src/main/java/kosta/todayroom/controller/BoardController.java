@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kosta.todayroom.domain.BoardAttachVO;
-import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.BoardCriteria;
+import kosta.todayroom.domain.BoardPageDTO;
+import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.KnowhowVO;
-import kosta.todayroom.domain.PageDTO;
 import kosta.todayroom.domain.RoomwarmingVO;
 import kosta.todayroom.service.BoardService;
 import lombok.Setter;
@@ -49,7 +49,7 @@ public class BoardController {
 
 		int total = service.boardTotalCount(cri);
 		
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
 
 		model.addAttribute("memberList", service.memberList());
 	}
@@ -192,3 +192,4 @@ public class BoardController {
 		});// end foreachd
 	}
 }
+

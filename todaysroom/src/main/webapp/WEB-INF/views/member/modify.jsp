@@ -28,8 +28,6 @@
 <%@include file="../includes/header.jsp"%>
 <body>
 	<!-- ================ start banner area ================= -->
-	<sec:authorize access="isAuthenticated()">
-		<sec:authentication property="principal.member" var="member"/>	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
 			<div class="blog-banner">
@@ -49,6 +47,8 @@
 
 
 	<!-- ================ category section start ================= -->		  
+  <sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.member" var="member"/>	
   <section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
@@ -75,7 +75,7 @@
 					</c:if>
 							<h4 style=" padding-top: 10px;">${member.member_nickname}님 프로필</h4>
 							<div class="social_icon">
-							<br>
+							<br>	
 								<a href="#"> <i class="ti-heart"> 좋아요</i></a> 
 								<a href="#"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
@@ -85,7 +85,7 @@
           <div class="sidebar-filter">
             <div class="top-filter-head">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
-					<li><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do"><p>프로필</p></a></li>
+					<li><a href="/member/mypage"><p>프로필</p></a></li>
 					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
 					<li><a href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do" class="d-flex justify-content-between"><p>설정</p></a></li>
 					<li><a href="${pageContext.request.contextPath}/Member/ConstractorSignup_form.do" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
@@ -98,15 +98,20 @@
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">
-            		<a href="" style="float:right;">회원탈퇴</a>
-						<form class="row login_form" action="/member/update"  method="post" enctype="multipart/form-data">
+            		<a id="memberSecession" href="#" style="float:right;">회원탈퇴</a>
+            		    <form id="Secession-form" action="/member/secession" method="Post">
+								<input type="hidden" name="member_seq" value="${member.member_seq }"/>
+								<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
+						</form>
+						
+						<form class="row login_form" action="/member/modify"  method="post" enctype="multipart/form-data">
 							<input type="hidden" name="member_seq" value="${member.member_seq }">
 							<input type="hidden" name="member_id" value="${member.member_id }">
 							<input type="hidden" name="member_path" value="${member.member_path }">
 							<input type="hidden" name="member_profile" value="${member.member_profile }">
 							<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
 							
-							<div class="col-md-12 form-group member_signup"><h5 style="font-size: 15px;float: left;padding-top: 12px;"></h5><input type="text" class="form-control-member_singup" id="member_nickname" name="member_nickname"  placeholder="별명" onfocus="this.placeholder = ''" onblur="this.placeholder = '별명'" value=" ${member.member_nickname}">
+							<div class="col-md-12 form-group member_signup"><h5 style="font-size: 15px;float: left;padding-top: 12px;"></h5><input type="text" class="form-control-member_singup" id="member_nickname" name="member_nickname"  placeholder="별명" onfocus="this.placeholder = ''" onblur="this.placeholder = '별명'" value="${member.member_nickname}">
 							<button type="button" class="memberName_btn">중복확인</button></div>
 							<div class="col-md-12 form-group"><input type="text" class="form-control" id="member_name" name="member_name" placeholder="이름" onfocus="this.placeholder = ''" onblur="this.placeholder = '이름'" value="${member.member_name}"></div>
 							<div class="col-md-12 form-group member_signup" ><input type="text" class="form-control-member_singup" id="member_address" name="member_address" placeholder="주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '주소'" value="${member.member_address}" style="padding-left: 10px;"><button type="button" onclick="openZipSearch(member_address)">주소찾기</button></div>
@@ -155,7 +160,29 @@
   <script src="/main_resource/js/member_register.js"></script>
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script>
-  	
+  $(document).ready(function name() {
+	 $("#memberSecession").click(function() {
+		  if (confirm("회원탈퇴하시겠습니까?") == true){  
+			document.getElementById('Secession-form').submit();
+		  }else{ 
+		      return;
+		  }
+	  });
+	  
+		$(".memberName_btn").click(function() {
+	        
+	        var userName =  $("#member_nickname").val(); 
+	        memberRegister.nameCheck(userName, function(result) {
+	        	
+	        	if(result=='0'){
+	        		alert("사용할수 있는 별명입니다.");
+	        	}else{
+		        	alert("사용중인 별명입니다.");
+	        	}
+			});
+	    });
+	});
+  
 	function imgRead() {
 		var file1=$("#fileChange").val();
 /* 		var fReader=new FileReader();

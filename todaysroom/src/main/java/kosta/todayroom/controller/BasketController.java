@@ -31,31 +31,34 @@ public class BasketController {
 	private BasketServiceImpl service;
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		model.addAttribute("list", service.list());
+	public void list(@RequestParam("member_seq") int member_seq, Model model) {
+		model.addAttribute("list", service.list(member_seq));
 	}
 	
 	@PostMapping(value="/register")
-	public String register(@RequestParam(value = "product_seq", required=true) List<Integer> seq_list, RedirectAttributes rttr) {
+	public String register(@RequestParam(value = "product_seq", required=true) List<Integer> seq_list,
+			@RequestParam("member_seq") int member_seq,
+			@RequestParam("product_quantity") int product_quantity,
+			RedirectAttributes rttr) {
 		//product_seq list를 파라미터로 가져옴
 		//register는 basketList를 Create함
 		
-		//register의 파라미터를 basketList가 아닌 product_seq list로 바꾸어야 할 듯
-		System.out.println("1");
 		System.out.println(seq_list);
 		
 		List<BasketVO> basketList = new ArrayList<>();
 		if(seq_list != null) {
 			for(int i=0; i<seq_list.size(); i++) {
-				System.out.println("2");
 				basketList.add(new BasketVO());
-				basketList.get(i).setProduct_seq(seq_list.get(i));		
+				basketList.get(i).setProduct_seq(seq_list.get(i));
+				basketList.get(i).setMember_seq(member_seq);
+				basketList.get(i).setBasket_quantity(product_quantity);
 			}			
 		}
-		System.out.println("3");
 		service.register(basketList);
 		
+		
 		rttr.addFlashAttribute("basketList", basketList);
+		rttr.addAttribute("member_seq", member_seq);
 		
 		return "redirect:/basket/list";
 	}

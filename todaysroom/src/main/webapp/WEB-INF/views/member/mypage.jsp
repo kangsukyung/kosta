@@ -16,18 +16,16 @@
   <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}" />
   
   <title>마이페이지 프로필</title>
-  <link rel="icon" href="/resources/main_resource/img/Fevicon.png" type="image/png">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/themify-icons/themify-icons.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/linericon/style.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/owl-carousel/owl.carousel.min.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/nice-select/nice-select.css">
-  <link rel="stylesheet" href="/resources/main_resource/vendors/nouislider/nouislider.min.css">
-
-  <link rel="stylesheet" href="/resources/main_resource/css/style.css">
-  <link rel="stylesheet" href="/resources/css/member_mypage.css">
+  <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
+  <link rel="stylesheet" href="/main_resource/css/style.css">
+  <link rel="stylesheet" href="/main_resource/css/member_mypage.css">
 </head>
  <%@include file="../includes/header.jsp"%>
 <body>
@@ -67,7 +65,7 @@
 						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
 						<c:choose>
 							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-								<a href="/member/update"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" alt="" width="130" height="130"></a>
+								<a href="/member/modify"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" alt="" width="130" height="130"></a>
 							</c:when>
 							<c:otherwise>
 								<c:out value="NO IMAGE"></c:out>
@@ -75,7 +73,7 @@
 						</c:choose>					
 					</c:if>
 					<c:if test="${member.member_profile ==null}">
-						<a href="/member/update"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
+						<a href="/member/modify"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
 					</c:if>
 							<h4 style=" padding-top: 10px;"><sec:authentication property="principal.member.member_id"/>님 프로필</h4>
 							<div class="social_icon">
@@ -88,20 +86,20 @@
             </ul>
           </div>
           <div class="sidebar-filter">
-            <div class="top-filter-head">카테고리</div>
+            <div class="top-filter-head" style="margin-bottom: 10px;">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
-					<li><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do" class="d-flex justify-content-between"><p>프로필</p></a></li>
+					<li><a href="/member/mypage" class="d-flex justify-content-between"><p>마이페이지</p></a></li>
 					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
-					<li><a href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do" class="d-flex justify-content-between"><p>설정</p></a></li>
-					<c:if test="${member.member_rating eq '1' || member.member_rating eq '2'}">
-					<li><a href="/constractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
-					</c:if>
-					<c:if test="${member.member_rating eq '1' || member.member_rating eq '3'}">
-					<li><a href="${pageContext.request.contextPath}/Member/VendorSignup_form.do" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
-					</c:if>
-					<c:if test="${member.member_rating eq '2' }">
-					<li><a href="${pageContext.request.contextPath}/Product/ProductListAction.do" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
-					</c:if>
+					<li><a href="/member/modify" class="d-flex justify-content-between"><p>설정</p></a></li>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
+						<li><a href="/contractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_3')">
+						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_2')">
+						<li><a href="${pageContext.request.contextPath}/Product/ProductListAction.do" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+					</sec:authorize>
 				</ul>
           </div>
         </div>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kosta.todayroom.mapper.ConstMapper">
+	<insert id="register" parameterType="Const">
+		insert into const
+			values(SEQ_CONST_CONST_SEQ.nextval, #{const_space}, #{const_style}, #{const_color}, #{const_budget}, #{member_seq}, #{const_type})
+	</insert>
+</mapper>

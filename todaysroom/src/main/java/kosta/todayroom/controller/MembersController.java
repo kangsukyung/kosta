@@ -45,17 +45,4 @@ public class MembersController {
 		new ResponseEntity<>("1", HttpStatus.OK);
 	}
 
-	@GetMapping(value="profileUp/{file}", produces=MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> update(@PathVariable("file") MultipartFile file){
-		log.info(file);
-		log.warn(file);
-		return null;
-	}
-	
-	private String getFolder() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");// 날짜형식
-		Date date = new Date();// 오늘날짜
-		String str = sdf.format(date);
-		return str.replace("-", File.separator);
-	}
 }

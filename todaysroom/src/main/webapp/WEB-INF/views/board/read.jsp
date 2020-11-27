@@ -264,9 +264,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="comments-area">
-						<%-- 										<jsp:include page="../comments/comments.jsp"></jsp:include> --%>
-					</div>
+					<!-- <div class="comments-area"> -->
+						<jsp:include page="../comments/comments.jsp"></jsp:include>
+					<!-- </div> -->
 
 
 					<!-- Modal  Ãß°¡ -->

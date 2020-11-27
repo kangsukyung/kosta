@@ -11,7 +11,6 @@
   <title>Aroma Shop - Home</title>
   <link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
   <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
   <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
   <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
   <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
@@ -25,7 +24,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/board/listAction.do"><img src="main_resource/img/logo.png" alt=""></a>
+          <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/board/listAction.do"><img src="/main_resource/img/logo.png" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -62,16 +61,14 @@
               	<li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"aria-expanded="false">고객센터</a>
                 <ul class="dropdown-menu">
-                <c:choose>
-					<c:when test="${member!=null }">
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Member/OneInquiry_Form.do">1:1 문의</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">1:1 문의 내역</a></li>
-					</c:when>
-					<c:otherwise>
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Member/MemberLogin_Action.do">1:1 문의</a></li>
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/Member/MemberLogin_Action.do">1:1 문의 내역</a></li>
-					</c:otherwise>                
-                </c:choose>
+                <sec:authorize access="isAnonymous()">
+                  <li class="nav-item"><a class="nav-link" href="/login">1:1 문의</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/login">1:1 문의 내역</a></li>
+                 </sec:authorize>
+                 <sec:authorize access="isAuthenticated()">
+                  <li class="nav-item"><a class="nav-link" href="/oneInquriy/register">1:1 문의</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/oneInquriy/list">1:1 문의 내역</a></li>
+                  </sec:authorize>
                 </ul>
               </li>
             </ul>
@@ -80,13 +77,12 @@
               <li class="nav-item" id="hw-shopping-cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
 	
 		<sec:authorize access="isAuthenticated()">
-              <li class="nav-item"><a href="/member/update" class="msk-id"><button onclick="">${member.member_nickname}</button></a><sec:authentication property="principal.member.member_id"/></li>
-              <!-- <li class="nav-item"><a class="msk-id" href="#" onclick="document.getElementById('logout-form').submit();">로그아웃</a></li> -->
+              <li class="nav-item"><a href="/member/mypage" class="msk-id"><button onclick=""><sec:authentication property="principal.member.member_id"/></button></a></li>
               <li class="nav-item"><a id="Member_out"class="msk-id" href="#">로그아웃</a></li>
 		</sec:authorize>	
 		<sec:authorize access="isAnonymous()">
-              <li class="nav-item"><a href="${pageContext.request.contextPath}/Member/MemberLogin_Action.do" class="msk-id">로그인</a></li>
-              <li class="nav-item"><a href="${pageContext.request.contextPath}/Member/MemberSignup_Form.do" class="msk-id">회원가입</a></li>
+              <li class="nav-item"><a href="/login" class="msk-id">로그인</a></li>
+              <li class="nav-item"><a href="/member/register" class="msk-id">회원가입</a></li>
 		</sec:authorize>
 	<c:choose>
 		<c:when test="${member!=null }">
@@ -102,7 +98,7 @@
       </nav>
     </div>
     <form id="logout-form" action="/customLogout" method="POST">
-			   	<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 	</form>
   </header>
   

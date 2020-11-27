@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kosta.todayroom.mapper.ReviewMapper">
+
+	<!-- 리뷰 조회 -->
+	<!-- <select id="reviewList" resultType="kosta.todayroom.domain.ReviewVO">
+		select * from review
+	</select> -->
+	
+	<!-- 리뷰 조회(+페이징) -->
+	<select id="reviewList" resultType="kosta.todayroom.domain.ReviewVO">
+
+ 	 <![CDATA[
+		 select review_seq, member_seq, store_seq, review_date, review_content
+		 from 
+		   (
+		    select /*+INDEX(review idx_review) */
+		      rownum rn, review_seq, member_seq, store_seq, review_date, review_content
+		    from review
+		    where store_seq =  #{store_seq}
+		    and review_seq > 0
+		    and rownum <= #{cri.pageNum} * #{cri.amount}
+		   ) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+	]]>
+	
+	</select>
+	
+	<!-- 리뷰 쓰기 -->
+	<insert id="reviewRegister" parameterType="kosta.todayroom.domain.ReviewVO">
+		insert into review(
+			review_seq, 
+			review_date,
+			review_rating,
+			review_content,
+			review_picture,
+			shoporder_seq,
+			member_seq,
+			store_seq,
+			product_seq
+		)values(
+			 seq_review_review_seq.nextval,
+			 sysdate,
+			 null,
+			 #{review_content},
+			 null,
+			 #{shoporder_seq},
+			 #{member_seq},
+			 #{store_seq},
+			 #{product_seq}
+		 )
+	</insert>
+	
+	<!-- #{review_date},
+			 #{review_rating},
+			 #{review_content},
+			 #{review_picture},
+			 #{shoporder_seq},
+			 #{member_seq},
+			 #{store_seq},
+			 #{product_seq} -->
+			 
+			 
+	<!-- 리뷰 한개에 대한 디테일 -->
+	<select id="reivewRead" resultType="kosta.todayroom.domain.ReviewVO">
+		select * from review
+		where review_seq = #{review_seq}
+	</select>
+	
+	<!-- 수정 -->
+	<update id="reviewModify">
+		update review 
+		set 
+		review_content = #{review_content}
+		where 
+		review_seq = #{review_seq}
+	</update>
+	
+	<!-- 삭제 -->
+	<delete id="reviewRemove">
+		delete from review where review_seq = #{review_seq}
+	</delete>
+	
+	<!-- 한 상품들의 묶음?(스토어)에 대한 리뷰 수 -->
+	<select id="countByStore" resultType="int">
+		<![CDATA[
+			select count(review_seq) from review where store_seq = #{store_seq}
+		]]>
+</select>
+</mapper>

@@ -27,7 +27,7 @@
 	]]>
 	</select>
 	
-	<update id="update">
+	<update id="modify">
 	<![CDATA[
 	update member 
 		set member_nickname=#{member_nickname},
@@ -41,4 +41,21 @@
 			where member_seq=#{member_seq}
 	]]>
 	</update>	
+	
+	<update id="ratingUpdate" parameterType="int">
+		update member
+		set member_rating=#{num}
+		where member_seq=#{member}
+	</update>
+	
+	<select id="Check" resultType="kosta.todayroom.domain.MemberVO">
+		<![CDATA[
+			select * from Member where member_seq=#{seq}
+		]]>
+	</select>
+	<update id="countUpdate" parameterType="int">
+		update member
+		set member_count=#{num}
+		where member_seq=#{seq}
+	</update>
 </mapper>
