@@ -1,8 +1,15 @@
+$(document).ready(function() {
+	showList();
+	
+
+
 
 function showList(page){
-	var store_seq = 11;//나중에 수정 해줘야 됨
-	
-		ReviewService.reiewList({store_seq:store_seq,page: page|| 1 }, function(replyCnt, reviewList) {
+	console.log("여기를 오기는 오ㄴ");
+	var store_seq = 3;//나중에 수정 해줘야 됨
+//	console.log("혹시 페이지가 없어서 그런거니"+page);
+	var page = 1;
+		ReviewService.getList({store_seq:store_seq,page: page|| 1 }, function(replyCnt, reviewList) {
 			
 			console.log("replyCnt : "+ replyCnt );
 		    //console.log(reviewList);
@@ -47,8 +54,8 @@ function showList(page){
 			     //showReplyPage(replyCnt);	//paging
 		});
 	}//end showList
-
-/*function showReplyPage(replyCnt){
+});
+function showReplyPage(replyCnt){
     
 	var endNum = Math.ceil(pageNum / 10.0) * 10;  
 	var startNum = endNum - 9; 
@@ -81,24 +88,31 @@ function showList(page){
 	str += "</ul></div>";
 	console.log(str);
 	$(".blog-pagination justify-content-center d-flex").html(str);	//페이징 넣을 위치
-};*/
+};
 
 
 var ReviewService = (function(){
 	console.log("review js service start");
 	
 	//getlist
-	function reviewList(param, callback, error) {
-
+	function getList(param, callback, error) {
+		console.log("rrrrr");
+		console.log("param : "+param);
+		
 	    var store_seq = param.store_seq;
 	    var page = param.page || 1;
 	    
-	    $.getJSON("/review/pages/" + review_seq + "/" + page + ".json",
+	    console.log("store_seq :: "+store_seq);
+	    console.log("page :: "+page);
+	    
+	    
+	    $.getJSON("/review/pages/" + store_seq + "/" + page + ".json",
 	        function(data) {
 	    	
 	          if (callback) {
 	            //callback(data); // 댓글 목록만 가져오는 경우 
-	        	  console.log("data ::::::  "+data);
+	        	  console.log("data ::::::  "+data.replyCnt);
+	        	  console.log("data ::::::  "+data.reviewList);
 	            callback(data.replyCnt, data.reviewList); //댓글 숫자와 목록을 가져오는 경우 
 	          }
 	        }).fail(function(xhr, status, err) {
@@ -109,69 +123,10 @@ var ReviewService = (function(){
 	  }
 	
 	
+	return {getList:getList};
 	
-})
+	
+})();
 
 
 
-function modal(id) {
-    var zIndex = 9999;
-    var modal = document.getElementById(id);
-
-    // 모달 div 뒤에 희끄무레한 레이어
-    var bg = document.createElement('div');
-    bg.setStyle({
-        position: 'fixed',
-        zIndex: zIndex,
-        left: '0px',
-        top: '0px',
-        width: '100%',
-        height: '100%',
-        overflow: 'auto',
-        // 레이어 색갈은 여기서 바꾸면 됨
-        backgroundColor: 'rgba(0,0,0,0.4)'
-    });
-    document.body.append(bg);
-
-    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-    modal.querySelector('.modal_close_btn').addEventListener('click', function() {
-        bg.remove();
-        modal.style.display = 'none';
-        $("html, body").removeClass("not_scroll");
-    });
-
-    modal.setStyle({
-        position: 'fixed',
-        display: 'block',
-        boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-
-        // 시꺼먼 레이어 보다 한칸 위에 보이기
-        zIndex: zIndex + 1,
-
-        // div center 정렬
-        top: '45%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        msTransform: 'translate(-50%, -50%)',
-        webkitTransform: 'translate(-50%, -50%)'
-    });
-}
-
-// Element 에 style 한번에 오브젝트로 설정하는 함수 추가
-Element.prototype.setStyle = function(styles) {
-    for (var k in styles) this.style[k] = styles[k];
-    return this;
-};
-
-document.getElementById('popup_open_btn').addEventListener('click', function() {
-    // 모달창 띄우기
-    modal('my_modal');
-    $("html, body").addClass("not_scroll");
-});
-
-$(function(){
-	$(".pagination b li").addClass("active");
-	document.getElementById('page-item').addEventListener('click', function() {
-		$(".page-item").after.addClass("active");
-	});
-})

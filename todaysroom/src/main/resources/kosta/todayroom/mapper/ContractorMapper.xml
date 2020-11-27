@@ -13,7 +13,19 @@
 		select * from contractor where member_seq=#{seq}
 	</select>
 	
+	<select id="readMemberProfile" parameterType="int" resultType="String">
+		select member_profile from member where MEMBER_SEQ = #{member_seq}
+	</select>
+	
+	<select id="readBoardThumbnail" parameterType="int" resultType="String">
+		select board_thumbnail from board where MEMBER_SEQ = #{member_seq}
+	</select>
+	
 	<delete id="delete" parameterType="int">
 		delete from contractor where member_seq = #{seq}
 	</delete>
+	
+	<select id="list" resultType="kosta.todayroom.domain.ContractorVO">
+		select * from contractor order by contractor_seq desc
+	</select>
 </mapper>

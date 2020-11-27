@@ -8,24 +8,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Aroma Shop - Blog</title>
-<link rel="icon" href="/resources/main_resource/img/Fevicon.png" type="image/png">
+<link rel="icon" href="/main_resource/img/Fevicon.png" type="image/png">
 <link rel="stylesheet"
-	href="/resources/main_resource/vendors/bootstrap/bootstrap.min.css">
+	href="/main_resource/vendors/bootstrap/bootstrap.min.css">
 <link rel="stylesheet"
-	href="/resources/main_resource/vendors/fontawesome/css/all.min.css">
+	href="/main_resource/vendors/fontawesome/css/all.min.css">
 <link rel="stylesheet"
-	href="/resources/main_resource/vendors/themify-icons/themify-icons.css">
+	href="/main_resource/vendors/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
 <link rel="stylesheet"
-	href="/resources/main_resource/vendors/linericon/style.css">
+	href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
 <link rel="stylesheet"
-	href="/resources/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
-<link rel="stylesheet"
-	href="/resources/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+	href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
 
-<link rel="stylesheet"
-	href="/resources/main_resource/css/style.css">
-<link rel="stylesheet"
-	href="/resources/main_resource/css/product_inquiry.css">
+<link rel="stylesheet" href="/main_resource/css/style.css">
+<link rel="stylesheet" href="/main_resource/css/product_inquiry.css">
 
 </head>
 <body>
@@ -43,7 +40,7 @@
 						<div class="desc">
 							<h5>
 								<span hidden="hidden" class="inquiry-seq">${inquiry.pi_seq }</span>
-								<a href="#">{inquiry.key.product_name}</a>
+								<a href="/store/read?store_seq={inquiry.key.store_seq}">{inquiry.key.product_name}</a>
 								<!-- 상품 이름 출력 -->
 							</h5>
 							<p class="date">${inquiry.pi_type }</p>
@@ -53,50 +50,106 @@
 						</div>
 					</div>
 					<div class="reply-btn">
-						<a href="#" class="btn-reply text-uppercase" id="hw-reply">답변</a>
+						<!-- 						<a href="#" class="btn-reply text-uppercase" id="hw-reply">답변</a> -->
+						<button type="button" class="btn btn-primary hw-inquiry-modify"
+							data-toggle="modal" data-target="#exampleModal">문의수정</button>
 					</div>
 				</div>
 			</div>
 
 			<!-- 위쪽: 고객의 문의 // 밑쪽: 운영사측 답변 -->
 
-			<c:if test="${inquiry.pi_answer != null }">
-				<div class="comment-list left-padding">
-					<div class="single-comment justify-content-between d-flex">
-						<div class="user justify-content-between d-flex">
-							<!-- 					<div class="thumb"> -->
-							<!-- 						<img src="/resources/main_resource/img/blog/c2.jpg" alt=""> -->
-							<!-- 					</div> -->
-							<div class="desc">
-								<h5>
-									<a href="#">답변된 내용</a>
-								</h5>
-								<p class="date"></p>
-								<p class="comment">${inquiry.pi_answer }</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</c:if>
+			<%-- 			<c:if test="${inquiry.pi_answer != null }"> --%>
+			<!-- 				<div class="comment-list left-padding"> -->
+			<!-- 					<div class="single-comment justify-content-between d-flex"> -->
+			<!-- 						<div class="user justify-content-between d-flex"> -->
+			<!-- 												<div class="thumb"> -->
+			<!-- 													<img src="/resources/main_resource/img/blog/c2.jpg" alt=""> -->
+			<!-- 												</div> -->
+			<!-- 							<div class="desc"> -->
+			<!-- 								<h5> -->
+			<!-- 									<a href="#">답변된 내용</a> -->
+			<!-- 								</h5> -->
+			<!-- 								<p class="date"></p> -->
+			<%-- 								<p class="comment">${inquiry.pi_answer }</p> --%>
+			<!-- 							</div> -->
+			<!-- 						</div> -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+			<%-- 			</c:if> --%>
 		</c:forEach>
 	</div>
+
+	<!-- modal start -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true"
+		data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="exampleModalLabel">상품 문의수정</h4>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="my-form">
+						<div class="btn-group btn-group-toggle" data-toggle="buttons">
+							<label class="btn btn-default btn-lg"> <input
+								type="radio" name="pi_type" value="product"> 상품
+							</label> <label class="btn btn-default btn-lg"> <input
+								type="radio" name="pi_type" value="shipping"> 배송
+							</label> <label class="btn btn-default btn-lg"> <input
+								type="radio" name="pi_type" value="return"> 반품
+							</label> <label class="btn btn-default btn-lg"> <input
+								type="radio" name="pi_type" value="exchange"> 교환
+							</label> <label class="btn btn-default btn-lg"> <input
+								type="radio" name="pi_type" value="refund"> 환불
+							</label> <label class="btn btn-default btn-lg"> <input
+								type="radio" name="pi_type" value="etc"> 기타
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="message-text" class="control-label">문의내용</label>
+							<textarea class="form-control" id="message-text"
+								name="pi_content"></textarea>
+						</div>
+						<!-- 						<input hidden="hidden" name="member_seq" value="22"> -->
+						<!-- value 값 추후 조정 필요 -->
+<!-- 						<input hidden="hidden" name="product_seq" value="1"> -->
+						<input
+							type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" id="security-tokken"/>
+							<input hidden="hidden" name="pi_seq"
+							id="pi_seq">
+						<!--csrf 토큰 처리 -->
+					</form>
+					<div>문의내용에 대한 답변은 ‘마이페이지 &gt; 나의 쇼핑 &gt; 나의 문의내역’ 또는 ‘상품
+						상세페이지’에서 확인 가능합니다.</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" form="my-form" class="btn btn-primary"
+						id="inquiry-modify">문의수정</button>
+					<button id="inquiry-remove" class="btn btn-primary">문의삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- modal end -->
+
+
+	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+	<script src="/main_resource/vendors/skrollr.min.js"></script>
+	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
 	<script
-		src="/resources/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
-	<script
-		src="/resources/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-	<script
-		src="/resources/main_resource/vendors/skrollr.min.js"></script>
-	<script
-		src="/resources/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script
-		src="/resources/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
-	<script
-		src="/resources/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
-	<script
-		src="/resources/main_resource/vendors/mail-script.js"></script>
-	<script
-		src="/resources/main_resource/js/main.js"></script>
-	<script type="text/javascript" src="/resources/main_resource/js/product_inquiry.js"></script>
-	<jsp:include page="../footer.jsp"></jsp:include> 		
+		src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
+	<script src="/main_resource/vendors/mail-script.js"></script>
+	<script src="/main_resource/js/main.js"></script>
+	<script type="text/javascript"
+		src="/main_resource/js/product_inquiry.js"></script>
+	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

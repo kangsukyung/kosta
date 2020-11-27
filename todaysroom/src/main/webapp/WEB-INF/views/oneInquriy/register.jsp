@@ -134,5 +134,4 @@
 
   <!--================ Start footer Area  =================-->	
   <%@include file="../includes/footer.jsp"%>
-  
 </html>

@@ -1,7 +1,6 @@
 package kosta.todayroom.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.security.Principal;
@@ -12,7 +11,6 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -30,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,7 +53,7 @@ public class MemberController {
 
 	@Setter(onMethod_ = @Autowired)
 	private HttpServletRequest request;
-	
+
 	
 	@GetMapping("/register")
 	public void getRegister() {
@@ -76,6 +75,15 @@ public class MemberController {
 
 	@GetMapping("/mypage")
 	public void mypage() {
+	}
+	
+	@GetMapping("/users/{member_seq}")
+	public String users(@PathVariable("member_seq") int member_seq ,Model model) {
+		MemberVO user = service.Check(member_seq);
+		
+		model.addAttribute("user", user);
+		
+		return "/member/users";
 	}
 
 	@GetMapping("/modify")
@@ -161,6 +169,8 @@ public class MemberController {
 	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getFile(String fileId){
+//		log.info(fileId);
+//		log.warn(fileId);
 		
 		MemberVO member=service.idCheck(fileId);
 		String fileName=member.getMember_path()+"\\"+member.getMember_profile();

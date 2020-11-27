@@ -45,5 +45,4 @@ public class MembersController {
 		new ResponseEntity<>("1", HttpStatus.OK);
 	}
 
-	
 }
