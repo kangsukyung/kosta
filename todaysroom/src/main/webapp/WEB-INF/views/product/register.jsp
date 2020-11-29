@@ -4,6 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
+
 	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
@@ -234,16 +236,8 @@
 
 											</div>
 										</div>
-										<sec:authorize access="isAuthenticated()">
-                                       <sec:authentication property="principal.member" var="member" />
-                                       <input type="hidden" name="member_seq"
-                                          value="${member.member_seq }">
-                                    </sec:authorize>
-
-                                    <div>
-                                       <input type="hidden" name="${_csrf.parameterName}"
-                                          value="${_csrf.token}" />
-                                    </div>
+										
+								
 									</div>
 								</div>
 								<div class="row" id="ksk_row">
@@ -266,6 +260,14 @@
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="button button-register w-100">상품등록</button>
 							</div>
+							
+								<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.member" var="member"/>
+						<input type="hidden" name="member_seq" value="${member.member_seq }">
+						</sec:authorize>
+						
+						<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
+						
 						</form>
 					</div>
 				</div>
