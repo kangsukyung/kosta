@@ -11,6 +11,6 @@ import lombok.Getter;
 @Getter
 public class ReviewPageVO {
 
-  private int replyCnt;
+  private int reviewCnt;
   private List<ReviewVO> reviewList;
 }
