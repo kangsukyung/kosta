@@ -30,8 +30,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 //		ArrayList<SimpleGrantedAuthority> auth=new ArrayList<>();
 //		auth.add(new SimpleGrantedAuthority(vo.getMember_rating()));
 		
-
-		
 		log.warn("queried by member mapper: "+ vo);
 		
 		return vo==null? null: new CustomUser(vo);

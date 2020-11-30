@@ -15,4 +15,7 @@ public interface OneInquiryMapper {
 			@Param("seq") int seq
 	);
 	public int total(int seq);
+	public One_inquiryVO getRead(int seq);
+	public int delete(int seq);
+	public int modify(One_inquiryVO vo);
 }

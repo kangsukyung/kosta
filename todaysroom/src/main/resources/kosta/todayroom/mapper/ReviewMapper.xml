@@ -4,31 +4,31 @@
 
 <mapper namespace="kosta.todayroom.mapper.ReviewMapper">
 
-	<!-- 댓글 조회 -->
-	<select id="reviewList" resultType="kosta.todayroom.domain.ReviewVO">
+	<!-- 리뷰 조회 -->
+	<!-- <select id="reviewList" resultType="kosta.todayroom.domain.ReviewVO">
 		select * from review
-	</select>
+	</select> -->
 	
-	<!-- 댓글 조회(+페이징) -->
-	<!-- <select id="commentsList" resultType="kosta.todayroom.domain.ReviewVO">
+	<!-- 리뷰 조회(+페이징) -->
+	<select id="reviewList" resultType="kosta.todayroom.domain.ReviewVO">
 
  	 <![CDATA[
-		 select comments_seq, board_seq, comments_content, member_seq
+		 select review_seq, member_seq, store_seq, review_date, review_content
 		 from 
 		   (
-		    select /*+INDEX(comments idx_reply) */
-		      rownum rn,  comments_seq, board_seq, comments_content, member_seq
-		    from comments
-		    where board_seq =  #{board_seq}
-		    and comments_seq > 0
+		    select /*+INDEX(review idx_review) */
+		      rownum rn, review_seq, member_seq, store_seq, review_date, review_content
+		    from review
+		    where store_seq =  #{store_seq}
+		    and review_seq > 0
 		    and rownum <= #{cri.pageNum} * #{cri.amount}
 		   ) where rn > (#{cri.pageNum} -1) * #{cri.amount}
 	]]>
 	
-	</select> -->
+	</select>
 	
 	<!-- 리뷰 쓰기 -->
-	<insert id="reivewRegister" parameterType="kosta.todayroom.domain.ReviewVO">
+	<insert id="reviewRegister" parameterType="kosta.todayroom.domain.ReviewVO">
 		insert into review(
 			review_seq, 
 			review_date,
@@ -40,11 +40,11 @@
 			store_seq,
 			product_seq
 		)values(
-			seq_review_review_seq.nextval,
-			 #{review_date},
-			 #{review_rating},
+			 seq_review_review_seq.nextval,
+			 sysdate,
+			 null,
 			 #{review_content},
-			 #{review_picture},
+			 null,
 			 #{shoporder_seq},
 			 #{member_seq},
 			 #{store_seq},
@@ -52,6 +52,16 @@
 		 )
 	</insert>
 	
+	<!-- #{review_date},
+			 #{review_rating},
+			 #{review_content},
+			 #{review_picture},
+			 #{shoporder_seq},
+			 #{member_seq},
+			 #{store_seq},
+			 #{product_seq} -->
+			 
+			 
 	<!-- 리뷰 한개에 대한 디테일 -->
 	<select id="reivewRead" resultType="kosta.todayroom.domain.ReviewVO">
 		select * from review

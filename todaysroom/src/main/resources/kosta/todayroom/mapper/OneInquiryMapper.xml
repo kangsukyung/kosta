@@ -8,9 +8,9 @@
 		insert into One_inquiry values(SEQ_ONE_INQUIRY_OI_SEQ.nextval, #{oi_title}, #{oi_content}, #{oi_answer}, #{member_seq}, #{admin_seq}, sysdate) 
 	</insert>
 
-	<!-- <select id="read" resultType="kosta.todayroom.domain.One_inquiryVO">
-		select * from One_inquiry where member_seq=#{seq}
-	</select> -->
+	 <select id="getRead" resultType="kosta.todayroom.domain.One_inquiryVO">
+		select * from One_inquiry where oi_seq=#{seq}
+	</select> 
 	
 	<select id="read" parameterType="int" resultType="kosta.todayroom.domain.One_inquiryVO">
 		
@@ -29,4 +29,14 @@
 	<select id="total" resultType="int">
 		select count(*) from ONE_INQUIRY where member_seq=#{seq}
 	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from ONE_INQUIRY where oi_seq=#{seq}
+	</delete>
+	<update id="modify" parameterType="kosta.todayroom.domain.One_inquiryVO">
+		update ONE_INQUIRY
+		set oi_title=#{oi_title},
+			oi_content=#{oi_content}
+		where oi_seq=#{oi_seq}
+	</update>
 </mapper>
