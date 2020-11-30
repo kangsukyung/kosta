@@ -7,7 +7,7 @@ import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.domain.StoreVO;
 
 public interface StoreService {
-//	public List<StoreVO> StoreList();
+	public List<StoreVO> StoreListForCategory();
 	
 	public List<StoreVO> StoreList(Criteria cri);
 	

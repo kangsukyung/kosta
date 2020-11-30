@@ -44,6 +44,7 @@ public class StoreController {
 	public void StoreRead(@RequestParam("store_seq") int seq, Model model) {
 		model.addAttribute("store", service.StoreRead(seq));
 		model.addAttribute("list", service.ProductList(seq));
+		model.addAttribute("store_list", service.StoreListForCategory());
 	}
 	
 	@ResponseBody

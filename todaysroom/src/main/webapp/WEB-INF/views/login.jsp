@@ -58,8 +58,8 @@
 							</div> 
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="button button-login w-100">로그인</button>
-								<a href="#" class="id_found">아이디 찾기</a>
-								<a href="#" class="pw_found">비밀번호 찾기</a>
+								<a href="#" id="idFound" class="id_found">아이디 찾기</a>
+								<a href="#" id="passwordFound" class="pw_found">비밀번호 찾기</a>
 							</div>
 						</form>
 					</div>
@@ -67,6 +67,134 @@
 			</div>
 		</div>
 	</section>
+	
+	<!--modal  -->
+	  <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content" style="margin-top: 200px;">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label style="width: 18%;">아이디: </label> 
+                <input type="text" class="form-control" id="member_id" name='member_id' style="width:70%; display :inline-block !important;">
+              </div>
+              <div class="form-group" >
+                <label style="width: 18%;">휴대폰번호: </label> 
+                <input type="tel" class="form-control" id="member_phone" name='member_phone' style="width:70%; display :inline-block !important;"><button id="phone_sub"type="button" style="height: 35px;float: right;border-color: #007bff;background: #007bff;color: #fff;">인증</button>
+              </div>
+              <div id="ph_check"class="form-group" style=" display:none;" >
+                <label style="width: 18%;">인증번호: </label> 
+                <input type="text" class="form-control" id="chek_phone" name='chek_phone' style="width:70%; display :inline-block !important;"><button id="phone_chk"type="button" style="height: 35px;float: right;border-color: #007bff;background: #007bff;color: #fff;">확인</button>
+              </div>      
+      
+            </div>
+	  <div class="modal-footer">
+        <button id='modalModBtn' type="button" class="btn btn-warning">Modify</button>
+        <button id='modalRemoveBtn' type="button" class="btn btn-danger">Remove</button>
+        <button id='modalRegisterBtn' type="button" class="btn btn-primary">Register</button>
+        <button id='modalCloseBtn' type="button" class="btn btn-default">Close</button>
+      </div>          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
 		<%@include file="includes/footer.jsp"%>
+<script>
+
+var modal=$(".modal");
+var modalInputReply=modal.find("input[name='reply']");
+var modalInputReplyer=modal.find("input[name='replyer']");
+var modalInputReplyDate=modal.find("input[name='replyDate']");
+var modalModBtn=$("#modalModBtn");
+var modalRemoveBtn=$("#modalRemoveBtn");
+var modalRegisterBtn=$("#modalRegisterBtn");
+
+var ph_check=document.getElementById("ph_check");
+var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;// 휴대폰 번호 정규식
+
+var phonet=$("#member_phone");
+var member_idt=$("#member_id");
+var chek_phonet=$("#chek_phone");
+var cerNum="";
+
+
+  $(document).ready(function(){
+	  $("#idFound").click(function() {
+		  if (confirm("ㅎㅎㅎ?") == true){  
+			  return ;
+		  }else{ 
+		      return;
+		  }
+   	  });
+	  
+	  $("#passwordFound").click(function() {
+			$(".modal").modal("show");
+   	  });
+	  
+	  $("#phone_chk").click(function() {
+		var chek_phone=chek_phonet.val();
+		if(cerNum==chek_phone){
+			alert("인증번호가 일치합니다.");
+		}else{
+			alert("인증번호가 일치하지 않습니다.");
+		}
+	  });
+	  
+	  $("#phone_sub").click(function() {
+		  var phone=phonet.val();
+		  var member_id=member_idt.val();
+		  console.log(phone);
+			if(phoneJ.test(phone)){
+				$.ajax({
+					url:"/members/passwordFound",
+					type:"post",
+					data:{phone:phone,
+						  member_id:member_id},
+					beforeSend: function(xhr){
+						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+					},
+					success: function(data){
+						if(data==member_id){
+							
+							ph_check.style.display="block";
+							 $.ajax({
+				                   url:"/members/sendSms.do",
+				                   type:"get",
+				                   data:{phone: phone},
+				                 	success:function(data){
+				                 		$("#member_id").attr('readonly',true);
+				                 		$("#member_phone").attr('readonly',true);
+				                 		cerNum=data;
+				                 		console.log(cerNum);
+				                 		  alert("해당 휴대폰으로 인증번호를 발송했습니다");
+				                   }, error : function() {
+				                      alert("실패");
+				                   }
+							 });
+						}else{
+							$(".modal").modal("hide");
+							alert("가입정보가 일치하지 않습니다.");
+						}
+					}, error : function() {
+	                      alert("실패");
+					}
+				});
+			}else{
+			$("#member_phone").val("");
+				alert('사용할수없는 휴대폰 번호입니다');			
+			}
+
+	  });
+	  
+	  $("#modalCloseBtn").click(function() {
+		  $(".modal").modal("hide");
+	  });
+  });
+  </script>
 </body>
 </html>

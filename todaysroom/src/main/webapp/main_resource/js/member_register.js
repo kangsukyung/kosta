@@ -1,6 +1,5 @@
 var memberRegister=(function() {	
 	function idCheck(userid,callback,error) {
-		console.log(userid);
 		var id=userid;
 	
 		
@@ -25,7 +24,6 @@ var memberRegister=(function() {
 	}
 	
 	function nameCheck(userName,callback,error) {
-		console.log(userName);
 		var name=userName;
 		
 		$.ajax({
@@ -33,7 +31,6 @@ var memberRegister=(function() {
 			url : '/members/nickNameCheck/'+name,
 			contentType : "application/json; chareset=uft-8",
 			success : function(result, status, xhr) {
-				console.log(result);
 				if(callback){	
 					callback(result);
 				}

@@ -71,4 +71,9 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.ratingUpdate(member, num);
 	}
 
+	@Override
+	public MemberVO passwordFound(String member_id, String member_phone) {
+		return mapper.passwordFound(member_id, member_phone);
+	}
+
 }
