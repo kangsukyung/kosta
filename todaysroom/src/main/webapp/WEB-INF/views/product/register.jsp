@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/vendors/nice-select/nice-select.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/vendors/nouislider/nouislider.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/style.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/board.css">
+
   <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/skrollr.min.js"></script>
@@ -32,9 +32,8 @@
   <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/mail-script.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/js/main.js"></script>
-  <%-- <script src="${pageContext.request.contextPath}/main_resource/js/board.js"></script>
-   --%>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/ksk_style.css">
+
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/product_style.css">
   	
 <script src="${pageContext.request.contextPath}/main_resource/js/jquery.js" type="text/javascript"></script>
 <%-- <script src="${pageContext.request.contextPath}/main_resource/js/product_insert_btn.js" type="text/javascript"></script>
@@ -45,16 +44,17 @@
 <body>
 	<style>
 .uploadResult {
-	width: 100%;
-	background-color: gray;
+	width: 60%;
+    background-color: #f1eded;
+    margin-left: 21em;
 }
 
 .uploadResult ul {
 	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	align-items: center;
-}
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    margi
 
 .uploadResult ul li {
 	list-style: none;
@@ -90,15 +90,16 @@
 	<jsp:include page="../../header.jsp"></jsp:include>
 </section>
   <!-- ================ start banner area ================= -->	
-	<section class="blog-banner-area" id="category">
+	<section class="blog-banner-area" id="product_header">
+		<!-- <img src="/main_resource/img/product_register_img.png"/> -->
 		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
-					<h1>글 등록</h1>
+					<h1>상품등록</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">글 등록</li>
+              <li class="breadcrumb-item"><a href="#">STORE</a></li>
+              <li class="breadcrumb-item active" aria-current="page">상품등록</li>
             </ol>
           </nav>
 				</div>
@@ -108,12 +109,12 @@
 	<!-- ================ end banner area ================= -->
   
   <!--================Login Box Area =================-->
-	<section class="login_box_area section-margin">
-		<div class="container">
-			<div class="row">
-				<div class="contents-col-lg-6">
-					<div class="login_form_inner register_form_inner">
-						<h3>필수 입력 사항</h3>
+<section class="login_box_area section-margin">
+	<div class="container">
+		<div class="row">
+			<div class="contents-col-lg-6">
+				<div class="login_form_inner register_form_inner">
+					<h3>필수 입력 사항</h3>
 						<form role="form" class="contents-row login_form" action="/product/register" id="contents-register_form" method="post" enctype="multipart/form-data">
 							
 							<div class="select33" id="select3">
@@ -124,20 +125,23 @@
 								<input type="file" class="form-control" id="thumbnail_image" name="thumbnail_image" placeholder="Thumbnail image">
 				            </div> -->
 				            
-				            <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="title" name="store_title" placeholder="제목을 입력해주세요.">
+				           <div class="col-md-12 form-group">
+								<label id="product_insert_label">상품제목 </label>
+								<input class="form-control" id="product_insert_input" name="store_title" 
+								type="text" placeholder="상품제목을 입력하세요." required="">
 				            </div>
 
-							
-							<!-- <div class="contents-form-control">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="dropdown_bang_selection">
-												분류 선택        
-											</div>
-											
-											<div class="selectoption">
-												<select id="select_option" name="classification" size="1">
+								
+							<div class="col-md-12 form-group">
+								<label id="product_insert_label">스토어명 </label>
+								<input class="form-control" id="product_insert_input" name="store_name" 
+								type="text" placeholder="스토어명을 입력하세요." required="">
+				            </div>
+				            
+				            <!-- <div class="col-md-12 form-group">
+								<label id="product_insert_label">분류선택 </label>
+								<div>
+												<select id="option2" name="classification" size="1">
 													<option value="">선택해주세요.</option>
 													<option value="living">쇼파/거실가구</option>
 													<option value="bed">침실가구</option>
@@ -148,7 +152,7 @@
 													<option value="table">테이블</option>
 												</select>
 												
-												<select id="select_option" name="classification" size="1">
+												<select id="ption2" name="classification" size="1">
 													<option value="">선택해주세요.</option>
 													<option value="living">쇼파/거실가구</option>
 													<option value="bed">침실가구</option>
@@ -158,40 +162,57 @@
 													<option value="receiving">수납가구</option>
 													<option value="table">테이블</option>
 												</select>
-											</div>
 											
-										</div>
-									</div>
-								</div> --> 
+				            		</div>
+				            </div> -->
+				            
+				            
+				            
+							<div class="product_select">
+								<label id="product_select_label">분류선택 </label>
 								
+                              	<select class="product_select_class" name="addressKindU" onchange="addressKindChange(this)">
+                               		<option>주소를 선택하세요</option>
+                                	<option value="a">서울</option>
+                                	<option value="b">경기도</option>
+                                	<option value="c">충청남도</option>
+                              	</select>
+                     
+                            
+                              	<select class="product_select_class" name="addressKindD">
+                                	<option>선택해주세요.</option>
+                              	</select>
+                            </div>
+                            
+                            
+							
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="store_name" name="store_name" placeholder="제목을 입력해주세요.">
+								<label id="product_insert_label">상품가격 </label>
+								<input class="form-control" id="product_insert_input" name="store_price" 
+								type="text" placeholder="가격을 입력하세요." required="">
+				            </div>
+				            
+				            <div class="col-md-12 form-group">
+								<label id="product_insert_label_content">상품내용 </label>
+								<textarea rows="30%" cols="70" class="form-control" id="store_content" name="store_content" placeholder="내용을 입력해주세요."></textarea>
 				            </div>
 				            
 				            <div class="form-group">
-													<label id="product_insert_label">파일 </label> <input
-														class="form-control" id="product_insert_input"
-														name='uploadFile' type="file" placeholder="상품명을 입력하세요."
-														required="" multiple>
-												</div>
-												
-												<div class="uploadResult">
-													<ul>
-													
-													</ul>			
-												</div>
-				            <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="store_price" name="store_price" placeholder="제목을 입력해주세요.">
-				            </div>
-				            <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="store_picture" name="store_picture" placeholder="제목을 입력해주세요.">
-				            </div>
-				       
-							 <div class="col-md-12 form-group">
-								<textarea rows="30%" cols="70" class="form-control" id="store_content" name="store_content" placeholder="내용을 입력해주세요."></textarea>
+								<label id="product_insert_label">파일 </label> <input
+								class="form-control" id="product_insert_input"
+								name='uploadFile' type="file" placeholder="상품명을 입력하세요."
+								required="" multiple>
 							</div>
+												
+							<div class="uploadResult">
+								<ul>
+													
+								</ul>			
+							</div>
+				            
+							 
 							
-							<section class="product_description_area">
+					<section class="product_description_area">
 
 						<div class="container">
 
@@ -223,11 +244,18 @@
 													type="text" placeholder="가격을 입력하세요." required="">	
 													
 													
+												
 													
-													<div class="inputArea">
-														 <label for="gdsImg">이미지</label>
+													
+													<div class="col-md-12 form-group">
+														 <!-- <label for="gdsImg">상품사진</label>
 														 <input type="file" id="gdsImg" name="product_fname" />
-														 <div class="select_img"><img src="" /></div>
+														 <div class="select_img"><img src="" /></div> -->
+														 
+														 <label id="product_insert_label">상품사진 </label>
+														<input class="form-control" id="product_insert_input" id="gdsImg" name="product_fname" 
+														type="file" placeholder="상품제목을 입력하세요." required="">
+														<div class="select_img"><img src="" /></div>
 														 
 														 <script>
 														 
@@ -241,30 +269,10 @@
 														   }
 														  }); 
 														 </script>
-														 <%=request.getRealPath("/") %>
+														<input type="hidden" <%=request.getRealPath("/") %> />
 													</div>
 													
-													<!-- <div>		
-															<label id="product_insert_label">상품사진 </label>
-															<input class="form-control" id="product_insert_file_input" name="product_fname" 
-															type="file" placeholder="상품명을 입력하세요." required="">	
-															<div class="select_img"><img src=""></div>
-															
-															<script>
-																$("#product_insert_file_input").change(function(){
-																	if(this.files & this.files[0]){
-																		var reader = new FileReader;
-																		reader.onload = function(data) {
-																			$("select_img img").attr("src", data.target.result).width(200);
-								
-																		}
-																		reader.readAsDataURL(this.files[0]);
-																	}
-																	
-																})
-																
-															</script>																		
-													</div> -->
+													
 												</div>
 												
 												
