@@ -6,6 +6,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>     
 <!DOCTYPE html>
 <html>
+  <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
+  <link rel="stylesheet" href="/main_resource/css/style.css">
+  <link rel="stylesheet" href="/main_resource/css/member_mypage.css">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -124,5 +134,4 @@
 
   <!--================ Start footer Area  =================-->	
   <%@include file="../includes/footer.jsp"%>
-  
 </html>

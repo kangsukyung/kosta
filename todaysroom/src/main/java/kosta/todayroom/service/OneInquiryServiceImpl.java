@@ -34,6 +34,25 @@ public class OneInquiryServiceImpl implements OneInquiryService{
 	public int total(int seq) {
 		return mapper.total(seq);
 	}
+
+	@Override
+	public One_inquiryVO getRead(int seq) {
+		return mapper.getRead(seq);
+	}
+
+	@Transactional
+	@Override
+	public int delete(int seq) {
+		return mapper.delete(seq);
+	}
+
+	@Transactional
+	@Override
+	public int modify(One_inquiryVO vo) {
+		return mapper.modify(vo);
+	}
+	
+	
 	
 
 }

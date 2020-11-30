@@ -1,0 +1,44 @@
+#contractor-list-container{
+	width:720px;
+	height: 100vh;
+	margin:0 auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.list-items{
+	position: relative;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.list-items a{
+	position: absolute;
+	top:0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.list-items .img-wrap{
+	display:inline-block;
+	width: 40%;
+	height:100%;
+	padding-right: 10px;
+}
+
+.list-items .content-wrap{
+	display:inline-block;
+	width: 50%;
+	padding-left: 10px;
+}
+
+.list-items .content-wrap img{
+	width:60px;
+	height:60px;
+	border-radius: 100%;
+}
+
+.bname{
+	display: inline-block;
+}

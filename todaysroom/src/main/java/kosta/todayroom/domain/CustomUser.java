@@ -26,9 +26,9 @@ public class CustomUser extends User{
         }else if(rating.equals("3")){//전문가
         	authorities.add(new SimpleGrantedAuthority("ROLE_3"));
         }else if(rating.equals("4")){//비활성화
-        	
+        	authorities.add(new SimpleGrantedAuthority("ROLE_4"));
         }else if(rating.equals("0")){//탈퇴회원
-        	
+        	authorities.add(new SimpleGrantedAuthority("ROLE_0"));
         }
         	
         return authorities;

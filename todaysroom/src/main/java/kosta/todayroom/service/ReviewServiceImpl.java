@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.ReviewPageVO;
-import kosta.todayroom.domain.CommentsPageVO;
 import kosta.todayroom.domain.ReviewVO;
 import kosta.todayroom.mapper.ReviewMapper;
 import lombok.Setter;
@@ -23,6 +22,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int reviewRegister(ReviewVO vo) {
 		log.info("register...........");
+		System.out.println("serviceimpl : "+vo);
 		return reviewMapper.reviewRegister(vo);
 	}
 
@@ -52,7 +52,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public ReviewPageVO ReviewListPage(Criteria cri, int store_seq) {
-		
+		System.out.println("reviewServiceImpl:cri   :  "+cri);
 		return new ReviewPageVO(reviewMapper.countByStore(store_seq), reviewMapper.reviewList(cri, store_seq));
 		
 	}

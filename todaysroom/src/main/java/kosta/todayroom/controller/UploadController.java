@@ -1,4 +1,4 @@
-package kosta.todayroom.controller;
+/*package kosta.todayroom.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -182,3 +182,4 @@ public class UploadController {
 	}
 
 }
+*/

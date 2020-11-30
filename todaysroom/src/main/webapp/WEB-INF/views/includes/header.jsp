@@ -61,16 +61,14 @@
               	<li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"aria-expanded="false">고객센터</a>
                 <ul class="dropdown-menu">
-                <c:choose>
-					<c:when test="${member!=null }">
-                  <li class="nav-item"><a class="nav-link" href="/oneInquriy/register">1:1 문의</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">1:1 문의 내역</a></li>
-					</c:when>
-					<c:otherwise>
+                <sec:authorize access="isAnonymous()">
+                  <li class="nav-item"><a class="nav-link" href="/login">1:1 문의</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/login">1:1 문의 내역</a></li>
+                 </sec:authorize>
+                 <sec:authorize access="isAuthenticated()">
                   <li class="nav-item"><a class="nav-link" href="/oneInquriy/register">1:1 문의</a></li>
                   <li class="nav-item"><a class="nav-link" href="/oneInquriy/list">1:1 문의 내역</a></li>
-					</c:otherwise>                
-                </c:choose>
+                  </sec:authorize>
                 </ul>
               </li>
             </ul>
@@ -79,7 +77,7 @@
               <li class="nav-item" id="hw-shopping-cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
 	
 		<sec:authorize access="isAuthenticated()">
-              <li class="nav-item"><a href="/member/modify" class="msk-id"><button onclick=""><sec:authentication property="principal.member.member_id"/></button></a></li>
+              <li class="nav-item"><a href="/member/mypage" class="msk-id"><button onclick=""><sec:authentication property="principal.member.member_id"/></button></a></li>
               <li class="nav-item"><a id="Member_out"class="msk-id" href="#">로그아웃</a></li>
 		</sec:authorize>	
 		<sec:authorize access="isAnonymous()">
@@ -100,7 +98,7 @@
       </nav>
     </div>
     <form id="logout-form" action="/customLogout" method="POST">
-			   	<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
 	</form>
   </header>
   

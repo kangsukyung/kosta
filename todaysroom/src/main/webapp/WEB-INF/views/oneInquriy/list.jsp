@@ -6,6 +6,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>     
 <!DOCTYPE html>
 <html>
+  <link rel="stylesheet" href="/main_resource/vendors/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/fontawesome/css/all.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="/main_resource/vendors/linericon/style.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nice-select/nice-select.css">
+  <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
+  <link rel="stylesheet" href="/main_resource/css/style.css">
+  <link rel="stylesheet" href="/main_resource/css/member_mypage.css">
+  <link rel="stylesheet" href="/main_resource/css/oneInquriys.css">
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -33,8 +45,7 @@
 	<!-- ================ end banner area ================= -->
 	 
 	<!--================ End Header Menu Area =================-->
-	<sec:authorize access="isAuthenticated()">
-		<sec:authentication property="principal.member" var="member"/>
+	<sec:authentication property="principal.member" var="member"/>
 	<section class="section-margin--small mb-5">
     <div class="container">
       <div class="row">
@@ -90,12 +101,12 @@
 		        
 		  <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">
-          <div class="panel panel-default" style="border: 1px solid #f5f5f5;">
-			<div class="panel-heading" style="background-color: #f5f5f5; padding-bottom: 20px; color: #384aeb;">
+          <div style="border: 1px solid #f5f5f5;">
+			<div style="background-color: #f5f5f5; padding-bottom: 20px; color: #384aeb;">
 				1:1문의 내역
-				<button id='regBtn' type="button" class="btn btn-xs pull-right" onclick="location.href='/oneInquriy/register'" style=" float: right; height: 40px; font-size: 15px; color: #384aeb;" >1:1문의</button>
+				<button id='regBtn' type="button" onclick="location.href='/oneInquriy/register'" style="border: 1px; float: right; height: 40px; font-size: 15px; color: #384aeb;" >1:1문의</button>
 			</div>
-          			<div class="panel-body">
+          			<div >
 					<table class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
@@ -108,7 +119,7 @@
 					<c:forEach items="${list}" var="list">
 						<tr>
 							<td>${list.oi_seq}</td>
-							<td><a href="#">${list.oi_title }</a></td>
+							<td><a href="/oneInquriy/get?seq=${list.oi_seq}&pageNum=${pageMaker.cri.pageNum} &amount=${pageMaker.cri.amount}">${list.oi_title}</a></td>
 
 							<td>${member.member_nickname }</td>
 							<td><fmt:formatDate pattern="yyyy-MM-dd" value="${list.oi_date}" /></td>
@@ -125,18 +136,19 @@
 
 						<c:forEach var="num" begin="${pageMaker.startPage}"
 							end="${pageMaker.endPage}">
-							<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">	
-								<a href="${num}">${num}</a>
-							</li>
+							<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} "> <a href="${num}">${num}</a> </li>
 						</c:forEach>
 
 						<c:if test="${pageMaker.next}">
-							<li class="paginate_button next"><a
-								href="${pageMaker.endPage +1 }">Next</a></li>
+							<li class="paginate_button next"><a href="${pageMaker.endPage +1 }">Next</a></li>
 						</c:if>
 
 					</ul>
 				</div>
+			<form id='actionForm' action="/oneInquriy/list" method='get'>
+				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+			</form>
 				</div>
 				</div>
           </section>
@@ -144,13 +156,25 @@
        		</div>
         </div>
    </section>
-   </sec:authorize>
+   
 	<!-- ================ start banner area ================= -->	
   
 
 
 
   <!--================ Start footer Area  =================-->	
-  <%@include file="../includes/footer.jsp"%>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+			console.log('click');
+			var actionForm=$("#actionForm");
+	
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		});
+});
+</script>
   
+  <%@include file="../includes/footer.jsp"%>
 </html>
