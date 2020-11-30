@@ -153,7 +153,8 @@ $(document).ready(function checkForm() {
         	}
 		});
         }else{
-        	alert("패턴이 일치하지않습니다.");
+        	alert("사용할수 없는 아이디입니다.");
+        	id.value="";
         }
     });
 	
@@ -225,19 +226,18 @@ function checkForm() {
 		email.focus();
 		return false;
 	}	
-	if(userPwChk.value!= pass.value){
+	if(userPwChk.value!= pass.value || pswJ.test(pass.value) == false){
+		if(userPwChk.value!= pass.value){
 			userPwChk.value='';
 			userPwChk.focus();
 			alert("비밀번호가 일치하지 않습니다.");
+		}else{
+			userPwChk.value='';
+			pass.value='';
+			pass.focus();
+			alert("사용할수 없는 패스워드입니다.");
+		}
 			return false;
-	}
-	
-	if(pswJ.test(pass.value) == false){
-		userPwChk.value='';
-		pass.value='';
-		pass.focus();
-		alert("사용할수 없는 패스워드입니다.");
-		return false;
 	}
 	
 	if(address.value==''){
