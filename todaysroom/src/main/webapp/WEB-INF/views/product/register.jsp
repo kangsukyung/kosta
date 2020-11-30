@@ -320,7 +320,7 @@ $(document).ready(function(e){
     });
     
     
-    $(".uploadResult ul li").each(function(i, obj){
+   /*  $(".uploadResult ul li").each(function(i, obj){
         
         var jobj = $(obj);
         
@@ -334,7 +334,7 @@ $(document).ready(function(e){
         str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
         str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
         
-      });
+      }); */
     
     
     
