@@ -1,5 +1,5 @@
 $(function() {
-	var totalCost = 0;
+
 	
 	$('.production-select-dropdown__button').click(function(event) {
 		if($('.production-select-dropdown__list-container').hasClass('open')) {
@@ -9,7 +9,7 @@ $(function() {
 			$('.production-select-dropdown__list-container').addClass('open');
 		};
 	})
-	
+
 
  $(".production-select-list__item").on("click","button", function() {
 	   //상품 클릭하면 장바구니 옵션 폼 생성
@@ -71,6 +71,7 @@ $(function() {
    //장바구니 계산값 출력
    $(".checkpoint").on("change", ".form-control", function() {
 	   var form_id = $(this).attr('id');
+
 	   
 	   //물건의 개수 저장
 	   var product_quantity = $(this).find(":selected").val();
@@ -82,25 +83,43 @@ $(function() {
 	   
 	   //상품의 가격
 	   var productCost = productOneCost * $(this).val();
-//	   totalCost = totalCost + parseInt($(this).val() * productOneCost);
-	   
-	   //총 결제 금액 버그있음
-	   totalCost += productCost;
-	   $(".selling-option-form-content__price .selling-option-form-content__price__number").text(totalCost);
 		
 	   if($(this).val() > 0) {
 		   $(this).parent().parent().parent().find(".selling-option-item__price").find(".selling-option-item__price__number").text(productCost);
 	   }
 	   
+	   var totalCost = 0;
+	   //총 가격 계산
+	   $(".checkpoint .selling-option-item__price").each(function(i, items) {
+		   var item = $(items);
+		   totalCost += parseInt(item.text());
+	   })
+	   $(".selling-option-form-content__price .selling-option-form-content__price__number").text(totalCost);
 
    })
+
+   var store_title = $(".store_title").html();
+	var store_item_category = $(".store_lcategory").html();
 	
+   var store_lcategory = $(".store_lcategory").html();
+	var store_size = parseInt($(".store_list_hidden .store_size").html());
+	var list_str = "";
+	for (var i = 0; i < store_size; i++) {
+		if(store_lcategory == store_item_category) {
+			list_str += '<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">'
+				+'       <div class="single-search-product-wrapper">'
+				+'         <div class="single-search-product d-flex">'
+				+'           <a href="#"><img src="#" alt=""></a>'
+				+'           <div class="desc">'
+				+'               <a href="#" class="title">' + store_title + '</a>'
+				+'               <div class="price">$170.00</div>'
+				+'           </div>'
+				+'         </div>'
+				+'       </div>'
+				+'     </div>'			
+		}
+	}
    
-   $(".checkpoint").on("click", "", function() {
-	   
-	   
-   }) 
-   
-   
+	$("#recommend_list").append(list_str);
    
 })
