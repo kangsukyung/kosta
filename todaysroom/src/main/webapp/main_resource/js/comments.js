@@ -18,11 +18,9 @@ $(document).ready(function() {
 		CommentsService.commentsList({board_seq:bnoValue,page: page|| 1 }, function(replyCnt, commentsList) {
 			
 			console.log("replyCnt : "+ replyCnt );
-		    console.log("commentsList : " + commentsList);
-		    console.log(commentsList);
 			
 		    if(page == -1){
-		    	pageNum = Math.ceil(replyCnt/10.0);
+		    	pageNum = Math.ceil(replyCnt/5.0);
 		    	showList(pageNum);
 		    	return;
 		    }
@@ -40,10 +38,10 @@ $(document).ready(function() {
 				str +="				</div>"
 				str +="				<div class='desc'>"
 				str +="						<h5>"
-				str +="								<a href='#'>"+commentsList[i].member_seq+"</a>"
+				str +="							<a href='#'>"+commentsList[i].member_seq+"</a>"
 				str +="						</h5>"
-				str +="						<p class='date'>날짜</p>"
 				str +="						<p class='comment'>"+commentsList[i].comments_content+"</p>"
+				str +="						<p class='date'>"+commentsList[i].comments_date+"</p>"
 				str +="				</div>"
 				str +="		</div>"
 				str +="		<div class='reply-btn'>"
@@ -91,13 +89,14 @@ $(document).ready(function() {
 	    
 	//댓글저장 버튼
     modalRegisterBtn.on("click",function(e){
+    	
     	//console.log("here!!  ->  "+ $(this).val());
         //console.log("here!!!  ->  "+ $(this).html());
+    	
 	    var comments = {
 	    	  comments_content: modalInputReply.val(),
 	          member_seq:21,
-	          board_seq:bnoValue,
-	          admin_seq:1
+	          board_seq:bnoValue
 	    };
 	    CommentsService.commentsRegister(comments, function(result){
 	      
@@ -112,7 +111,32 @@ $(document).ready(function() {
 	    });
       
     });
-	//end modalRegister    
+	//end modalRegister   
+    //댓글 저장 버튼(모달 x)
+    $("#commentsAddBtn").on("click",function(e){
+    	e.preventDefault();
+    	console.log("add btn click");
+    	
+    	var csrfTokenValue = $("#csrf").attr("value");
+    	
+    	var comments = {
+    			comments_content : $("#insert_content").val(),
+    			board_seq : 11,
+    			member_seq : 21
+    	};
+    	
+    	console.log(comments);
+    	CommentsService.commentsRegister(comments, function(result){
+  	      
+		    alert(result);
+		    $(".comments-area").find("#insert_content").val("");
+		    //showList(1);
+		    showList(-1);
+	      
+	    });
+    	
+    })
+    
 	    
 	    
 	  //댓글 조회 클릭 이벤트 처리 
@@ -166,22 +190,22 @@ $(document).ready(function() {
     	});
       //end modalRemoveBtn
       
-      
+    
     var pageNum = 1;
-    var replyPageFooter = $(".panel-footer");
+    var replyPageFooter = $(".comments_paging");
       
 	function showReplyPage(replyCnt){
         
-		var endNum = Math.ceil(pageNum / 10.0) * 10;  
-		var startNum = endNum - 9; 
+		var endNum = Math.ceil(pageNum / 5.0) * 5;  
+		var startNum = endNum - 4; 
 		var prev = startNum != 1;
 		var next = false;
 		
-		if(endNum * 10 >= replyCnt){
-		 endNum = Math.ceil(replyCnt/10.0);
+		if(endNum * 5 >= replyCnt){
+		 endNum = Math.ceil(replyCnt/5.0);
 		}
 		
-		if(endNum * 10 < replyCnt){
+		if(endNum * 5 < replyCnt){
 		 next = true;
 		}
 		
@@ -261,6 +285,9 @@ var CommentsService = (function(){
 		$.ajax({
 			type : 'post',
 			url : '/comments/register',
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+			},
 			data : JSON.stringify(comments),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
@@ -294,13 +321,13 @@ var CommentsService = (function(){
 	}*/
 	
 	function getList(param, callback, error) {
-
+		console.log("getList......");
+		console.log("board_seq : "+param.board_seq);
 	    var board_seq = param.board_seq;
 	    var page = param.page || 1;
 	    
 	    $.getJSON("/comments/pages/" + board_seq + "/" + page + ".json",
 	        function(data) {
-	    	
 	          if (callback) {
 	            //callback(data); // 댓글 목록만 가져오는 경우 
 	        	  console.log("data ::::::  "+data);

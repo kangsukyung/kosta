@@ -45,8 +45,19 @@
 						<div class="review-modal__form__product__contents__options"></div>
 					</div>
 				</div>
-				<div class="col-md-12 text-right">
-					<input type="file" class="ti-search" name="review_picture">사진 첨부하기
+				<div class="col-md-12 text-left">
+					<input type="file" class="ti-search" name="review_picture">
+				</div>
+				<div class="review_box">
+					<div class="col-md-12 text-left">
+						<ul class="list">
+							<li><a href="#"><i class="fa fa-star"></i></a></li>
+							<li><a href="#"><i class="fa fa-star"></i></a></li>
+							<li><a href="#"><i class="fa fa-star"></i></a></li>
+							<li><a href="#"><i class="fa fa-star"></i></a></li>
+							<li><a href="#"><i class="fa fa-star"></i></a></li>
+						</ul>
+					</div>
 				</div>
 				<div class="review-modal__section">
 					<div class="review-modal__section__title">리뷰 내용</div>
@@ -75,20 +86,20 @@
 			<div class="review_sidebar_button_jsb">
 				<a id="popup_open_btn">리뷰쓰기</a>
 			</div>
-			<div class="review_sidebar_select_jsb">
+			<!-- <div class="review_sidebar_select_jsb">
 	                 <div class="nice-select" tabindex="0"><span class="current">상품옵션</span>
 	                  <ul class="list">
-	                  <!-- 글번호 불러오면 상품들 다 가져올 수 있다고 함 -->
+	                  글번호 불러오면 상품들 다 가져올 수 있다고 함
 	                  <li data-value="1" class="option selected focus">안마의자 핑크</li>
 	                  <li data-value="1" class="option">안마의자 블랙</li>
 	                  <li data-value="1" class="option">안마의자 옐로</li>
 	                  </ul>
 	                 </div>
-	   		</div>
+	   		</div> -->
 	        <div class="blog_left_sidebar">
-	        	<a class="review_sidebar_alig_jsb">추천순</a>
+	        	<!-- <a class="review_sidebar_alig_jsb">추천순</a> -->
 	        	<a class="review_sidebar_alig_jsb">최신순</a>
-	        	<a class="review_sidebar_alig_jsb">평점</a>
+	        	<a class="review_sidebar_alig_jsb">평점순</a>
 	        	<!-- review list 시작 -->
 	            <div class="production-review-item__container">
 	            </div>

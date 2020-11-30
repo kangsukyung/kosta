@@ -226,7 +226,7 @@
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
-<%-- 				<jsp:include page="../review/review.jsp"></jsp:include> --%>
+				<jsp:include page="../review/review.jsp"></jsp:include>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">

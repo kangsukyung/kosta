@@ -29,7 +29,18 @@
 <body>
 
 <div class="comments-area">
-	<h4>05 Comments</h4>
+	<h4>Comments</h4>
+	<div class="form-group col-lg-10 col-md-6 name comments_reply_jsb">
+		<form class="comments_register_form">
+			<input type="hidden"  name="${comments.board_seq}" value="${comments.board_seq}">
+			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="text" class="form-control" id="insert_content" name="comments_content" 
+					placeholder="댓글내용을 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '댓글내용을 입력해주세요'">
+			<div class="register-reply-btn">
+				<button class="btn primary-btn" id="commentsAddBtn">작성하기</button>
+			</div>
+		</form>
+	</div>
 	<div class="comment-list chat">
 			<!-- <div class="single-comment justify-content-between d-flex">
 					<div class="user justify-content-between d-flex">
@@ -73,9 +84,16 @@
 				</div>
 		</div>
 	</div>
+	<!-- paging -->
+	<div class="comments_paging">
+	</div>
 	<!-- 대댓 끝 -->
 </div>
 
 </body>
 </html>
+ <script type="text/javascript">
+ 	var csrfHeaderName = "${_csrf.headerName}";
+	var csrfTokenValue = "${_csrf.token}";
+ </script>
 <script type="text/javascript" src="../../../main_resource/js/comments.js"></script>
