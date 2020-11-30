@@ -68,25 +68,28 @@
 							<button type="button" class="phone_btn" style="margin-top: 7px;">인증하기</button></div>
     			          	<font class="member_font_padding" id="phone_check" size="2"></font>
 							
-							<div id="checknum" class="col-md-12 form-group member_signup" style="display: none;"><input type="text" class="form-control-member_singup" id="phone_check" name="phone_check" placeholder="인증번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호'">
-							<button type="button" class="phone_btn" style="margin-top: 7px;">인증확인</button></div>
-							
+							<div id="checknum" class="col-md-12 form-group member_signup" style="display: none;"><input type="text" class="form-control-member_singup" id="ph_check" name="ph_check" placeholder="인증번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '인증번호'">
+							<button type="button" class="check_phone_btn" style="margin-top: 7px;">인증확인</button></div>
+							<input type="hidden" name="cerNum" id="cerNum">
             				
-            				<!-- <div class="col-md-12 form-group"><input type="tel" class="form-control"  id="member_phone" name="member_phone" placeholder="휴대폰번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '휴대폰번호'"></div> -->
-    			          	
 							<div class="col-md-12 form-group"><input type="text" class="form-control" id="member_email" name="member_email" placeholder="이메일 주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '이메일 주소'"></div>
     			          	<font class="member_font_padding" id="mail_check" size="2"></font>
 	            			<div class="col-md-12 form-group"><input type="password" class="form-control" class="memberPassword" id="member_password" name="member_password" placeholder="비밀번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호'"></div>
     			          	<font class="member_font_padding" id="password_check" size="2"></font>
     			          	<div class="col-md-12 form-group"><input type="password" class="form-control" class="userPwChk" id="userPwChk" name="userPwChk" placeholder="비밀번호확인" onfocus="this.placeholder = ''" onblur="this.placeholder = '비밀번호확인'"></div>
     			          	<font class="member_font_padding" id="chkNotice" size="2" style="display: none;">입력한 비밀번호가 일치하지 않습니다</font>
-     			          	<div class="col-md-12 form-group member_signup"><input type="text" class="form-control-member_singup" id="member_address" name="member_address" placeholder="주소" onblur="this.placeholder = '주소'" readonly="readonly"><button type="button" onclick="openZipSearch(member_address)">주소찾기</button></div>
      			          	<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
-     			          	
+     			          	<div class="col-md-12 form-group member_signup"><input type="text" class="form-control-member_singup" id="member_address" name="member_address" placeholder="주소" onblur="this.placeholder = '주소'" readonly="readonly"><button type="button" onclick="openZipSearch(member_address)">주소찾기</button></div>
  							<div class="col-md-10 form-group">
 								<button type="submit" value="submit" class="button button-register w-100" style="margin-left: 30px;">회원가입</button>
 							</div>
 						</form>
+						
+							<%-- <form action="#" method="post" id="cerNumCheck">
+      									<input type="hidden" name="pone" id="pone" />   <!-- 인증번호 받을사람 휴대폰 번호 -->
+							  			<input type="hidden" name="cerNum" id="cerNum">   <!-- 인증번호를 히든으로 저장해서 보낸다 -->
+							  			<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
+							</form>   --%>
 					</div>
 				</div>
 			</div>
@@ -112,6 +115,9 @@ var phone = document.getElementById("member_phone");
 var email = document.getElementById("member_email");
 var pass = document.getElementById("member_password");
 var userPwChk = document.getElementById("userPwChk");
+var cerNum=document.getElementById("cerNum");
+var ph_check=document.getElementById("ph_check");
+var phone_ok=0;
 
 var idJ = /^[a-z0-9]{6,12}$/;//아이디 정규식
 var pswJ = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
@@ -119,16 +125,54 @@ var nameJ = /^[가-힣]{2,6}$/;// 이름 정규식
 var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;// 휴대폰 번호 정규식
 
-$(document).ready(function checkForm() {
+$(document).ready(function() {
+	$(".check_phone_btn").click(function() {
+		console.log(ph_check);
+		console.log(cerNum);
+		
+		if(cerNum.value==ph_check.value){
+			alert("인증에 성공하셧습니다.");
+			var con=document.getElementById("checknum");
+			con.style.display='none';
+			$("#member_phone").attr('readonly',true);
+			phone_ok=1;
+		}else{
+			console.log(cerNum.value);
+			console.log(ph_check.value);
+			alert("실패!!");
+			phone_ok=0;
+		}
+	});
+	
 	$(".phone_btn").click(function() {
-		var phone=$("#member_phone").val();
-		if(phoneJ.test(phone)){
-			if(confirm(phone+" 해당 번호로 인증문자를 발송하시겠습니까?")){
+		var phoneb=$("#member_phone").val();
+		if(phoneJ.test(phoneb)){
+			if(confirm(phoneb+" 해당 번호로 인증문자를 발송하시겠습니까?")){
+				phone_ok=0;
 				var con=document.getElementById("checknum");
 				con.style.display='block';
+		
+				 $.ajax({
+	                   url:"/members/sendSms.do",
+	                   type:"get",
+	                   data:{phoneb: phoneb },
+	                 	success:function(data){
+	                 		  cerNum.value=data;
+	                 		  console.log(cerNum.value);
+	                 		  alert("해당 휴대폰으로 인증번호를 발송했습니다");
+	                   }, error : function() {
+	                      alert("실패");
+						  }
+	                });
+			}else{
+				phone.value="";	
+				phone.focus();
+				phone_ok=0;
 			}
 		}else{
-			alert('패턴이 일치하지 않습니다');			
+				$("#member_phone").val("");
+				phone_ok=0;
+			alert('사용할수없는 휴대폰 번호입니다');			
 		}
 			
 			
@@ -212,7 +256,14 @@ function checkForm() {
 		return false;
 	}
 	
-	if(phone.value=='' ||phoneJ.test(phone.value) == false){
+	if(phone.value=='' ||phoneJ.test(phone.value) == false||phone_ok==0){
+		if(phone.value==''){
+			alert("핸드폰 번호를 입력해주세요");
+		}else if(phoneJ.test(phone.value)==false){
+			alert("사용할수 없는 휴대폰번호 입니다.");
+		}else{
+			alert("휴대폰 인증을 받으세요");
+		}
 		phone.focus();
 		return false;
 	} 
