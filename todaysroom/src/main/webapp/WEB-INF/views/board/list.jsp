@@ -22,7 +22,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<section>
-<%-- 			<%@include file="/WEB-INF/views/header.jsp"%> --%>
+		<%@include file="../includes/header.jsp" %>
 	</section>
 	<!--================ End Header Menu Area =================-->
 
@@ -54,23 +54,23 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">Post Catgories</h4>
 							<ul class="list cat-list">
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>HOME</p>
-										<p>
-											<c:out value="${pageMaker.total }" />
-										</p>
+								<li><a href="/board/list" class="d-flex justify-content-between">
+										<p>HOME</p><p><c:if test="${pageMaker.cri.filter eq null }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>방들이</p>
+								<li><a href="/board/list?filter=bang" class="d-flex justify-content-between">
+										<p>방들이</p><p><c:if test="${pageMaker.cri.filter eq 'bang' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>전문가방들이</p>
+								<li><a href="/board/list?filter=bang" class="d-flex justify-content-between">
+										<p>전문가방들이</p><p><c:if test="${pageMaker.cri.filter eq 'bang' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>노하우</p>
+								<li><a href="/board/list?filter=knowhow" class="d-flex justify-content-between">
+										<p>노하우</p><p><c:if test="${pageMaker.cri.filter eq 'knowhow' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
-								<li><a href="#" class="d-flex justify-content-between">
-										<p>질문과답변</p>
+								<li><a href="/board/list?filter=qa" class="d-flex justify-content-between">
+										<p>질문과답변</p><p><c:if test="${pageMaker.cri.filter eq 'qa' }"><c:out value="${pageMaker.total}"/></c:if></p>
+								</a></li>
+								<li><a href="/board/register" class="d-flex justify-content-between">
+										<p>글 삭제 잠시만 쓸게욤~</p>
 								</a></li>
 							</ul>
 						</aside>
@@ -113,10 +113,12 @@
 							</form>
 
 						</nav>
-
+		
+					<div>
 						<c:forEach var="board" items="${board }">
 							<c:forEach var="member" items="${memberList }">
 								<c:if test="${board.member_seq eq member.member_seq }">
+								<div class="board_member">
 									<article class="row blog_item">
 										<div class="col-md-3">
 											<div class="blog_info text-right">
@@ -143,16 +145,22 @@
 										</div>
 										<div class="col-md-9">
 											<div class="blog_post">
-												<img
-													src="${pageContext.request.contextPath}/main_resource/img/blog/main-blog/m-blog-1.jpg"
-													alt="">
+												<div class="img_post_plz">
+												
+												</div>
+												<input class="imgBoardID" type="hidden" name="imgBoardSeq" value="${board.board_seq}">
+												<input class="imgBoardID" type="hidden" name="imgBoardThumbnail" value="${board.board_thumbnail}">
 												<div class="blog_details">
 													<a class="move" href="<c:out value='${board.board_seq }'/>">
 														<h2>
 															<c:out value="${board.board_title }" />
 														</h2>
 													</a>
-													<p>${board.board_content }</p>
+													<p style="width: 200px; 
+															  text-overflow: ellipsis; 
+															  white-space: nowrap; 
+															  overflow: hidden; 
+															  display: block;">${board.board_content }</p>
 													<a class="button button-blog"
 														href='/board/read?board_seq=<c:out value="${board.board_seq }"/>'>View
 														More</a>
@@ -160,9 +168,11 @@
 											</div>
 										</div>
 									</article>
+								</div>
 								</c:if>
 							</c:forEach>
 						</c:forEach>
+					</div>
 
 
 						<nav class="blog-pagination justify-content-center d-flex">
@@ -209,7 +219,7 @@
 
 	<!--================ Start footer Area  =================-->
 	<section>
-<%-- 	<%@include file="/WEB-INF/views/footer.jsp"%> --%>
+		<%@include file="../includes/footer.jsp"%>
 	</section>
 	<!--================ End footer Area  =================-->
 
@@ -219,8 +229,7 @@
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-	<script
-		src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
 	<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
 	<script src="/main_resource/vendors/mail-script.js"></script>
 	<script src="/main_resource/js/main.js"></script>
@@ -248,7 +257,49 @@
 				actionForm.attr("action", "/board/get");
 				actionForm.submit();
 			});
+			
+			//리스트 이미지
+			(function(){
+				
+				let board_thumb = new Map();
+				
+				var str = "";
+				var board_list = $("input[name='imgBoardSeq']").get();
+				var board_thumbnail_list = $("input[name='imgBoardThumbnail']").get();
+				var board_thumbnail_list123 = $("input[value='3.png']").val();
+				
+				for (var int = 0; int < board_list.length; int++) {
+					board_thumb.set(board_list[int].value, board_thumbnail_list[int].value);
+				}
+				
+				
+				board_thumb.forEach((value, key, map) => {
+					var imgvalue = $("input[value='"+value+"']").val();
+					$.getJSON("/board/readAttachList", {board_seq : key}, function(arr) {
+						$(arr).each(function(i, attach) {
+							if (attach.fileName==value) {
+								
+								var imgseq = $("input[value='"+key+"']").val();
+								
+								if (key == imgseq) {
+									if (str == null || str.length == 0) {
+										var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
+										str = "<img src='/board/display?fileName="+thumbnailPath+"'>";
+										$("input[value='"+key+"']").before(str);
+									}
+								}
+							}
+						});
+						
+						str = "";
+					});
+					
+				});
+			
+			})();
+
 		});
+		
 	</script>
 
 </body>

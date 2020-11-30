@@ -9,5 +9,8 @@ public interface ScrapMapper {
 	
 	//스크랩목록
 	public List<ScrapVO> ScrapgetList();
+	
+	//스크랩목록-방들이만
+	public List<ScrapVO> ScrapBangList();
 
 }

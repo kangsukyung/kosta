@@ -28,7 +28,7 @@
 	</select>
 	
 	<!-- 리뷰 쓰기 -->
-	<insert id="reivewRegister" parameterType="kosta.todayroom.domain.ReviewVO">
+	<insert id="reviewRegister" parameterType="kosta.todayroom.domain.ReviewVO">
 		insert into review(
 			review_seq, 
 			review_date,
@@ -40,11 +40,11 @@
 			store_seq,
 			product_seq
 		)values(
-			seq_review_review_seq.nextval,
-			 #{review_date},
-			 #{review_rating},
+			 seq_review_review_seq.nextval,
+			 sysdate,
+			 null,
 			 #{review_content},
-			 #{review_picture},
+			 null,
 			 #{shoporder_seq},
 			 #{member_seq},
 			 #{store_seq},
@@ -52,6 +52,16 @@
 		 )
 	</insert>
 	
+	<!-- #{review_date},
+			 #{review_rating},
+			 #{review_content},
+			 #{review_picture},
+			 #{shoporder_seq},
+			 #{member_seq},
+			 #{store_seq},
+			 #{product_seq} -->
+			 
+			 
 	<!-- 리뷰 한개에 대한 디테일 -->
 	<select id="reivewRead" resultType="kosta.todayroom.domain.ReviewVO">
 		select * from review

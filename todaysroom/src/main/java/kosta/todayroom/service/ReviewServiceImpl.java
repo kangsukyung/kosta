@@ -22,6 +22,7 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public int reviewRegister(ReviewVO vo) {
 		log.info("register...........");
+		System.out.println("serviceimpl : "+vo);
 		return reviewMapper.reviewRegister(vo);
 	}
 
@@ -51,9 +52,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public ReviewPageVO ReviewListPage(Criteria cri, int store_seq) {
-		System.out.println("akjsddfkjdafkjhlsdf   :::  "+cri);
-		log.info("reviewListpage :::: "+cri);
-		log.info("reviewListpage :::: "+store_seq);
+		System.out.println("reviewServiceImpl:cri   :  "+cri);
 		return new ReviewPageVO(reviewMapper.countByStore(store_seq), reviewMapper.reviewList(cri, store_seq));
 		
 	}
