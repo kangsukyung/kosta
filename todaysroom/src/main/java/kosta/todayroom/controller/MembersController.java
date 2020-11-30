@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -80,6 +81,12 @@ public class MembersController {
 		
 		return numStr;
 	}
-
-
+	
+	@ResponseBody
+	@RequestMapping(value = "/passwordFound", method = RequestMethod.POST)
+	public String passwordFound(@RequestParam("phone") String member_phone,@RequestParam("member_id") String member_id){
+		log.warn(member_phone);
+		log.warn(member_id);
+		return member_id;
+	}
 }

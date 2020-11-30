@@ -106,7 +106,7 @@
 								<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}" />
 						</form>
 						
-						<form class="row login_form" action="/member/modify"  method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
+						<form id="modifyForm" class="row login_form" action="/member/modify"  method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
 							<input type="hidden" name="member_seq" value="${member.member_seq }">
 							<input type="hidden" name="member_id" value="${member.member_id }">
 							<input type="hidden" name="member_path" value="${member.member_path }">
