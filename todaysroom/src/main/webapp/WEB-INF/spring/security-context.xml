@@ -23,10 +23,20 @@
 			access="permitAll"/>
 		<security:intercept-url pattern="/member/mypage"
 			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
-		<security:intercept-url pattern="/member/update"
+		<security:intercept-url pattern="/member/users"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		<security:intercept-url pattern="/member/modify"
 			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
 		<security:intercept-url pattern="/contractor/register"
 			access="hasAnyRole('ROLE_1,ROLE_2')"/>
+		<security:intercept-url pattern="/vendor/register"
+			access="hasAnyRole('ROLE_1,ROLE_3')"/>
+		<security:intercept-url pattern="/oneInquriy/register"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		<security:intercept-url pattern="/oneInquriy/get"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		<security:intercept-url pattern="/oneInquriy/list"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
 			
 		<security:form-login login-page="/login" authentication-success-handler-ref="customLoginSuccess" 
 												 authentication-failure-handler-ref="customLoginFail"/>

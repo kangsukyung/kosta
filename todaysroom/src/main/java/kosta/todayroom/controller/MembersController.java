@@ -87,6 +87,10 @@ public class MembersController {
 	public String passwordFound(@RequestParam("phone") String member_phone,@RequestParam("member_id") String member_id){
 		log.warn(member_phone);
 		log.warn(member_id);
-		return member_id;
+		MemberVO member=service.passwordFound(member_id, member_phone);
+		if(member==null){
+			return "0";
+		}
+		return member.getMember_id();
 	}
 }
