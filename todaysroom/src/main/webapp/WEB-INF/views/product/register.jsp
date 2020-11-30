@@ -167,6 +167,19 @@
 							<div class="col-md-12 form-group">
 								<input type="text" class="form-control" id="store_name" name="store_name" placeholder="제목을 입력해주세요.">
 				            </div>
+				            
+				            <div class="form-group">
+													<label id="product_insert_label">파일 </label> <input
+														class="form-control" id="product_insert_input"
+														name='uploadFile' type="file" placeholder="상품명을 입력하세요."
+														required="" multiple>
+												</div>
+												
+												<div class="uploadResult">
+													<ul>
+													
+													</ul>			
+												</div>
 				            <div class="col-md-12 form-group">
 								<input type="text" class="form-control" id="store_price" name="store_price" placeholder="제목을 입력해주세요.">
 				            </div>
@@ -207,7 +220,51 @@
 													
 													<label id="product_insert_label">가격 </label> 
 													<input class="form-control" id="product_insert_input" name="product_price" 
-													type="text" placeholder="가격을 입력하세요." required="">																				
+													type="text" placeholder="가격을 입력하세요." required="">	
+													
+													
+													
+													<div class="inputArea">
+														 <label for="gdsImg">이미지</label>
+														 <input type="file" id="gdsImg" name="product_fname" />
+														 <div class="select_img"><img src="" /></div>
+														 
+														 <script>
+														 
+														  $("#gdsImg").change(function(){
+														   if(this.files && this.files[0]) {
+														    var reader = new FileReader;
+														    reader.onload = function(data) {
+														     $(".select_img img").attr("src", data.target.result).width(200);        
+														    }
+														    reader.readAsDataURL(this.files[0]);
+														   }
+														  }); 
+														 </script>
+														 <%=request.getRealPath("/") %>
+													</div>
+													
+													<!-- <div>		
+															<label id="product_insert_label">상품사진 </label>
+															<input class="form-control" id="product_insert_file_input" name="product_fname" 
+															type="file" placeholder="상품명을 입력하세요." required="">	
+															<div class="select_img"><img src=""></div>
+															
+															<script>
+																$("#product_insert_file_input").change(function(){
+																	if(this.files & this.files[0]){
+																		var reader = new FileReader;
+																		reader.onload = function(data) {
+																			$("select_img img").attr("src", data.target.result).width(200);
+								
+																		}
+																		reader.readAsDataURL(this.files[0]);
+																	}
+																	
+																})
+																
+															</script>																		
+													</div> -->
 												</div>
 												
 												
@@ -219,7 +276,7 @@
 												
 											</div>	
 											
-												<div class="form-group">
+												<!-- <div class="form-group">
 													<label id="product_insert_label">파일 </label> <input
 														class="form-control" id="product_insert_input"
 														name='uploadFile' type="file" placeholder="상품명을 입력하세요."
@@ -230,7 +287,7 @@
 													<ul>
 													
 													</ul>			
-												</div>
+												</div> -->
 												
 
 
@@ -362,6 +419,10 @@ $(document).ready(function(e){
     return true;
   }
   
+  var csrfHeaderName = "${_csrf.headerName}";
+  var csrfTokenValue = "${_csrf.token}";
+  
+
   $("input[type='file']").change(function(e){
 
     var formData = new FormData();
@@ -379,14 +440,18 @@ $(document).ready(function(e){
       
     }
     
+    
     $.ajax({
       url: '/uploadAjaxAction',
       processData: false, 
       contentType: false,
-	  data: {_csrf :tokken_value},
+      data: formData,
 	  type: 'POST',
+	  beforeSend: function(xhr) {
+          xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+       },
       dataType:'json',
-        success: function(result){
+        success: function(result, xhr){
           console.log(result); 
 		  showUploadResult(result); //업로드 결과 처리 함수 
 
@@ -427,7 +492,7 @@ $(document).ready(function(e){
         } */
 		//image type
 		
-		if(obj.image){
+    	if(obj.image){
 			var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
 			str += "<li data-path='"+obj.uploadPath+"'";
 			str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
@@ -453,6 +518,7 @@ $(document).ready(function(e){
 		}
 
     });
+    
     
     uploadUL.append(str);
   }
@@ -499,6 +565,12 @@ $(document).ready(function(e){
 	    	a += "<label id='product_insert_label'>가격 </label>";
 	    	a += "<input class='form-control' id='product_insert_input' name='product_price'" ;
 	    	a += "type='text' placeholder='가격을 입력하세요.' required=''></div>";
+	    	
+	    	a += "<label id='product_insert_label'>상품사진 </label>";
+	    	a += "<input class='form-control' id='product_insert_input' name='product_fname'" ;
+	    	a += "type='file' id='gdsImg' placeholder='가격을 입력하세요.' required=''></div>";
+	    	
+	    	
 	    	
 	    $("#product_register").append(a);
 	    
