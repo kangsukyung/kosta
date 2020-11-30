@@ -307,7 +307,8 @@
 								<div class="card text-center card-product">
 									<div class="card-product__img">
 										<img class="card-img"
-											src="/display?fileName=${store.store_picture}" alt="상품이미지">
+<%-- 											src="/display?fileName=${store.store_picture}" alt="상품이미지"> --%>
+											src="#" alt="상품이미지">
 										<ul class="card-product__imgOverlay">
 											<li><button>
 													<i class="ti-search"></i>
