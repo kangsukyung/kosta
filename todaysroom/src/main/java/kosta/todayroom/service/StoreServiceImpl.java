@@ -55,4 +55,9 @@ public class StoreServiceImpl implements StoreService {
 		return mapper.StoreListScategory(scategory, cri);
 	}
 
+	@Override
+	public List<StoreVO> StoreListForCategory() {
+		return mapper.StoreList();
+	}
+
 }
