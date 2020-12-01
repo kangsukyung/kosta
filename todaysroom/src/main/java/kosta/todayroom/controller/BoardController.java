@@ -38,11 +38,15 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("/list")
-	public void BoardList(BoardCriteria cri, @RequestParam(value="filter", required=false) String filter, Model model) {
+	public void BoardList(BoardCriteria cri, @RequestParam(value="filter", required=false) String filter, @RequestParam(value="roomwarming", required=false) String roomwarming, Model model) {
 		log.info("list..........");
 		
 		if (filter != null) {
 			cri.setFilter(filter);
+		}
+		
+		if (roomwarming != null) {
+			cri.setRoomwarming(roomwarming);
 		}
 		
 		model.addAttribute("board", service.boardList(cri));
@@ -92,6 +96,8 @@ public class BoardController {
 	@GetMapping({ "/read", "/modify" })
 	public void BoardRead(@RequestParam("board_seq") int board_seq, Model model) {
 		log.info("read...........");
+		
+		service.viewModify(board_seq);
 
 		model.addAttribute("member", service.member(board_seq));
 		model.addAttribute("board", service.read(board_seq));
