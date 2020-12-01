@@ -30,7 +30,8 @@ public class CustomLoginFailHandler implements AuthenticationFailureHandler {
 		try {
 			member = service.idCheck(request.getParameter("username"));
 			if (member == null) {
-				response.getWriter().print("<script>alert('로그인에 실패하셧습니다'); location.href='/login'</script>");
+				response.getWriter().print("<script>alert('로그인에 실패하셧습니다'); location.href='/login'; </script>");
+				//"+"passfound"+".click();
 			}
 		} catch (Exception e) {
 			log.error(e);
@@ -45,7 +46,7 @@ public class CustomLoginFailHandler implements AuthenticationFailureHandler {
 		
 		if (member.getMember_count() >= 5) {
 			service.ratingUpdate(member.getMember_seq(), 4);
-			response.getWriter().print("<script>alert('비활성계정입니다.'); location.href='/login'</script>");
+			response.getWriter().print("<script>alert('비활성계정입니다.'); location.href='/login?num=1'</script>");
 		} else {
 			response.getWriter().print("<script>alert('비밀번호가 일치하지 않습니다. 틀린횟수: " + member.getMember_count()
 					+ "번'); location.href='/login'</script>");

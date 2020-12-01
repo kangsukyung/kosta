@@ -1,5 +1,7 @@
 package kosta.todayroom.service;
 
+import org.apache.ibatis.annotations.Param;
+
 import kosta.todayroom.domain.MemberVO;
 
 public interface MemberService {
@@ -12,4 +14,6 @@ public interface MemberService {
 	public int ratingUpdate(int member, int num);
 	public MemberVO passwordFound(String member_id, String member_phone);
 	public int update(String member_id, String member_password);
+	public MemberVO idFound(String member_name, String member_phone);
+
 }

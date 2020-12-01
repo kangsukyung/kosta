@@ -83,4 +83,9 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.update(member_id, password);
 	}
 
+	@Override
+	public MemberVO idFound(String member_name, String member_phone) {
+		return mapper.idFound(member_name, member_phone);
+	}
+
 }

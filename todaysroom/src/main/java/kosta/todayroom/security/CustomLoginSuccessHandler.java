@@ -37,7 +37,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		if(roleNames.contains("ROLE_4")){
 			request.getSession().invalidate();
-			response.getWriter().print("<script>alert('비활성계정입니다.'); location.href='/login'</script>");
+			response.getWriter().print("<script>alert('비활성계정입니다.'); location.href='/login?num=1'</script>");
 		}else if(roleNames.contains("ROLE_0")){
 			request.getSession().invalidate();
 			response.getWriter().print("<script>alert('탈퇴한 회원입니다.'); location.href='/login'</script>");

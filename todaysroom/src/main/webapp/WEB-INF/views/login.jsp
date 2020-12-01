@@ -24,7 +24,7 @@
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">커뮤니티</a></li>
-              <li class="breadcrumb-item active" aria-current="page"><a href="${pageContext.request.contextPath}/Member/MemberSignup_Form.do">회원가입</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a href="/member/register">회원가입</a></li>
             </ol>
           </nav>
 				</div>
@@ -39,7 +39,7 @@
 						<div class="hover">
 							<h4>웹사이트에 처음 방문하셨나요??</h4>
 							<p>First time visiting the website?</p>
-							<a class="button button-account" href="${pageContext.request.contextPath}/Member/MemberSignup_Form.do">회원 가입하러 가기</a>
+							<a class="button button-account" href="/member/register">회원 가입하러 가기</a>
 						</div>
 					</div>
 				</div>
@@ -141,19 +141,20 @@ var pswJ = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;//패스
 
 var namet=$("#member_name");//모달  이름창
 var id_phonet=$("#member_id_phone");//모달 아이디 핸드폰번호창
-var id_chek_phonet=$("#chek_id_phone");//모달 아이디 핸드폰번호창
+var id_chek_phonet=$("#chek_id_phone");//모달 아이디 인증번호 체크
 
 var phonet=$("#member_phone");//모달 핸드폰 번호창
 var member_idt=$("#member_id");//모달 아이디창
 var chek_phonet=$("#chek_phone");//모달 인증번호 확인창
-var cerNum="";
+var cerNum="";//인증번호 들어감
+var cerName="";//아이디 조회시 아이디 들어감
 
 var member_passwordt=$("#member_password");//모달 패스워드
 var check_passwordt=$("#check_password");//모달 패스워드 체크
 var updateMember=document.getElementById("updateMember");
 
+
   $(document).ready(function(){
-	
 	  $("#idFound").click(function() {
 		$(".modal-title").html("아이디 찾기");
 		$(".modal").modal("show");
@@ -180,8 +181,64 @@ var updateMember=document.getElementById("updateMember");
 			modalRegisterBtn.hide();
    	  });
 	  
-	  $("#id_phone_sub").click(function() {
+	  $("#id_phone_chk").click(function() {
+		  var id_chek_phone=id_chek_phonet.val();
+		  console.log(id_chek_phone);
+		  if(cerNum==id_chek_phone){
+			  alert("인증번호가 일치합니다");
+		  }else{
+			  alert("인증번호가 일치하지 않습니다.");
+		  }
+	  });
+	  
+	  $("#id_phone_sub").click(function() {//아이디 찾기 휴대폰 인증
 		console.log("1");
+		var member_name=namet.val();//모달  이름창
+		var id_phone=id_phonet.val();//모달 아이디 핸드폰번호창
+		
+		console.log(id_phone);
+		console.log(member_name);
+		if(phoneJ.test(id_phone)){
+			$.ajax({
+				url:"/members/idFound",
+				type:"post",
+				data:{id_phone:id_phone,
+					  member_name:member_name},
+				beforeSend: function(xhr){
+					xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+				},
+				success: function(data){
+					ph_id_check.style.display="block";
+					console.log(data);
+					cerName=data;
+					
+					$.ajax({
+		                   url:"/members/sendSms.do",
+		                   type:"get",
+		                   data:{phone: id_phone},
+		                   beforeSend: function(xhr){
+								xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+							},
+		                 	success:function(data){
+		    					id_phonet.attr('readonly',true);
+		    					namet.attr('readonly',true);
+		                 		cerNum=data;
+		                 		console.log(cerNum);
+		                 		  alert("해당 휴대폰으로 인증번호를 발송했습니다");
+		                   }, error : function() {
+		                      alert("실패");
+		                   }
+					 });
+					
+				},error : function() {
+                    alert("실패");
+                }
+			});
+		}else{
+			id_phonet.val("");
+			alert('사용할수없는 휴대폰 번호입니다');	
+		}
+
 	  });
 	  
 	  $("#phone_sub").click(function() {
@@ -281,6 +338,8 @@ var updateMember=document.getElementById("updateMember");
 		});
 	  
 	  $("#modalCloseBtn").click(function() {
+		  id_phonet.attr('readonly',false);
+		  namet.attr('readonly',false);
 		  $("#member_id").attr('readonly', false);
  	  	  $("#member_phone").attr('readonly', false);
 	 	  
@@ -298,6 +357,15 @@ var updateMember=document.getElementById("updateMember");
 		  $(".modal").modal("hide");
 	  });
   });
+  </script>
+  <script>
+  window.onload = function () {
+		if( ${ratingNum} == "1"){
+			if(confirm("계정을 활성화시키겠습니까?")){
+				document.getElementById("passwordFound").click();
+			}
+		}
+	}
   </script>
 </body>
 </html>

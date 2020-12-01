@@ -96,7 +96,7 @@ public class MemberController {
 	public String update(@RequestParam("profile") MultipartFile profile, MemberVO vo) {
 //		log.info(profile.toString());
 //		log.warn(profile.toString());
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = "c:\\upload";
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 		String proname = vo.getMember_profile();

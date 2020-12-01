@@ -15,4 +15,5 @@ public interface MemberMapper {
 	public int countUpdate(@Param("seq") int seq , @Param("num") int num);
 	public MemberVO passwordFound(@Param("member_id")String member_id, @Param("member_phone") String member_phone);
 	public int update(@Param("member_id") String member_id, @Param("password") String member_password);
+	public MemberVO idFound(@Param("member_name")String member_name, @Param("member_phone") String member_phone);
 }
