@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -28,9 +28,9 @@
 <link rel="stylesheet" href="../../main_resource/css/style.css">
 <link rel="stylesheet" href="../../main_resource/css/store.css">
 </head>
+<%@include file="../includes/header.jsp"%>
 <body>
 	<!--================ Start Header Menu Area =================-->
-	<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
 	<!--================ End Header Menu Area =================-->
 
 	<!-- ================ start banner area ================= -->
@@ -301,15 +301,14 @@
 					</div>
 					<!-- End Filter Bar -->
 					<!-- Start Best Seller -->
-					<section class="lattest-product-area pb-40 category-list ">
+<%-- 					<section class="lattest-product-area pb-40 category-list ">
 						<c:forEach items="${list }" var="store">
-							<c:forEach items="${attach }" var="attach">
-								<c:if test="${store.store_seq eq attach.store_seq }">
+				
 							<div class="row row_product_hw col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
 										<img class="card-img"
- 											src="/display?fileName=${attach.fileName}" alt="상품이미지"> 
+ 											src="/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지"> 
 										<ul class="card-product__imgOverlay">
 											<li><button>
 													<i class="ti-search"></i>
@@ -324,18 +323,45 @@
 									</div>
 									<div class="card-body">
 										<p>${store.store_date }</p>
-										<%-- <td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td> --%>
+										<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td>
 										<h4 class="card-product__title">
 											<a href="/store/read?store_seq=${store.store_seq}">${store.store_title }</a>
 										</h4>
 									</div>
 								</div>
 							</div>
-								</c:if>	
-							</c:forEach>
 						</c:forEach>
-					</section>
-
+					</section> --%>
+			<section class="lattest-product-area pb-40 category-list ">
+                  <c:forEach items="${list }" var="store">
+                     <div class="row row_product_hw col-lg-4">
+                        <div class="card text-center card-product">
+                           <div class="card-product__img">
+                              <img class="card-img"
+ 											src="/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지">
+                              <ul class="card-product__imgOverlay">
+                                 <li><button>
+                                       <i class="ti-search"></i>
+                                    </button></li>
+                                 <li><button>
+                                       <i class="ti-shopping-cart"></i>
+                                    </button></li>
+                                 <li><button>
+                                       <i class="ti-heart"></i>
+                                    </button></li>
+                              </ul>
+                           </div>
+                           <div class="card-body">
+                              <p>${store.store_date }</p>
+                              <%-- <td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td> --%>
+                              <h4 class="card-product__title">
+                                 <a href="/store/read?store_seq=${store.store_seq}">${store.store_title }</a>
+                              </h4>
+                           </div>
+                        </div>
+                     </div>
+                  </c:forEach>
+               </section>			
 					<!-- End Best Seller -->
 				</div>
 			</div>
@@ -376,170 +402,16 @@
 	<!-- ================ category section end ================= -->
 
 	<!-- ================ top product area start ================= -->
-	<section class="related-product-area">
-		<div class="container">
-			<div class="section-intro pb-60px">
-				<p>Popular Item in the market</p>
-				<h2>
-					Top <span class="section-intro__style">Product</span>
-				</h2>
-			</div>
-			<div class="row mt-30">
-				<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-					<div class="single-search-product-wrapper">
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-1.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-2.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-3.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-					</div>
-				</div>
 
-				<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-					<div class="single-search-product-wrapper">
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-4.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-5.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-6.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-					<div class="single-search-product-wrapper">
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-7.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-8.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-9.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
-					<div class="single-search-product-wrapper">
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-1.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-2.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-						<div class="single-search-product d-flex">
-							<a href="#"><img
-								src="/main_resource/img/product/product-sm-3.png" alt=""></a>
-							<div class="desc">
-								<a href="#" class="title">Gray Coffee Cup</a>
-								<div class="price">$170.00</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 	<!-- ================ top product area end ================= -->
 
 	<!-- ================ Subscribe section start ================= -->
-	<section class="subscribe-position">
-		<div class="container">
-			<div class="subscribe text-center">
-				<h3 class="subscribe__title">Get Update From Anywhere</h3>
-				<p>Bearing Void gathering light light his eavening unto dont
-					afraid</p>
-				<div id="mc_embed_signup">
-					<form target="_blank"
-						action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-						method="get" class="subscribe-form form-inline mt-5 pt-1">
-						<div class="form-group ml-sm-auto">
-							<input class="form-control mb-1" type="email" name="EMAIL"
-								placeholder="Enter your email" onfocus="this.placeholder = ''"
-								onblur="this.placeholder = 'Your Email Address '">
-							<div class="info"></div>
-						</div>
-						<button class="button button-subscribe mr-auto mb-1" type="submit">Subscribe
-							Now</button>
-						<div style="position: absolute; left: -5000px;">
-							<input name="b_36c4fd991d266f23781ded980_aefe40901a"
-								tabindex="-1" value="" type="text">
-						</div>
 
-					</form>
-				</div>
-
-			</div>
-		</div>
-	</section>
 	<!-- ================ Subscribe section end ================= -->
 
 
 	<!--================ Start footer Area  =================-->
-	<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
+	<%@include file="../includes/footer.jsp"%>
 	<!--================ End footer Area  =================-->
 
 

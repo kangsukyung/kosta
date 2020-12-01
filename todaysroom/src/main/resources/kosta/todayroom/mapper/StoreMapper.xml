@@ -21,16 +21,48 @@
   	where store_seq = #{store_seq}
   </select>
   
-  <select id="getListWithPaging" resultType="kosta.todayroom.domain.StoreVO">
-  	<![CDATA[
+  <resultMap type="kosta.todayroom.domain.StoreVO" id="storeMap">
+  	<id property="store_seq" column="store_seq"></id>
+  	<result property="member_seq" column="member_seq"></result>
+  	<result property="store_title" column="store_title"></result>
+  	<result property="store_content" column="store_content"></result>
+  	<result property="store_name" column="store_name"></result>
+  	<result property="store_price" column="store_price"></result>
+  	<result property="store_date" column="store_date"></result>
+  	<result property="store_lcategory" column="store_lcategory"></result>
+  	<result property="store_scategory" column="store_scategory"></result>
+  	<collection property="attachList" resultMap="attachMap" >	
+  	</collection>
+  </resultMap>
+  
+  <resultMap type="kosta.todayroom.domain.ProductAttachVO" id="attachMap">
+  		<result property="uuid" column="uuid"></result>	
+  		<result property="uploadPath" column="uploadPath"></result>	
+  		<result property="fileName" column="fileName"></result>	
+  		<result property="image" column="image"></result>
+  		<result property="store_seq" column="store_seq"></result>
+  </resultMap>
+  
+  <select id="getListWithPaging" resultMap="storeMap">
+<!--   	<![CDATA[
   		select *
 		from (
-			select /*+ INDEX_DESC(store store_seq) */
+			select /*+ INDEX_DESC(s STORE_SEQ_PK) */
 			rownum rn, s.*
 			from store s
 			where rownum <= #{pageNum} * #{amount})
 		where rn > (#{pageNum} - 1) * #{amount}
-  	]]>
+  	]]> -->
+  	  	<![CDATA[
+  	select *
+		from (
+			select /*+ INDEX_DESC(s STORE_SEQ_PK) */
+			rownum rn, s.*, p.uuid, p.uploadpath, p.filename, p.image
+			from store s, product_attach p
+			where rownum <= #{pageNum} * #{amount}
+      and s.STORE_SEQ = p.STORE_SEQ) 
+		where rn > (#{pageNum} - 1) * #{amount}
+  	  	]]>
   </select>
   
   <select id="getTotalCount" resultType="int">
