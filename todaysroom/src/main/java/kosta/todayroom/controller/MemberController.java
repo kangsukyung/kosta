@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.CustomUser;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.security.CustomUserDetailsService;
@@ -76,7 +78,16 @@ public class MemberController {
 	}
 
 	@GetMapping("/mypage")
-	public void mypage() {
+	public void mypage(Principal principal , Model model) {
+		MemberVO member=service.idCheck(principal.getName());
+		List<BoardVO> room=service.MyRoomList(member.getMember_seq());
+		List<BoardVO> knowhow=service.MyKnowhowList(member.getMember_seq());
+		
+		model.addAttribute("room", room);
+		model.addAttribute("knowhow", knowhow);
+		
+		log.warn(room);
+		log.warn(knowhow);
 	}
 	
 	@GetMapping("/users/{member_seq}")
@@ -90,6 +101,7 @@ public class MemberController {
 
 	@GetMapping("/modify")
 	public void updateForm() {
+		
 	}
 
 	@PostMapping("/modify")
@@ -170,8 +182,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	//@RequestParam("memberID") String member_id, @RequestParam("memberPassword") String member_password
 	public String update(HttpServletRequest request,HttpServletResponse response){
+		//@RequestParam("memberID") String member_id, @RequestParam("memberPassword") String member_password
 		response.setContentType("text/html; charset=UTF-8");
 		
 		int num=service.update(request.getParameter("memberID"), request.getParameter("memberPassword"));

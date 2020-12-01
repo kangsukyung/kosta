@@ -1,7 +1,10 @@
 package kosta.todayroom.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
+import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.MemberVO;
 
 public interface MemberMapper {
@@ -16,4 +19,6 @@ public interface MemberMapper {
 	public MemberVO passwordFound(@Param("member_id")String member_id, @Param("member_phone") String member_phone);
 	public int update(@Param("member_id") String member_id, @Param("password") String member_password);
 	public MemberVO idFound(@Param("member_name")String member_name, @Param("member_phone") String member_phone);
+	public List<BoardVO> MyRoomList(int seq);
+	public List<BoardVO> MyKnowhowList(int seq);
 }

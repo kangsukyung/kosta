@@ -111,7 +111,7 @@
               <c:forEach items="${room }" var="board" >
               <div class="col-md-6 col-lg-4">
                 <div class="card text-center card-product">
- 	                <a href='#?seq=${board.board_seq}'><img class="card-img" src="/kosta1200/upload/${board.board_thumbnail}" alt=""></a>
+ 	                <a href='#?seq=${board.board_seq}'><img class="card-img" src="/board/display?fileName=${room.board_thumbnail}" alt=""></a>
                 </div>
               </div>
               </c:forEach>
@@ -121,7 +121,7 @@
           <section class="lattest-product-area pb-40 category-list">
           <div class="filter-bar d-flex flex-wrap align-items-center"><h2>노하우</h2></div>
             <div class="row">
-            <c:forEach items="${knowhow }" var="knowhow" >
+            <c:forEach items="${knowhow}" var="knowhow" >
               <div class="col-md-6 col-lg-4">
                	    <div class="card text-center card-product">
  	               	 <a href='#?seq=${knowhow.board_seq}'><img class="card-img" src="/kosta1200/upload/${knowhow.board_thumbnail}" alt=""></a>

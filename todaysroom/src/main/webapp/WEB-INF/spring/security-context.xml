@@ -21,6 +21,8 @@
 			access="permitAll"/>
 		<security:intercept-url pattern="/board/list"
 			access="permitAll"/>
+		<security:intercept-url pattern="/board/register"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
 		<security:intercept-url pattern="/member/mypage"
 			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
 		<security:intercept-url pattern="/member/users"

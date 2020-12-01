@@ -84,14 +84,7 @@
               <li class="nav-item"><a href="/login" class="msk-id">로그인</a></li>
               <li class="nav-item"><a href="/member/register" class="msk-id">회원가입</a></li>
 		</sec:authorize>
-	<c:choose>
-		<c:when test="${member!=null }">
-              <li class="nav-item"><a class="button button-header" href="${pageContext.request.contextPath}/board/board_insertActionForm.do">글쓰기</a></li>
-		</c:when>
-		<c:otherwise>
-              <li class="nav-item"><a class="button button-header" href="${pageContext.request.contextPath}/Member/MemberLogin_Action.do">글쓰기</a></li>
-		</c:otherwise>
-	</c:choose>
+              <li class="nav-item"><a class="button button-header" href="/board/register">글쓰기</a></li>
             </ul>
           </div>
         </div>

@@ -73,4 +73,11 @@
 	<select id="idFound" parameterType="String" resultType="kosta.todayroom.domain.MemberVO">
 		select * from member where member_name=#{member_name} AND member_phone=#{member_phone}
 	</select>
+	
+	<select id="MyRoomList" parameterType="int" resultType="kosta.todayroom.domain.BoardVO">
+		select * from roomwarming r, board b where b.member_seq=#{seq} AND b.board_seq=r.board_seq
+	</select>
+ 	<select id="MyKnowhowList" parameterType="int" resultType="kosta.todayroom.domain.BoardVO">
+ 		select * from board b, Knowhow k where b.member_seq=#{seq} AND b.board_seq=k.board_seq	
+	</select>
 </mapper>
