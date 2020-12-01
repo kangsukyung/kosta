@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -28,9 +28,9 @@
 <link rel="stylesheet" href="../../main_resource/css/style.css">
 <link rel="stylesheet" href="../../main_resource/css/store.css">
 </head>
+<%@include file="../includes/header.jsp"%>
 <body>
 	<!--================ Start Header Menu Area =================-->
-	<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
 	<!--================ End Header Menu Area =================-->
 
 	<!-- ================ start banner area ================= -->
@@ -387,7 +387,7 @@
 
 
 	<!--================ Start footer Area  =================-->
-	<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
+	<%@include file="../includes/footer.jsp"%>
 	<!--================ End footer Area  =================-->
 
 
