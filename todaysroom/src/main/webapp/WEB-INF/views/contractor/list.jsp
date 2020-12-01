@@ -33,18 +33,37 @@
 			<c:forEach items="${list }" var="item">
 				<li class="list-items"><a href="/member/users/${item.key }"></a>
 					<div class="img-wrap">
-						<img src="${item.value.board_thumbnail }">
+						<%-- 						<img src="${item.value.board_thumbnail }"> --%>
+						<img src="/main_resource/img/main-banner.jpg">
 					</div>
 					<div class="content-wrap">
-						<img src="${item.value.member_profile }">
+						<%-- 						<img src="${item.value.member_profile }"> --%>
+						<img src="/main_resource/img/main-banner.jpg">
 						<div class="bname">${item.value.contractor_bname }</div>
 						<div class="address">${item.value.contractor_address }</div>
 					</div></li>
 			</c:forEach>
 		</ul>
-		
-		
-		
+
+		<div id="page-area">
+			<c:if test="${pageMaker.prev }">
+				<a>${pageMaker.startPage -1 }</a>
+			</c:if>
+
+			<c:forEach begin="${pageMaker.startPage }"
+				end="${pageMaker.endPage }" var="pageNumber">
+				<a class="pages">${pageNumber }</a>
+			</c:forEach>
+
+			<c:if test="${pageMaker.next }">
+				<a>${pageMaker.endPage +1 }</a>
+			</c:if>
+		</div>
+
+		<form action="/contractor/list" method="get" id="paginator">
+			<input type="hidden" name="pageNum" value="">
+		</form>
+
 	</div>
 
 	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
@@ -56,6 +75,17 @@
 	<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
 	<script src="/main_resource/vendors/mail-script.js"></script>
 	<script src="/main_resource/js/main.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$(".pages").on("click", function(e) {
+				e.preventDefault();
+
+				$("#paginator input[name=pageNum]").val($(this).text());
+
+				$("#paginator").submit();
+			});
+		});
+	</script>
 </body>
 <jsp:include page="../includes/footer.jsp"></jsp:include>
 </html>

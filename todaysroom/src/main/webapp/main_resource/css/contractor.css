@@ -31,6 +31,10 @@
 	padding-right: 10px;
 }
 
+.img-wrap img{
+	width:100%;
+}
+
 .list-items .content-wrap{
 	display:inline-block;
 	width: 50%;
@@ -45,4 +49,16 @@
 
 .bname{
 	display: inline-block;
+}
+
+#page-area{
+	text-align: right;
+}
+
+#page-area .pages{
+	cursor: pointer;
+	display: inline-block;
+	margin: 2px;
+	padding: 0 8px;
+	border: 1px solid black;
 }

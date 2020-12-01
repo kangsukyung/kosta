@@ -16,13 +16,21 @@
 		resultType="kosta.todayroom.domain.ContractorVO">
 		select * from contractor where member_seq=#{seq}
 	</select>
+	
+	<select id="totalCount" resultType="int">
+		select count(*) from contractor
+	</select>
 
 	<select id="readMemberProfile" parameterType="int" resultType="String">
 		select member_profile from member where MEMBER_SEQ = #{member_seq}
 	</select>
 
 	<select id="readBoardThumbnail" parameterType="int" resultType="String">
-		select board_thumbnail from board where MEMBER_SEQ = #{member_seq}
+		<![CDATA[
+			select board_thumbnail from 
+  				(select rownum r, board_thumbnail from board where MEMBER_SEQ=#{member_seq})
+			where r=1
+		]]>
 	</select>
 
 	<delete id="delete" parameterType="int">

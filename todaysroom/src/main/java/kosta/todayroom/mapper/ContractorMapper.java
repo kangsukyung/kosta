@@ -10,6 +10,7 @@ public interface ContractorMapper {
 	public ContractorVO read(int seq);
 	public int delete(int seq);
 	public List<ContractorVO> list(Criteria cri);
+	public int totalCount();
 	
 	public String readMemberProfile(int member_seq);
 	public String readBoardThumbnail(int member_seq);

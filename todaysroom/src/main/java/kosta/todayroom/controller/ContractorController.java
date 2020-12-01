@@ -58,9 +58,9 @@ public class ContractorController {
 		
 	}
 	
-	@GetMapping("/list")
+	@RequestMapping("/list")
 	public void list(Criteria cri, Model model){
 		model.addAttribute("list", service.list(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri, 11));
+		model.addAttribute("pageMaker", new PageDTO(cri, service.totalCount()));
 	}
 }

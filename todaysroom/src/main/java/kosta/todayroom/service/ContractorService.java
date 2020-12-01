@@ -11,4 +11,5 @@ import kosta.todayroom.domain.Criteria;
 public interface ContractorService {
 	public int register(ContractorVO vo);
 	public LinkedHashMap<Integer, HashMap<String, String>> list(Criteria cri);
+	public int totalCount();
 }

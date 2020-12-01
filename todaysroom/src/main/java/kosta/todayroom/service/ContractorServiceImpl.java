@@ -78,4 +78,10 @@ public class ContractorServiceImpl implements ContractorService{
 		return list;
 	}
 
+	@Override
+	public int totalCount() {
+		// TODO Auto-generated method stub
+		return mapper.totalCount();
+	}
+
 }
