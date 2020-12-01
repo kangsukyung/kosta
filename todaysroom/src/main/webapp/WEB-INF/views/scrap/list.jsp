@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/vendors/owl-carousel/owl.carousel.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/member_mypage.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/ksk_style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/scrap_style.css">
 </head>
 <body>	
  	<jsp:include page="../../header.jsp"></jsp:include>
@@ -63,6 +63,71 @@
 		
 	</div>
 	
+	
+	
+	
+	
+	<section class="blog">
+      <div class="container">
+        <!-- <div class="section-intro pb-60px">
+          <p>My Store</p>
+          <h2>todayRoom's <span class="section-intro__style">My STORE</span></h2>
+        </div> -->
+
+
+          
+        <c:forEach var="scrap" items="${list}">
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+            <div class="card card-blog" id="product_card-blog">
+
+		              <div class="card-blog__img">
+		                <img class="card-img rounded-0" src="/board/display?fileName=s_${scrap.boardAttachList[0].uuid}_${scrap.boardAttachList[0].fileName}">
+		              </div>
+	          		<c:forEach var="scrap" items="${list2}">
+		              <div class="card-body">
+		                <ul class="card-blog__info">
+		                  <li><a href="#">스크랩번호 </a></li>
+		                  <li><a href="#"><i class="ti-comments-smiley"></i> ${scrap.scrap_seq }</a></li>
+		                </ul>
+		                <h4 class="card-blog__title"><a href='/board/read?board_seq=<c:out value="${scrap.board.board_seq }"/>'>${scrap.board.board_title }</a></h4>
+		                <p>${product.product_price }</p>
+		                <a class="card-blog__link" href='/scrap/remove?scrap_seq=<c:out value="${scrap.scrap_seq }"/>'>삭제하기 
+		                <i class="ti-arrow-right"></i></a>
+		              </div>
+	           		</c:forEach>
+
+            </div>
+        </div>
+       </c:forEach>
+
+
+
+ 
+
+      </div>
+    </section>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<div class="scrap_list">
 	
 		<div class="scrap_1_list">
@@ -73,44 +138,56 @@
 						src="/board/display?fileName=${scrap.boardAttachList.uuid }_${scrap.boardAttachList.fileName}" alt="상품이미지">
 					</div>
 				</c:forEach>	 --%>
-				
-				<c:forEach var="scrap" items="${list}">
-					<div class="scrap_img">
-					</div>
-					<div class="scrap_board_title">
-						<label>${scrap.board.board_title }</label><br>
-					</div>
-				
-				
-				</c:forEach>
 			
+			<!-- <div class="scrap_Alist"> -->
+	
+				<%-- 	<div class="scrap_img">
+						<c:forEach var="scrap" items="${list}">
+							<img class="card-img"
+ 							src="/board/display?fileName=s_${scrap.boardAttachList.uuid}_${scrap.boardAttachList.fileName}">
+							<label>${scrap.board.board_title }</label>
+						</c:forEach>
+					</div> --%>
+					
+						<c:forEach var="scrap" items="${list}">
+							<div class="TEST">
+							<div class="scrap_img">
+								<img src="/board/display?fileName=s_${scrap.boardAttachList[0].uuid}_${scrap.boardAttachList[0].fileName}">
+	 							<%-- <c:out value="${scrap.boardAttachList[0].uuid}">uuid</c:out> --%>
+	 							<%-- <c:out value="${scrap.boardAttachList[0].fileName}">파일네임</c:out> --%>
+							</div>
+							</div>
+						</c:forEach>
+						
+						
+						<c:forEach var="scrap" items="${list2}">
+							<div class="scrap_board_title">
+								<a id="board_title" href='/board/read?board_seq=<c:out value="${scrap.board.board_seq }"/>'>${scrap.board.board_title }</a>
+							
+							</div>
+						</c:forEach>
+		
+			<!-- </div> -->
 
 		</div>
 
 	</div>
 	
-<%-- 	<div class="desc">
-<c:forEach var="product" items="${list}">
-
-<div id="product_list_in_list">
-<img src="/display?fileName=${product.product_fname}">
-<label id="product_list_index"> 상품번호 : </label>${product.product_seq }<br>
-<label id="product_list_index"> 상품명  : </label>${product.product_name }<br>
-<label id="product_list_index"> 가 격 : </label>${product.product_price }<br>
-											
-<a href="/product/modify?product_seq=<c:out value="${product.product_seq}"/>">수정하기</a>
-<a href="/product/remove?product_seq=<c:out value="${product.product_seq}"/>">삭제하기</a>
-<a href="/product/remove?product_seq=${product.product_seq}">삭제하기</a>
-</div>
-</c:forEach>
-</div> --%>
-
-
-
-
-
-
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

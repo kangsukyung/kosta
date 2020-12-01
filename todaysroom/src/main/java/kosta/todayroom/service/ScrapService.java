@@ -16,5 +16,8 @@ public interface ScrapService {
 	
 	//스크랩등록
 	public void ScrapRegister(ScrapVO scrap);
+	
+	//삭제
+	public boolean ScrapRemove(Long scrap_seq);
 
 }

@@ -48,6 +48,7 @@ public class ProductController {
 		log.info("list");
 		
 		model.addAttribute("list", productService.ProductItemGetList());
+		
 	} //end list
 	
 	
@@ -127,6 +128,22 @@ public class ProductController {
 		
 	}
 	
+	@GetMapping("/modify")
+	public void modify(){
+		
+	}
+	
+	@PostMapping("/modify")
+	public String ProductModify(StoreVO store, RedirectAttributes rttr) {
+		log.info("modify:" + store);
+		
+		if(productService.ProductStoreModify(store)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		return "redirect:/product/list";
+	}
+	
 	
 	
 	
@@ -139,16 +156,7 @@ public class ProductController {
 		model.addAttribute("store", productStoreService.ProductStoreRead(store_seq));
 	}
 	
-	@PostMapping("/modify")
-	public String ProductModify(StoreVO store, RedirectAttributes rttr) {
-		log.info("modify:" + store);
-		
-		if(productStoreService.ProductStoreModify(store)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		
-		return "redirect:/product/list";
-	}
+	
 	
 	@PostMapping("/remove")
 	public String ProductRemove(@RequestParam("store_seq") Long store_seq, RedirectAttributes rttr){

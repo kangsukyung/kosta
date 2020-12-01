@@ -15,5 +15,8 @@ public interface ScrapMapper {
 	public List<ScrapVO> ScrapBangList();
 	
 	public void ScrapRegister(ScrapVO scrap);
+	
+	//삭제
+	public int ScrapRemove(Long scrap_seq);
 
 }

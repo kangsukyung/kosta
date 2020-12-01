@@ -274,3 +274,13 @@ text-align: center;
 #select-boxes .nice-select{
 	clear: none !important;
 }
+
+.product_imgList{
+	width: 150px !important;
+    height: 150px !important;
+}
+
+
+#product_card-blog{
+	float: left !important;
+}

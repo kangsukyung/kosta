@@ -56,6 +56,15 @@ public class ScrapServiceImpl implements ScrapService {
 		scrapMapper.ScrapRegister(scrap);
 
 	} //스크랩 등록
+	
+	
+	@Override
+	public boolean ScrapRemove(Long scrap_seq){
+		
+		log.info("ScrapRemove................." + scrap_seq);
+		
+		return scrapMapper.ScrapRemove(scrap_seq) == 1;
+	}
 
 	
 
