@@ -106,12 +106,11 @@
 								<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
 						</form>
 						
-						<form id="modifyForm" class="row login_form" action="/member/modify"  method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
+						<form id="modifyForm" class="row login_form" action="/member/modify?${_csrf.parameterName}=${_csrf.token}"  method="post" enctype="multipart/form-data" onsubmit="return checkForm();">
 							<input type="hidden" name="member_seq" value="${member.member_seq }">
 							<input type="hidden" name="member_id" value="${member.member_id }">
 							<input type="hidden" name="member_path" value="${member.member_path }">
 							<input type="hidden" name="member_profile" value="${member.member_profile }">
-							<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
 							
 							<div class="col-md-12 form-group member_signup"><h5 style="font-size: 15px;float: left;padding-top: 12px;"></h5><input type="text" class="form-control-member_singup" id="member_nickname" name="member_nickname"  placeholder="별명" onfocus="this.placeholder = ''" onblur="this.placeholder = '별명'" value="${member.member_nickname}">
 							<button type="button" class="memberName_btn">중복확인</button></div>

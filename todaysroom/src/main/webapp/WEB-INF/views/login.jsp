@@ -153,7 +153,6 @@ var member_passwordt=$("#member_password");//모달 패스워드
 var check_passwordt=$("#check_password");//모달 패스워드 체크
 var updateMember=document.getElementById("updateMember");
 
-
   $(document).ready(function(){
 	  $("#idFound").click(function() {
 		$(".modal-title").html("아이디 찾기");
@@ -185,14 +184,17 @@ var updateMember=document.getElementById("updateMember");
 		  var id_chek_phone=id_chek_phonet.val();
 		  console.log(id_chek_phone);
 		  if(cerNum==id_chek_phone){
-			  alert("인증번호가 일치합니다");
+			  namet.val("");
+			  id_phonet.val("");
+			  id_chek_phonet.val("");
+			  document.getElementById("modalCloseBtn").click();
+			  alert("아이디는 "+cerName+" 입니다.");
 		  }else{
 			  alert("인증번호가 일치하지 않습니다.");
 		  }
 	  });
 	  
 	  $("#id_phone_sub").click(function() {//아이디 찾기 휴대폰 인증
-		console.log("1");
 		var member_name=namet.val();//모달  이름창
 		var id_phone=id_phonet.val();//모달 아이디 핸드폰번호창
 		
@@ -231,11 +233,15 @@ var updateMember=document.getElementById("updateMember");
 					 });
 					
 				},error : function() {
-                    alert("실패");
+					namet.val("");
+					id_phonet.val("");
+					namet.focus("");
+                    alert("유저정보가 존재하지 않습니다.");
                 }
 			});
 		}else{
 			id_phonet.val("");
+			id_phonet.focus();
 			alert('사용할수없는 휴대폰 번호입니다');	
 		}
 
