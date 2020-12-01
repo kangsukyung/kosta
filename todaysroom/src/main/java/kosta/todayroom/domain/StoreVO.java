@@ -24,6 +24,5 @@ public class StoreVO {
 	
 	private List<ProductVO> productList;
 	
-	
 
 }
