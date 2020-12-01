@@ -11,17 +11,21 @@ insert into product_attach (uuid, uploadpath, filename, image, store_seq)
 </insert>
 
 
+<select id="ProductAttachList" resultType="kosta.todayroom.domain.ProductAttachVO">
+	select * from product_attach
+</select>
+
+<select id="findBySno" resultType="kosta.todayroom.domain.ProductAttachVO">
+
+select * from product_attach where store_seq = #{store_seq}
+
+</select>
 <!-- <delete id="delete">
 
 delete from tbl_attach where uuid = #{uuid}
 
 </delete>
 
-<select id="findByBno" resultType="org.zerock.domain.BoardAttachVO">
-
-select * from tbl_attach where bno = #{bno}
-
-</select>
 
 
 <delete id="deleteAll">

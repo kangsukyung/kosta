@@ -140,7 +140,7 @@
 				            
 				            <div class="col-md-12 form-group">
 								<label id="product_insert_label">분류선택 </label>
-								<div>
+								<div id="select-boxes">
 												<select id="option2" name="store_lcategory" size="1">
 													<option value="">선택해주세요.</option>
 													<option value="living">쇼파/거실가구</option>
@@ -241,6 +241,7 @@
 														 <label id="product_insert_label">상품사진 </label>
 														<input class="form-control" id="product_insert_input" id="gdsImg" name="product_fname" 
 														type="file" placeholder="상품제목을 입력하세요." required="">
+														<input type="hidden" name="product_uuid">
 														<div class="select_img"><img src="" /></div>
 														 
 														 <script>
@@ -563,7 +564,7 @@ $(document).ready(function(e){
 	    	a += "<label id='product_insert_label'>상품사진 </label>";
 	    	a += "<input class='form-control' id='product_insert_input' name='product_fname'" ;
 	    	a += "type='file' id='gdsImg' placeholder='가격을 입력하세요.' required=''></div>";
-	    	
+	    	/* a += "<input type='hidden' name='product_uuid' value='${product.product_uuid }'>"; */
 	    	
 	    	
 	    $("#product_register").append(a);

@@ -55,7 +55,8 @@ public class ProductController {
 	public String ProductRegister(StoreVO store, RedirectAttributes rttr
 			,@RequestParam ("product_name") List<String> product_name
 			,@RequestParam ("product_price") List<Integer> product_price
-			,@RequestParam("product_fname") List<MultipartFile> multipartFile) {
+			,@RequestParam("product_fname") List<MultipartFile> multipartFile
+			,@RequestParam("product_uuid") List<String> product_uuid ){
 		
 		String uploadFolder = "C:\\upload";
 
@@ -71,6 +72,7 @@ public class ProductController {
 			list.add(new ProductVO());
 			list.get(i).setProduct_name(product_name.get(i));
 			list.get(i).setProduct_price(product_price.get(i));
+			//list.get(i).setProduct_uuid(product_uuid.get(i));
 			
 			String uploadFileName = multipartFile.get(i).getOriginalFilename();
 			
@@ -83,6 +85,14 @@ public class ProductController {
 			log.info("only file name: " + uploadFileName);
 
 			UUID uuid = UUID.randomUUID();
+			
+			
+			// uuid담기
+			String productUuid = uuid.toString();
+			
+			System.out.println("productUuid:  "+productUuid);
+			
+			list.get(i).setProduct_uuid(productUuid);
 
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
 
