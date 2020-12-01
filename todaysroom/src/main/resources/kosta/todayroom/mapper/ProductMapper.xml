@@ -18,7 +18,7 @@
 
 <insert id="ProductStoreRegister">
 		insert into store (store_seq, member_seq, store_title, store_content, store_name, store_price)
-		values(SEQ_STORE_STORE_SEQ.nextval, 42, #{store_title}, #{store_content}, #{store_name}, #{store_price})
+		values(SEQ_STORE_STORE_SEQ.nextval, 92, #{store_title}, #{store_content}, #{store_name}, #{store_price})
 </insert>
 
 

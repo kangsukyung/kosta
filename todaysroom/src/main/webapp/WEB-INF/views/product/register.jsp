@@ -168,7 +168,7 @@
 				            
 				            
 				            
-							<div class="product_select">
+							<!-- <div class="product_select">
 								<label id="product_select_label">분류선택 </label>
 								
                               	<select class="product_select_class" name="addressKindU" onchange="addressKindChange(this)">
@@ -182,7 +182,7 @@
                               	<select class="product_select_class" name="addressKindD">
                                 	<option>선택해주세요.</option>
                               	</select>
-                            </div>
+                            </div> -->
                             
                             
 							
