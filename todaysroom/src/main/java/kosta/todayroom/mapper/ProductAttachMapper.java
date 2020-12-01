@@ -11,8 +11,8 @@ public interface ProductAttachMapper {
 
 	public void ProductAttachRemove(String uuid);
 
-	public List<ProductAttachVO> findBySno(Long store_deq);
+	public List<ProductAttachVO> findBySno(Long store_seq);
 	
-	public void ProductAttachRemoveAll(Long store_deq);
+	public void ProductAttachRemoveAll(Long store_seq);
 
 }
