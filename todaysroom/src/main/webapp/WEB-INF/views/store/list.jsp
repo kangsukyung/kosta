@@ -309,7 +309,7 @@
 								<div class="card text-center card-product">
 									<div class="card-product__img">
 										<img class="card-img"
- 											src="/display?fileName=${attach.fileName}" alt="상품이미지"> 
+ 											src="/display?fileName=${attach.uuid }_${attach.fileName}" alt="상품이미지"> 
 										<ul class="card-product__imgOverlay">
 											<li><button>
 													<i class="ti-search"></i>
