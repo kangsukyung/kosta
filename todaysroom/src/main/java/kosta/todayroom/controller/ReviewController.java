@@ -30,11 +30,11 @@ public class ReviewController {
 	@Setter(onMethod_=@Autowired)
 	private ReviewServiceImpl service;
 	
-	@PostMapping(value = "/register", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
+	//리뷰쓰기
+	@PostMapping(value = "/register", consumes = "application/json", produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> reviewRegister(@RequestBody ReviewVO vo) {
 		
 		int insertCount = service.reviewRegister(vo);
-
 		log.info("Reply INSERT COUNT: " + insertCount);
 
 		return insertCount == 1 

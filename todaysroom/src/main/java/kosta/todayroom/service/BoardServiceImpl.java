@@ -2,13 +2,14 @@ package kosta.todayroom.service;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosta.todayroom.domain.BoardAttachVO;
 import kosta.todayroom.domain.BoardVO;
-import kosta.todayroom.domain.Criteria;
+import kosta.todayroom.domain.BoardCriteria;
 import kosta.todayroom.domain.KnowhowVO;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.domain.RoomwarmingVO;
@@ -31,7 +32,7 @@ public class BoardServiceImpl implements BoardService {
 	public void register(BoardVO board) {
 		log.info("======= REGISTER =======");
 		log.info("보드" + board.getBoard_seq());
-		mapper.insert(board);
+		mapper.register(board);
 
 		if (board.getAttachList() == null || board.getAttachList().size() <= 0) {
 			return;
@@ -48,18 +49,18 @@ public class BoardServiceImpl implements BoardService {
 	public void roomRegister(RoomwarmingVO room) {
 		log.info("===== ROOM REGISTER =====");
 
-		mapper.roomWarmingInsert(room);
+		mapper.roomWarmingRegister(room);
 	}
 
 	@Override
 	public void knowhowRegister(KnowhowVO know) {
 		log.info("===== KNOWHOW REGISTER =====");
 
-		mapper.knowhowInsert(know);
+		mapper.knowhowRegister(know);
 	}
 
 	@Override
-	public List<BoardVO> boardList(Criteria cri) {
+	public List<BoardVO> boardList(BoardCriteria cri) {
 
 		log.info("getList..........");
 
@@ -79,7 +80,7 @@ public class BoardServiceImpl implements BoardService {
 
 		log.info("modify.........");
 
-		return mapper.update(board) == 1;
+		return mapper.modify(board) == 1;
 	}
 
 	@Override
@@ -89,17 +90,17 @@ public class BoardServiceImpl implements BoardService {
 		
 		attachMapper.deleteAll(board_seq);
 		
-		return mapper.delete(board_seq) == 1;
+		return mapper.remove(board_seq) == 1;
 	}
 
 	@Override
 	public boolean removeRoom(int board_seq) {
-		return mapper.deleteRoom(board_seq) == 1;
+		return mapper.removeRoom(board_seq) == 1;
 	}
 
 	@Override
 	public boolean removeKnowhow(int board_seq) {
-		return mapper.deleteKnowhow(board_seq) == 1;
+		return mapper.removeKnowhow(board_seq) == 1;
 	}
 
 	@Override
@@ -111,7 +112,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int boardTotalCount(Criteria cri) {
+	public int boardTotalCount(BoardCriteria cri) {
 
 		log.info("boardTotalCount..........");
 
@@ -142,6 +143,17 @@ public class BoardServiceImpl implements BoardService {
 		log.info("read Attach List by board_seq : " + board_seq);
 		
 		return attachMapper.findByBoardSeq(board_seq);
+	}
+
+	@Override
+	public BoardAttachVO readThumbnail(int board_seq, String fileName) {
+		
+		return attachMapper.readThumbnail(board_seq, fileName);
+	}
+
+	@Override
+	public int viewModify(int board_seq) {
+		return mapper.viewModify(board_seq);
 	}
 
 }

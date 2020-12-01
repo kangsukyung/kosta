@@ -2,37 +2,40 @@ package kosta.todayroom.mapper;
 
 import java.util.List;
 
+
 import kosta.todayroom.domain.BoardVO;
-import kosta.todayroom.domain.Criteria;
+import kosta.todayroom.domain.BoardCriteria;
 import kosta.todayroom.domain.KnowhowVO;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.domain.RoomwarmingVO;
 
 public interface BoardMapper {
 	public List<BoardVO> List();
-	public List<BoardVO> ListPaging(Criteria cri);
+	public List<BoardVO> ListPaging(BoardCriteria cri);
 	
 	public RoomwarmingVO roomwarming(int board_seq);
 	public KnowhowVO knowhow(int board_seq);
 	
-	public int insert(BoardVO board);
-	public int roomWarmingInsert(RoomwarmingVO room);
-	public int knowhowInsert(KnowhowVO know);
+	public int register(BoardVO board);
+	public int roomWarmingRegister(RoomwarmingVO room);
+	public int knowhowRegister(KnowhowVO know);
 	
 	
 	public BoardVO read(int board_seq);
-	public int update(BoardVO board);
+	public int modify(BoardVO board);
 //	public int updateRoom(RoomwarmingVO room);
 //	public int updatekNowhow(KnowhowVO knowhow);
 	
-	public int delete(int board_seq);
-	public int deleteRoom(int board_seq);
-	public int deleteKnowhow(int board_seq);
+	public int remove(int board_seq);
+	public int removeRoom(int board_seq);
+	public int removeKnowhow(int board_seq);
 	
 	
 	public List<MemberVO> memberList();
 	public MemberVO member(int member_seq);
 	
-	public int boardTotalCount(Criteria cri);
+	public int boardTotalCount(BoardCriteria cri);
+	
+	public int viewModify(int board_seq);
 	
 }

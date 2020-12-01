@@ -1,6 +1,7 @@
 package kosta.todayroom.security;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +26,26 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException {
-		log.warn("Login Success");
-//		String id=request.getParameter("username");
-//		MemberVO member=service.idCheck(id);
+		response.setContentType("text/html; charset=UTF-8");
 		
-		response.sendRedirect("/member/mypage");
+		log.warn("Login Success");
+		log.warn(auth.getAuthorities());
+		List<String> roleNames=new ArrayList<>();
+		auth.getAuthorities().forEach(authority ->{
+			roleNames.add(authority.getAuthority());
+		});
+		
+		if(roleNames.contains("ROLE_4")){
+			request.getSession().invalidate();
+			response.getWriter().print("<script>alert('비활성계정입니다.'); location.href='/login'</script>");
+		}else if(roleNames.contains("ROLE_0")){
+			request.getSession().invalidate();
+			response.getWriter().print("<script>alert('탈퇴한 회원입니다.'); location.href='/login'</script>");
+		}else{
+			MemberVO member=service.idCheck(request.getParameter("username"));
+			service.countUpdate(member.getMember_seq(), 0);
+			response.getWriter().print("<script>alert('로그인에 성공하셨습니다.'); location.href='/member/mypage'</script>");			
+		}
+		
 	}	
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -20,10 +21,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kosta.todayroom.domain.BoardAttachVO;
+import kosta.todayroom.domain.BoardCriteria;
+import kosta.todayroom.domain.BoardPageDTO;
 import kosta.todayroom.domain.BoardVO;
-import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.KnowhowVO;
-import kosta.todayroom.domain.PageDTO;
 import kosta.todayroom.domain.RoomwarmingVO;
 import kosta.todayroom.service.BoardService;
 import lombok.Setter;
@@ -37,47 +38,57 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("/list")
-	public void BoardList(Criteria cri, Model model) {
+	public void BoardList(BoardCriteria cri, @RequestParam(value="filter", required=false) String filter, @RequestParam(value="roomwarming", required=false) String roomwarming, Model model) {
 		log.info("list..........");
-
+		
+		if (filter != null) {
+			cri.setFilter(filter);
+		}
+		
+		if (roomwarming != null) {
+			cri.setRoomwarming(roomwarming);
+		}
+		
 		model.addAttribute("board", service.boardList(cri));
 
 		int total = service.boardTotalCount(cri);
-
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
+		model.addAttribute("pageMaker", new BoardPageDTO(cri, total));
 
 		model.addAttribute("memberList", service.memberList());
 	}
-
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void BoardRegister() {
 		log.info("register..........");
 	}
 
 	@Transactional
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String BoardRegister(BoardVO board, RoomwarmingVO room, KnowhowVO know, RedirectAttributes rttr) {
 		log.info("========== INSERT ==========");
 		
-//		log.info("register : " + board);
-//
-//		if (board.getAttachList() != null) {
-//			board.getAttachList().forEach(attach -> log.info(attach));
-//		}
-//
-//		log.info("========== INSERT ==========");
-//
-//		service.register(board);
-//
-//		if (room.getRoomwarming_type() != null) {
-//			service.roomRegister(room);
-//		}
-//
-//		if (know.getKnowhow_style() != null) {
-//			service.knowhowRegister(know);
-//		}
-//
-//		rttr.addFlashAttribute("result", board.getBoard_seq());
+		log.info("register : " + board);
+
+		if (board.getAttachList() != null) {
+			board.getAttachList().forEach(attach -> log.info(attach));
+		}
+
+		log.info("========== INSERT ==========");
+
+		service.register(board);
+
+		if (room.getRoomwarming_type() != null) {
+			service.roomRegister(room);
+		}
+
+		if (know.getKnowhow_style() != null) {
+			service.knowhowRegister(know);
+		}
+
+		rttr.addFlashAttribute("result", board.getBoard_seq());
 
 		return "redirect:/board/list";
 	}
@@ -85,6 +96,8 @@ public class BoardController {
 	@GetMapping({ "/read", "/modify" })
 	public void BoardRead(@RequestParam("board_seq") int board_seq, Model model) {
 		log.info("read...........");
+		
+		service.viewModify(board_seq);
 
 		model.addAttribute("member", service.member(board_seq));
 		model.addAttribute("board", service.read(board_seq));
@@ -139,11 +152,20 @@ public class BoardController {
 	@GetMapping(value = "/readAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<BoardAttachVO>> readAttachList(int board_seq) {
-
+	
 		log.info("readAttachList : " + board_seq);
 
 		return new ResponseEntity<>(service.readAttachList(board_seq), HttpStatus.OK);
 	}
+	
+//	public ResponseEntity<BoardAttachVO> readThumbnail(int board_seq, String fileName) {
+//		BoardVO board = new BoardVO();
+//		board = service.read(board_seq);
+//		
+//		fileName = board.getBoard_thumbnail();
+//		
+//		return new ResponseEntity<>(service.readThumbnail(board_seq, fileName), HttpStatus.OK);
+//	}
 
 	// 파일 삭제 처리
 	private void deleteFiles(List<BoardAttachVO> attachList) {
@@ -176,3 +198,4 @@ public class BoardController {
 		});// end foreachd
 	}
 }
+

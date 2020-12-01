@@ -12,4 +12,6 @@ public interface MemberMapper {
 	public int modify(MemberVO member);
 	public int ratingUpdate(@Param("member") int member , @Param("num") int num);
 	public MemberVO Check(int seq);
+	public int countUpdate(@Param("seq") int seq , @Param("num") int num);
+	public MemberVO passwordFound(@Param("member_id")String member_id, @Param("member_phone") String member_phone);
 }

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.todayroom.mapper.ProductMapper">
+
+
+<select id="ProductStoregetList" resultType="kosta.todayroom.domain.StoreVO">
+	select * from store
+</select>
+
+
+<select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
+	select * from product
+</select>
+
+
+
+<insert id="ProductStoreRegister">
+		insert into store (store_seq, member_seq, store_title, store_content, store_name)
+		values(SEQ_STORE_STORE_SEQ.nextval, 42, #{store_title}, #{store_content}, #{store_name})
+</insert>
+
+
+<insert id="ProductItemRegister">
+insert into product(product_seq,store_seq,product_name,product_price)
+select SEQ_PRODUCT_PRODUCT_SEQ.NEXTVAL, SEQ_STORE_STORE_SEQ.CURRVAL, A.* from(
+ <foreach item="item" collection="list" separator="UNION ALL " >
+   select #{item.product_name} as product_name,
+        #{item.product_price} as product_price
+   from dual
+ </foreach>) A
+</insert>
+
+
+
+<select id="ProductStoreRead" resultType="kosta.todayroom.domain.StoreVO">
+	select * from store where store_seq = #{store_seq}
+</select>
+
+<delete id="ProductStoreRemove">
+	delete from store where store_seq = #{store_seq}
+</delete>
+
+<update id="ProductStoreModify">
+	update store
+	set store_title = #{store_title},
+	store_content = #{store_content}
+	where store_seq = #{store_seq}
+</update>
+
+
+
+</mapper>

@@ -160,6 +160,13 @@ public class MemberController {
 		return "redirect:/member/modify";
 	}
 	
+	@PostMapping("/secession")
+	public String secession(@RequestParam("member_seq") int member_seq){
+		log.warn(member_seq);
+		service.ratingUpdate(member_seq, 0);
+		return "/logout";
+	}
+	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getFile(String fileId){
 //		log.info(fileId);
