@@ -16,7 +16,6 @@ public interface BoardAttachMapper {
 	
 	public BoardAttachVO readThumbnail(int board_seq, String fileName);
 	
-//
-//	public List<BoardAttachVO> getOldFiles();
+	public List<BoardAttachVO> getOldFiles();
 
 }

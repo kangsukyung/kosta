@@ -13,13 +13,24 @@
 		<![CDATA[
 		select * 
 		from ( 
-				select /*+ index_desc (board pk_board) */ 
-					rownum rn, board_seq, member_seq, board_title, board_content, board_date, board_picture,
-					board_thumbnail, board_classification, board_views, board_scraps
+				select /*+ index_desc (b pk_board) */ 
+					rownum rn, b.board_seq, b.member_seq, b.board_title, b.board_content, b.board_date, b.board_picture,
+					b.board_thumbnail, b.board_classification, b.board_views, b.board_scraps
 				from 
-					board
-				where ]]>
-				<if test="filter != null">board_classification = #{filter} and</if>
+					board b]]>
+				<choose>
+					<when test="filter == 'bang'">
+						, roomwarming r where b.board_seq = r.board_seq and b.board_classification = #{filter} and
+						<if test="roomwarming != null">r.roomwarming_classification = #{roomwarming} and</if>
+					</when>
+					<when test="filter == 'knowhow'">
+						, knowhow k where b.board_seq = k.board_seq and b.board_classification = #{filter} and
+					</when>
+					<when test="filter == 'qa'">
+						where b.board_classification = #{filter} and
+					</when>
+					<otherwise>where</otherwise>
+				</choose>
 				<![CDATA[
 				rownum <= #{pageNum} * #{amount}
 			)
@@ -28,8 +39,19 @@
 	</select>
 
 	<select id="boardTotalCount" resultType="int">
-		select count(*) from board
-		<if test="filter != null">where board_classification = #{filter}</if>
+		select count(*) from board b
+		<choose>
+			<when test="filter == 'bang'">
+				, roomwarming r where b.board_seq = r.board_seq
+				<if test="roomwarming != null">and r.roomwarming_classification = #{roomwarming}</if>
+			</when>
+			<when test="filter == 'knowhow'">
+				, knowhow k where b.board_seq = k.board_seq
+			</when>
+			<when test="filter == 'qa'">
+				where b.board_classification = 'qa'
+			</when>
+		</choose>
 	</select>
 
 	<insert id="register">
@@ -65,6 +87,10 @@
 		select * from board where board_seq
 		= #{board_seq}
 	</select>
+	
+	<update id="viewModify">
+		update board set board_views = board_views + 1 where board_seq = #{board_seq}
+	</update>
 
 	<update id="modify">
 		update board set board_title = #{board_title},

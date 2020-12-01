@@ -198,7 +198,7 @@
 						<!-- /.row -->
 						<!-- end 파일 업로드 -->
 
-
+						<br><br>
 						<div class="col-md-12 form-group">
 							<input type="text" class="form-control" id="title"
 								name="board_title" placeholder="제목을 입력해주세요." style="width: 882px;
@@ -373,13 +373,13 @@
 						//image type
 						if(obj.image){
 							var fileCallPath = encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-							str += "<li data-path='"+obj.uploadPath+"'"+" style='float: left;width: 33%;'";
+							str += "<li data-path='"+obj.uploadPath+"'"+" style='float: left;width: 33%;height: 300px'";
 							str +=" data-uuid='"+obj.uuid+"' data-filename='"+obj.fileName+"' data-type='"+obj.image+"'"
 							str +" ><div>";
-							str += "<span> "+ obj.fileName+"</span>";
+							str += "<span></span>";
 							str += "<button type='button' data-file=\'"+fileCallPath+"\' "
 							str += "data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-							str += "<img src='/board/display?fileName="+fileCallPath+"'>";
+							str += "<img src='/board/display?fileName="+fileCallPath+"'"+ "style='width: 99%;'" +">";
 							str += "</div>";
 							str +"</li>";
 						}else{
@@ -532,6 +532,27 @@
 			    }); //$.ajax
 			    
 			}
+			
+			//첨부파일 삭제 처리
+			$(".uploadResult").on("click", "button", function(e){
+				console.log("delete file");
+			      
+			    var targetFile = $(this).data("file");
+			    var type = $(this).data("type");
+			    var targetLi = $(this).closest("li");
+			    
+			    $.ajax({
+			      url: '/deleteFile',
+			      data: {fileName: targetFile, type:type},
+			      dataType:'text',
+			      type: 'POST',
+			        success: function(result){
+			           alert(result);
+			           
+			           targetLi.remove();
+			        }
+			    }); //$.ajax
+			});
 
 		});
 	</script>
