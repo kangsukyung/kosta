@@ -303,12 +303,13 @@
 					<!-- Start Best Seller -->
 					<section class="lattest-product-area pb-40 category-list ">
 						<c:forEach items="${list }" var="store">
+							<c:forEach items="${attach }" var="attach">
+								<c:if test="${store.store_seq eq attach.store_seq }">
 							<div class="row row_product_hw col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
 										<img class="card-img"
-<%-- 											src="/display?fileName=${store.store_picture}" alt="상품이미지"> --%>
-											src="#" alt="상품이미지">
+ 											src="/display?fileName=${attach.fileName}" alt="상품이미지"> 
 										<ul class="card-product__imgOverlay">
 											<li><button>
 													<i class="ti-search"></i>
@@ -330,6 +331,8 @@
 									</div>
 								</div>
 							</div>
+								</c:if>	
+							</c:forEach>
 						</c:forEach>
 					</section>
 
