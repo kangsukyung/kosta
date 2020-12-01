@@ -66,11 +66,16 @@
 	<div class="scrap_list">
 	
 		<div class="scrap_1_list">
+				<%-- <c:forEach var="scrap" items="${list2}">
+					<div class="scrap_img">
+						<img alt="글썸네일" src="/display?fileName=${scrap.board.board_thumbnail }">
+						<img alt="글썸네일"
+						src="/board/display?fileName=${scrap.boardAttachList.uuid }_${scrap.boardAttachList.fileName}" alt="상품이미지">
+					</div>
+				</c:forEach>	 --%>
+				
 				<c:forEach var="scrap" items="${list}">
 					<div class="scrap_img">
-						<%-- <img alt="글썸네일" src="/display?fileName=${scrap.board.board_thumbnail }"> --%>
-						<img alt="글썸네일"
-						src="/display?fileName=${scrap.attachList.uuid }_${scrap.attachList.fileName}" alt="상품이미지">
 					</div>
 					<div class="scrap_board_title">
 						<label>${scrap.board.board_title }</label><br>

@@ -26,6 +26,11 @@ public class ScrapController {
 		
 //		model.addAttribute(scrapService.ScrapGetList());
 		model.addAttribute("list", scrapService.ScrapGetList());
+		System.out.println(scrapService.ScrapGetList());
+		
+		log.info("CONTROLLER SCRAP ALL LIST");
+		model.addAttribute("list2", scrapService.ScrapAttachGetList());
+		System.out.println(scrapService.ScrapAttachGetList());
 	} //end list
 	
 	

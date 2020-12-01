@@ -34,6 +34,13 @@ public class ScrapServiceImpl implements ScrapService {
 
 		
 	}
+	
+	@Override
+	public List<ScrapVO> ScrapAttachGetList(){
+		log.info(" --------STORE ATTACH LIST -------");
+		
+		return scrapMapper.ScrapAttachGetList();
+	}
 
 	@Override
 	public List<ScrapVO> ScrapBangList() {

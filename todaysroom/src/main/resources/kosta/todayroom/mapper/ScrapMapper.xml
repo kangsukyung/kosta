@@ -39,6 +39,35 @@
 
 
 
+
+
+
+<resultMap type="kosta.todayroom.domain.ScrapVO" id="scrapMap">
+	<id property="board_seq" column="board_seq"/>
+	<result column="scrap_seq" property="scrap_seq"/>
+	<result column="member_seq" property="member_seq"/>
+	<collection property="boardAttachList" resultMap="boardAttachMap" >
+	</collection>
+</resultMap>
+	
+<resultMap type="kosta.todayroom.domain.BoardAttachVO" id="boardAttachMap">
+	<result property="uuid" column="uuid"/>	
+  	<result property="uploadPath" column="uploadPath"/>	
+  	<result property="fileName" column="fileName"/>	
+  	<result property="fileType" column="fileType"/>
+  	<result property="board_seq" column="board_seq"/>
+</resultMap>
+
+
+<select id="ScrapAttachGetList"  resultMap="Scrap">
+	SELECT *
+  	FROM scrap s
+    INNER JOIN board_attach b
+  	ON s.board_seq = b.board_seq
+   
+</select>
+
+
 <!-- 
 
 <select id="ScrapGetList" resultType="kosta.todayroom.domain.ScrapVO">
