@@ -138,10 +138,10 @@
 								type="text" placeholder="스토어명을 입력하세요." required="">
 				            </div>
 				            
-				            <!-- <div class="col-md-12 form-group">
+				            <div class="col-md-12 form-group">
 								<label id="product_insert_label">분류선택 </label>
 								<div>
-												<select id="option2" name="classification" size="1">
+												<select id="option2" name="store_lcategory" size="1">
 													<option value="">선택해주세요.</option>
 													<option value="living">쇼파/거실가구</option>
 													<option value="bed">침실가구</option>
@@ -152,37 +152,23 @@
 													<option value="table">테이블</option>
 												</select>
 												
-												<select id="ption2" name="classification" size="1">
+												<select id="ption2" name="store_scategory" size="1">
 													<option value="">선택해주세요.</option>
-													<option value="living">쇼파/거실가구</option>
-													<option value="bed">침실가구</option>
+													<option value="living">쇼파</option>
+													<option value="bed">침대</option>
 													<option value="clothes">드레스룸</option>
-													<option value="kitchen">주방가구</option>
+													<option value="kitchen">주방</option>
 													<option value="study">학생/서재가구</option>
-													<option value="receiving">수납가구</option>
+													<option value="receiving">수납</option>
 													<option value="table">테이블</option>
 												</select>
 											
 				            		</div>
-				            </div> -->
+				            </div>
 				            
 				            
 				            
-							<!-- <div class="product_select">
-								<label id="product_select_label">분류선택 </label>
-								
-                              	<select class="product_select_class" name="addressKindU" onchange="addressKindChange(this)">
-                               		<option>주소를 선택하세요</option>
-                                	<option value="a">서울</option>
-                                	<option value="b">경기도</option>
-                                	<option value="c">충청남도</option>
-                              	</select>
-                     
-                            
-                              	<select class="product_select_class" name="addressKindD">
-                                	<option>선택해주세요.</option>
-                              	</select>
-                            </div> -->
+							
                             
                             
 							

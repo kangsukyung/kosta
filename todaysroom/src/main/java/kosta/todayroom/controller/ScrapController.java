@@ -17,9 +17,11 @@ public class ScrapController {
 	
 	@GetMapping("/list")
 	public void list(Model model) {
-		log.info("list");
-		
-		
+		log.info("list");		
 	} //end list
+	
+	
+	
+	
 
 }
