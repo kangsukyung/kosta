@@ -14,6 +14,12 @@ public class LoginController {
 	@GetMapping("/login")
 	public void loginForm(){}
 	
+	@GetMapping("/logint")
+	public String login(){
+		return "/login";
+	}
+	
+	
 	@GetMapping("/logout")
 	public void logout(){}
 }

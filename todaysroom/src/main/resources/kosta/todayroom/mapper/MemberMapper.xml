@@ -62,4 +62,12 @@
 	<select id="passwordFound" parameterType="String" resultType="kosta.todayroom.domain.MemberVO">
 		select * from member where member_id=#{member_id} AND member_phone=#{member_phone}
 	</select>
+	<update id="update" parameterType="String">
+		update member
+		set member_count=0,
+			member_rating=1,
+			member_password=#{password}
+		where member_id=#{member_id}
+	</update>
+	
 </mapper>

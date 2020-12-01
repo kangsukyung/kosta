@@ -11,4 +11,5 @@ public interface MemberService {
 	public int countUpdate(int seq , int num);
 	public int ratingUpdate(int member, int num);
 	public MemberVO passwordFound(String member_id, String member_phone);
+	public int update(String member_id, String member_password);
 }

@@ -76,4 +76,11 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.passwordFound(member_id, member_phone);
 	}
 
+	@Transactional
+	@Override
+	public int update(String member_id, String member_password) {
+		String password=pwdEncoder.encode(member_password);
+		return mapper.update(member_id, password);
+	}
+
 }

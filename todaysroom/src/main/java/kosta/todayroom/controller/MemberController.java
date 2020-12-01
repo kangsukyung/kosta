@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -165,6 +167,24 @@ public class MemberController {
 		log.warn(member_seq);
 		service.ratingUpdate(member_seq, 0);
 		return "/logout";
+	}
+	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	//@RequestParam("memberID") String member_id, @RequestParam("memberPassword") String member_password
+	public String update(HttpServletRequest request,HttpServletResponse response){
+		response.setContentType("text/html; charset=UTF-8");
+		
+		int num=service.update(request.getParameter("memberID"), request.getParameter("memberPassword"));
+		if(num>0){
+			try {
+				response.getWriter().print("<script>alert('변경에 성공하셨습니다'); location.href='/login'</script>");	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			return "redirect:/login";
+		}
+		return null;
 	}
 	
 	@GetMapping("/display")
