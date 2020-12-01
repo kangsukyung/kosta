@@ -79,7 +79,7 @@
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="blog">
 		<div class="container h-100" id="containerH100"
-			style="background-image: url('/main_resource/img/blog/feature-img1.jpg'); background-position: center;">
+			style="background-position: center;">
 			<div class="blog-banner">
 				<div class="text-center" style="background-color: white; opacity:0.7;">
 					<h1>
@@ -176,7 +176,7 @@
 											class="lnr lnr-eye"></i>
 									</a></li>
 									<li>
-										<form action="/Scrap/ScrapInsertAction.do" method="post">
+										<form action="/scrap/register" method="post">
 											<a type="hidden" href="#">${board.board_scraps } Scraps <input
 												type="hidden" name="board_seq" value="${board.board_seq }">
 												<input type="hidden" name="member_seq"
@@ -184,6 +184,7 @@
 												class="lnr lnr-bubble"></i>
 											</a> <input class="button button-blog" type="submit"
 												value="½ºÅ©·¦ÇÏ±â">
+											<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
 										</form>
 									</li>
 								</ul>

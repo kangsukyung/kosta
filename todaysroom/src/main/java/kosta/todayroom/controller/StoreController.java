@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.PageDTO;
+import kosta.todayroom.domain.ProductAttachVO;
 import kosta.todayroom.domain.StoreVO;
+import kosta.todayroom.mapper.StoreMapper;
+import kosta.todayroom.service.ProductAttachServiceImpl;
 import kosta.todayroom.service.StoreServiceImpl;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -30,9 +33,13 @@ public class StoreController {
 	@Setter(onMethod_= @Autowired)
 	private StoreServiceImpl service;
 	
+	@Setter(onMethod_= @Autowired)
+	private ProductAttachServiceImpl attach_service;
+	
 	@GetMapping(value = "/list")
 	public void StoreList(Criteria cri, Model model) {
 		model.addAttribute("list", service.StoreList(cri));
+		model.addAttribute("attach", attach_service.ProductAttachList());
 		
 		cri.setAmount(6);
 		int total = service.getTotal(cri);
@@ -45,6 +52,7 @@ public class StoreController {
 		model.addAttribute("store", service.StoreRead(seq));
 		model.addAttribute("list", service.ProductList(seq));
 		model.addAttribute("store_list", service.StoreListForCategory());
+		model.addAttribute("attach", attach_service.findBySno(seq));		
 	}
 	
 	@ResponseBody

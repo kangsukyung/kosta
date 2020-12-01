@@ -54,6 +54,11 @@
     height: 400px;
 }
 
+.ScrapList{
+	width: 65%;
+    height: 400px;
+}
+
 #ProductList_box{
 	padding: 50px 10px;	
 }
@@ -112,10 +117,39 @@
 }
 
 
+.scrap_list{
+	border: solid;
+    width: 1080px;
+    height: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+	
+}
+
+.scrapList_header{
+text-align: center;
+    margin-top: 100px;
+    }
 
 
+.scrap_img{
+	border: solid;
+    width: 200px;
+    height: 200px;
+	
+}
 
+.scrap_board_title{
+	border: solid;
+    width: 200px;
+}
 
+.scrap_nav a{
+	    margin: 30px;
+}
 
-
-
+.scrap_1_list{
+	float: left;
+    margin: 50px;
+}

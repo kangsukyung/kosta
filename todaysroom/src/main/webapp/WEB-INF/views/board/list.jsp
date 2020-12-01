@@ -57,11 +57,11 @@
 								<li><a href="/board/list" class="d-flex justify-content-between">
 										<p>HOME</p><p><c:if test="${pageMaker.cri.filter eq null }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
-								<li><a href="/board/list?filter=bang" class="d-flex justify-content-between">
-										<p>방들이</p><p><c:if test="${pageMaker.cri.filter eq 'bang' }"><c:out value="${pageMaker.total}"/></c:if></p>
+								<li><a href="/board/list?filter=bang&roomwarming=셀프" class="d-flex justify-content-between">
+										<p>방들이</p><p><c:if test="${pageMaker.cri.roomwarming eq '셀프' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
-								<li><a href="/board/list?filter=bang" class="d-flex justify-content-between">
-										<p>전문가방들이</p><p><c:if test="${pageMaker.cri.filter eq 'bang' }"><c:out value="${pageMaker.total}"/></c:if></p>
+								<li><a href="/board/list?filter=bang&roomwarming=전문가" class="d-flex justify-content-between">
+										<p>전문가방들이</p><p><c:if test="${pageMaker.cri.roomwarming eq '전문가' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
 								<li><a href="/board/list?filter=knowhow" class="d-flex justify-content-between">
 										<p>노하우</p><p><c:if test="${pageMaker.cri.filter eq 'knowhow' }"><c:out value="${pageMaker.total}"/></c:if></p>
@@ -70,7 +70,7 @@
 										<p>질문과답변</p><p><c:if test="${pageMaker.cri.filter eq 'qa' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
 								<li><a href="/board/register" class="d-flex justify-content-between">
-										<p>글 삭제 잠시만 쓸게욤~</p>
+										<p>글 등록 잠시만 쓸게욤~</p>
 								</a></li>
 							</ul>
 						</aside>
@@ -145,7 +145,7 @@
 										</div>
 										<div class="col-md-9">
 											<div class="blog_post">
-												<div class="img_post_plz">
+												<div class="img_post_plz" title="${board.board_seq}">
 												
 												</div>
 												<input class="imgBoardID" type="hidden" name="imgBoardSeq" value="${board.board_seq}">
@@ -157,7 +157,7 @@
 														</h2>
 													</a>
 													<p style="width: 200px; 
-															  text-overflow: ellipsis; 
+															  text-overflow: ellipsis;
 															  white-space: nowrap; 
 															  overflow: hidden; 
 															  display: block;">${board.board_content }</p>
@@ -285,7 +285,7 @@
 									if (str == null || str.length == 0) {
 										var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
 										str = "<img src='/board/display?fileName="+thumbnailPath+"'>";
-										$("input[value='"+key+"']").before(str);
+										$("div[title='"+key+"']").append(str);
 									}
 								}
 							}

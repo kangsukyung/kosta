@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.todayroom.mapper.ScrapMapper">
+
+
+<select id="ScrapGetList" resultType="kosta.todayroom.domain.ScrapVO">
+	select * from scrap
+</select>
+
+
+<insert id="ScrapRegister">
+	insert into scrap values(SEQ_SCRAP_SCRAP_SEQ.nextval, 92, #{board_seq})
+</insert>
+
+<select id="ScrapBangList" resultType="kosta.todayroom.domain.ScrapVO">
+	SELECT *
+  	FROM scrap s
+ 	INNER JOIN board b
+  	ON s.board_seq = b.board_seq
+  	where b.BOARD_CLASSIFICATION = '방들이'
+
+</select>
+
+</mapper>

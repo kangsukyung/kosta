@@ -151,4 +151,9 @@ public class BoardServiceImpl implements BoardService {
 		return attachMapper.readThumbnail(board_seq, fileName);
 	}
 
+	@Override
+	public int viewModify(int board_seq) {
+		return mapper.viewModify(board_seq);
+	}
+
 }

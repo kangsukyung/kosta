@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kosta.todayroom.domain.ContractorVO;
+import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.VendorVO;
 import kosta.todayroom.mapper.BoardMapper;
 import kosta.todayroom.mapper.ContractorMapper;
@@ -53,11 +54,11 @@ public class ContractorServiceImpl implements ContractorService{
 	}
 
 	@Override
-	public LinkedHashMap<Integer, HashMap<String, String>> list() {
+	public LinkedHashMap<Integer, HashMap<String, String>> list(Criteria cri) {
 		// TODO Auto-generated method stub
-		List<ContractorVO> original_list = mapper.list();
-		ContractorVO tempVO = null;
+		List<ContractorVO> original_list = mapper.list(cri);
 		HashMap<String, String> tempMap = null;
+		ContractorVO tempVO = null;
 		int member_seq;
 		LinkedHashMap<Integer, HashMap<String, String>> list = new LinkedHashMap<>();
 		
@@ -71,10 +72,16 @@ public class ContractorServiceImpl implements ContractorService{
 			tempMap.put("member_profile", mapper.readMemberProfile(member_seq));
 			tempMap.put("board_thumbnail", mapper.readBoardThumbnail(member_seq));
 			
-			list.put(member_seq, tempMap);
+			list.put(i, tempMap);	//추후, i를 member_seq로 변경해줄 것.
 		}
 		
 		return list;
+	}
+
+	@Override
+	public int totalCount() {
+		// TODO Auto-generated method stub
+		return mapper.totalCount();
 	}
 
 }
