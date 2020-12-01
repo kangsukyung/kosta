@@ -14,6 +14,7 @@ public class StoreVO {
 	private String store_title;
 	private String store_content;
 	private String store_name;
+	private int store_price;
 	private Date store_date;
 	private String store_lcategory;
 	private String store_scategory;
