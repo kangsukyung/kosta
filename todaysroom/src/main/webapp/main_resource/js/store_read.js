@@ -98,12 +98,17 @@ $(function() {
 
    })
 
+   
+   //요기부터 스토어 추천 리스트 해야함
+   var store_status_count = $(".store_status_count").data("count");
    var store_title = $(".store_title").html();
 	var store_item_category = $(".store_lcategory").html();
 	
    var store_lcategory = $(".store_lcategory").html();
 	var store_size = parseInt($(".store_list_hidden .store_size").html());
 	var list_str = "";
+	
+	//인덱스 1씩 더하면서 비교해야함
 	for (var i = 0; i < store_size; i++) {
 		if(store_lcategory == store_item_category) {
 			list_str += '<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">'
