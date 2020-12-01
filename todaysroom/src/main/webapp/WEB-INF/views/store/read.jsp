@@ -51,9 +51,11 @@
 	<!--================Single Product Area =================-->
 	<div hidden=""  class="store_list_hidden">
 		<c:forEach items="${store_list }" var="store" varStatus="status">
-			<div class="store_title">${store.store_title }${status.count }</div>
-			<div class="store_lcategory">${store.store_lcategory }</div>
-			<div class="store_scategory">${store.store_scategory }</div>
+			<div class="store_status_count" data-count="${status.index }">
+				<div class="store_title">${store.store_title }</div>
+				<div class="store_lcategory">${store.store_lcategory }</div>
+				<div class="store_scategory">${store.store_scategory }</div>
+			</div>
 		</c:forEach>
 			<div class="store_size">${fn:length(store_list) }</div>
 	</div>
@@ -65,8 +67,7 @@
 						<div class="single-prd-item">
 
 							<img class="img-fluid"
-								<%-- src="/display?fileName=${store.store_picture}" alt=""> --%>
-								src="#" alt="">
+								 src="/display?fileName=${attach[0].fileName}" alt="">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -121,8 +122,7 @@
 									<button value="${status.count}" class="production-select-item" id="product_seq" type="button">
 											<div class="production-select-item__index">${status.count }</div>
 											<div class="production-select-item__image">
-												<%-- <img class="image" id="product_image" alt="" src="/display?fileName=${product.product_fname}"> --%>
-												<img class="image" id="product_image" alt="" src="#">
+												<img class="image" id="product_image" alt="" src="/display?fileName=${product.product_fname}">
 											</div>
 											<div class="production-select-item__contents">
 												<span class="production-select-item__contents__name" id="product_name"> ${product.product_name }</span>
@@ -183,6 +183,10 @@
 						data-toggle="modal" data-target="#exampleModal">문의하기</button>
 				</li>
 			</ul>
+			<div class="tab-cotent" id="myTabContent">
+				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">				
+					<img alt="제품상세이미지" src="/display?fileName=${attach[1].fileName}">
+				</div>
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true"
 				data-backdrop="static">
@@ -378,7 +382,9 @@
 							</div>
 						</div>
 					</div>
+					</div>
 				</div>
+			</div>
 			</div>
 	</section>
 	<section>
