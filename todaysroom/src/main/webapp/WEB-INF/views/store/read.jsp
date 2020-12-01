@@ -67,7 +67,7 @@
 						<div class="single-prd-item">
 
 							<img class="img-fluid"
-								 src="/display?fileName=${attach[0].fileName}" alt="">
+								 src="/display?fileName=${attach[0].uuid }_${attach[0].fileName}" alt="">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -122,7 +122,7 @@
 									<button value="${status.count}" class="production-select-item" id="product_seq" type="button">
 											<div class="production-select-item__index">${status.count }</div>
 											<div class="production-select-item__image">
-												<img class="image" id="product_image" alt="" src="/display?fileName=${product.product_fname}">
+												<img class="image" id="product_image" alt="" src="/display?fileName=${product.product_uuid }_${product.product_fname}">
 											</div>
 											<div class="production-select-item__contents">
 												<span class="production-select-item__contents__name" id="product_name"> ${product.product_name }</span>
@@ -185,7 +185,7 @@
 			</ul>
 			<div class="tab-cotent" id="myTabContent">
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">				
-					<img alt="제품상세이미지" src="/display?fileName=${attach[1].fileName}">
+					<img alt="제품상세이미지" src="/display?fileName=${attach[1].uuid }_${attach[1].fileName}">
 				</div>
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true"
