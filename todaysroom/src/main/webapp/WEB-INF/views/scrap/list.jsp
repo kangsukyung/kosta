@@ -66,48 +66,55 @@
 	<div class="scrap_list">
 	
 		<div class="scrap_1_list">
+				<c:forEach var="scrap" items="${list}">
+					<div class="scrap_img">
+						<%-- <img alt="글썸네일" src="/display?fileName=${scrap.board.board_thumbnail }"> --%>
+						<img alt="글썸네일"
+						src="/display?fileName=${scrap.attachList.uuid }_${scrap.attachList.fileName}" alt="상품이미지">
+					</div>
+					<div class="scrap_board_title">
+						<label>${scrap.board.board_title }</label><br>
+					</div>
+				
+				
+				</c:forEach>
 			
-			<div class="scrap_img">
-				사진 올 자리	
-			</div>
-			
-			<div class="scrap_board_title">
-				글 제목 올 자리
-			</div>
+
+		</div>
 
 	</div>
+	
+<%-- 	<div class="desc">
+<c:forEach var="product" items="${list}">
 
-		
-
-
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-	</div>
-        	</div>
-     </section>
-
- <jsp:include page="../footer.jsp"></jsp:include>
+<div id="product_list_in_list">
+<img src="/display?fileName=${product.product_fname}">
+<label id="product_list_index"> 상품번호 : </label>${product.product_seq }<br>
+<label id="product_list_index"> 상품명  : </label>${product.product_name }<br>
+<label id="product_list_index"> 가 격 : </label>${product.product_price }<br>
+											
+<a href="/product/modify?product_seq=<c:out value="${product.product_seq}"/>">수정하기</a>
+<a href="/product/remove?product_seq=<c:out value="${product.product_seq}"/>">삭제하기</a>
+<a href="/product/remove?product_seq=${product.product_seq}">삭제하기</a>
+</div>
+</c:forEach>
+</div> --%>
 
 
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/skrollr.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/nouislider/nouislider.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/mail-script.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+ <jsp:include page="../../footer.jsp"></jsp:include>
+
+
+
 </body>
 </html>

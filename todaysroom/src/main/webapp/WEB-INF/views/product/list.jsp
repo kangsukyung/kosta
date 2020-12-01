@@ -105,8 +105,8 @@
 				<div class="ProductList" id="ProductList_box">
 					<div class="comments-area" id="ProductList_area">
 						<h4>등록한 상품 목록</h4>
-						<sec:authentication property="principal.member" var="member"/>   <!-- 로그인 한 사람 seq -->
-        				<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
+						<%-- <sec:authentication property="principal.member" var="member"/>   <!-- 로그인 한 사람 seq -->
+        				<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${member.member_seq}"> --%>
 						<a href="/product/register">상품추가</a>
 						<div class="single-comment justify-content-between d-flex"
 							id="ProductList_detail">

@@ -25,9 +25,14 @@ public class ScrapServiceImpl implements ScrapService {
 	
 
 	@Override
-	public List<ScrapVO> ScrapgetList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ScrapVO> ScrapGetList() {
+		log.info("--------- STORE ALL LIST ---------");
+		
+		//System.out.println("스크랩목록:     " + scrapMapper.ScrapGetList());
+		
+		return scrapMapper.ScrapGetList();
+
+		
 	}
 
 	@Override

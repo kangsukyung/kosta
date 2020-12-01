@@ -115,6 +115,7 @@ public class ProductController {
 //		log.info("ProductItemRegister: " + product);
 
 		rttr.addFlashAttribute("result", store.getStore_seq());
+		//rttr.addFlashAttribute("result", store.getStore_seq());
 
 		
 		return "redirect:/product/list";

@@ -5,15 +5,55 @@
 <mapper namespace="kosta.todayroom.mapper.ScrapMapper">
 
 
-<select id="ScrapGetList" resultType="kosta.todayroom.domain.ScrapVO">
-	select * from scrap
+
+<!-- <resultMap type="BoardVO" id="Board">
+	<result column="board_seq" property="board_Seq"/>
+	<result column="board_thumbnail" property="board_Thumbnail"/>
+	<result column="board_title" property="board_Title"/>
+</resultMap> -->
+
+<resultMap type="ScrapVO" id="Scrap">
+	<result column="scrap_seq" property="scrap_seq"/>
+	<result column="member_seq" property="member_seq"/>
+	<result column="board_seq" property="board_seq"/>
+	
+	<association property="board" javaType="kosta.todayroom.domain.BoardVO">
+	
+
+	<result column="board_seq" property="board_seq"/>
+	<result column="board_thumbnail" property="board_thumbnail"/>
+	<result column="board_title" property="board_title"/>
+
+	
+	
+	</association>
+</resultMap>
+
+<select id="ScrapGetList"  resultMap="Scrap">
+	SELECT *
+  	FROM scrap s
+    INNER JOIN board b
+  	ON s.board_seq = b.board_seq
+   
 </select>
+
+
+
+<!-- 
+
+<select id="ScrapGetList" resultType="kosta.todayroom.domain.ScrapVO">
+	SELECT b.BOARD_THUMBNAIL, b.BOARD_TITLE
+  	FROM scrap s
+    INNER JOIN board b
+  	ON s.board_seq = b.board_seq
+    where b.board_seq = #{b.board_seq}
+</select> -->
 
 
 <insert id="ScrapRegister">
 	insert into scrap values(SEQ_SCRAP_SCRAP_SEQ.nextval, 92, #{board_seq})
 </insert>
-
+<!-- 
 <select id="ScrapBangList" resultType="kosta.todayroom.domain.ScrapVO">
 	SELECT *
   	FROM scrap s
@@ -21,6 +61,6 @@
   	ON s.board_seq = b.board_seq
   	where b.BOARD_CLASSIFICATION = '방들이'
 
-</select>
+</select> -->
 
 </mapper>

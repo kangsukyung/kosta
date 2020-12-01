@@ -8,5 +8,7 @@ public class ScrapVO {
 	private int scrap_seq;
 	private int board_seq;
 	private int member_seq;
+	
+	private BoardVO board;
 
 }

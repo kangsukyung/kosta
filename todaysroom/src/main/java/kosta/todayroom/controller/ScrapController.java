@@ -22,7 +22,10 @@ public class ScrapController {
 	
 	@GetMapping("/list")
 	public void list(Model model) {
-		log.info("list");		
+		log.info("CONTROLLER SCRAP ALL LIST");
+		
+//		model.addAttribute(scrapService.ScrapGetList());
+		model.addAttribute("list", scrapService.ScrapGetList());
 	} //end list
 	
 	
