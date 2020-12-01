@@ -8,9 +8,13 @@
 /**
  * 
  */
-$(document).ready(function() {
+/*$(document).ready(function() {
   
-	var bnoValue = 11;
+	var bnoValue = $("#comments_board_seq").val();
+	var memValue = $("#comments_member_seq").val();
+	console.log("member_seq : "+memValue);
+	var myMemValue = $("#my_member_seq").val();
+	console.log("my_membr_seq : "+ myMemValue);
 	var replyUL = $(".chat");
 	showList(1);
 	  
@@ -34,7 +38,7 @@ $(document).ready(function() {
 				str +="<div class='single-comment justify-content-between d-flex' data-comments_seq='"+commentsList[i].comments_seq+"'>"
 				str +="		<div class='user justify-content-between d-flex'>"
 				str +="				<div class='thumb'>"
-				str +="					<img src='../../../main_resource/img/blog/c3.jpg' alt=''>"
+				str +="					<img src='C:\\upload\\"+${member_profile}+"' alt=''>"
 				str +="				</div>"
 				str +="				<div class='desc'>"
 				str +="						<h5>"
@@ -95,7 +99,7 @@ $(document).ready(function() {
     	
 	    var comments = {
 	    	  comments_content: modalInputReply.val(),
-	          member_seq:21,
+	          member_seq:$("#my_member_seq").val(),
 	          board_seq:bnoValue
 	    };
 	    CommentsService.commentsRegister(comments, function(result){
@@ -121,8 +125,8 @@ $(document).ready(function() {
     	
     	var comments = {
     			comments_content : $("#insert_content").val(),
-    			board_seq : 11,
-    			member_seq : 21
+    			board_seq : bnoValue,
+    			member_seq : $("#my_member_seq").val()
     	};
     	
     	console.log(comments);
@@ -242,7 +246,7 @@ $(document).ready(function() {
           showList(pageNum);
         }); 
        
-      /* replyPageFooter.on("click","li a", function(e){
+       replyPageFooter.on("click","li a", function(e){
          e.preventDefault();
          console.log("page click");
          
@@ -253,7 +257,7 @@ $(document).ready(function() {
          pageNum = targetPageNum;
          
          showList(pageNum);
-       });  */
+       });  
 	
 	
 	
@@ -303,7 +307,7 @@ var CommentsService = (function(){
 		})
 	}//add함수
 	
-	/*function getList(param, callback, error) {
+	function getList(param, callback, error) {
 		
 		var bno = param.bno;
 		var page = param.page || 1;
@@ -318,7 +322,7 @@ var CommentsService = (function(){
 				error();
 			}
 		});
-	}*/
+	}
 	
 	function getList(param, callback, error) {
 		console.log("getList......");
@@ -431,3 +435,4 @@ var CommentsService = (function(){
 	
 	
 })();
+*/

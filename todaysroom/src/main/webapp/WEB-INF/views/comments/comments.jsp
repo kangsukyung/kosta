@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <script src="../../../main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="../../../main_resource/vendors/skrollr.min.js"></script>
@@ -30,9 +31,28 @@
 
 <div class="comments-area">
 	<h4>Comments</h4>
-	<div class="form-group col-lg-10 col-md-6 name comments_reply_jsb">
+	<div class="form-group col-lg-12 col-md-6 name comments_reply_jsb">
+	
+		<sec:authorize access="isAnonymous()">
 		<form class="comments_register_form">
-			<input type="hidden"  name="${comments.board_seq}" value="${comments.board_seq}">
+			<input type="hidden"  id="comments_board_seq" name="${board.board_seq}" value="${board.board_seq}">
+			<input type="hidden"  id="comments_member_seq" name="${member.member_seq}" value="${member.member_seq}"><!-- 글 쓴 사람 seq -->
+			<%-- <sec:authentication property="principal.member" var="member"/> --%>	<!-- 로그인 한 사람 seq -->
+			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="text" class="form-control" id="insert_content" name="comments_content" 
+					placeholder="댓글내용을 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '댓글을 입력하시려면 로그인 하여 주세요'" onclick="location.href='/login'">
+			<div class="register-reply-btn">
+				<button class="btn primary-btn" id="commentsAddBtn">작성하기</button>
+			</div>
+		</form>
+		</sec:authorize>
+		
+		<sec:authorize access="isAuthenticated()">
+		<form class="comments_register_form">
+			<input type="hidden"  id="comments_board_seq" name="${board.board_seq}" value="${board.board_seq}">
+			<input type="hidden"  id="comments_member_seq" name="comments_member_seq" value="${member.member_seq}"><!-- 글 쓴 사람 seq -->
+			<sec:authentication property="principal.member" var="member"/>	<!-- 로그인 한 사람 seq -->
+			<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
 			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="text" class="form-control" id="insert_content" name="comments_content" 
 					placeholder="댓글내용을 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '댓글내용을 입력해주세요'">
@@ -40,6 +60,7 @@
 				<button class="btn primary-btn" id="commentsAddBtn">작성하기</button>
 			</div>
 		</form>
+		</sec:authorize>
 	</div>
 	<div class="comment-list chat">
 			<!-- <div class="single-comment justify-content-between d-flex">

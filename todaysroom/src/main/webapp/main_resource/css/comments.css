@@ -33,7 +33,7 @@
 }
 
 .thumb img{
-	width : 75% !important;
+	/* width : 75% !important; */
 }
 
 #insert_content{
@@ -43,4 +43,9 @@
 
 .single-comment justify-content-between d-flex{
 	margin-top : 20px;	
+}
+
+#insert_content{
+	float: left;
+    margin-right: 10px;
 }
