@@ -19,6 +19,7 @@ public class BoardCriteria {
   private String keyword;
   
   private String filter;
+  private String roomwarming;
 
   public BoardCriteria() {
     this(1, 10);
@@ -40,7 +41,8 @@ public class BoardCriteria {
 			  .queryParam("amount", this.getAmount())
 			  .queryParam("type", this.getType())
 			  .queryParam("keyword", this.getKeyword())
-			  .queryParam("filter", this.getFilter());
+			  .queryParam("filter", this.getFilter())
+			  .queryParam("roomwarming", this.getRoomwarming());
 	  
 	  return builder.toUriString();
   }

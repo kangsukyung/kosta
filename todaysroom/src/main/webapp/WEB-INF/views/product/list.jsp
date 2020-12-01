@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/ksk_style.css">
 </head>
 <body>	
- 	<jsp:include page="../header.jsp"></jsp:include>
+ 	<jsp:include page="../../header.jsp"></jsp:include>
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
@@ -124,6 +124,7 @@
 																	<c:when
 																		test="${pattern == 'png' || pattern == 'gif' || pattern == 'PNG' }">
 																		<img src="/kosta1200/upload/${head }_small.${pattern}">
+																		<img src="/display?fileName=${product.product_fname}">
 																	</c:when>
 																	<c:otherwise>
 																		<c:out value="NO IMAGE"></c:out>
@@ -132,9 +133,10 @@
 					
 															</c:if> --%>
 										<div id="product_list_in_list">
-											<label>상품번호 : ${product.product_seq }<br></label>
-											 <label>상품명  : ${product.product_name }<br></label>
-											 <label>가 격 : ${product.product_price }<br></label>
+											<%-- <img src="/display?fileName=${product.product_fname}"> --%>
+											<label id="product_list_index"> 상품번호 : </label>${product.product_seq }<br>
+											<label id="product_list_index"> 상품명  : </label>${product.product_name }<br>
+											<label id="product_list_index"> 가 격 : </label>${product.product_price }<br>
 											
 											<a href="/product/modify?product_seq=<c:out value="${product.product_seq}"/>">수정하기</a>
 											<a href="/product/remove?product_seq=<c:out value="${product.product_seq}"/>">삭제하기</a>
@@ -163,17 +165,8 @@
         	</div>
      </section>
 
- <jsp:include page="../footer.jsp"></jsp:include>
+ <jsp:include page="../../footer.jsp"></jsp:include>
 
 
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/skrollr.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/nouislider/nouislider.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/mail-script.js"></script>
-  <script src="${pageContext.request.contextPath}/main_resource/js/main.js"></script>
 </body>
 </html>

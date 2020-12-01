@@ -3,29 +3,51 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kosta.todayroom.mapper.ContractorMapper">
-	
-	
+
+
 	<insert id="register" parameterType="kosta.todayroom.domain.ContractorVO">
-		insert into contractor values(SEQ_CONTRACTOR_CONTRACTOR_SEQ.nextval, #{contractor_bname}, #{contractor_name}, #{contractor_address}, #{member_seq}, #{admin_seq} ) 
+		insert into contractor
+		values(SEQ_CONTRACTOR_CONTRACTOR_SEQ.nextval, #{contractor_bname},
+		#{contractor_name}, #{contractor_address}, #{member_seq}, #{admin_seq}
+		)
 	</insert>
-	
-	<select id="read" parameterType="int" resultType="kosta.todayroom.domain.ContractorVO">
+
+	<select id="read" parameterType="int"
+		resultType="kosta.todayroom.domain.ContractorVO">
 		select * from contractor where member_seq=#{seq}
 	</select>
 	
+	<select id="totalCount" resultType="int">
+		select count(*) from contractor
+	</select>
+
 	<select id="readMemberProfile" parameterType="int" resultType="String">
 		select member_profile from member where MEMBER_SEQ = #{member_seq}
 	</select>
-	
+
 	<select id="readBoardThumbnail" parameterType="int" resultType="String">
-		select board_thumbnail from board where MEMBER_SEQ = #{member_seq}
+		<![CDATA[
+			select board_thumbnail from 
+  				(select rownum r, board_thumbnail from board where MEMBER_SEQ=#{member_seq})
+			where r=1
+		]]>
 	</select>
-	
+
 	<delete id="delete" parameterType="int">
-		delete from contractor where member_seq = #{seq}
+		delete from contractor where
+		member_seq = #{seq}
 	</delete>
-	
+
 	<select id="list" resultType="kosta.todayroom.domain.ContractorVO">
-		select * from contractor order by contractor_seq desc
+	<![CDATA[
+		select rn, contractor_bname, contractor_address, member_seq
+			from (
+				select /*+INDEX_DESC(contractor PK_CONTRACTOR)*/
+				rownum rn, contractor_bname, contractor_address, member_seq
+				from contractor
+				where rownum <= #{pageNum} * #{amount}
+			)
+		where rn> (#{pageNum} -1) * #{amount}
+	]]>
 	</select>
 </mapper>

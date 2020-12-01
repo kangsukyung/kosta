@@ -79,7 +79,7 @@
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="blog">
 		<div class="container h-100" id="containerH100"
-			style="background-image: url('/main_resource/img/blog/feature-img1.jpg'); background-position: center;">
+			style="background-position: center;">
 			<div class="blog-banner">
 				<div class="text-center" style="background-color: white; opacity:0.7;">
 					<h1>

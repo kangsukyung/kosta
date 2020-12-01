@@ -36,4 +36,6 @@ public interface BoardService {
 	
 	public int boardTotalCount(BoardCriteria cri);
 	
+	public int viewModify(int board_seq);
+	
 }
