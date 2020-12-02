@@ -4,8 +4,16 @@ $(function() {
 		
 	})
 	
-/*	var uri = $(".card-img").attr("src");
-	encodeURIComponent(uri);*/
+	$(".card-product__img").each(function(i, obj) {
+		var uploadpath = $(this).find(".uploadpath").val();
+		var uuid = $(this).find(".uuid").val();
+		var filename = $(this).find(".filename").val();
+		
+		var url = encodeURIComponent(uploadpath + "\\" + uuid + "_" + filename);
+		var urlstr = "/product/display?fileName="+url;
+		$(this).find(".card-img").attr("src",urlstr);
+		
+	})
 	
 	$("#allsofa").click(function() {
 		var str = "";

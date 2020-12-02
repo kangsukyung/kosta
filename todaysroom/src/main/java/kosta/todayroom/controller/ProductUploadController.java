@@ -140,9 +140,32 @@ public class ProductUploadController {
 
 		log.info("fileName: " + fileName);
 
-		String uploadFolderPath = getFolder();
+		File file = new File("c:\\upload\\" + fileName);
+
+		log.info("file: " + file);
+
+		ResponseEntity<byte[]> result = null;
+
+		try {
+			HttpHeaders header = new HttpHeaders();
+
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	@GetMapping("/product/display")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFile2(String fileName) {
+
+		log.info("fileName: " + fileName);
 		
-		File file = new File("c:\\upload\\"+ uploadFolderPath+ "\\" + fileName);
+		File file = new File("c:\\upload\\" + fileName);
 
 		log.info("file: " + file);
 

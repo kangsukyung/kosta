@@ -197,8 +197,13 @@
                      <div class="row row_product_hw col-lg-4">
                         <div class="card text-center card-product">
                            <div class="card-product__img">
+                           	<input type="hidden" class="uploadpath"  value="${store.attachList[0].uploadPath }">
+                           	<input type="hidden" class="uuid"  value="${store.attachList[0].uuid }">
+                           	<input type="hidden" class="filename"  value="${store.attachList[0].fileName }">
+<%--                               <img class="card-img"
+ 											src="/product/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지"> --%>
                               <img class="card-img"
- 											src="/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지">
+ 											src="" alt="상품이미지">
                               <ul class="card-product__imgOverlay">
                                  <li><button>
                                        <i class="ti-search"></i>
