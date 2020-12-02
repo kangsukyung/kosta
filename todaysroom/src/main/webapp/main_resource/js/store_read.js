@@ -127,19 +127,4 @@ $(function() {
    
 	$("#recommend_list").append(list_str);
    
-	$('#review').css('display',"none");
-	
-	$('#review-tab').click(function(e) {
-		$('#review-tab').addClass('active');
-		$('#review').css('display',"");
-		$('#home').css('display',"none");
-		$('#home-tab').removeClass('active');
-	});
-	$('#home-tab').click(function(e) {
-		$('#home-tab').addClass('active');
-		$('#home').css('display','');
-		$('#review').css('display',"none");
-		$('#review-tab').removeClass('active');
-	});
-	
 })

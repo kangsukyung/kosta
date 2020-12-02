@@ -10,7 +10,6 @@ $(document).ready(function() {
 		console.log("my member value : "+myMemValue);
 		var reviewMemValue = $("#review_member_seq").val();	//리뷰 쓴 사람의 seq
 		console.log("review_member_seq : "+reviewMemValue);
-		
 		ReviewService.getList({store_seq:store_seq,page: page|| 1 }, function(reviewCnt, reviewList) {
 			
 			console.log("showList - reviewCnt : "+ reviewCnt );
@@ -25,6 +24,9 @@ $(document).ready(function() {
 			if(reviewList == null || reviewList.length == 0){
 				return;
 			}
+			
+			str+="<a class='review_sidebar_alig_jsb'>최신순</a><a class='review_sidebar_alig_jsb'>평점순</a>"
+			
 			for (var i = 0, len = reviewList.length || 0; i < len; i++) {
 				str +="<article class='row blog_item blog_item_jsb'>"
 				str +="	<div class='thumb'>"
@@ -123,10 +125,12 @@ $(document).ready(function() {
 		
 		var review = {
 				review_content : $("#message").val(),
-				shoporder_seq : 24,	//주문내역있어야됨
+				shoporder_seq : 22,	//주문내역있어야됨
 				member_seq : $("#my_member_seq").val(),
 				store_seq : $("#review_store_seq").val(),
-				product_seq : 1	//제품 선택해야됨
+				product_seq : $("#review_store_seq").val(),	//제품 선택해야됨
+				store_seq : $("#review_store_seq").val()
+				
 		};
 		console.log(review);
 		
@@ -210,6 +214,23 @@ $(document).ready(function() {
 	}
 	
 	
+	//----------------------------------store button event------------------------------------------------------
+	
+	$('#review').css('display',"none");
+	
+	$('#review-tab').click(function(e) {
+		$('#review-tab').addClass('active');
+		$('#review').css('display',"");
+		$('#home').css('display',"none");
+		$('#home-tab').removeClass('active');
+	});
+	$('#home-tab').click(function(e) {
+		$('#home-tab').addClass('active');
+		$('#home').css('display','');
+		$('#review').css('display',"none");
+		$('#review-tab').removeClass('active');
+	});
+	
 	
 	//----------------------------------reviewService------------------------------------------------------
 	
@@ -253,13 +274,13 @@ $(document).ready(function() {
 			data : JSON.stringify(review),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
-				console.log("11");
+				console.log("success");
 				if (callback) {
 					callback(result);
 				}
 			},
 			error : function(xhr, status, er) {
-				alert("test1");
+				alert("error!");
 				if (error) {
 					error(er);
 				}
