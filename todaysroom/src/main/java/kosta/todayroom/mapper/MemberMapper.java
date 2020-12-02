@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import kosta.todayroom.domain.BoardAttachVO;
 import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.MemberVO;
 
@@ -21,4 +22,5 @@ public interface MemberMapper {
 	public MemberVO idFound(@Param("member_name")String member_name, @Param("member_phone") String member_phone);
 	public List<BoardVO> MyRoomList(int seq);
 	public List<BoardVO> MyKnowhowList(int seq);
+	public BoardAttachVO readThumbnail(@Param("board_seq")int board_seq, @Param("fileName")String fileName);
 }

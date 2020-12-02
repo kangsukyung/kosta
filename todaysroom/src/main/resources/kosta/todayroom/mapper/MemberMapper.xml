@@ -80,4 +80,7 @@
  	<select id="MyKnowhowList" parameterType="int" resultType="kosta.todayroom.domain.BoardVO">
  		select * from board b, Knowhow k where b.member_seq=#{seq} AND b.board_seq=k.board_seq	
 	</select>
+	<select id="readThumbnail" resultType="kosta.todayroom.domain.BoardAttachVO">
+		select * from board_attach where board_seq = #{board_seq} and filename = #{fileName}
+	</select>
 </mapper>

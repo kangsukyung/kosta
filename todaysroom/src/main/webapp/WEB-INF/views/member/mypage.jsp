@@ -108,26 +108,25 @@
           <section class="lattest-product-area pb-40 category-list">
       	    <div class="filter-bar d-flex flex-wrap align-items-center"><h2>방들이</h2></div>
             <div class="row">
-              <c:forEach items="${room }" var="board" >
+           <c:forEach items="${room}" var="board" >
               <div class="col-md-6 col-lg-4">
                 <div class="card text-center card-product">
- 	                <a href='#?seq=${board.board_seq}'><img class="card-img" src="/board/display?fileName=${room.board_thumbnail}" alt=""></a>
+ 	                <a href='/board/read?board_seq=${board.board_seq}'><img class="card-img" src="/member/displays?fileName=${board.board_thumbnail}&board_seq=${board.board_seq}"  alt=""></a>
                 </div>
               </div>
-              </c:forEach>
-            </div>
+             </c:forEach> 
+        </div>
           </section>
           
           <section class="lattest-product-area pb-40 category-list">
           <div class="filter-bar d-flex flex-wrap align-items-center"><h2>노하우</h2></div>
             <div class="row">
-            <c:forEach items="${knowhow}" var="knowhow" >
+             <c:forEach items="${knowhow}" var="knowhow" >
               <div class="col-md-6 col-lg-4">
                	    <div class="card text-center card-product">
- 	               	 <a href='#?seq=${knowhow.board_seq}'><img class="card-img" src="/kosta1200/upload/${knowhow.board_thumbnail}" alt=""></a>
+ 	               	 <a href='/board/read?board_seq=${knowhow.board_seq}'><img class="card-img" src="/member/displays?fileName=${knowhow.board_thumbnail}&board_seq=${knowhow.board_seq}" alt=""></a>
                 	</div>
                 </div>
-                
                 </c:forEach>
               </div>
             </section>

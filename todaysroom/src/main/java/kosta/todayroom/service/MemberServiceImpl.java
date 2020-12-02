@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kosta.todayroom.domain.BoardAttachVO;
 import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.mapper.MemberMapper;
@@ -99,6 +100,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public List<BoardVO> MyKnowhowList(int seq) {
 		return mapper.MyKnowhowList(seq);
+	}
+
+	@Override
+	public BoardAttachVO readThumbnail(int board_seq, String fileName) {
+		return mapper.readThumbnail(board_seq, fileName);
 	}
 
 }

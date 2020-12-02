@@ -1,6 +1,7 @@
 package kosta.todayroom.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.security.Principal;
@@ -39,10 +40,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kosta.todayroom.domain.BoardAttachVO;
 import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.CustomUser;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.security.CustomUserDetailsService;
+import kosta.todayroom.service.BoardService;
 import kosta.todayroom.service.MemberService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -57,6 +60,9 @@ public class MemberController {
 
 	@Setter(onMethod_ = @Autowired)
 	private HttpServletRequest request;
+	
+	@Setter(onMethod_=@Autowired)
+	private BoardService boardService;
 
 	
 	@GetMapping("/register")
@@ -221,6 +227,31 @@ public class MemberController {
 		}
 		return result;
 	}
+	
+	// 이미지 섬네일 보여주기
+	@GetMapping("/displays")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFiles(@RequestParam("fileName")String fileName, @RequestParam("board_seq") int board_seq) {
+		BoardAttachVO vo=service.readThumbnail(board_seq, fileName);
+		
+		String fileNameing=vo.getUploadPath()+"\\"+vo.getUuid()+"_"+fileName;
+
+		File file = new File("c:\\upload\\" + fileNameing);
+		log.warn(file);
+
+		ResponseEntity<byte[]> result = null;
+
+		try {
+			HttpHeaders header = new HttpHeaders();
+
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 
 
 	private String getFolder() {
