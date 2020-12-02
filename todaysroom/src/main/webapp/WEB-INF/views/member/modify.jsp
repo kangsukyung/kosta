@@ -148,7 +148,7 @@
 		    			<img  id="basicImg" class="author_img rounded-circle mypageUpdate_img" src="/main_resource/img/member_basic.png" alt="" width="200px" height="200">
 					</c:if>
 							<div class="col-md-10 form-group">
-								<input type="file" class="mypageUdate_type" name="profile" id="fileChange" accept=".gif, .jpg, .png" onchange="setThumbnail(event);">
+								<input type="file" class="mypageUdate_type" name="profile" id="fileChange" accept=".gif, .jpg, .png" onchange="setThumbnail(event);" style="display: none;" >
 							</div>
 							
 							<div class="col-md-10 form-group">
@@ -268,7 +268,17 @@
 	        	}
 			});
 	    });
-	});
+		
+		$("#profileImg").click(function(e) {
+			e.preventDefault();
+			$('#fileChange').click();
+		});
+		
+		$("#basicImg").click(function(e) {
+			e.preventDefault();
+			$('#fileChange').click();
+		});
+});
   
 function checkForm() {
 		
@@ -333,41 +343,12 @@ function checkForm() {
 			return false;
 		} 
 	}
-  
-	function imgRead() {
-		var file1=$("#fileChange").val();
-/* 		var fReader=new FileReader();
-		fReader.readAsDataURL(input.files[0]);
-		fReader.onloadend = function(event){
-		    var img = document.getElementById("yourImgTag");
-		    img.src = event.target.result;
-		}
- *///		var file=$("#fileChange").val();
-		console.log(typeof file1);
-		console.log(file1);
-		console.log("1");
-		
-/* 	    $.ajax({
-	        url: '/members/profileUp/'+file,
-	        dataType:'text',
-	        type: 'GET',
-	        success: function(result){
-	             alert(result);
-	             
-	           }
-	      }); */
-	}
   </script>
   <script>
   function setThumbnail(event) { 
 	  console.log(memberProfile);
 	  var reader = new FileReader(); 
 	  reader.onload = function(event) {
-//		  profileImg
-//		  basicImg
-//		  var img = document.createElement("img");
-//		  var img = document.getElementsByClassName("basicImg");
-//		  console.log(imgProfilex);
 		  if(memberProfile==''){
 			  var img = document.getElementById("basicImg"); 
 			  img.setAttribute("src", event.target.result); 
@@ -376,8 +357,6 @@ function checkForm() {
 		  	  var img = document.getElementById("profileImg"); 
 		  	  img.setAttribute("src", event.target.result); 
 		  }
-//		  document.querySelector("div#image_container").appendChild(img); 
-//		  document.querySelector("div#image_container").append(img); 
 		}
 	 reader.readAsDataURL(event.target.files[0]); 
   }
