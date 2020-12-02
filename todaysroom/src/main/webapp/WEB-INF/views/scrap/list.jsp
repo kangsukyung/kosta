@@ -76,15 +76,28 @@
 
 
           
-        <c:forEach var="scrap" items="${list}">
-          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
+          <div class="cc">
             <div class="card card-blog" id="product_card-blog">
 
-		              <div class="card-blog__img">
-		                <img class="card-img rounded-0" src="/board/display?fileName=s_${scrap.boardAttachList[0].uuid}_${scrap.boardAttachList[0].fileName}">
-		              </div>
+        <c:forEach var="scrap1" items="${list}">
 	          		<c:forEach var="scrap" items="${list2}">
+	          			<c:if test="${scrap1.boardAttachList[1].board_seq eq scrap.board.board_seq }">
+	          			<div class="scrapTest1">
+			              <div class="test1">
+			              	<input type="hidden" name="uploadpath" value="${scrap1.boardAttachList[1].uploadPath }">
+			              	<input type="hidden" name="uuid" value="${scrap1.boardAttachList[1].uuid }">
+			              	<input type="hidden" name="fileName" value="${scrap1.boardAttachList[1].fileName }">
+			              	
+			              	
+			              	
+			              </div>
+       
+       
+       
 		              <div class="card-body">
+		              <div class="card-blog__img">
+		                <img class="card-img rounded-0" id="scrap_img_thumbnail" src="">
+		              </div>
 		                <ul class="card-blog__info">
 		                  <li><a href="#">스크랩번호 </a></li>
 		                  <li><a href="#"><i class="ti-comments-smiley"></i> ${scrap.scrap_seq }</a></li>
@@ -93,18 +106,21 @@
 		                <p>${product.product_price }</p>
 		                <a class="card-blog__link" href='/scrap/remove?scrap_seq=<c:out value="${scrap.scrap_seq }"/>'>삭제하기 
 		                <i class="ti-arrow-right"></i></a>
+		                <input type="hidden" name="board_seq" value="${scrap.board.board_seq }">
 		              </div>
+		              </div>
+		              </c:if>
 	           		</c:forEach>
+       </c:forEach>
+		              </div>
 
             </div>
         </div>
-       </c:forEach>
 
 
 
  
 
-      </div>
     </section>
 	
 	
@@ -112,6 +128,9 @@
 	
 	
 	
+	<div class="board_thumbnail">
+	
+	</div>
 	
 	
 	
@@ -127,34 +146,33 @@
 	
 	
 	
-	
-	<div class="scrap_list">
+	<%-- <div class="scrap_list">
 	
 		<div class="scrap_1_list">
-				<%-- <c:forEach var="scrap" items="${list2}">
+				<c:forEach var="scrap" items="${list2}">
 					<div class="scrap_img">
 						<img alt="글썸네일" src="/display?fileName=${scrap.board.board_thumbnail }">
 						<img alt="글썸네일"
 						src="/board/display?fileName=${scrap.boardAttachList.uuid }_${scrap.boardAttachList.fileName}" alt="상품이미지">
 					</div>
-				</c:forEach>	 --%>
+				</c:forEach>	
 			
 			<!-- <div class="scrap_Alist"> -->
 	
-				<%-- 	<div class="scrap_img">
+					<div class="scrap_img">
 						<c:forEach var="scrap" items="${list}">
 							<img class="card-img"
  							src="/board/display?fileName=s_${scrap.boardAttachList.uuid}_${scrap.boardAttachList.fileName}">
 							<label>${scrap.board.board_title }</label>
 						</c:forEach>
-					</div> --%>
+					</div>
 					
 						<c:forEach var="scrap" items="${list}">
 							<div class="TEST">
 							<div class="scrap_img">
 								<img src="/board/display?fileName=s_${scrap.boardAttachList[0].uuid}_${scrap.boardAttachList[0].fileName}">
-	 							<%-- <c:out value="${scrap.boardAttachList[0].uuid}">uuid</c:out> --%>
-	 							<%-- <c:out value="${scrap.boardAttachList[0].fileName}">파일네임</c:out> --%>
+	 							<c:out value="${scrap.boardAttachList[0].uuid}">uuid</c:out>
+	 							<c:out value="${scrap.boardAttachList[0].fileName}">파일네임</c:out>
 							</div>
 							</div>
 						</c:forEach>
@@ -172,6 +190,7 @@
 		</div>
 
 	</div>
+	 --%>
 	
 	
 	
@@ -187,15 +206,60 @@
 	
 	
 	
-	
+<script>
 
+//var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
+
+$(document).ready(function() {
+	
+// 	var board_seq = $("input[name='board_seq']").get();
+	
+// 	console.log("======");
+	
+// 	$(board_seq).each(function(i, board_seq) {
+		
+// 		$.getJSON("/board/readAttachList", {board_seq : board_seq.value}, function(arr) {
+// 			$(arr).each(function(i, attach) {
+				
+// 					var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
+// 					str = "<img src='/board/display?fileName="+thumbnailPath+"'>";
+// 					$(".card-body").prepend(str);
+	
+// 			});
+			
+// 			str = "";
+// 		});
+			
+// 	})
+	
+// 	console.log("======");
+	
+	
+	$(".scrapTest1").each(function(i, obj) {
+		var uploadpath = $(this).find("input[name='uploadpath']").val();
+		var uuid = $(this).find("input[name='uuid']").val();
+		var filename = $(this).find("input[name='fileName']").val();
+		
+		var url = encodeURIComponent(uploadpath + "\\s_" + uuid + "_" + filename);
+		
+		var urlstr = "/board/display?fileName="+url;
+		
+		console.log(urlstr);
+		
+		
+		$(this).find("#scrap_img_thumbnail").attr("src", urlstr);
+	})
+	
+	
+})
+
+</script>
 
 
 
 
 
  <jsp:include page="../../footer.jsp"></jsp:include>
-
 
 
 </body>

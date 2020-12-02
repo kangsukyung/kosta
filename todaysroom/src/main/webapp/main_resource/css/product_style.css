@@ -281,6 +281,20 @@ text-align: center;
 }
 
 
-#product_card-blog{
-	float: left !important;
+
+
+.ccc{
+	flex : none !important;
+	max-width : none !important;
+} 
+
+section.blog{
+	width: 75%;
+}
+
+.card-blog{
+	width:33% !important;
+	display:inline-block !important;
+	padding-right: 5px !important;
+	max-width : none !important;
 }

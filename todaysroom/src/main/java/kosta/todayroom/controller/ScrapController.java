@@ -1,5 +1,9 @@
 package kosta.todayroom.controller;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kosta.todayroom.domain.BoardAttachVO;
+import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.ScrapVO;
 import kosta.todayroom.service.ScrapService;
 import lombok.AllArgsConstructor;
@@ -34,6 +40,22 @@ public class ScrapController {
 		model.addAttribute(scrapService.ScrapGetList());
 		model.addAttribute("list2", scrapService.ScrapGetList());
 		System.out.println(scrapService.ScrapGetList());
+		
+		/*List<ScrapVO> list1 = scrapService.ScrapAttachGetList();
+		List<ScrapVO> list2 = scrapService.ScrapGetList();
+		
+		LinkedHashMap<ScrapVO, ScrapVO> trueList = new LinkedHashMap<>();
+		
+		for(int i=0; i<list1.size(); i++){
+			ScrapVO temp1 = list1.get(i);
+			ScrapVO temp2 = list2.get(i);
+			
+			trueList.put(temp1, temp2);
+		}
+		
+		model.addAttribute("list", trueList);*/
+		
+		
 	} //end list
 	
 	

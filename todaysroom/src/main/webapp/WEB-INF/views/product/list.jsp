@@ -34,10 +34,10 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/main_resource/css/member_mypage.css">
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/main_resource/css/ksk_style.css">
+	href="${pageContext.request.contextPath}/main_resource/css/product_style.css">
 </head>
 <body>
-	<jsp:include page="../../header.jsp"></jsp:include>
+	<%@include file="../includes/header.jsp"%>
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
@@ -196,16 +196,19 @@
         <div class="section-intro pb-60px">
           <p>My Store</p>
           <h2>todayRoom's <span class="section-intro__style">My STORE</span></h2>
+						<sec:authentication property="principal.member" var="member"/>   <!-- 로그인 한 사람 seq -->
+        				<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
+						<a href="/product/register">상품추가</a>
         </div>
-
-
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+	
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 ccc">
           
           <c:forEach var="product" items="${list}">
           
             <div class="card card-blog" id="product_card-blog">
               <div class="card-blog__img">
-                <img class="card-img rounded-0" src="/display?fileName=${product.product_uuid }_${product.product_fname}">
+                <img class="card-img rounded-0" src="/product/display?fileName=${product.product_uuid }_${product.product_fname}">
+                <%-- <c:out value="${product.product_uuid }_${product.product_fname}"></c:out> --%>
               </div>
               <div class="card-body">
                 <ul class="card-blog__info">
@@ -340,7 +343,7 @@
 		</div>
 	</section>
 
-	<jsp:include page="../../footer.jsp"></jsp:include>
+	<%@include file="../includes/footer.jsp"%>
 
 
 </body>

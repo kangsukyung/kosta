@@ -2,6 +2,7 @@ package kosta.todayroom.service;
 
 import java.util.List;
 
+import kosta.todayroom.domain.ProductAttachVO;
 import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.domain.StoreVO;
 
@@ -16,6 +17,8 @@ public interface ProductService {
 
 	public List<StoreVO> ProductStoreGetList();
 	public List<ProductVO> ProductItemGetList();
+	
+	
 	
 	
 	
