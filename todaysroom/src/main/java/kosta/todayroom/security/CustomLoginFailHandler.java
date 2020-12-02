@@ -31,11 +31,19 @@ public class CustomLoginFailHandler implements AuthenticationFailureHandler {
 			member = service.idCheck(request.getParameter("username"));
 			if (member == null) {
 				response.getWriter().print("<script>alert('로그인에 실패하셧습니다'); location.href='/login'; </script>");
-				//"+"passfound"+".click();
 			}
 		} catch (Exception e) {
 			log.error(e);
 		}
+		
+		try {
+			if(member.getMember_rating().equals("0")){
+				response.getWriter().print("<script>alert('탈퇴회원입니다.'); location.href='/login?num=2'</script>");
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}
+		
 		int count=member.getMember_count()+1;
 		if(member.getMember_count()<5){
 			service.countUpdate(member.getMember_seq(), count);

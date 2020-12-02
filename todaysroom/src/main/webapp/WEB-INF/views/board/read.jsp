@@ -71,7 +71,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<section>
-		<%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
+		<%@include file="../includes/header.jsp"%>
 	</section>
 	<!--================ End Header Menu Area =================-->
 
@@ -109,7 +109,7 @@
 					<ul class="blog_meta list" id="blog_meta-list-member">
 						<li class="li_fixed_style"><a href="#"
 							class="blog_meta_list_a"> <i class="lnr lnr-user"></i>
-								<div class="blog_meta_list_div">${member.member_name }</div>
+								<div class="blog_meta_list_div">${bmember.member_name }</div>
 
 						</a></li>
 						<li class="li_fixed_style"><a href="#"
@@ -166,7 +166,7 @@
 									<a href="#">Politics,</a> <a href="#">Lifestyle</a>
 								</div>
 								<ul class="blog_meta list">
-									<li><a href="#">${member.member_name } <i
+									<li><a href="#">${bmember.member_name } <i
 											class="lnr lnr-user"></i>
 									</a></li>
 									<li><a href="#"><fmt:formatDate
@@ -307,7 +307,7 @@
 
 	<!--================ Start footer Area  =================-->
 	<section>
-		<%--  	<jsp:include page="../footer.jsp"></jsp:include> --%>
+		<%@include file="../includes/footer.jsp"%>
 	</section>
 	<!--================ End footer Area  =================-->
 
