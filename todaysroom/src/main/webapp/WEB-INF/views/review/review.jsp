@@ -27,6 +27,11 @@
 </head>
 <body>
 	<!-- modal start -->
+	<!-- 필요한 input들(?) -->
+	<input type="hidden"  id="review_store_seq" name="${store.store_seq}" value="${store.store_seq}">
+	<input type="hidden" id="review_member_seq" name="review_member_seq" value="${member.member_seq}"><!-- 글 쓴 사람 seq? -->
+	<sec:authentication property="principal.member" var="member"/>	<!-- 로그인 한 사람 seq? -->
+	<input type="hidden" id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
 	<div id="my_modal">
 	    <div class="review-modal__title">
 			리뷰작성
@@ -83,9 +88,16 @@
 			<div class="review_sidebar_count_jsb" >
 				<h4 >리뷰  ${reviewCnt}</h4>
 			</div>
-			<div class="review_sidebar_button_jsb">
-				<a id="popup_open_btn">리뷰쓰기</a>
-			</div>
+			<sec:authorize access="isAnonymous()">
+				<div class="review_sidebar_button_jsb">
+					<a id="popup_open_btn" onclick="location.href='/login'">로그인 후 리뷰쓰기</a>
+				</div>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<div class="review_sidebar_button_jsb">
+					<a id="popup_open_btn">리뷰쓰기</a>
+				</div>
+			</sec:authorize>
 			<!-- <div class="review_sidebar_select_jsb">
 	                 <div class="nice-select" tabindex="0"><span class="current">상품옵션</span>
 	                  <ul class="list">
@@ -97,7 +109,6 @@
 	                 </div>
 	   		</div> -->
 	        <div class="blog_left_sidebar">
-	        	<!-- <a class="review_sidebar_alig_jsb">추천순</a> -->
 	        	<a class="review_sidebar_alig_jsb">최신순</a>
 	        	<a class="review_sidebar_alig_jsb">평점순</a>
 	        	<!-- review list 시작 -->
