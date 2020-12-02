@@ -29,7 +29,7 @@
 </head>
 <body>
 <section>
-<%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
+<%@include file="../includes/header.jsp"%>
 </section>
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
@@ -260,7 +260,7 @@
 
 
 <section>
-<%--  	<jsp:include page="../footer.jsp"></jsp:include> --%>
+<%@include file="../includes/footer.jsp"%>
 </section>
 
 

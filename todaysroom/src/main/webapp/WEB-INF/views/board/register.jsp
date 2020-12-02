@@ -94,7 +94,7 @@
 
 	</style>
 <body>
-	<section> <%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
+	<section><%@include file="../includes/header.jsp"%>
 	</section>
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="category">
@@ -238,7 +238,7 @@
 	<!--================End Login Box Area =================-->
 
 
-	<section> <%--  	<jsp:include page="../footer.jsp"></jsp:include> --%>
+	<section> <%@include file="../includes/footer.jsp"%>
 	</section>
 
 	<script type="text/javascript">

@@ -50,7 +50,7 @@
 </head>
 
 <body>
-
+<%@include file="../includes/header.jsp"%>
 	<div id="wrapper">
 
 		<div id="page-wrapper" style="margin: 0 0 0 0; min-height: auto;">
@@ -278,7 +278,7 @@
 					"aria-expanded", 'false').attr("style", "height:1px");
 		});
 	</script>
-
+<%@include file="../includes/footer.jsp"%>
 </body>
 
 </html>

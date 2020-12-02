@@ -104,6 +104,7 @@
 
 </style>
 <body>
+<%@include file="../includes/header.jsp"%>
 	<section> <%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
 	</section>
 	<!-- ================ start banner area ================= -->
@@ -163,7 +164,7 @@
 	<!--================End Login Box Area =================-->
 
 
-	<section> </section>
+	<section> <%@include file="../includes/footer.jsp"%></section>
 
 
 </body>

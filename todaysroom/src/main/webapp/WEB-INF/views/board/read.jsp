@@ -71,7 +71,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<section>
-		<%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
+		<%@include file="../includes/header.jsp"%>
 	</section>
 	<!--================ End Header Menu Area =================-->
 
@@ -306,7 +306,7 @@
 
 	<!--================ Start footer Area  =================-->
 	<section>
-		<%--  	<jsp:include page="../footer.jsp"></jsp:include> --%>
+		<%@include file="../includes/footer.jsp"%>
 	</section>
 	<!--================ End footer Area  =================-->
 
