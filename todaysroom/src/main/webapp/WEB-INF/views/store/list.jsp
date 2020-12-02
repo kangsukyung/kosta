@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -28,9 +28,9 @@
 <link rel="stylesheet" href="../../main_resource/css/style.css">
 <link rel="stylesheet" href="../../main_resource/css/store.css">
 </head>
+<%@include file="../includes/header.jsp"%>
 <body>
 	<!--================ Start Header Menu Area =================-->
-	<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
 	<!--================ End Header Menu Area =================-->
 
 	<!-- ================ start banner area ================= -->
@@ -301,16 +301,14 @@
 					</div>
 					<!-- End Filter Bar -->
 					<!-- Start Best Seller -->
-					<section class="lattest-product-area pb-40 category-list ">
+<%-- 					<section class="lattest-product-area pb-40 category-list ">
 						<c:forEach items="${list }" var="store">
-							<c:set var="loop_flag" value="false" />
-							<c:forEach items="${attach }" var="attach">
-								<c:if test="${store.store_seq eq attach.store_seq and (not loop_flag) }">
+				
 							<div class="row row_product_hw col-lg-4">
 								<div class="card text-center card-product">
 									<div class="card-product__img">
 										<img class="card-img"
- 											src="/display?fileName=${attach.uuid }_${attach.fileName}" alt="상품이미지"> 
+ 											src="/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지"> 
 										<ul class="card-product__imgOverlay">
 											<li><button>
 													<i class="ti-search"></i>
@@ -325,19 +323,45 @@
 									</div>
 									<div class="card-body">
 										<p>${store.store_date }</p>
-										<%-- <td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td> --%>
+										<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td>
 										<h4 class="card-product__title">
 											<a href="/store/read?store_seq=${store.store_seq}">${store.store_title }</a>
 										</h4>
 									</div>
 								</div>
 							</div>
-								<c:set var="loop_flag" value="true" />
-								</c:if>	
-							</c:forEach>
 						</c:forEach>
-					</section>
-
+					</section> --%>
+			<section class="lattest-product-area pb-40 category-list ">
+                  <c:forEach items="${list }" var="store">
+                     <div class="row row_product_hw col-lg-4">
+                        <div class="card text-center card-product">
+                           <div class="card-product__img">
+                              <img class="card-img"
+ 											src="/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지">
+                              <ul class="card-product__imgOverlay">
+                                 <li><button>
+                                       <i class="ti-search"></i>
+                                    </button></li>
+                                 <li><button>
+                                       <i class="ti-shopping-cart"></i>
+                                    </button></li>
+                                 <li><button>
+                                       <i class="ti-heart"></i>
+                                    </button></li>
+                              </ul>
+                           </div>
+                           <div class="card-body">
+                              <p>${store.store_date }</p>
+                              <%-- <td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td> --%>
+                              <h4 class="card-product__title">
+                                 <a href="/store/read?store_seq=${store.store_seq}">${store.store_title }</a>
+                              </h4>
+                           </div>
+                        </div>
+                     </div>
+                  </c:forEach>
+               </section>			
 					<!-- End Best Seller -->
 				</div>
 			</div>
@@ -387,7 +411,7 @@
 
 
 	<!--================ Start footer Area  =================-->
-	<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
+	<%@include file="../includes/footer.jsp"%>
 	<!--================ End footer Area  =================-->
 
 

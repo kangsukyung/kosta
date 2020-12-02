@@ -1,11 +1,15 @@
 package kosta.todayroom.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kosta.todayroom.domain.BoardAttachVO;
+import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.mapper.MemberMapper;
 import lombok.AllArgsConstructor;
@@ -74,6 +78,33 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public MemberVO passwordFound(String member_id, String member_phone) {
 		return mapper.passwordFound(member_id, member_phone);
+	}
+
+	@Transactional
+	@Override
+	public int update(String member_id, String member_password) {
+		String password=pwdEncoder.encode(member_password);
+		return mapper.update(member_id, password);
+	}
+
+	@Override
+	public MemberVO idFound(String member_name, String member_phone) {
+		return mapper.idFound(member_name, member_phone);
+	}
+
+	@Override
+	public List<BoardVO> MyRoomList(int seq) {
+		return mapper.MyRoomList(seq);
+	}
+
+	@Override
+	public List<BoardVO> MyKnowhowList(int seq) {
+		return mapper.MyKnowhowList(seq);
+	}
+
+	@Override
+	public BoardAttachVO readThumbnail(int board_seq, String fileName) {
+		return mapper.readThumbnail(board_seq, fileName);
 	}
 
 }
