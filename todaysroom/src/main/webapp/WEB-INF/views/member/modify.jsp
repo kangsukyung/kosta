@@ -137,7 +137,7 @@
 						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
 						<c:choose>
 							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-	    			          	<img class="author_img rounded-circle mypageUpdate_img" src="/member/display?fileId=${member.member_id}" alt="" width="200px" height="200">
+	    			          	<img id="profileImg"  class="author_img rounded-circle mypageUpdate_img" src="/member/display?fileId=${member.member_id}" alt="" width="200px" height="200">
 							</c:when>
 							<c:otherwise>
 								<c:out value="NO IMAGE"></c:out>
@@ -145,10 +145,10 @@
 						</c:choose>					
 					</c:if>
 					<c:if test="${member.member_profile ==null}">
-		    			<img class="author_img rounded-circle mypageUpdate_img" src="/main_resource/img/member_basic.png" alt="" width="200px" height="200">
+		    			<img  id="basicImg" class="author_img rounded-circle mypageUpdate_img" src="/main_resource/img/member_basic.png" alt="" width="200px" height="200">
 					</c:if>
 							<div class="col-md-10 form-group">
-								<input type="file" class="mypageUdate_type" name="profile" id="fileChange" accept=".gif, .jpg, .png">
+								<input type="file" class="mypageUdate_type" name="profile" id="fileChange" accept=".gif, .jpg, .png" onchange="setThumbnail(event);">
 							</div>
 							
 							<div class="col-md-10 form-group">
@@ -186,6 +186,8 @@
   var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
   var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;// 휴대폰 번호 정규식
 
+  var memberProfile = "<c:out value='${member.member_profile}'/>";
+  
   $(document).ready(function name() {
 	 $("#memberSecession").click(function() {
 		  if (confirm("회원탈퇴하시겠습니까?") == true){  
@@ -355,7 +357,32 @@ function checkForm() {
 	           }
 	      }); */
 	}
-
   </script>
+  <script>
+  function setThumbnail(event) { 
+	  console.log(memberProfile);
+	  var reader = new FileReader(); 
+	  reader.onload = function(event) {
+//		  profileImg
+//		  basicImg
+//		  var img = document.createElement("img");
+//		  var img = document.getElementsByClassName("basicImg");
+//		  console.log(imgProfilex);
+		  if(memberProfile==''){
+			  var img = document.getElementById("basicImg"); 
+			  img.setAttribute("src", event.target.result); 
+		  }else{
+			  console.log("1");
+		  	  var img = document.getElementById("profileImg"); 
+		  	  img.setAttribute("src", event.target.result); 
+		  }
+//		  document.querySelector("div#image_container").appendChild(img); 
+//		  document.querySelector("div#image_container").append(img); 
+		}
+	 reader.readAsDataURL(event.target.files[0]); 
+  }
+  </script>
+
+
 </body>
 </html>

@@ -106,22 +106,22 @@
         
         <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">
-      	    <div class="filter-bar d-flex flex-wrap align-items-center"><h2>방들이</h2></div>
-            <div class="row">
-           <c:forEach items="${room}" var="board" >
-              <div class="col-md-6 col-lg-4">
+      	    <div class="filter-bar d-flex flex-wrap align-items-center"><h2>방들이</h2><a id="roomclick" href="#" style="color: blue;margin-left: 80%;">더보기</a></div>
+            <div class="row" id="myRoom" style="display:none;">
+           <c:forEach items="${room}" var="board">
+              <div class="col-md-6 col-lg-4" >
                 <div class="card text-center card-product">
  	                <a href='/board/read?board_seq=${board.board_seq}'><img class="card-img" src="/member/displays?fileName=${board.board_thumbnail}&board_seq=${board.board_seq}"  alt=""></a>
                 </div>
               </div>
              </c:forEach> 
-        </div>
+        	</div>
           </section>
           
           <section class="lattest-product-area pb-40 category-list">
-          <div class="filter-bar d-flex flex-wrap align-items-center"><h2>노하우</h2></div>
-            <div class="row">
-             <c:forEach items="${knowhow}" var="knowhow" >
+          <div class="filter-bar d-flex flex-wrap align-items-center"><h2>노하우</h2><a id="knowHowclick" href="#" style="color: blue;margin-left: 80%;">더보기</a></div>
+            <div class="row" id="myKnowhow" style="display: none">
+             <c:forEach items="${knowhow}" var="knowhow">
               <div class="col-md-6 col-lg-4">
                	    <div class="card text-center card-product">
  	               	 <a href='/board/read?board_seq=${knowhow.board_seq}'><img class="card-img" src="/member/displays?fileName=${knowhow.board_thumbnail}&board_seq=${knowhow.board_seq}" alt=""></a>
@@ -137,5 +137,36 @@
      </section>
 
 	<%@include file="../includes/footer.jsp"%>
+	<script>
+	var myRoom=document.getElementById("myRoom");
+	var myKnowhow=document.getElementById("myKnowhow");
+	
+	$(document).ready(function() {
+		 $("#roomclick").click(function(e) {
+			 e.preventDefault();
+			 
+			 if($("#roomclick").text()=="더보기"){
+				 $("#roomclick").text("숨기기");
+				 myRoom.style.display="inline-flex";
+			 }else{
+				 $("#roomclick").text("더보기");
+				 myRoom.style.display="none";
+			 }
+		 });
+		 
+		 $("#knowHowclick").click(function(e) {
+			 e.preventDefault();
+			 
+			 if($("#knowHowclick").text()=="더보기"){
+				 $("#knowHowclick").text("숨기기");
+				 myKnowhow.style.display="inline-flex";
+			 }else{
+				 $("#knowHowclick").text("더보기");
+				 myKnowhow.style.display="none";
+			 }
+		 });
+	});
+	
+	</script>
 </body>
 </html>

@@ -128,6 +128,7 @@
 		</form>
       
 		<%@include file="includes/footer.jsp"%>
+		
 <script>
 
 var modal=$(".modal");
@@ -366,7 +367,8 @@ var updateMember=document.getElementById("updateMember");
   </script>
   <script>
   window.onload = function () {
-		if( ${ratingNum} == "1"){
+	  var ratingNum="<c:out value='${ratingNum}'/>";
+		if( ratingNum == "1"){
 			if(confirm("계정을 활성화시키겠습니까?")){
 				document.getElementById("passwordFound").click();
 			}
