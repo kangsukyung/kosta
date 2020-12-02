@@ -7,9 +7,10 @@ $(function() {
 	
 	$("#allsofa").click(function() {
 		var str = "";
+		var category = "";
 		$(".lattest-product-area").empty();
 		
-		$.getJSON("/store/pages/" + "test_lcategory2" + "/" + "1" + ".json", function(data) {
+		$.getJSON("/store/pages/" + "sofa" + "/" + "1" + ".json", function(data) {
 			$.each(data, function(i, item) {
 				str += '<div class="row row_product_hw col-lg-4">'
 				+'<div class="card text-center card-product">'

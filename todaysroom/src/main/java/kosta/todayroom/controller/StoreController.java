@@ -39,7 +39,7 @@ public class StoreController {
 	@GetMapping(value = "/list")
 	public void StoreList(Criteria cri, Model model) {
 		model.addAttribute("list", service.StoreList(cri));
-		model.addAttribute("attach", attach_service.ProductAttachList());
+//		model.addAttribute("attach", attach_service.ProductAttachList());
 		
 		cri.setAmount(6);
 		int total = service.getTotal(cri);
