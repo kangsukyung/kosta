@@ -158,9 +158,13 @@ $(document).ready(function() {
 	//-----------------------------modal-----------------------------------------------------------
 	//모달
 
-	var modal = "";
+	//var modal = "";
 
-
+	$('#popup_open_btn').on('click', function() {
+	    // 모달창 띄우기
+	    modal('#my_modal');
+	    $("html, body").css("overflow",'hidden');
+	});
 
 
 	function modal(id) {
@@ -205,11 +209,7 @@ $(document).ready(function() {
 	    });
 	}
 	
-	$('#popup_open_btn').on('click', function() {
-	    // 모달창 띄우기
-	    modal('#my_modal');
-	    $("html, body").css("overflow",'hidden');
-	});
+	
 	
 	//----------------------------------reviewService------------------------------------------------------
 	
