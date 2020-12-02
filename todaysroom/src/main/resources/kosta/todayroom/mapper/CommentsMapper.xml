@@ -8,29 +8,43 @@
 	<!-- <select id="commentsList" resultType="kosta.todayroom.domain.CommentsVO">
 		select * from comments
 	</select> -->
-	
-	<!-- 댓글 조회(+페이징) -->
-	<select id="commentsList" resultType="kosta.todayroom.domain.CommentsVO">
-
- 	 <![CDATA[
-		 select comments_seq, board_seq, comments_content, member_seq, comments_date,comments_update
+	<!-- 
+	select comments_seq, board_seq, comments_content, member_seq, comments_date, comments_update
 		 from 
 		   (
 		    select /*+INDEX(comments idx_comments) */
 		      rownum rn,  comments_seq, board_seq, comments_content, member_seq, comments_date, comments_update
 		    from comments
-		    where board_seq =  #{board_seq}
+		    where board_seq = #{board_seq}
+		    and comments_seq > 0
+		    and rownum <= #{cri.pageNum} * #{cri.amount}
+		    order by comments_seq desc
+		   ) where rn > (#{cri.pageNum} -1) * #{cri.amount} 
+	-->
+	
+	<!-- 댓글 조회(+페이징) -->
+	<select id="commentsList" resultType="kosta.todayroom.domain.CommentsVO">
+
+ 	 <![CDATA[
+		 select comments_seq, board_seq, comments_content, member_seq, comments_date, comments_update
+		 from 
+		   (
+		    select /*+ INDEX_desc(comments idx_comments) */
+		      rownum rn,  comments_seq, board_seq, comments_content, member_seq, comments_date, comments_update
+		    from comments
+		    where board_seq = #{board_seq}
 		    and comments_seq > 0
 		    and rownum <= #{cri.pageNum} * #{cri.amount}
 		   ) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		  
 	]]>
 	
 	</select>
 	
 	<!-- 댓글 쓰기 -->
 	<insert id="commentsRegister" parameterType="kosta.todayroom.domain.CommentsVO">
-		insert into comments(comments_seq, comments_content, board_seq, member_seq, admin_seq, comments_date, comments_update) 
-		values(seq_comments_comments_seq.nextval, #{comments_content},#{board_seq},#{member_seq},#{admin_seq}, sysdate, null)
+		insert into comments(comments_seq, comments_content, board_seq, member_seq, comments_date, comments_update) 
+		values(seq_comments_comments_seq.nextval, #{comments_content},#{board_seq},#{member_seq}, sysdate, null)
 	</insert>
 	
 	<!-- 댓글 한개에 대한 디테일 -->

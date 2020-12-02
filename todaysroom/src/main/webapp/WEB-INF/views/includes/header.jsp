@@ -20,6 +20,9 @@
     
 </head>
 <body>
+	<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.member" var="member"/>
+	</sec:authorize>
 	<header class="header_area">
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">

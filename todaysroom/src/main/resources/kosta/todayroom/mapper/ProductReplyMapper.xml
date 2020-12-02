@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kosta.todayroom.mapper.ProductReplyMapper">
+
+	<select id="list" resultType="kosta.todayroom.domain.ProductInquiryVO">
+		<![CDATA[
+		select * from (
+		  select /*+ index_desc(product_inquiry pk_pi) */
+		    rownum rn, pi_seq, pi_type, pi_content, pi_answer, product_seq, member_seq
+		  from product_inquiry
+		  where]]>
+		  
+		  <if test="result == 'no_answer'">
+		  	pi_answer is null and
+		  </if>
+		  
+		  <if test="result == 'yes_answer'">
+		  	pi_answer is not null and
+		  </if>
+		  
+		  <![CDATA[
+		   rownum <= #{pageNum} * #{amount}
+			)
+		where rn > (#{pageNum} -1 ) * #{amount}
+		]]>
+	</select>
+	
+	<select id="piTotalCount" resultType="int">
+		select count(*) from product_inquiry
+		<if test="result == 'no_answer'">where pi_answer is null</if>
+		<if test="result == 'yes_answer'">where pi_answer is not null</if>
+		
+	</select>
+	
+	<select id="read" resultType="kosta.todayroom.domain.ProductInquiryVO">
+		select * from product_inquiry where pi_seq = #{pi_seq}
+	</select>
+	
+	<update id="modify">
+		update product_inquiry set pi_answer = #{pi_answer} where pi_seq = #{pi_seq}
+	</update>
+	
+	<delete id="remove">
+		delete product_inquiry where pi_seq = #{pi_seq}
+	</delete>
+</mapper>

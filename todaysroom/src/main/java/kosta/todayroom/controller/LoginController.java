@@ -17,7 +17,7 @@ public class LoginController {
 	@GetMapping("/login")
 	public void loginForm(@Param("num") String num, Model model){
 		try {
-			if(num.equals("1")){
+			if(num.equals("1")|| num.equals("2")){
 				model.addAttribute("ratingNum", num);
 			}
 		} catch (Exception e) {

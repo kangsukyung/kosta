@@ -87,9 +87,9 @@
           <div class="sidebar-filter">
             <div class="top-filter-head" style="margin-bottom: 10px;">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
-					<li><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do" class="d-flex justify-content-between"><p>프로필</p></a></li>
-					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
-					<li><a href="/member/modify" class="d-flex justify-content-between"><p>설정</p></a></li>
+					<li><a href="/member/mypage" class="d-flex justify-content-between"><p>마이페이지</p></a></li>
+					<li><a href="/productInquiry/list" class="d-flex justify-content-between"><p>상품문의목록</p></a></li>
+					<li><a href="/member/modify" class="d-flex justify-content-between"><p>유저정보 수정</p></a></li>
 					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
 						<li><a href="/contractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
 					</sec:authorize>
@@ -97,7 +97,7 @@
 						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_2')">
-						<li><a href="${pageContext.request.contextPath}/Product/ProductListAction.do" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+						<li><a href="/product/list" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
 					</sec:authorize>
 				</ul>
           </div>

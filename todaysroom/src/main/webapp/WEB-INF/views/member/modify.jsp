@@ -37,8 +37,8 @@
 					<h1>마이페이지</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do">마이페이지</a></li>
-              <li class="breadcrumb-item active" aria-current="page">설정</li>
+              <li class="breadcrumb-item"><a href="/member/mypage">마이페이지</a></li>
+              <li class="breadcrumb-item active" aria-current="page">유저정보 수정</li>
             </ol>
           </nav>
 				</div>
@@ -78,8 +78,8 @@
 							<h4 style=" padding-top: 10px;">${member.member_nickname}님 프로필</h4>
 							<div class="social_icon">
 							<br>	
-								<a href="#"> <i class="ti-heart"> 좋아요</i></a> 
-								<a href="#"> <i class="fab fa-twitter"> 팔로잉</i></a> 
+								<a href="/scrap/list"> <i class="ti-heart"> 스크랩</i></a> 
+								<a href="/follow/list"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
 					</div>
             </ul>
@@ -87,14 +87,18 @@
           <div class="sidebar-filter">
             <div class="top-filter-head">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
-					<li><a href="/member/mypage"><p>프로필</p></a></li>
-					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
-					<li><a href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do" class="d-flex justify-content-between"><p>설정</p></a></li>
-					<li><a href="${pageContext.request.contextPath}/Member/ConstractorSignup_form.do" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
-					<li><a href="${pageContext.request.contextPath}/Member/VendorSignup_form.do" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
-					<c:if test="${member.member_rating eq '2' }">
-					<li><a href="${pageContext.request.contextPath}/Product/ProductListAction.do" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
-					</c:if>
+					<li><a href="/member/mypage" class="d-flex justify-content-between"><p>마이페이지</p></a></li>
+					<li><a href="/productInquiry/list" class="d-flex justify-content-between"><p>상품문의목록</p></a></li>
+					<li><a href="/member/modify" class="d-flex justify-content-between"><p>유저정보 수정</p></a></li>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
+						<li><a href="/contractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_3')">
+						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_2')">
+						<li><a href="/product/list" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+					</sec:authorize>
 				</ul>
           </div>
         </div>
@@ -137,7 +141,7 @@
 						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
 						<c:choose>
 							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-	    			          	<img class="author_img rounded-circle mypageUpdate_img" src="/member/display?fileId=${member.member_id}" alt="" width="200px" height="200">
+	    			          	<img id="profileImg"  class="author_img rounded-circle mypageUpdate_img" src="/member/display?fileId=${member.member_id}" alt="" width="200px" height="200">
 							</c:when>
 							<c:otherwise>
 								<c:out value="NO IMAGE"></c:out>
@@ -145,10 +149,10 @@
 						</c:choose>					
 					</c:if>
 					<c:if test="${member.member_profile ==null}">
-		    			<img class="author_img rounded-circle mypageUpdate_img" src="/main_resource/img/member_basic.png" alt="" width="200px" height="200">
+		    			<img  id="basicImg" class="author_img rounded-circle mypageUpdate_img" src="/main_resource/img/member_basic.png" alt="" width="200px" height="200">
 					</c:if>
 							<div class="col-md-10 form-group">
-								<input type="file" class="mypageUdate_type" name="profile" id="fileChange" accept=".gif, .jpg, .png">
+								<input type="file" class="mypageUdate_type" name="profile" id="fileChange" accept=".gif, .jpg, .png" onchange="setThumbnail(event);" style="display: none;" >
 							</div>
 							
 							<div class="col-md-10 form-group">
@@ -186,6 +190,8 @@
   var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
   var phoneJ = /^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/;// 휴대폰 번호 정규식
 
+  var memberProfile = "<c:out value='${member.member_profile}'/>";
+  
   $(document).ready(function name() {
 	 $("#memberSecession").click(function() {
 		  if (confirm("회원탈퇴하시겠습니까?") == true){  
@@ -266,7 +272,17 @@
 	        	}
 			});
 	    });
-	});
+		
+		$("#profileImg").click(function(e) {
+			e.preventDefault();
+			$('#fileChange').click();
+		});
+		
+		$("#basicImg").click(function(e) {
+			e.preventDefault();
+			$('#fileChange').click();
+		});
+});
   
 function checkForm() {
 		
@@ -331,31 +347,25 @@ function checkForm() {
 			return false;
 		} 
 	}
-  
-	function imgRead() {
-		var file1=$("#fileChange").val();
-/* 		var fReader=new FileReader();
-		fReader.readAsDataURL(input.files[0]);
-		fReader.onloadend = function(event){
-		    var img = document.getElementById("yourImgTag");
-		    img.src = event.target.result;
-		}
- *///		var file=$("#fileChange").val();
-		console.log(typeof file1);
-		console.log(file1);
-		console.log("1");
-		
-/* 	    $.ajax({
-	        url: '/members/profileUp/'+file,
-	        dataType:'text',
-	        type: 'GET',
-	        success: function(result){
-	             alert(result);
-	             
-	           }
-	      }); */
-	}
-
   </script>
+  <script>
+  function setThumbnail(event) { 
+	  console.log(memberProfile);
+	  var reader = new FileReader(); 
+	  reader.onload = function(event) {
+		  if(memberProfile==''){
+			  var img = document.getElementById("basicImg"); 
+			  img.setAttribute("src", event.target.result); 
+		  }else{
+			  console.log("1");
+		  	  var img = document.getElementById("profileImg"); 
+		  	  img.setAttribute("src", event.target.result); 
+		  }
+		}
+	 reader.readAsDataURL(event.target.files[0]); 
+  }
+  </script>
+
+
 </body>
 </html>

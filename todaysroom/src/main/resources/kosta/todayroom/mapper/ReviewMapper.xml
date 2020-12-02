@@ -9,11 +9,8 @@
 		select * from review
 	</select> -->
 	
-	<!-- 리뷰 조회(+페이징) -->
-	<select id="reviewList" resultType="kosta.todayroom.domain.ReviewVO">
-
- 	 <![CDATA[
-		 select review_seq, member_seq, store_seq, review_date, review_content
+	
+	<!--  select review_seq, member_seq, store_seq, review_date, review_content
 		 from 
 		   (
 		    select /*+INDEX(review idx_review) */
@@ -22,7 +19,19 @@
 		    where store_seq =  #{store_seq}
 		    and review_seq > 0
 		    and rownum <= #{cri.pageNum} * #{cri.amount}
-		   ) where rn > (#{cri.pageNum} -1) * #{cri.amount}
+		   ) where rn > (#{cri.pageNum} -1) * #{cri.amount} -->
+		   
+		   
+	<!-- 리뷰 조회(+페이징) -->
+	<select id="reviewList" resultType="kosta.todayroom.domain.ReviewVO">
+
+ 	 <![CDATA[
+		
+		   
+		 select review_seq, member_seq, store_seq, review_date, review_content
+		 from review
+		 where review_seq > 0
+		 order by review_seq desc
 	]]>
 	
 	</select>

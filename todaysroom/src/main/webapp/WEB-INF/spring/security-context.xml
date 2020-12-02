@@ -21,8 +21,25 @@
 			access="permitAll"/>
 		<security:intercept-url pattern="/board/list"
 			access="permitAll"/>
+			
 		<security:intercept-url pattern="/board/register"
 			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		<security:intercept-url pattern="/scrap/list "
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		<security:intercept-url pattern="/follow/list"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+							
+		<security:intercept-url pattern="/productInquiry/*"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			
+		<security:intercept-url pattern="/basket/*"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			
+		<security:intercept-url pattern="/product/register"
+			access="hasRole('ROLE_2')"/>
+		<security:intercept-url pattern="/product/list"
+			access="hasRole('ROLE_2')"/>
+			
 		<security:intercept-url pattern="/member/mypage"
 			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
 		<security:intercept-url pattern="/member/users"

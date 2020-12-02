@@ -172,12 +172,12 @@
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item"><a class="nav-link" id="home-tab"
+				<li class="nav-item"><a class="nav-link active" id="home-tab"
 					data-toggle="tab" href="#home" role="tab" aria-controls="home"
-					aria-selected="true">제품 상세</a></li>
-				<li class="nav-item"><a class="nav-link active" id="review-tab"
+					aria-selected="false">제품 상세</a></li>
+				<li class="nav-item"><a class="nav-link" id="review-tab"
 					data-toggle="tab" href="#review" role="tab" aria-controls="review"
-					aria-selected="false">리뷰</a></li>
+					aria-selected="true">리뷰</a></li>
 				<li>
 					<button type="button" class="btn btn-primary" id="inquiry-button"
 						data-toggle="modal" data-target="#exampleModal">문의하기</button>
@@ -187,60 +187,62 @@
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">				
 					<img alt="제품상세이미지" src="/display?fileName=${attach[1].uuid }_${attach[1].fileName}">
 				</div>
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-				aria-labelledby="exampleModalLabel" aria-hidden="true"
-				data-backdrop="static">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title" id="exampleModalLabel">상품 문의하기</h4>
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<form id="my-form" me>
-								<div class="btn-group btn-group-toggle" data-toggle="buttons">
-									<label class="btn btn-default btn-lg"> <input
-										type="radio" name="pi_type" value="product"> 상품
-									</label> <label class="btn btn-default btn-lg"> <input
-										type="radio" name="pi_type" value="shipping"> 배송
-									</label> <label class="btn btn-default btn-lg"> <input
-										type="radio" name="pi_type" value="return"> 반품
-									</label> <label class="btn btn-default btn-lg"> <input
-										type="radio" name="pi_type" value="exchange"> 교환
-									</label> <label class="btn btn-default btn-lg"> <input
-										type="radio" name="pi_type" value="refund"> 환불
-									</label> <label class="btn btn-default btn-lg"> <input
-										type="radio" name="pi_type" value="etc"> 기타
-									</label>
-								</div>
-								<div class="form-group">
-									<label for="message-text" class="control-label">문의내용</label>
-									<textarea class="form-control" id="message-text"
-										name="pi_content"></textarea>
-								</div>
-								<input hidden="hidden" name="member_seq" value="1">
-								<!-- value 값 추후 조정 필요 -->
-								<input hidden="hidden" name="product_seq" value="1">
-							</form>
-							<div>문의내용에 대한 답변은 ‘마이페이지 &gt; 나의 쇼핑 &gt; 나의 문의내역’ 또는 ‘상품
-								상세페이지’에서 확인 가능합니다.</div>
-						</div>
-						<div class="modal-footer">
-							<button type="submit" form="my-form" class="btn btn-primary"
-								id="inquiry-submit">문의하기</button>
+				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">	
+					<jsp:include page="../review/review.jsp"></jsp:include>
+				</div>
+				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+					aria-labelledby="exampleModalLabel" aria-hidden="true"
+					data-backdrop="static">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="exampleModalLabel">상품 문의하기</h4>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form id="my-form" me>
+									<div class="btn-group btn-group-toggle" data-toggle="buttons">
+										<label class="btn btn-default btn-lg"> <input
+											type="radio" name="pi_type" value="product"> 상품
+										</label> <label class="btn btn-default btn-lg"> <input
+											type="radio" name="pi_type" value="shipping"> 배송
+										</label> <label class="btn btn-default btn-lg"> <input
+											type="radio" name="pi_type" value="return"> 반품
+										</label> <label class="btn btn-default btn-lg"> <input
+											type="radio" name="pi_type" value="exchange"> 교환
+										</label> <label class="btn btn-default btn-lg"> <input
+											type="radio" name="pi_type" value="refund"> 환불
+										</label> <label class="btn btn-default btn-lg"> <input
+											type="radio" name="pi_type" value="etc"> 기타
+										</label>
+									</div>
+									<div class="form-group">
+										<label for="message-text" class="control-label">문의내용</label>
+										<textarea class="form-control" id="message-text"
+											name="pi_content"></textarea>
+									</div>
+									<input hidden="hidden" name="member_seq" value="1">
+									<!-- value 값 추후 조정 필요 -->
+									<input hidden="hidden" name="product_seq" value="1">
+								</form>
+								<div>문의내용에 대한 답변은 ‘마이페이지 &gt; 나의 쇼핑 &gt; 나의 문의내역’ 또는 ‘상품
+									상세페이지’에서 확인 가능합니다.</div>
+							</div>
+							<div class="modal-footer">
+								<button type="submit" form="my-form" class="btn btn-primary"
+									id="inquiry-submit">문의하기</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="tab-content" id="myTabContent">
+			<%-- <div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade" id="home" role="tabpanel"
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
-<%-- 				<jsp:include page="../review/review.jsp"></jsp:include> --%>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
@@ -383,12 +385,12 @@
 						</div>
 					</div>
 					</div>
-				</div>
+				</div> --%>
 			</div>
 			</div>
 	</section>
 	<section>
-	<jsp:include page="../review/review.jsp"></jsp:include>
+	<%-- <jsp:include page="../review/review.jsp"></jsp:include> --%>
 	</section>
 	<!--================End Product Description Area =================-->
 	
