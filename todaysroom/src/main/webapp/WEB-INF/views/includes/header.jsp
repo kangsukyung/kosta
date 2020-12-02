@@ -73,7 +73,7 @@
               </li>
             </ul>
             <ul class="nav-shop">
-              <li class="nav-item" id="hw-search"><form id="hw-searchbar" action=""><input name="keyword" placeholder="검색어 입력"></form><button><i class="ti-search"></i></button></li>
+              <li class="nav-item" id="hw-search"><form id="hw-searchbar" action=""><input name="keyword" placeholder="검색어 입력"></form><button><i class="ti-search" id="hw-search-icon"></i></button></li>
               <li class="nav-item" id="hw-shopping-cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
 	
 		<sec:authorize access="isAuthenticated()">
@@ -96,13 +96,14 @@
   </header>
   
   <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/main_resource/js/jquery-ui.js"></script>
   <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="/main_resource/vendors/skrollr.min.js"></script>
   <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
   <script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
   <script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
   <script src="/main_resource/vendors/mail-script.js"></script>
-  <script src="/main_resource/js/main.js"></script>
+  <script src="/main_resource/js/main.js"></script>  
   <script src="/main_resource/js/header.js"></script>
   <script>
   $(document).ready(function(e){
@@ -113,7 +114,8 @@
 	      return;
 	  }
    });
-  })
+  
+  });
   </script>
 </body>
 </html>
