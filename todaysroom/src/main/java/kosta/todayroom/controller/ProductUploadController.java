@@ -142,7 +142,7 @@ public class ProductUploadController {
 
 		String uploadFolderPath = getFolder();
 		
-		File file = new File("c:\\upload\\" + uploadFolderPath +"\\"+ fileName);
+		File file = new File("c:\\upload\\"+ uploadFolderPath+ "\\" + fileName);
 
 		log.info("file: " + file);
 

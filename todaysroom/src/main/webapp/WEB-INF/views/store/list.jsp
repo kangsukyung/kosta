@@ -62,7 +62,7 @@
 					<div class="sidebar-categories">
 						<section class="commerce-category-list">
 							<h2 class="commerce-category-list__title">
-								<a href="/store/category?category=0">가구</a>
+								<a href="/store/list?pageNum=1&amount=12">가구</a>
 							</h2>
 							<ul class="commerce-category-tree commerce-category-list__categories">
 								<li class="commerce-category-tree__entry">
@@ -80,49 +80,12 @@
 									<div class="open expanded" style="overflow: hidden;">
 										<ul
 											class="commerce-category-tree commerce-category-tree__entry__children">
-											<li class="commerce-category-tree__entry hidden"><div
+											<li class="commerce-category-tree__entry hidden" id="sofa"><div
 													class="commerce-category-tree__entry__header">
 													<a class="commerce-category-tree__entry__title" id="sofa"
 														href="#">소파</a>
-													<button class="commerce-category-tree__entry__expand open"
-														title="펼치기" type="button">
-														<svg class="icon" width="12" height="12"
-															fill="currentColor" viewBox="0 0 12 12"
-															preserveAspectRatio="xMidYMid meet">
-															<path
-																d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-													</button>
 												</div>
-												<div class="open expanded" style="overflow: hidden;">
-													<ul
-														class="commerce-category-tree commerce-category-tree__entry__children">
-														<li class="commerce-category-tree__entry"><div
-																class="commerce-category-tree__entry__header">
-																<a class="commerce-category-tree__entry__title" id="normalsofa"
-																	href="/store/category?category=0_1_0_3">일반소파</a>
-															</div></li>
-														<li class="commerce-category-tree__entry"><div
-																class="commerce-category-tree__entry__header">
-																<a class="commerce-category-tree__entry__title" id="binsofa"
-																	href="/store/category?category=0_1_0_4">빈백소파</a>
-															</div></li>
-														<li class="commerce-category-tree__entry"><div
-																class="commerce-category-tree__entry__header">
-																<a class="commerce-category-tree__entry__title" id="jwasofa"
-																	href="/store/category?category=0_1_0_5">좌식소파</a>
-															</div></li>
-														<li class="commerce-category-tree__entry"><div
-																class="commerce-category-tree__entry__header">
-																<a class="commerce-category-tree__entry__title" id="bedsofa"
-																	href="/store/category?category=0_1_0_6">소파베드</a>
-															</div></li>
-														<li class="commerce-category-tree__entry"><div
-																class="commerce-category-tree__entry__header">
-																<a class="commerce-category-tree__entry__title" id="stoolsofa"
-																	href="/store/category?category=0_1_0_7">소파스툴</a>
-															</div></li>
-													</ul>
-												</div></li>
+												</li>
 											<li class="commerce-category-tree__entry hidden"><div
 													class="commerce-category-tree__entry__header">
 													<a class="commerce-category-tree__entry__title"
@@ -132,14 +95,6 @@
 													class="commerce-category-tree__entry__header">
 													<a class="commerce-category-tree__entry__title"
 														href="/store/category?category=0_1_7">거실수납장/TV장</a>
-													<button class="commerce-category-tree__entry__expand"
-														title="펼치기" type="button">
-														<svg class="icon" width="12" height="12"
-															fill="currentColor" viewBox="0 0 12 12"
-															preserveAspectRatio="xMidYMid meet">
-															<path
-																d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-													</button>
 												</div>
 												<div class="" style="overflow: hidden;"></div></li>
 											<li class="commerce-category-tree__entry hidden"><div
@@ -151,122 +106,58 @@
 													class="commerce-category-tree__entry__header">
 													<a class="commerce-category-tree__entry__title"
 														href="/store/category?category=0_1_11">의자</a>
-													<button class="commerce-category-tree__entry__expand"
-														title="펼치기" type="button">
-														<svg class="icon" width="12" height="12"
-															fill="currentColor" viewBox="0 0 12 12"
-															preserveAspectRatio="xMidYMid meet">
-															<path
-																d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-													</button>
+													
 												</div>
 												<div class="" style="overflow: hidden;"></div></li>
 										</ul>
 									</div></li>
-								<li class="commerce-category-tree__entry"><div
-										class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title"
-											href="/store/category?category=0_2">침실가구</a>
-										<button class="commerce-category-tree__entry__expand"
+									<li class="commerce-category-tree__entry">
+								<div class="commerce-category-tree__entry__header">
+										<a class="commerce-category-tree__entry__title" id="allbed"
+											href="#">침실가구</a>
+										<button class="commerce-category-tree__entry__expand open"
 											title="펼치기" type="button">
 											<svg class="icon" width="12" height="12" fill="currentColor"
 												viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
 												<path
 													d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
 										</button>
-									</div>
-									<div class="" style="overflow: hidden;"></div></li>
-								<li class="commerce-category-tree__entry"><div
-										class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title"
-											href="/store/category?category=0_8">드레스룸</a>
-										<button class="commerce-category-tree__entry__expand"
-											title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor"
-												viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path
-													d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;"></div></li>
-								<li class="commerce-category-tree__entry"><div
-										class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title"
-											href="/store/category?category=0_6">주방가구</a>
-										<button class="commerce-category-tree__entry__expand"
-											title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor"
-												viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path
-													d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;"></div></li>
-								<li class="commerce-category-tree__entry"><div
-										class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title"
-											href="/store/category?category=0_5">학생/서재가구</a>
-										<button class="commerce-category-tree__entry__expand"
-											title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor"
-												viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path
-													d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;"></div></li>
-								<li class="commerce-category-tree__entry"><div
-										class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title"
-											href="/store/category?category=0_4">수납가구</a>
-										<button class="commerce-category-tree__entry__expand"
-											title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor"
-												viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path
-													d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;"></div></li>
-								<li class="commerce-category-tree__entry"><div
-										class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title"
-											href="/store/category?category=0_3">테이블</a>
-										<button class="commerce-category-tree__entry__expand"
-											title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor"
-												viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path
-													d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;"></div></li>
-								<li class="commerce-category-tree__entry"><div
-										class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title"
-											href="/store/category?category=0_0">의자/스툴</a>
-										<button class="commerce-category-tree__entry__expand"
-											title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor"
-												viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path
-													d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;"></div></li>
-								<li class="commerce-category-tree__entry"><div
-										class="commerce-category-tree__entry__header">
-										<a class="commerce-category-tree__entry__title"
-											href="/store/category?category=0_7">유아동가구</a>
-										<button class="commerce-category-tree__entry__expand"
-											title="펼치기" type="button">
-											<svg class="icon" width="12" height="12" fill="currentColor"
-												viewBox="0 0 12 12" preserveAspectRatio="xMidYMid meet">
-												<path
-													d="M6.07 7.56l4.39-4.55.87.87-5.25 5.45L.67 3.9 1.53 3z"></path></svg>
-										</button>
-									</div>
-									<div class="" style="overflow: hidden;"></div></li>
+								</div>
+									<div class="open expanded" style="overflow: hidden;">
+										<ul
+											class="commerce-category-tree commerce-category-tree__entry__children">
+											<li class="commerce-category-tree__entry hidden"><div
+													class="commerce-category-tree__entry__header">
+													<a class="commerce-category-tree__entry__title" id="sofa"
+														href="#">침대</a>
+													
+												</div>
+												</li>
+											<li class="commerce-category-tree__entry hidden"><div
+													class="commerce-category-tree__entry__header">
+													<a class="commerce-category-tree__entry__title"
+														href="/store/category?category=0_1_2">매트리스</a>
+												</div></li>
+											<li class="commerce-category-tree__entry hidden"><div
+													class="commerce-category-tree__entry__header">
+													<a class="commerce-category-tree__entry__title"
+														href="/store/category?category=0_1_7">화장대</a>
+												</div>
+												<div class="" style="overflow: hidden;"></div></li>
+											<li class="commerce-category-tree__entry hidden"><div
+													class="commerce-category-tree__entry__header">
+													<a class="commerce-category-tree__entry__title"
+														href="/store/category?category=0_1_8">서랍장</a>
+												</div></li>
+											<li class="commerce-category-tree__entry hidden"><div
+													class="commerce-category-tree__entry__header">
+													<a class="commerce-category-tree__entry__title"
+														href="/store/category?category=0_1_11">거울</a>
+												</div>
+												<div class="" style="overflow: hidden;"></div></li>
+										</ul>
+									</div></li>
+								
 							</ul>
 						</section>
 					</div>
@@ -301,37 +192,6 @@
 					</div>
 					<!-- End Filter Bar -->
 					<!-- Start Best Seller -->
-<%-- 					<section class="lattest-product-area pb-40 category-list ">
-						<c:forEach items="${list }" var="store">
-				
-							<div class="row row_product_hw col-lg-4">
-								<div class="card text-center card-product">
-									<div class="card-product__img">
-										<img class="card-img"
- 											src="/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지"> 
-										<ul class="card-product__imgOverlay">
-											<li><button>
-													<i class="ti-search"></i>
-												</button></li>
-											<li><button>
-													<i class="ti-shopping-cart"></i>
-												</button></li>
-											<li><button>
-													<i class="ti-heart"></i>
-												</button></li>
-										</ul>
-									</div>
-									<div class="card-body">
-										<p>${store.store_date }</p>
-										<td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td>
-										<h4 class="card-product__title">
-											<a href="/store/read?store_seq=${store.store_seq}">${store.store_title }</a>
-										</h4>
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-					</section> --%>
 			<section class="lattest-product-area pb-40 category-list ">
                   <c:forEach items="${list }" var="store">
                      <div class="row row_product_hw col-lg-4">
