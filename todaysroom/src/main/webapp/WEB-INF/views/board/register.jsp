@@ -61,7 +61,6 @@
 			margin-right: auto; 
 			padding: 5px; 
 			text-align: center; 
-			line-height: 500px; 
 			vertical-align:middle;
 		}
 		
@@ -123,7 +122,7 @@
 				<div class="login_form_inner register_form_inner">
 					<h3>필수 입력 사항</h3>
 					<form role='form' class="contents-row login_form"
-						action="/board/register" id="contents-register_form" method="post"
+						action="/board/register?${_csrf.parameterName}=${_csrf.token}" id="contents-register_form" method="post"
 						encytype="multipart/form-data">
 
 						<div class="col-md-12 form-group">
@@ -167,7 +166,9 @@
 										
 										<div id="dropZone" style="width: 100%; height: 500px; border: 1px solid #ced4da; border-radius: 0.25em;">
 											<div id="fileDragDesc">
-												<p style="font-family: fantasy; font-size: xx-large; font-weight: bold;">썸네일 사진을 마우스로 끌어서 넣어주세요!</p>
+												<button id="thumbnail-btn" disabled="disabled" style="width: 95%; 
+												height: 95%; margin-top: 1.7%; font-size: xx-large; font-weight: bold; 
+												font-family: fantasy; border: aliceblue; color: #777;">썸네일 사진을 마우스로 끌어서 넣어주세요!</button>
 											</div>
 											<div><input type='hidden' name='attachList.uuid' value=''></div>
 
@@ -201,14 +202,14 @@
 						<br><br>
 						<div class="col-md-12 form-group">
 							<input type="text" class="form-control" id="title"
-								name="board_title" placeholder="제목을 입력해주세요." style="width: 882px;
+								name="board_title" placeholder="제목을 입력해주세요." style="width: 96%;
 																					    position: absolute;
 																					    padding-bottom: 21px;
 																					    font-size: 24px;">
 							<span style="color: #aaa;
     									 position: absolute;
-    									 left: 92%;
-    									 margin-top: 10px;" id="counter">(0 / 30)</span>
+    									 left: 90%;
+    									 width: fit-content;" id="counter">(0 / 30)</span>
 						</div>
 						<br>
 						<div class="col-md-12 form-group">
@@ -221,10 +222,10 @@
 						<input type="hidden" name="member_seq" value="${member.member_seq }">
 						</sec:authorize>
 						
-						<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>						
+												
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
-								class="button button-register w-100">글 등록</button>
+								class="button button-tracking w-100" style="font-weight: bold; font-size: large;">글 등록</button>
 						</div>
 					</form>
 				</div>
@@ -241,6 +242,7 @@
 	</section>
 
 	<script type="text/javascript">
+		
 		$(document).ajaxSend(function(e, xhr, options) {
 			var csrfHeaderName = "${_csrf.headerName}";
 			var csrfTokenValue = "${_csrf.token}";

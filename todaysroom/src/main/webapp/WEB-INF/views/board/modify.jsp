@@ -57,7 +57,7 @@
 				<div class="contents-col-lg-6">
 					<div class="login_form_inner register_form_inner">
 						<h3>필수 입력 사항</h3>
-						<form class="contents-row login_form" action="/board/modify" id="contents-register_form" method="post">
+						<form class="contents-row login_form" action="/board/modify?${_csrf.parameterName}=${_csrf.token}" id="contents-register_form" method="post">
 							<div class="col-md-12 form-group">
 								<div class="contents-form-control">
 									<div class="row">

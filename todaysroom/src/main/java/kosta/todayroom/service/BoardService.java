@@ -27,6 +27,7 @@ public interface BoardService {
 	public boolean remove(int board_seq);
 	public boolean removeRoom(int board_seq);
 	public boolean removeKnowhow(int board_seq);
+	public boolean removeAttach(int board_seq);
 	
 	public BoardAttachVO readThumbnail(int board_seq, String fileName);
 	
