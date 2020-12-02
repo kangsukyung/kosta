@@ -37,8 +37,8 @@
 					<h1>마이페이지</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do">마이페이지</a></li>
-              <li class="breadcrumb-item active" aria-current="page">설정</li>
+              <li class="breadcrumb-item"><a href="/member/mypage">마이페이지</a></li>
+              <li class="breadcrumb-item active" aria-current="page">유저정보 수정</li>
             </ol>
           </nav>
 				</div>
@@ -78,8 +78,8 @@
 							<h4 style=" padding-top: 10px;">${member.member_nickname}님 프로필</h4>
 							<div class="social_icon">
 							<br>	
-								<a href="#"> <i class="ti-heart"> 좋아요</i></a> 
-								<a href="#"> <i class="fab fa-twitter"> 팔로잉</i></a> 
+								<a href="/scrap/list"> <i class="ti-heart"> 스크랩</i></a> 
+								<a href="/follow/list"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
 					</div>
             </ul>
@@ -87,14 +87,18 @@
           <div class="sidebar-filter">
             <div class="top-filter-head">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
-					<li><a href="/member/mypage"><p>프로필</p></a></li>
-					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
-					<li><a href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do" class="d-flex justify-content-between"><p>설정</p></a></li>
-					<li><a href="${pageContext.request.contextPath}/Member/ConstractorSignup_form.do" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
-					<li><a href="${pageContext.request.contextPath}/Member/VendorSignup_form.do" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
-					<c:if test="${member.member_rating eq '2' }">
-					<li><a href="${pageContext.request.contextPath}/Product/ProductListAction.do" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
-					</c:if>
+					<li><a href="/member/mypage" class="d-flex justify-content-between"><p>마이페이지</p></a></li>
+					<li><a href="/productInquiry/list" class="d-flex justify-content-between"><p>상품문의목록</p></a></li>
+					<li><a href="/member/modify" class="d-flex justify-content-between"><p>유저정보 수정</p></a></li>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
+						<li><a href="/contractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_3')">
+						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_2')">
+						<li><a href="/product/list" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+					</sec:authorize>
 				</ul>
           </div>
         </div>

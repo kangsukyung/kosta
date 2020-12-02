@@ -372,6 +372,10 @@ var updateMember=document.getElementById("updateMember");
 			if(confirm("계정을 활성화시키겠습니까?")){
 				document.getElementById("passwordFound").click();
 			}
+		}else if(ratingNum == "2"){
+			if(confirm("계정을 복구하시겠습니까?")){
+				document.getElementById("passwordFound").click();
+			}
 		}
 	}
   </script>

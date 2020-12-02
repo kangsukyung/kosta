@@ -23,7 +23,7 @@
 					<h1 >전문가 신청</h1>
 					<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do">마이페이지</a></li>
+              <li class="breadcrumb-item"><a href="/member/mypage">마이페이지</a></li>
               <li class="breadcrumb-item active" aria-current="page">전문가 신청</li>
             </ol>
           </nav>

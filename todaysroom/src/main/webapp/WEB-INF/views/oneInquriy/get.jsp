@@ -34,7 +34,7 @@
           	  <br>
 			<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">고객센터</a></li>
+              <li class="breadcrumb-item"><a href="/oneInquriy/register">고객센터</a></li>
               <li class="breadcrumb-item active" aria-current="page"> 1:1문의</li>
             </ol>
           </nav>
@@ -74,8 +74,8 @@
 							<h4 style=" padding-top: 10px;"><sec:authentication property="principal.member.member_id"/>님 프로필</h4>
 							<div class="social_icon">
 							<br>
-								<a href="#"> <i class="ti-heart"> 좋아요</i></a> 
-								<a href="#"> <i class="fab fa-twitter"> 팔로잉</i></a> 
+								<a href="/scrap/list"> <i class="ti-heart"> 스크랩</i></a> 
+								<a href="/follow/list"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
 					</div>
 				</sec:authorize>
