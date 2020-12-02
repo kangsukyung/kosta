@@ -57,7 +57,8 @@ public class ProductController {
 			,@RequestParam ("product_name") List<String> product_name
 			,@RequestParam ("product_price") List<Integer> product_price
 			,@RequestParam("product_fname") List<MultipartFile> multipartFile
-			,@RequestParam("product_uuid") List<String> product_uuid ){
+			,@RequestParam("product_uuid") List<String> product_uuid 
+			,@RequestParam("product_uploadpath") List<String> product_uploadpath ){
 		
 		String uploadFolder = "C:\\upload";
 
@@ -69,14 +70,19 @@ public class ProductController {
 		productService.ProductStoreRegister(store);
 		
 		List<ProductVO> list = new ArrayList<ProductVO>();
+	
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		}
+		
 		for (int i=0; i<product_name.size(); i++) {
 			list.add(new ProductVO());
 			list.get(i).setProduct_name(product_name.get(i));
 			list.get(i).setProduct_price(product_price.get(i));
-			//list.get(i).setProduct_uuid(product_uuid.get(i));
 			
+			//System.out.println("uploadPath ::!!!!!!!!" + uploadPath);
 			String uploadFileName = multipartFile.get(i).getOriginalFilename();
-			
+				
 			//db에 담는거
 			list.get(i).setProduct_fname(uploadFileName);
 			
@@ -93,13 +99,20 @@ public class ProductController {
 			
 			System.out.println("productUuid:  "+productUuid);
 			
+			//uuid db담기
 			list.get(i).setProduct_uuid(productUuid);
 
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
+			
+			System.out.println(uploadPath);
 
 			try {
-				File saveFile = new File(uploadPath, uploadFileName);
+				File saveFile = new File(uploadPath, uploadFileName);				
 				multipartFile.get(i).transferTo(saveFile);
+				
+				list.get(i).setProduct_uploadpath(uploadFolderPath);
+				
+				System.out.println("uploadPath : " + uploadFolderPath);
 
 			} catch (Exception e) {
 				e.printStackTrace();

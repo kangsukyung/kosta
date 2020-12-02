@@ -10,10 +10,21 @@
 </select>
 
 
-<select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
-	select * from product
-</select>
+<!-- <select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
+	
+	select * 
+	    from store s
+	    inner join product p
+	    on s.store_seq = p.store_seq
+	    where member_seq = 92
+</select> -->
 
+
+<select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
+
+	select * from product
+
+</select>
 
 
 <insert id="ProductStoreRegister">
@@ -23,13 +34,14 @@
 
 
 <insert id="ProductItemRegister">
-insert into product(product_seq, store_seq, product_name, product_price, product_fname, product_uuid)
+insert into product(product_seq, store_seq, product_name, product_price, product_fname, product_uuid, product_uploadpath)
 select SEQ_PRODUCT_PRODUCT_SEQ.NEXTVAL, SEQ_STORE_STORE_SEQ.CURRVAL, A.* from(
  <foreach item="item" collection="list" separator="UNION ALL " >
    select #{item.product_name} as product_name,
         #{item.product_price} as product_price,
         #{item.product_fname} as product_fname,
-        #{item.product_uuid} as product_uuid
+        #{item.product_uuid} as product_uuid,
+        #{item.product_uploadpath} as product_uploadpath
    from dual
  </foreach>) A
 </insert>

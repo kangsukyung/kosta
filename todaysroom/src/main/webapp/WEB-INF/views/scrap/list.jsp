@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/style.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/member_mypage.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/scrap_style.css">
-</head>
+
 <body>	
  	<jsp:include page="../../header.jsp"></jsp:include>
 	<!-- ================ start banner area ================= -->	
@@ -76,10 +76,11 @@
 
 
           
-          <div class="cc">
-            <div class="card card-blog" id="product_card-blog">
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 ccc">
 
         <c:forEach var="scrap1" items="${list}">
+        
+            <div class="card card-blog" id="product_card-blog">
 	          		<c:forEach var="scrap" items="${list2}">
 	          			<c:if test="${scrap1.boardAttachList[1].board_seq eq scrap.board.board_seq }">
 	          			<div class="scrapTest1">
@@ -94,16 +95,16 @@
        
        
        
-		              <div class="card-body">
 		              <div class="card-blog__img">
 		                <img class="card-img rounded-0" id="scrap_img_thumbnail" src="">
 		              </div>
+		              <div class="card-body">
 		                <ul class="card-blog__info">
 		                  <li><a href="#">스크랩번호 </a></li>
 		                  <li><a href="#"><i class="ti-comments-smiley"></i> ${scrap.scrap_seq }</a></li>
 		                </ul>
 		                <h4 class="card-blog__title"><a href='/board/read?board_seq=<c:out value="${scrap.board.board_seq }"/>'>${scrap.board.board_title }</a></h4>
-		                <p>${product.product_price }</p>
+		              
 		                <a class="card-blog__link" href='/scrap/remove?scrap_seq=<c:out value="${scrap.scrap_seq }"/>'>삭제하기 
 		                <i class="ti-arrow-right"></i></a>
 		                <input type="hidden" name="board_seq" value="${scrap.board.board_seq }">
@@ -111,12 +112,12 @@
 		              </div>
 		              </c:if>
 	           		</c:forEach>
+	          </div>	
        </c:forEach>
-		              </div>
+		    </div>
 
-            </div>
         </div>
-
+     
 
 
  
