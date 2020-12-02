@@ -125,13 +125,13 @@
 
         <div class="form-group">
           <label>제목</label> <input class="form-control" id="title" name='title'
-            value="${one.oi_title }" >
+            value="${one.oi_title }" readonly="readonly">
         </div>
 
         <div class="form-group">
           <label>내용</label>
-          <textarea class="form-control" rows="3" id="cotent" style="padding-bottom: 100px;"
-          name='content'><c:out value="${one.oi_content}" /></textarea>
+          <textarea class="form-control" rows="3" id="content" style="padding-bottom: 100px;"
+          name='content' readonly="readonly"><c:out value="${one.oi_content}"/></textarea>
         </div>
 
         <div class="form-group">
@@ -146,7 +146,8 @@
          readonly="readonly">
         </div>
 
-<button data-oper='modify' class="btn btn-default" id="modifyButton" style="background-color: #e9ecef;">수정</button>
+<button data-oper='modify' class="btn btn-default" id="modifyButton" style="background-color: #e9ecef; display: none;">수정</button>
+<button data-oper='modify' class="btn btn-default" id="modifyButtonForm" style="background-color: #e9ecef;">수정</button>
 <button data-oper='list' class="btn btn-info" id="listButton">목록</button>
 <button data-oper='delete' class="btn btn-info" id="deleteButton"style="background: #c5322d;">삭제</button>
 
@@ -185,10 +186,23 @@
  
  <script>
   $(document).ready(function(e){
+	  
+	  $("#modifyButtonForm").click(function() {
+		  if(confirm("수정하시겠습니까?")==true){
+			  $("#title").attr('readonly',false);
+			  $("#content").attr('readonly',false);
+			  $("#title").focus();
+			  $("#modifyButton").show();
+			  $("#modifyButtonForm").hide();
+			  $("#deleteButton").hide();
+		  }else{
+			  return ;
+		  }
+	  });
 
 	  $("#listButton").click(function() {
 		  document.getElementById('listForm').submit();
-   		});
+   	  });
 	  
 	  $("#deleteButton").click(function() {
 		  if (confirm("삭제하시겠습니까?") == true){  
@@ -199,9 +213,9 @@
 		});
 		
 	  $("#modifyButton").click(function() {
-		  if (confirm("수정하시겠습니까?") == true){  
+		  if (confirm("변경된 내용을 저장하시겠습니까?") == true){  
 		  var title=$("#title").val();
-		  var content=$("#cotent").val();
+		  var content=$("#content").val();
 		  
 		  document.getElementById("oi_title").value = title;
 		  document.getElementById("oi_content").value = content;

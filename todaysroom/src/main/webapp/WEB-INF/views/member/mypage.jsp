@@ -70,7 +70,7 @@
 							<c:otherwise>
 								<c:out value="NO IMAGE"></c:out>
 							</c:otherwise>
-						</c:choose>					
+						</c:choose>						
 					</c:if>
 					<c:if test="${member.member_profile ==null}">
 						<a href="/member/modify"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
