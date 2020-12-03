@@ -203,7 +203,7 @@
 <%--                               <img class="card-img"
  											src="/product/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지"> --%>
                               <img class="card-img"
- 											src="" alt="상품이미지">
+ 											src="" alt="상품이미지" onerror="this.src='/main_resource/img/stimg.png'">
                               <ul class="card-product__imgOverlay">
                                  <li><button>
                                        <i class="ti-search"></i>

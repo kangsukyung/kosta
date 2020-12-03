@@ -73,7 +73,7 @@
 
 
 							<img class="img-fluid"
-								 src="" alt="">
+								 src="" alt="" onerror="this.src='/main_resource/img/stimg.png'">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -135,7 +135,7 @@
 									<button value="${status.count}" class="production-select-item" id="product_seq" type="button">
 											<div class="production-select-item__index">${status.count }</div>
 											<div class="production-select-item__image">
-												<img class="image" id="product_image_each" alt="" src="">
+												<img class="image" id="product_image_each" alt="" src="" onerror="this.src='/main_resource/img/stimg.png'">
 											</div>
 											<div class="production-select-item__contents">
 												<span class="production-select-item__contents__name" id="product_name"> ${product.product_name }</span>
@@ -201,7 +201,7 @@
                 <input type="hidden" class="uuid2"  value="${attach[1].uuid }">
                 <input type="hidden" class="filename2"  value="${attach[1].fileName }">			
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">				
-					<img class="product_detail_image"  alt="제품상세이미지" src="">
+					<img class="product_detail_image"  alt="제품상세이미지" src="" onerror="this.src='/main_resource/img/stimg.png'">
 				</div>
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true"
