@@ -165,11 +165,7 @@ public class ProductUploadController {
 	public ResponseEntity<byte[]> getFile2(String fileName) {
 
 		log.info("fileName: " + fileName);
-<<<<<<< HEAD
 
-		String uploadFolderPath = getFolder();
-=======
->>>>>>> refs/heads/develop
 		
 		File file = new File("c:\\upload\\" + fileName);
 
