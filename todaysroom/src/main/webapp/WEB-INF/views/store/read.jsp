@@ -257,7 +257,7 @@
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
-<%-- 				<jsp:include page="../review/review.jsp"></jsp:include> --%>
+ 				<jsp:include page="../review/review.jsp"></jsp:include>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
@@ -405,7 +405,7 @@
 			</div>
 	</section>
 	<section>
-	<jsp:include page="../review/review.jsp"></jsp:include>
+	<%-- <jsp:include page="../review/review.jsp"></jsp:include> --%>
 	</section>
 	<!--================End Product Description Area =================-->
 	
@@ -533,7 +533,6 @@
 	</section>
 
 
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
