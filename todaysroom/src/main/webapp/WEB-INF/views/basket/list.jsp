@@ -24,7 +24,7 @@
 </head>
 <body>
   <!--================ Start Header Menu Area =================-->
-  	<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
+  	<%@include file="../includes/header.jsp"%>
 	<!--================ End Header Menu Area =================-->
 
 	<!-- ================ start banner area ================= -->	
@@ -198,7 +198,7 @@
 
 
   <!--================ Start footer Area  =================-->	
-<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
+<%@include file="../includes/footer.jsp"%>
 	<!--================ End footer Area  =================-->
 
 

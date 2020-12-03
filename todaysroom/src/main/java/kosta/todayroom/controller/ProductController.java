@@ -66,6 +66,10 @@ public class ProductController {
 		// make folder --------
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		}
+		
 
 		productService.ProductStoreRegister(store);
 		

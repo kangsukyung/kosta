@@ -62,7 +62,7 @@ public class CommentsController {
 	@GetMapping(value = "/pages/{board_seq}/{page}",produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<CommentsPageVO> commentsList(@PathVariable("page") int page, @PathVariable("board_seq") int board_seq) {
 		log.info("getList............");
-		Criteria cri = new Criteria(page,10);
+		Criteria cri = new Criteria(page,5);
 		log.info("cri : "+cri);
 		
 		return new ResponseEntity<>(service.CommentsListPage(cri, board_seq),HttpStatus.OK);

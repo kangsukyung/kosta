@@ -9,6 +9,7 @@ public class CommentsVO {
 	private String comments_picture;
 	private int board_seq;
 	private int member_seq;
-	private int admin_seq;
+	private String comments_date;
+	private String comments_update;
 	
 }

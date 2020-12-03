@@ -20,6 +20,9 @@
     
 </head>
 <body>
+	<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal.member" var="member"/>
+	</sec:authorize>
 	<header class="header_area">
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
@@ -73,7 +76,7 @@
               </li>
             </ul>
             <ul class="nav-shop">
-              <li class="nav-item" id="hw-search"><form id="hw-searchbar" action=""><input name="keyword" placeholder="검색어 입력"></form><button><i class="ti-search"></i></button></li>
+              <li class="nav-item" id="hw-search"><form id="hw-searchbar" action=""><input name="keyword" placeholder="검색어 입력"></form><button><i class="ti-search" id="hw-search-icon"></i></button></li>
               <li class="nav-item" id="hw-shopping-cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
 	
 		<sec:authorize access="isAuthenticated()">
@@ -84,14 +87,7 @@
               <li class="nav-item"><a href="/login" class="msk-id">로그인</a></li>
               <li class="nav-item"><a href="/member/register" class="msk-id">회원가입</a></li>
 		</sec:authorize>
-	<c:choose>
-		<c:when test="${member!=null }">
-              <li class="nav-item"><a class="button button-header" href="${pageContext.request.contextPath}/board/board_insertActionForm.do">글쓰기</a></li>
-		</c:when>
-		<c:otherwise>
-              <li class="nav-item"><a class="button button-header" href="${pageContext.request.contextPath}/Member/MemberLogin_Action.do">글쓰기</a></li>
-		</c:otherwise>
-	</c:choose>
+              <li class="nav-item"><a class="button button-header" href="/board/register">글쓰기</a></li>
             </ul>
           </div>
         </div>
@@ -103,13 +99,14 @@
   </header>
   
   <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/main_resource/js/jquery-ui.js"></script>
   <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="/main_resource/vendors/skrollr.min.js"></script>
   <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
   <script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
   <script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
   <script src="/main_resource/vendors/mail-script.js"></script>
-  <script src="/main_resource/js/main.js"></script>
+  <script src="/main_resource/js/main.js"></script>  
   <script src="/main_resource/js/header.js"></script>
   <script>
   $(document).ready(function(e){
@@ -120,7 +117,8 @@
 	      return;
 	  }
    });
-  })
+  
+  });
   </script>
 </body>
 </html>

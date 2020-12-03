@@ -156,4 +156,9 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.viewModify(board_seq);
 	}
 
+	@Override
+	public boolean removeAttach(int board_seq) {
+		return mapper.removeAttach(board_seq) == 1;
+	}
+
 }
