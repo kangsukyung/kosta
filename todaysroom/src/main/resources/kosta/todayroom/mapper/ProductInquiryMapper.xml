@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="list" resultType="ProductInquiry">
-		select * from product_inquiry order by pi_seq desc
+		select * from product_inquiry where member_seq=#{member_seq} order by pi_seq desc
 	</select>
 	
 	<update id="modify" parameterType="ProductInquiry">
@@ -23,4 +23,8 @@
 	<delete id="remove" parameterType="int">
 		delete product_inquiry where pi_seq=#{pi_seq}
 	</delete>
+	
+	<select id="productRead" resultType="kosta.todayroom.domain.ProductVO">
+		select * from product where product_seq=#{product_seq}
+	</select>
 </mapper>

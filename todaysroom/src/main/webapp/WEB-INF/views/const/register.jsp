@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
-<%-- <sec:authentication property="principal.member.member_seq" var="member_seq"/> --%>
+<sec:authentication property="principal.member.member_seq" var="member_seq"/>
 <!DOCTYPE html>
 <html lang="en" class="hw-contractor-common">
 <head>
@@ -39,14 +39,14 @@
 				<div class="text-center">
 					<div class="col-lg-6 hw-consult-form-width">
 						<h3>인테리어 시공 신청서</h3>
+						
 						<div class="login_form_inner register_form_inner hw-consult-form">
 
 							<form class="row login_form" action="/const/register"
 								method="post" id="register_form">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" />
+								
 								<%-- 보안 토큰 설정 --%>
-								<input type="hidden" name="member_seq" value="22">
+								<input hidden="hidden" name="member_seq" value="${member_seq }">
 								<%-- 원래는 value속성 값에 ${member_seq} 가 들어가야함 --%>
 								<div class="col-md-12 form-group">
 									<div>시공 공간은 몇 평이세요?</div>
@@ -85,11 +85,17 @@
 									</select>
 								</div>
 								<div class="col-md-12 form-group">
-									<div>희망하시는 컬러를 선택해주세요.</div>
-									<input type="text" class="form-control" id="const_color"
-										name="const_color" placeholder="희망하는 색상 선택"
-										onfocus="this.placeholder = ''"
-										onblur="this.placeholder = '희망하는 색상 선택'" required="required">
+									<div>희망하시는 테마 컬러를 선택해주세요.</div>
+									<select name="const_color">
+										<option value="">선택해주세요</option>
+										<option value="Red">Red</option>
+										<option value="Black">Black</option>
+										<option value="White">White</option>
+									</select>
+<!-- 									<input type="text" class="form-control" id="const_color" -->
+<!-- 										name="const_color" placeholder="희망하는 색상 선택" -->
+<!-- 										onfocus="this.placeholder = ''" -->
+<!-- 										onblur="this.placeholder = '희망하는 색상 선택'" required="required"> -->
 								</div>
 								<div class="col-md-12 form-group">
 									<div class="creat_account">
@@ -104,6 +110,8 @@
 									<button type="submit" value="submit"
 										id="hw-submit-button" class="button hw-float-right">신청서 등록</button>
 								</div>
+								<input type="hidden" name="${_csrf.parameterName}"
+									value="${_csrf.token}" />
 							</form>
 						</div>
 					</div>
@@ -113,7 +121,6 @@
 	</section>
 	<jsp:include page="../includes/footer.jsp"></jsp:include>
 
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -137,6 +144,9 @@
 					} else {
 						alert("양식을 다시 확인해주세요.");
 					}
+				},
+				error: function(xhr, status, error){
+					alert("양식을 다시 확인해주세요.");
 				}
 			});
 		});

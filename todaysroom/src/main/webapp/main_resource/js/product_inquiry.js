@@ -22,6 +22,7 @@ $(function(){
 				if(data>0){
 					alert("문의가 접수되었습니다.");
 					$('#exampleModal').modal("hide");
+					$('.modal-backdrop').remove();
 				}else{
 					alert("양식을 다시 확인해주세요.");
 				}

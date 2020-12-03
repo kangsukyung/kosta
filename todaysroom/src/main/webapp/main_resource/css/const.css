@@ -38,3 +38,7 @@
 #hw-button:hover{
 	color: #222;
 }
+
+.creat_account label{
+	font-size: 13px;
+}
