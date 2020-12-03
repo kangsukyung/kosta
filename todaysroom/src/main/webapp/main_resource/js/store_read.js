@@ -30,14 +30,14 @@ $(function() {
 		$(this).find(".product_detail_image").attr("src",urlstr);
 
 		
-		$(".production-select-item").each(function(i,obj){
+		$(".production-select-list__item").each(function(i,obj){
 			var product_uploadpath = $(this).find(".product_uploadpath").val();
 			var product_uuid = $(this).find(".product_uuid").val();
 			var product_filename = $(this).find(".product_filename").val();
 			
 			var product_url = encodeURIComponent(product_uploadpath + "\\" + product_uuid + "_" + product_filename);
 			var product_urlstr = "/product/display?fileName="+product_url;
-			$(this).find("#product_image").attr("src",urlstr);
+			$(this).find(".image").attr("src",product_urlstr);
 			
 		})
 		
