@@ -38,26 +38,26 @@
               <li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
 	              <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/listAction.do">방들이</a></li>
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/listAction.do">노하우</a></li>
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/listAction.do">질문과답변</a></li>
-                </ul>
+                   <li class="nav-item"><a class="nav-link" href="/board/list?filter=bang&roomwarming=셀프">방들이</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/board/list?filter=bang&roomwarming=전문가">전문가방들이</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/board/list?filter=knowhow">노하우</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/board/list?filter=qa">질문과답변</a></li>               
+                  </ul>
 				</li>
               <li class="nav-item submenu dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                  aria-expanded="false">스토어</a>
-                <ul class="dropdown-menu">
+                <a href="/store/list?pageNum=1&amount=6" class="nav-link dropdown-toggle">스토어</a>
+                <%-- <ul class="dropdown-menu">
                   <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/listStoreAction.do">카테고리</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">특가</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">베스트</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">기획전</a></li>
-                </ul>
+                </ul> --%>
 				</li>
 				<li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"aria-expanded="false">인테리어</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="#">우리지역 업체</a></li>
-                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/const/insertConstForm.do">맞춤업체 추천</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/contractor/list">우리지역 업체</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/const/register">맞춤업체 추천</a></li>
                 </ul>
               </li>
               
