@@ -63,11 +63,6 @@ public class ScrapController {
 		
 	} //end list
 	
-	
-	
-	
-	
-	
 	@GetMapping("/register")
 	public void ScrapRegister(){
 		
@@ -80,6 +75,7 @@ public class ScrapController {
 		scrapService.ScrapRegister(scrap);
 		
 		rttr.addFlashAttribute("result", scrap.getScrap_seq());
+		
 
 		return "redirect:/board/list";
 

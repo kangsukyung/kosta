@@ -71,9 +71,9 @@
 	          			<c:if test="${scrap1.boardAttachList[1].board_seq eq scrap.board.board_seq }">
 	          			<div class="scrapTest1">
 			              <div class="test1">
-			              	<input type="hidden" name="uploadpath" value="${scrap1.boardAttachList[1].uploadPath }">
-			              	<input type="hidden" name="uuid" value="${scrap1.boardAttachList[1].uuid }">
-			              	<input type="hidden" name="fileName" value="${scrap1.boardAttachList[1].fileName }">
+			              	<input type="hidden" name="uploadpath" value="${scrap1.boardAttachList[0].uploadPath }">
+			              	<input type="hidden" name="uuid" value="${scrap1.boardAttachList[0].uuid }">
+			              	<input type="hidden" name="fileName" value="${scrap1.boardAttachList[0].fileName }">
 			              	
 			              	
 			              	

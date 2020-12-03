@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 	
 <!DOCTYPE html>
 <html>
@@ -40,22 +42,16 @@
 						<div id="product_picture">
 
 
-							<c:if test="${productVO.product_fname != null }">
-								<c:set var="head"
-									value="${fn:substring(productVO.product_fname, 0, fn:length(productVO.product_fname)-4) }"></c:set>
-								<c:set var="pattern"
-									value="${fn:substring(productVO.product_fname, fn:length(head) +1, fn:length(productVO.product_fname)) }"></c:set>
-
-								<c:choose>
-									<c:when
-										test="${pattern == 'png' || pattern == 'gif' || pattern == 'PNG' }">
-										<img id="product_img" src="/kosta1200/upload/${head }.${pattern}">
-									</c:when>
-									<c:otherwise>
-										<c:out value="NO IMAGE"></c:out>
-									</c:otherwise>
-								</c:choose>
-							</c:if>
+							<div class="card card-blog" id="product_card-blog">
+				              <div class="card-blog__img">
+				                <div class="test1">
+							              	<input type="hidden" class="product_uploadpath"  value="${product.product_uploadpath }">
+						                	<input type="hidden" class="product_uuid"  value="${product.product_uuid }">
+						                    <input type="hidden" class="product_filename"  value="${product.product_fname }">
+							        <img class="card-img rounded-0" id="product_img_list" src="">      	
+								</div>
+				              </div>
+				             </div>
 
 
 
@@ -63,6 +59,7 @@
 
 
 						</div>
+						
 						<div class="col-lg-6">
 							<div class="review_box">
 								<h4>상품수정</h4>
@@ -77,9 +74,7 @@
 										<label id="product_insert_label">가격 </label> <input class="form-control" id="product_insert_input2" name="product_price" type="text" placeholder="가격을입력하세요." value="${product.product_price}">
 									</div>
 									 
-									<div class="form-group">
-										<label id="product_insert_label">가격 </label> <input class="form-control" id="product_insert_input2" name="product_fname" type="text" placeholder="가격을입력하세요." value="${product.product_fname}">
-									</div>
+							
 									
 									<%-- <div class="form-group">
 										<label id="product_insert_label">대분류 </label> <input class="form-control" id="product_insert_input2" name="product_lcategory" type="text" placeholder="대분류를 입력하세요." value="${productVO.product_lcategory}">
@@ -91,10 +86,19 @@
 
 
 									
-		<div class="form-group text-center text-md-right mt-3" id="ksk_btn">
-			<input type="submit" class="button button--active button-review" value="수정하기">
-			<button type="submit" class="button button--active button-review">취소하기</button>
-		</div>
+										<div class="form-group text-center text-md-right mt-3" id="ksk_btn">
+											<input type="submit" class="button button--active button-review" value="수정하기">
+											<button type="submit" class="button button--active button-review">취소하기</button>
+										</div>
+										
+									<sec:authorize access="isAuthenticated()">
+									<sec:authentication property="principal.member" var="member"/>
+									<input type="hidden" name="member_seq" value="${member.member_seq }">
+									</sec:authorize>
+									
+									<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>	
+										
+										
 								</form>
 
 							</div>
@@ -107,7 +111,28 @@
 
 
 	</section>
+<script>
 
+$(document).ready(function() {
+
+	$(".test1").each(function(i,obj){
+		var product_uploadpath = $(this).find(".product_uploadpath").val();
+		var product_uuid = $(this).find(".product_uuid").val();
+		var product_filename = $(this).find(".product_filename").val();
+		
+		var product_url = encodeURIComponent(product_uploadpath + "\\" + product_uuid + "_" + product_filename);
+		var product_urlstr = "/product/display?fileName="+product_url;
+
+		
+		$(this).find(".card-img").attr("src",product_urlstr);
+		
+	})
+	
+
+	
+})
+
+</script>
 
 
 
