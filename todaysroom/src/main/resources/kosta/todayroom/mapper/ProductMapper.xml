@@ -38,6 +38,7 @@
     INNER JOIN product p
   	ON s.store_seq = p.store_seq
   	where s.member_seq = #{member_seq}
+  	order by p.product_seq DESC
    
 </select>
 

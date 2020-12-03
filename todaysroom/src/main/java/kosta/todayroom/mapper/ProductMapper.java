@@ -2,6 +2,7 @@ package kosta.todayroom.mapper;
 
 import java.util.List;
 
+import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.domain.StoreVO;
 
@@ -10,6 +11,10 @@ public interface ProductMapper {
 	//@Select("select * from product")
 	public List<StoreVO> ProductStoregetList();
 	public List<ProductVO> ProductItemgetList(int member_seq);
+	
+	
+	//페이징
+	public List<ProductVO> ProductItemgetListPaging(int member_seq, Criteria cri);
 	
 	
 	public void ProductStoreRegister(StoreVO store);

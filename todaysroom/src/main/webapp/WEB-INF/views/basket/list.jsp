@@ -108,7 +108,7 @@
                           </c:forEach>
                           <tr class="bottom_button">
                               <td>
-                                  <a class="button" href="#">Update Cart</a>
+
                               </td>
                               <td>
 
@@ -118,7 +118,7 @@
                               </td>
                               <td>
                                   <div class="cupon_text d-flex align-items-center">
-                                      <a class="primary-btn" href="#">Apply</a>
+                                      <a class="primary-btn" href="#">결제</a>
 
                                   </div>
                               </td>
@@ -139,40 +139,7 @@
                                   </h5>
                               </td>
                           </tr>
-                          <tr class="shipping_area">
-                              <td class="d-none d-md-block">
-
-                              </td>
-                              <td>
-
-                              </td>
-                              <td>
-                                  <h5>Shipping</h5>
-                              </td>
-                              <td>
-                                  <div class="shipping_box">
-                                      <ul class="list">
-                                          <li><a href="#">Flat Rate: $5.00</a></li>
-                                          <li><a href="#">Free Shipping</a></li>
-                                          <li><a href="#">Flat Rate: $10.00</a></li>
-                                          <li class="active"><a href="#">Local Delivery: $2.00</a></li>
-                                      </ul>
-                                      <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
-                                      <select class="shipping_select">
-                                          <option value="1">Bangladesh</option>
-                                          <option value="2">India</option>
-                                          <option value="4">Pakistan</option>
-                                      </select>
-                                      <select class="shipping_select">
-                                          <option value="1">Select a State</option>
-                                          <option value="2">Select a State</option>
-                                          <option value="4">Select a State</option>
-                                      </select>
-                                      <input type="text" placeholder="Postcode/Zipcode">
-                                      <a class="gray_btn" href="#">Update Details</a>
-                                  </div>
-                              </td>
-                          </tr>
+                          
                           <tr class="out_button_area">
                               <td class="d-none-l">
 
@@ -185,7 +152,7 @@
                               </td>
                               <td>
                                   <div class="checkout_btn_inner d-flex align-items-center">
-                                      <a class="gray_btn" href="#">Continue Shopping</a>
+                                      <a class="gray_btn" href="http://localhost:8081/store/list?pageNum=1&amount=12">Continue Shopping</a>
                                       <a class="primary-btn ml-2" href="#">Proceed to checkout</a>
                                   </div>
                               </td>
@@ -206,7 +173,6 @@
 
 
 
-  <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="/main_resource/vendors/skrollr.min.js"></script>
   <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

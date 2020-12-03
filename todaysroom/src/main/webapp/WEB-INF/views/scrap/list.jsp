@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 	
 <!DOCTYPE html>
 <html>
@@ -24,25 +26,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/scrap_style.css">
 
 <body>	
- 	<jsp:include page="../../header.jsp"></jsp:include>
-	<!-- ================ start banner area ================= -->	
+<sec:authentication property="principal.member" var="member"/>
+ 	<%@include file="../includes/header.jsp"%>
 
-	<!-- ================ end banner area ================= -->
-
-
-	
-				
-				
-				
-				
-<!-- 				
-				<div class="ScrapList" id="ProductList_box">
-					<div class="comments-area" id="ProductList_area">
-						<h4>스크랩한 게시물 목록</h4>
-						
-					</div>
-				</div>
- -->
 	<div class="scrapList_header">
 		
 		<div>
@@ -104,10 +90,20 @@
 		                  <li><a href="#"><i class="ti-comments-smiley"></i> ${scrap.scrap_seq }</a></li>
 		                </ul>
 		                <h4 class="card-blog__title"><a href='/board/read?board_seq=<c:out value="${scrap.board.board_seq }"/>'>${scrap.board.board_title }</a></h4>
-		              
-		                <a class="card-blog__link" href='/scrap/remove?scrap_seq=<c:out value="${scrap.scrap_seq }"/>'>삭제하기 
-		                <i class="ti-arrow-right"></i></a>
+
+		                
+		                <form action="/scrap/remove" method="post">
+		                	<input type="hidden" name="scrap_seq" value="${scrap.scrap_seq }">
+		                	<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
+		                	<button class="card-blog__link" type="submit">삭제하기<i class="ti-arrow-right"></i></button>
+		                </form>
 		                <input type="hidden" name="board_seq" value="${scrap.board.board_seq }">
+		              
+		              
+		              
+		              
+		              
+		              
 		              </div>
 		              </div>
 		              </c:if>
@@ -260,7 +256,7 @@ $(document).ready(function() {
 
 
 
- <jsp:include page="../../footer.jsp"></jsp:include>
+ <%@include file="../includes/footer.jsp"%>
 
 
 </body>

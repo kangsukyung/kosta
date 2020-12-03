@@ -59,8 +59,6 @@ public class ReviewController {
 		public ResponseEntity<ReviewPageVO> reviewList(@PathVariable("page") int page, @PathVariable("store_seq") int store_seq) {
 			log.info("getList............");
 			Criteria cri = new Criteria(page,5);
-			log.info("cri : "+cri);
-			log.info("page:::::::::::::"+page);
 			log.info("store_seqqqqqqqqq : "+store_seq);
 			return new ResponseEntity<>(service.ReviewListPage(cri, store_seq),HttpStatus.OK);
 		}

@@ -34,7 +34,7 @@
   	FROM scrap s
     INNER JOIN board b
   	ON s.board_seq = b.board_seq
-  	where s.member_seq = 92
+  	where s.member_seq = #{member_seq}
    
 </select>
 
@@ -65,7 +65,7 @@
   	FROM scrap s
     INNER JOIN board_attach b
   	ON s.board_seq = b.board_seq
-  	where s.member_seq = 92
+  	where s.member_seq = #{member_seq}
    
 </select>
 
