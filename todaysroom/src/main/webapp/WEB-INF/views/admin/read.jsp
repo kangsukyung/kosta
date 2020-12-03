@@ -115,13 +115,17 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/logout">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="Logout">
+                <span id="adminLogout" class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
             <!-- /menu footer buttons -->
           </div>
         </div>
+        
+        <form id="logout-form" action="/customLogout" method="POST">
+			<input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+		</form>
 
         <!-- top navigation -->
         <div class="top_nav">
@@ -306,5 +310,15 @@
     <script src="/main_resource/js/admin_js/icheck.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="/main_resource/js/admin_js/custom.min.js"></script>
+    
+    <script>
+ 	 $("#adminLogout").click(function() {
+ 		if (confirm("로그아웃하시겠습니까?") == true){  
+ 			document.getElementById('logout-form').submit();
+ 		  }else{ 
+ 		      return;
+ 		  }
+  	});
+  </script>
   </body>
 </html>
