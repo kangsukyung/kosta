@@ -29,13 +29,17 @@ $(function() {
 		var urlstr = "/product/display?fileName="+url;
 		$(this).find(".product_detail_image").attr("src",urlstr);
 
-		var uploadpath3 = $(this).find(".uploadpath3").val();
-		var uuid3 = $(this).find(".uuid3").val();
-		var filename3 = $(this).find(".filename3").val();
 		
-		var url3 = encodeURIComponent(uploadpath + "\\" + uuid + "_" + filename);
-		var urlstr3 = "/product/display?fileName="+url;
-		$(this).find("#product_image").attr("src",urlstr);
+		$(".production-select-list__item").each(function(i,obj){
+			var product_uploadpath = $(this).find(".product_uploadpath").val();
+			var product_uuid = $(this).find(".product_uuid").val();
+			var product_filename = $(this).find(".product_filename").val();
+			
+			var product_url = encodeURIComponent(product_uploadpath + "\\" + product_uuid + "_" + product_filename);
+			var product_urlstr = "/product/display?fileName="+product_url;
+			$(this).find(".image").attr("src",product_urlstr);
+			
+		})
 		
 		
  $(".production-select-list__item").on("click","button", function() {

@@ -66,9 +66,12 @@
                          <c:forEach items="${list }" var="basket" varStatus="status">
                           <tr>
                               <td>
-                                  <div class="media">
+                                  <div class="media_product">
                                       <div class="d-flex">
-                                          <img src="/display?fileName=${basket.productvo.product_uuid }_${basket.productvo.product_fname}" alt="">
+	  									<input type="hidden" class="product_uploadpath"  value="${basket.productvo.product_uploadpath }">
+			                		    <input type="hidden" class="product_uuid"  value="${basket.productvo.product_uuid }">
+			                        	<input type="hidden" class="product_filename"  value="${basket.productvo.product_fname }">                                    
+	                                    <img class="product_image"  src="22" alt="">
                                       </div>
                                       <div class="media-body">
                                           <a href="/store/read?store_seq=${basket.productvo.store_seq }">
