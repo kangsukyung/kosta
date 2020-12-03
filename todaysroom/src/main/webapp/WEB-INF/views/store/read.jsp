@@ -57,6 +57,7 @@
 				<input type="hidden" name="store_lcategory_hidden" value="${store.store_lcategory }">
 				<input type="hidden" name="store_title_hidden" value="${store.store_title }">
 				<input type="hidden" name="store_price" value="${store.store_price }">
+				<input type="hidden" name="store_seq" value="${store.store_seq }">
 				<div class="store_scategory">${store.store_scategory }</div>
 			</div>
 		</c:forEach>
@@ -257,7 +258,9 @@
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
+				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
  				<jsp:include page="../review/review.jsp"></jsp:include>
+ 				</div>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
@@ -531,7 +534,6 @@
 	<section>
 		<%@include file="../includes/footer.jsp"%>
 	</section>
-
 
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
