@@ -242,6 +242,7 @@
 														<input class="form-control" id="product_insert_input" id="gdsImg" name="product_fname" 
 														type="file" placeholder="상품제목을 입력하세요." required="">
 														<input type="hidden" name="product_uuid">
+														<input type="hidden" name="product_uploadpath">
 														<div class="select_img"><img src="" /></div>
 														 
 														 <script>

@@ -1,4 +1,4 @@
-package kosta.todayroom.controller;
+ package kosta.todayroom.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -71,9 +71,7 @@ public class ProductController {
 		
 		List<ProductVO> list = new ArrayList<ProductVO>();
 	
-		if (uploadPath.exists() == false) {
-			uploadPath.mkdirs();
-		}
+		
 		
 		for (int i=0; i<product_name.size(); i++) {
 			list.add(new ProductVO());
@@ -97,6 +95,7 @@ public class ProductController {
 			// uuid담기
 			String productUuid = uuid.toString();
 			
+			
 			System.out.println("productUuid:  "+productUuid);
 			
 			//uuid db담기
@@ -104,15 +103,15 @@ public class ProductController {
 
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
 			
-			System.out.println(uploadPath);
+			//System.out.println(uploadPath);
 
 			try {
 				File saveFile = new File(uploadPath, uploadFileName);				
 				multipartFile.get(i).transferTo(saveFile);
 				
+				//list.get(i).setProduct_uploadpath(uploadFolderPath);
 				list.get(i).setProduct_uploadpath(uploadFolderPath);
-				
-				System.out.println("uploadPath : " + uploadFolderPath);
+				//System.out.println("uploadPath : " + uploadFolderPath);
 
 			} catch (Exception e) {
 				e.printStackTrace();
