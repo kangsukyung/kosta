@@ -93,4 +93,13 @@ public class MembersController {
 		}
 		return member.getMember_id();
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/idFound", method = RequestMethod.POST)
+	public String idFound(@RequestParam("id_phone") String member_phone,@RequestParam("member_name") String member_name){
+		log.warn(member_phone);
+		log.warn(member_name);
+		MemberVO member=service.idFound(member_name, member_phone);
+		return member.getMember_id();
+	}
 }

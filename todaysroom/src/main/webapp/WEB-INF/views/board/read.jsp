@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
@@ -71,7 +71,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<section>
-		<%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
+		<%@include file="../includes/header.jsp"%>
 	</section>
 	<!--================ End Header Menu Area =================-->
 
@@ -109,7 +109,7 @@
 					<ul class="blog_meta list" id="blog_meta-list-member">
 						<li class="li_fixed_style"><a href="#"
 							class="blog_meta_list_a"> <i class="lnr lnr-user"></i>
-								<div class="blog_meta_list_div">${member.member_name }</div>
+								<div class="blog_meta_list_div">${bmember.member_name }</div>
 
 						</a></li>
 						<li class="li_fixed_style"><a href="#"
@@ -166,7 +166,7 @@
 									<a href="#">Politics,</a> <a href="#">Lifestyle</a>
 								</div>
 								<ul class="blog_meta list">
-									<li><a href="#">${member.member_name } <i
+									<li><a href="#">${bmember.member_name } <i
 											class="lnr lnr-user"></i>
 									</a></li>
 									<li><a href="#"><fmt:formatDate
@@ -183,7 +183,7 @@
 												value="${member.member_seq }"> <i
 												class="lnr lnr-bubble"></i>
 											</a> <input class="button button-blog" type="submit"
-												value="½ºÅ©·¦ÇÏ±â">
+												value="ìŠ¤í¬ë©í•˜ê¸°">
 											<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
 										</form>
 									</li>
@@ -270,15 +270,15 @@
 					<!-- </div> -->
 
 
-					<!-- Modal  Ãß°¡ -->
+					<!-- Modal  ì¶”ê°€ -->
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel">°Ô½Ã±Û »èÁ¦</h4>
+									<h4 class="modal-title" id="myModalLabel">ê²Œì‹œê¸€ ì‚­ì œ</h4>
 								</div>
-								<div class="modal-body">Ã³¸®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.</div>
+								<div class="modal-body">ì²˜ë¦¬ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Close</button>
@@ -307,7 +307,7 @@
 
 	<!--================ Start footer Area  =================-->
 	<section>
-		<%--  	<jsp:include page="../footer.jsp"></jsp:include> --%>
+		<%@include file="../includes/footer.jsp"%>
 	</section>
 	<!--================ End footer Area  =================-->
 
@@ -327,7 +327,7 @@
 		$(document).ready(function() {
 			var board_seq = $("input[name='board_seq']").val();
 
-			$(".modal-body").html(board_seq + "¹ø °Ô½Ã±ÛÀ» »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?")
+			$(".modal-body").html(board_seq + "ë²ˆ ê²Œì‹œê¸€ì„ ì‚­ì œ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")
 
 			var formObj = $("form");
 

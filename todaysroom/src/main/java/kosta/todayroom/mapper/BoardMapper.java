@@ -29,6 +29,7 @@ public interface BoardMapper {
 	public int remove(int board_seq);
 	public int removeRoom(int board_seq);
 	public int removeKnowhow(int board_seq);
+	public int removeAttach(int board_seq);
 	
 	
 	public List<MemberVO> memberList();

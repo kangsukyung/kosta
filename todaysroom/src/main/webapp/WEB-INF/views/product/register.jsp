@@ -140,7 +140,7 @@
 				            
 				            <div class="col-md-12 form-group">
 								<label id="product_insert_label">분류선택 </label>
-								<div>
+								<div id="select-boxes">
 												<select id="option2" name="store_lcategory" size="1">
 													<option value="">선택해주세요.</option>
 													<option value="living">쇼파/거실가구</option>

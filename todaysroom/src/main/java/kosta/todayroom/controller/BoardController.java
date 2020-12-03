@@ -99,7 +99,7 @@ public class BoardController {
 		
 		service.viewModify(board_seq);
 
-		model.addAttribute("member", service.member(board_seq));
+		model.addAttribute("bmember", service.member(board_seq));
 		model.addAttribute("board", service.read(board_seq));
 		model.addAttribute("room", service.roomwarming(board_seq));
 		model.addAttribute("knowhow", service.knowhow(board_seq));
@@ -136,6 +136,7 @@ public class BoardController {
 			service.removeRoom(board_seq);
 			service.removeKnowhow(board_seq);
 		}
+
 
 		if (service.remove(board_seq)) {
 			

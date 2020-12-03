@@ -92,7 +92,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> by Bu
 		</div>
 	</footer>
 	
-  <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="/main_resource/vendors/skrollr.min.js"></script>
   <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

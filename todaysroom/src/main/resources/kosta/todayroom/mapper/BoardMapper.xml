@@ -116,6 +116,10 @@
 	<delete id="removeKnowhow">
 		delete from knowhow where board_seq = #{board_seq}
 	</delete>
+	
+	<delete id="removeAttach">
+		delete from board_attach where board_seq = #{board_seq}
+	</delete>
 
 	<select id="memberList" resultType="kosta.todayroom.domain.MemberVO">
 		select * from member
