@@ -23,4 +23,5 @@ public interface MemberMapper {
 	public List<BoardVO> MyRoomList(int seq);
 	public List<BoardVO> MyKnowhowList(int seq);
 	public BoardAttachVO readThumbnail(@Param("board_seq")int board_seq, @Param("fileName")String fileName);
+	public List<MemberVO> memberList();
 }

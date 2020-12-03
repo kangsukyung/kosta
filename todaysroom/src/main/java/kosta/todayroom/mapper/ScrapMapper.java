@@ -8,11 +8,15 @@ public interface ScrapMapper {
 	
 	
 	//스크랩목록
-	public List<ScrapVO> ScrapgetList();
+	public List<ScrapVO> ScrapGetList();
+	public List<ScrapVO> ScrapAttachGetList();
 	
 	//스크랩목록-방들이만
 	public List<ScrapVO> ScrapBangList();
 	
 	public void ScrapRegister(ScrapVO scrap);
+	
+	//삭제
+	public int ScrapRemove(Long scrap_seq);
 
 }

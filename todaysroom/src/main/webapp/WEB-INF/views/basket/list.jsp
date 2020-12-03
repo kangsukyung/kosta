@@ -24,7 +24,7 @@
 </head>
 <body>
   <!--================ Start Header Menu Area =================-->
-  	<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
+  	<%@include file="../includes/header.jsp"%>
 	<!--================ End Header Menu Area =================-->
 
 	<!-- ================ start banner area ================= -->	
@@ -66,9 +66,12 @@
                          <c:forEach items="${list }" var="basket" varStatus="status">
                           <tr>
                               <td>
-                                  <div class="media">
+                                  <div class="media_product">
                                       <div class="d-flex">
-                                          <img src="/display?fileName=${basket.productvo.product_uuid }_${basket.productvo.product_fname}" alt="">
+	  									<input type="hidden" class="product_uploadpath"  value="${basket.productvo.product_uploadpath }">
+			                		    <input type="hidden" class="product_uuid"  value="${basket.productvo.product_uuid }">
+			                        	<input type="hidden" class="product_filename"  value="${basket.productvo.product_fname }">                                    
+	                                    <img class="product_image" src="22" alt="">
                                       </div>
                                       <div class="media-body">
                                           <a href="/store/read?store_seq=${basket.productvo.store_seq }">
@@ -198,7 +201,7 @@
 
 
   <!--================ Start footer Area  =================-->	
-<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
+<%@include file="../includes/footer.jsp"%>
 	<!--================ End footer Area  =================-->
 
 
@@ -242,6 +245,18 @@
 			});
 			$(".product_total_price").html(loadPrice);
 	   })
+	   
+	      //이미지 인코딩
+   $(".media_product").each(function(i, obj) {
+	   	var product_uploadpath = $(this).find(".product_uploadpath").val();
+		var product_uuid = $(this).find(".product_uuid").val();
+		var product_filename = $(this).find(".product_filename").val();
+			
+		var product_url = encodeURIComponent(product_uploadpath + "\\" + product_uuid + "_" + product_filename);
+		var product_urlstr = "/product/display?fileName="+product_url;
+		$(this).find(".product_image").attr("src",product_urlstr);
+			
+   })
 	   
 	   
 	   	$(".product_count").on("click", "button", function() {

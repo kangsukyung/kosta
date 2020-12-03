@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kosta.todayroom.domain.ProductAttachVO;
 import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.domain.StoreVO;
 import kosta.todayroom.mapper.ProductAttachMapper;
@@ -69,11 +70,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<ProductVO> ProductItemGetList() {
+	public List<ProductVO> ProductItemGetList(int member_seq) {
 		
 		log.info("Product Item List");
 		
-		return productMapper.ProductItemgetList();
+		return productMapper.ProductItemgetList(member_seq);
 	}
 	
 
@@ -101,6 +102,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productMapper.ProductStoreRemove(store_seq) == 1;
 	}
+
 
 	
 

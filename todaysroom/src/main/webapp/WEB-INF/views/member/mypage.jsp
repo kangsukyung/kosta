@@ -29,6 +29,7 @@
 </head>
  <%@include file="../includes/header.jsp"%>
 <body>
+	<sec:authentication property="principal.member" var="member"/>
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
 		<div class="container h-100">
@@ -57,7 +58,6 @@
             <div class="head">프로필</div>
             <ul class="main-categories">
 				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="principal.member" var="member"/>
 					<div>
 					
 					<c:if test="${member.member_profile !=null}">
@@ -98,7 +98,7 @@
 						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_2')">
-						<li><a href="/product/list" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+						<li><a href="/product/list?seq=${member.member_seq}" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
 					</sec:authorize>
 				</ul>
           </div>

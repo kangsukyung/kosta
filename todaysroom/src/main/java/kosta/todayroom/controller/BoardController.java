@@ -49,6 +49,11 @@ public class BoardController {
 			cri.setRoomwarming(roomwarming);
 		}
 		
+		log.info("여기");
+		log.info(service.boardListAttach(cri));
+		
+		model.addAttribute("boardAttachList", service.boardListAttach(cri));
+		
 		model.addAttribute("board", service.boardList(cri));
 
 		int total = service.boardTotalCount(cri);
