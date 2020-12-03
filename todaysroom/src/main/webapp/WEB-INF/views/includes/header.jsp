@@ -27,7 +27,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand logo_h" href="/board/list"><img src="/main_resource/img/logo.png" alt=""></a>
+          <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/board/listAction.do"><img src="/main_resource/img/logoimg2.png" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -38,27 +38,26 @@
               <li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
 	              <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="/board/list?filter=bang&roomwarming=셀프">방들이</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/board/list?filter=bang&roomwarming=전문가">전문가방들이</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/board/list?filter=knowhow">노하우</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/board/list?filter=qa">질문과답변</a></li>
+                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/listAction.do">방들이</a></li>
+                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/listAction.do">노하우</a></li>
+                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/board/listAction.do">질문과답변</a></li>
                 </ul>
 				</li>
               <li class="nav-item submenu dropdown">
-                <a href="/store/list?pageNum=1&amount=6" class="nav-link dropdown-toggle">스토어</a>
-                <!--data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" 
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">스토어</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="/store/list">스토어홈</a></li>
+                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/listStoreAction.do">카테고리</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">특가</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">베스트</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">기획전</a></li>
-                </ul> -->
+                </ul>
 				</li>
 				<li class="nav-item submenu dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"aria-expanded="false">인테리어</a>
                 <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link" href="/contractor/list">우리지역 업체</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/const/register">맞춤업체 추천</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">우리지역 업체</a></li>
+                  <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/const/insertConstForm.do">맞춤업체 추천</a></li>
                 </ul>
               </li>
               
@@ -77,8 +76,8 @@
               </li>
             </ul>
             <ul class="nav-shop">
-              <li class="nav-item" id="hw-search"><form id="hw-searchbar" action=""><input name="keyword" placeholder="검색어 입력"></form><button><i class="ti-search"></i></button></li>
-              <li class="nav-item" id="hw-shopping-cart"><button onclick="location.href='/basket/list?member_seq=${member.member_seq}'"><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button></li>
+              <li class="nav-item" id="hw-search"><form id="hw-searchbar" action=""><input name="keyword" placeholder="검색어 입력"></form><button><i class="ti-search" id="hw-search-icon"></i></button></li>
+              <li class="nav-item" id="hw-shopping-cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
 	
 		<sec:authorize access="isAuthenticated()">
               <li class="nav-item"><a href="/member/mypage" class="msk-id"><button onclick=""><sec:authentication property="principal.member.member_id"/></button></a></li>
@@ -100,13 +99,14 @@
   </header>
   
   <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/main_resource/js/jquery-ui.js"></script>
   <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="/main_resource/vendors/skrollr.min.js"></script>
   <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
   <script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
   <script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
   <script src="/main_resource/vendors/mail-script.js"></script>
-  <script src="/main_resource/js/main.js"></script>
+  <script src="/main_resource/js/main.js"></script>  
   <script src="/main_resource/js/header.js"></script>
   <script>
   $(document).ready(function(e){
@@ -117,7 +117,8 @@
 	      return;
 	  }
    });
-  })
+  
+  });
   </script>
 </body>
 </html>

@@ -20,6 +20,8 @@
 	  	<result property="product_price" column="product_price"></result>
 	  	<result property="product_fname" column="product_fname"></result>
 	  	<result property="store_seq" column="store_seq"></result>
+	  	<result property="product_uuid" column="product_uuid"></result>
+	  	<result property="product_uploadpath" column="product_uploadpath"></result>
   	</association>
   
   </resultMap>

@@ -13,6 +13,8 @@ public interface BoardMapper {
 	public List<BoardVO> List();
 	public List<BoardVO> ListPaging(BoardCriteria cri);
 	
+	public List<BoardVO> boardListAttach(BoardCriteria cri);
+	
 	public RoomwarmingVO roomwarming(int board_seq);
 	public KnowhowVO knowhow(int board_seq);
 	
@@ -29,6 +31,7 @@ public interface BoardMapper {
 	public int remove(int board_seq);
 	public int removeRoom(int board_seq);
 	public int removeKnowhow(int board_seq);
+	public int removeAttach(int board_seq);
 	
 	
 	public List<MemberVO> memberList();

@@ -30,13 +30,15 @@
 	<!-- 필요한 input들(?) -->
 	<input type="hidden"  id="review_store_seq" name="review_store_seq" value="${store.store_seq}">
 	<input type="hidden" id="review_member_seq" name="review_member_seq" value="${store.member_seq}"><!-- 글 쓴 사람 seq? -->
-	<sec:authentication property="principal.member" var="member"/>	<!-- 로그인 한 사람 seq? -->
 	<div id="my_modal">
 	    <div class="review-modal__title">
 			리뷰작성
 		</div>
 			<form class="review-modal__form"><!-- enctype="multipart/form-data" -->
 			<!-- <div class="review-modal__form"> -->
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal.member" var="member"/>	<!-- 로그인 한 사람 seq? -->
+				</sec:authorize>
 					<input type="hidden" id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
 					<input type="hidden"  name="${review.store_seq}" value="${review.store_seq}">
 					<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -109,8 +111,8 @@
 	                 </div>
 	   		</div> -->
 	        <div class="blog_left_sidebar">
-	        	<a class="review_sidebar_alig_jsb">최신순</a>
-	        	<a class="review_sidebar_alig_jsb">평점순</a>
+	        	<!-- <a class="review_sidebar_alig_jsb">최신순</a>
+	        	<a class="review_sidebar_alig_jsb">평점순</a> -->
 	        	<!-- review list 시작 -->
 	            <div class="production-review-item__container">
 	            </div>
