@@ -15,6 +15,7 @@ $(function() {
 		
 	})
 	
+	//필터
 	$("#allsofa").click(function() {
 		var str = "";
 		var category = "";
@@ -26,7 +27,7 @@ $(function() {
 				+'<div class="card text-center card-product">'
 				+'	<div class="card-product__img">'
 				+'		<img class="card-img"'
-				+'			src="/display?fileName=' + item.store_picture + '" alt="상품이미지">'
+				+'			src="/display?fileName=' + item.store_picture + '" alt="상품이미지" onerror="this.src=' + "'/main_resource/img/stimg.png'" + '">'
 				+'		<ul class="card-product__imgOverlay">'
 				+'			<li><button>'
 				+'					<i class="ti-search"></i>'
@@ -40,7 +41,7 @@ $(function() {
 				+'		</ul>'
 				+'	</div>'
 				+'	<div class="card-body">'
-				+'		<p>' + item.store_date+'</p>'
+				+'		<p>' + item.store_price+'</p>'
 				+'		<h4 class="card-product__title">'
 				+'			<a href="/store/read?store_seq='+item.store_seq+'">'+item.store_title+'</a>'
 				+'		</h4>'
@@ -62,13 +63,13 @@ $(function() {
 		var category = "";
 		$(".lattest-product-area").empty();
 		
-		$.getJSON("/store/pages/" + "bed" + "/" + "1" + ".json", function(data) {
+		$.getJSON("/store/pages/" + "living" + "/" + "1" + ".json", function(data) {
 			$.each(data, function(i, item) {
 				str += '<div class="row row_product_hw col-lg-4">'
 				+'<div class="card text-center card-product">'
 				+'	<div class="card-product__img">'
 				+'		<img class="card-img"'
-				+'			src="/display?fileName=' + item.store_picture + '" alt="상품이미지">'
+				+'			src="/display?fileName=' + item.store_picture + '" alt="상품이미지" onerror="this.src=' + "'/main_resource/img/stimg.png'" + '">'
 				+'		<ul class="card-product__imgOverlay">'
 				+'			<li><button>'
 				+'					<i class="ti-search"></i>'
@@ -82,7 +83,7 @@ $(function() {
 				+'		</ul>'
 				+'	</div>'
 				+'	<div class="card-body">'
-				+'		<p>' + item.store_date+'</p>'
+				+'		<p>' + item.store_price+'</p>'
 				+'		<h4 class="card-product__title">'
 				+'			<a href="/store/read?store_seq='+item.store_seq+'">'+item.store_title+'</a>'
 				+'		</h4>'

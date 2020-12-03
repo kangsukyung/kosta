@@ -4,9 +4,11 @@ $(document).ready(function() {
 	var bnoValue = $("#comments_board_seq").val();
 	var memValue = $("#comments_member_seq").val();
 	var myMemValue = $("#my_member_seq").val();
-	var myMemProfile = $("my_member_profile").val();
-	console.log("myMemValue" + myMemValue);
+	var myMemProfile = $("#my_member_profile").val();
+	var myMemNickname = $("#my_member_nickname").val();
+	
 	var replyUL = $(".chat");
+	
 	showList(1);
 	  
 	function showList(page){
@@ -29,12 +31,9 @@ $(document).ready(function() {
 			for (var i = 0, len = commentsList.length || 0; i < len; i++) {
 				str +="<div class='single-comment justify-content-between d-flex' data-comments_seq='"+commentsList[i].comments_seq+"'>"
 				str +="		<div class='user justify-content-between d-flex'>"
-				str +="			<div class='thumb'>"
-				str +="				<img src='C:\\upload\\"+myMemProfile+"' alt=''>"
-				str +="			</div>"
 				str +="			<div class='desc'>"
 				str +="			<h5>"
-				str +="				<a href='#'>"+commentsList[i].member_seq+"</a>"
+				str +="				<a href='#'>"+myMemNickname+"</a>"
 				str +="			</h5>"
 				str +="			<p class='comment'>"+commentsList[i].comments_content+"</p>"
 				str +="			<p class='date'>"+commentsList[i].comments_date
@@ -109,7 +108,7 @@ $(document).ready(function() {
     	console.log("comments_no : "+ comments_no);
     	
     	//p태그 input태그로 바꾸기
-   		$(this).parents().prevAll(".comment").contents().unwrap().wrap( '<input class="comments_modify_accept">' );
+   		$(this).parents().prevAll(".comment").contents().unwrap().wrap( '<input class="comments_modify_accept form-control">' );
     	
    		//삭제랑 수정버튼 숨기기
         $("#comments_remove_btn").hide();

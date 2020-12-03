@@ -25,14 +25,14 @@ $(function() {
    })
    
    //이미지 인코딩
-   $(".media_product").each(function(i, obj) {
+   $(".tbody_class").each(function(i, obj) {
+	   console.log("22222222");
 	   	var product_uploadpath = $(this).find(".product_uploadpath").val();
 		var product_uuid = $(this).find(".product_uuid").val();
 		var product_filename = $(this).find(".product_filename").val();
 			
 		var product_url = encodeURIComponent(product_uploadpath + "\\" + product_uuid + "_" + product_filename);
 		var product_urlstr = "/product/display?fileName="+product_url;
-		alert("22222222");
 		$(this).find(".product_image").attr("src",product_urlstr);
 			
    })

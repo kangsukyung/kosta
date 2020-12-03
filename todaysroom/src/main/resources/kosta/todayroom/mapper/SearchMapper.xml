@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="kosta.todayroom.mapper.SearchMapper">
+ 	<select id="BoardTitleList" resultType="String">
+ 		<![CDATA[
+ 			select board_title
+ 			from(
+ 				select rownum rn, board_title from board where board_title like #{keyword} order by board_seq desc
+ 			)
+ 			where rn<=4
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="StoreTitleList" resultType="String">
+ 		<![CDATA[
+ 			select store_title
+ 			from(
+ 				select rownum rn, store_title from store where store_title like #{keyword} order by store_seq desc
+ 			)
+ 			where rn<=3
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="ContractorBnameList" resultType="String">
+ 		<![CDATA[
+ 			select contractor_bname
+ 			from(
+ 				select rownum rn, contractor_bname from contractor where contractor_bname like #{keyword} order by contractor_seq desc
+ 			)
+ 			where rn<=3
+ 		]]>
+ 	</select>
+ 	
+ 	
+ </mapper>

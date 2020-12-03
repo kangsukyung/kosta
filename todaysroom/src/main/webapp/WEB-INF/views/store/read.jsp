@@ -56,6 +56,8 @@
 				<div class="store_lcategory_hidden">${store.store_lcategory }</div>
 				<input type="hidden" name="store_lcategory_hidden" value="${store.store_lcategory }">
 				<input type="hidden" name="store_title_hidden" value="${store.store_title }">
+				<input type="hidden" name="store_price" value="${store.store_price }">
+				<input type="hidden" name="store_seq" value="${store.store_seq }">
 				<div class="store_scategory">${store.store_scategory }</div>
 			</div>
 		</c:forEach>
@@ -73,7 +75,7 @@
 
 
 							<img class="img-fluid"
-								 src="" alt="">
+								 src="" alt="" onerror="this.src='/main_resource/img/stimg.png'">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -89,7 +91,7 @@
 						<div hidden="" class="store_lcategory">${store.store_lcategory }</div>
 						<c:forEach items="${list }" var="product" varStatus="status"
 							begin="0" end="0">							
-							<h2 class="product_price">${product.product_price }원외</h2>
+							<h2 class="product_price">${product.product_price }원 외</h2>
 						</c:forEach>
 						<button class="production-selling-header_action_button_hw"
 							type="button">
@@ -135,7 +137,7 @@
 									<button value="${status.count}" class="production-select-item" id="product_seq" type="button">
 											<div class="production-select-item__index">${status.count }</div>
 											<div class="production-select-item__image">
-												<img class="image" id="product_image_each" alt="" src="">
+												<img class="image" id="product_image_each" alt="" src="" onerror="this.src='/main_resource/img/stimg.png'">
 											</div>
 											<div class="production-select-item__contents">
 												<span class="production-select-item__contents__name" id="product_name"> ${product.product_name }</span>
@@ -185,10 +187,10 @@
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item"><a class="nav-link" id="home-tab"
+				<li class="nav-item"><a class="nav-link active" id="home-tab"
 					data-toggle="tab" href="#home" role="tab" aria-controls="home"
 					aria-selected="true">제품 상세</a></li>
-				<li class="nav-item"><a class="nav-link active" id="review-tab"
+				<li class="nav-item"><a class="nav-link" id="review-tab"
 					data-toggle="tab" href="#review" role="tab" aria-controls="review"
 					aria-selected="false">리뷰</a></li>
 				<li>
@@ -201,7 +203,7 @@
                 <input type="hidden" class="uuid2"  value="${attach[1].uuid }">
                 <input type="hidden" class="filename2"  value="${attach[1].fileName }">			
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">				
-					<img class="product_detail_image"  alt="제품상세이미지" src="">
+					<img class="product_detail_image"  alt="제품상세이미지" src="" onerror="this.src='/main_resource/img/stimg.png'">
 				</div>
 			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
 				aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -252,11 +254,13 @@
 				</div>
 			</div>
 			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade" id="home" role="tabpanel"
+				<div class="" id="home" role="tabpanel"
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
-<%-- 				<jsp:include page="../review/review.jsp"></jsp:include> --%>
+				<div class="" id="review" role="tabpanel" aria-labelledby="review-tab">
+ 					<jsp:include page="../review/review.jsp"></jsp:include>
+ 				</div>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
@@ -404,7 +408,7 @@
 			</div>
 	</section>
 	<section>
-	<jsp:include page="../review/review.jsp"></jsp:include>
+	<%-- <jsp:include page="../review/review.jsp"></jsp:include> --%>
 	</section>
 	<!--================End Product Description Area =================-->
 	
@@ -413,7 +417,7 @@
 		<div class="container">
 			<div class="section-intro pb-60px">
         <p>Popular Item in the market</p>
-        <h2>Top <span class="section-intro__style">Product</span></h2>
+        <h2><span class="section-intro__style">추천 상품</span></h2>
       </div>
 			<div class="row mt-30" id="recommend_list">
         <!-- <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
@@ -531,8 +535,6 @@
 		<%@include file="../includes/footer.jsp"%>
 	</section>
 
-
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

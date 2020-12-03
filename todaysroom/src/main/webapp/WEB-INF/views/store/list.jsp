@@ -203,7 +203,7 @@
 <%--                               <img class="card-img"
  											src="/product/display?fileName=${store.attachList[0].uuid }_${store.attachList[0].fileName}" alt="상품이미지"> --%>
                               <img class="card-img"
- 											src="" alt="상품이미지">
+ 											src="" alt="상품이미지" onerror="this.src='/main_resource/img/stimg.png'">
                               <ul class="card-product__imgOverlay">
                                  <li><button>
                                        <i class="ti-search"></i>
@@ -217,7 +217,7 @@
                               </ul>
                            </div>
                            <div class="card-body">
-                              <p>${store.store_date }</p>
+                              <p>${store.store_price }원 외</p>
                               <%-- <td><a href='/board/get?bno=<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a></td> --%>
                               <h4 class="card-product__title">
                                  <a href="/store/read?store_seq=${store.store_seq}">${store.store_title }</a>
@@ -281,7 +281,6 @@
 
 
 
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
