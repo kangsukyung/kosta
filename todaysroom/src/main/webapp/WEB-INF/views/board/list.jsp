@@ -146,7 +146,7 @@
 										<div class="col-md-9">
 											<div class="blog_post">
 												<div class="img_post_plz" title="${board.board_seq}">
-												
+													<img class="boardAttachImg" src="" onerror="this.src='/main_resource/img/stimg.png'">
 												</div>
 												<input class="imgBoardID" type="hidden" name="imgBoardSeq" value="${board.board_seq}">
 												<input class="imgBoardID" type="hidden" name="imgBoardThumbnail" value="${board.board_thumbnail}">
@@ -286,7 +286,8 @@
 									if (str == null || str.length == 0) {
 										var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
 										str = "<img src='/board/display?fileName="+thumbnailPath+"'>";
-										$("div[title='"+key+"']").append(str);
+										str2 = "/board/display?fileName="+thumbnailPath;
+										$("div[title='"+key+"']").children(".boardAttachImg").attr("src", str2);
 									}
 								}
 							}

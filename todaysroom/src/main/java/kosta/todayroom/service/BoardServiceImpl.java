@@ -161,4 +161,9 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.removeAttach(board_seq) == 1;
 	}
 
+	@Override
+	public List<BoardVO> boardListAttach(BoardCriteria cri) {
+		return mapper.boardListAttach(cri);
+	}
+
 }

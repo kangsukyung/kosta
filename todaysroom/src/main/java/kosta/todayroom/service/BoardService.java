@@ -12,6 +12,9 @@ import kosta.todayroom.domain.RoomwarmingVO;
 
 public interface BoardService {
 	public List<BoardVO> boardList(BoardCriteria cri);
+	
+	public List<BoardVO> boardListAttach(BoardCriteria cri);
+	
 	public RoomwarmingVO roomwarming(int board_seq);
 	public KnowhowVO knowhow(int board_seq);
 	
