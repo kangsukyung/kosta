@@ -83,4 +83,8 @@
 	<select id="readThumbnail" resultType="kosta.todayroom.domain.BoardAttachVO">
 		select * from board_attach where board_seq = #{board_seq} and filename = #{fileName}
 	</select>
+	
+	<select id="memberList" resultType="kosta.todayroom.domain.MemberVO">
+		select *from member ORDER BY member_seq DESC
+	</select>
 </mapper>

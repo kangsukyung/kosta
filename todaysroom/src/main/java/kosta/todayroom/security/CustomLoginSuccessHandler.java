@@ -41,6 +41,8 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		}else if(roleNames.contains("ROLE_0")){
 			request.getSession().invalidate();
 			response.getWriter().print("<script>alert('탈퇴한 회원입니다.'); location.href='/login?num=2'</script>");
+		}else if(roleNames.contains("ROLE_100")){
+			response.getWriter().print("<script>alert('관리자 페이지로 이동합니다.'); location.href='/admin/read'</script>");
 		}else{
 			MemberVO member=service.idCheck(request.getParameter("username"));
 			service.countUpdate(member.getMember_seq(), 0);
