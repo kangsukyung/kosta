@@ -39,4 +39,8 @@
 			oi_content=#{oi_content}
 		where oi_seq=#{oi_seq}
 	</update>
+	
+	<select id="oneList" resultType="kosta.todayroom.domain.One_inquiryVO">
+		select * from ONE_INQUIRY where oi_answer IS NULL ORDER BY oi_seq DESC
+	</select>
 </mapper>

@@ -40,6 +40,9 @@
 		<security:intercept-url pattern="/product/list"
 			access="hasRole('ROLE_2')"/>
 		
+		<security:intercept-url pattern="/productInquiry/replylist"
+			access="hasRole('ROLE_2')"/>
+		
 		<security:intercept-url pattern="/admin/read"
 			access="hasRole('ROLE_100')"/>
 			

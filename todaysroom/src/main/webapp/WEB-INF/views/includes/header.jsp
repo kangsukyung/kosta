@@ -77,7 +77,7 @@
             </ul>
             <ul class="nav-shop">
               <li class="nav-item" id="hw-search"><form id="hw-searchbar" action=""><input name="keyword" placeholder="검색어 입력"></form><button><i class="ti-search" id="hw-search-icon"></i></button></li>
-              <li class="nav-item" id="hw-shopping-cart"><button><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
+              <li class="nav-item" id="hw-shopping-cart"><button onclick="location.href='/basket/list?member_seq=${member.member_seq}'"><i class="ti-shopping-cart"></i><span class="nav-shop__circle"></span></button> </li>
 	
 		<sec:authorize access="isAuthenticated()">
               <li class="nav-item"><a href="/member/mypage" class="msk-id"><button onclick=""><sec:authentication property="principal.member.member_id"/></button></a></li>
