@@ -56,6 +56,7 @@
 				<div class="store_lcategory_hidden">${store.store_lcategory }</div>
 				<input type="hidden" name="store_lcategory_hidden" value="${store.store_lcategory }">
 				<input type="hidden" name="store_title_hidden" value="${store.store_title }">
+				<input type="hidden" name="store_price" value="${store.store_price }">
 				<div class="store_scategory">${store.store_scategory }</div>
 			</div>
 		</c:forEach>
@@ -89,7 +90,7 @@
 						<div hidden="" class="store_lcategory">${store.store_lcategory }</div>
 						<c:forEach items="${list }" var="product" varStatus="status"
 							begin="0" end="0">							
-							<h2 class="product_price">${product.product_price }원외</h2>
+							<h2 class="product_price">${product.product_price }원 외</h2>
 						</c:forEach>
 						<button class="production-selling-header_action_button_hw"
 							type="button">
@@ -413,7 +414,7 @@
 		<div class="container">
 			<div class="section-intro pb-60px">
         <p>Popular Item in the market</p>
-        <h2>Top <span class="section-intro__style">Product</span></h2>
+        <h2><span class="section-intro__style">추천 상품</span></h2>
       </div>
 			<div class="row mt-30" id="recommend_list">
         <!-- <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">

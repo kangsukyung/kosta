@@ -137,6 +137,7 @@ $(function() {
 	var store_size = parseInt($(".store_list_hidden .store_size").html());
 	var list_str = "";
 	
+	var store_price = $("input[name='store_price']").get();
 	var store_lcategory = $("input[name='store_lcategory_hidden']").get();
 	var store_title = $("input[name='store_title_hidden']").get();
 	var subsub = $("input[name='store_lcategory_hidden']").get();
@@ -149,7 +150,7 @@ $(function() {
 				+'           <a href="#"><img src="#" alt=""></a>'
 				+'           <div class="desc">'
 				+'               <a href="#" class="title">' + store_title[i].value + '</a>'
-				+'               <div class="price">$170.00</div>'
+				+'               <div class="price">' +store_price[i].value + '원 외</div>'
 				+'           </div>'
 				+'         </div>'
 				+'       </div>'
