@@ -9,7 +9,7 @@ public interface ProductMapper {
 	
 	//@Select("select * from product")
 	public List<StoreVO> ProductStoregetList();
-	public List<ProductVO> ProductItemgetList();
+	public List<ProductVO> ProductItemgetList(int member_seq);
 	
 	
 	public void ProductStoreRegister(StoreVO store);

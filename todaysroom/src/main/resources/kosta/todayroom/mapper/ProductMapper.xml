@@ -5,27 +5,50 @@
 <mapper namespace="kosta.todayroom.mapper.ProductMapper">
 
 
-<select id="ProductStoregetList" resultType="kosta.todayroom.domain.StoreVO">
+<!-- <select id="ProductStoregetList" resultType="kosta.todayroom.domain.StoreVO">
 	select * from store
-</select>
-
-
-<!-- <select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
-	
-	select * 
-	    from store s
-	    inner join product p
-	    on s.store_seq = p.store_seq
-	    where member_seq = 92
 </select> -->
 
 
-<select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
+<resultMap type="StoreVO" id="store">
+	<result column="member_seq" property="member_seq"/>
+</resultMap>
+
+<resultMap type="ProductVO" id="product">
+	<result column="product_seq" property="product_seq"/>
+	<result column="store_seq" property="store_seq"/>
+	<result column="product_name" property="product_name"/>
+	<result column="product_price" property="product_price"/>
+	<result column="product_fname" property="product_fname"/>
+	<result column="product_uuid" property="product_uuid"/>
+	<result column="product_uploadpath" property="product_uploadpath"/>
+	
+	<association property="store" javaType="kosta.todayroom.domain.StoreVO">
+	
+
+	<result column="member_seq" property="member_seq"/>
+
+	
+	</association>
+</resultMap>
+
+<select id="ProductItemgetList"  resultMap="product">
+	SELECT *
+  	FROM store s
+    INNER JOIN product p
+  	ON s.store_seq = p.store_seq
+  	where s.member_seq = #{member_seq}
+   
+</select>
+
+
+
+<!-- <select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
 
 	select * from product
 
 </select>
-
+ -->
 
 <insert id="ProductStoreRegister">
 		insert into store (store_seq, member_seq, store_title, store_content, store_name, store_price, store_date, store_lcategory, store_scategory)

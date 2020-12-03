@@ -2,6 +2,7 @@
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.domain.StoreVO;
+import kosta.todayroom.service.MemberService;
 import kosta.todayroom.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -31,6 +34,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class ProductController {
 	
 	private ProductService productService;
+	private MemberService service;
 	
 	private String getFolder() {
 
@@ -44,11 +48,11 @@ public class ProductController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		log.info("list");
+	public void list(Model model, Principal principal) {
+		MemberVO member=service.idCheck(principal.getName());
 		
-		model.addAttribute("list", productService.ProductItemGetList());
-		
+		List<ProductVO> pList=productService.ProductItemGetList(member.getMember_seq());
+		model.addAttribute("pList", pList);
 	} //end list
 	
 	

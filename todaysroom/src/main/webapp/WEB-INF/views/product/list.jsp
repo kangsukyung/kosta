@@ -37,6 +37,8 @@
 	href="${pageContext.request.contextPath}/main_resource/css/product_style.css">
 </head>
 <body>
+<sec:authentication property="principal.member" var="member"/>
+
 	<%@include file="../includes/header.jsp"%>
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="category">
@@ -127,83 +129,23 @@
 
 
 
+<!-- ============================PRODUCT LIST========================================= -->
 
-
-
-
-
-
-				<%-- <div class="ProductList" id="ProductList_box">
-					<div class="comments-area" id="ProductList_area">
-						<h4>등록한 상품 목록</h4>
-						<sec:authentication property="principal.member" var="member"/>   <!-- 로그인 한 사람 seq -->
-        				<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
-						<a href="/product/register">상품추가</a>
-						<div class="single-comment justify-content-between d-flex"
-							id="ProductList_detail">
-							<div class="user justify-content-between d-flex">
-								<!-- <div class="thumb">
-									<img src="../../main_resource/img/blog/c1.jpg" alt="">
-								</div> -->
-
-								<div class="desc">
-									<c:forEach var="product" items="${list}">
-										<c:if test="${product.product_fname != null }">
-																<c:set var="head"
-																	value="${fn:substring(product.product_fname, 0, fn:length(productVO.product_fname)-4) }"></c:set>
-																<c:set var="pattern"
-																	value="${fn:substring(product.product_fname, fn:length(head) +1, fn:length(productVO.product_fname)) }"></c:set>
-					
-																<c:choose>
-																	<c:when
-																		test="${pattern == 'png' || pattern == 'gif' || pattern == 'PNG' }">
-																		<img src="/kosta1200/upload/${head }_small.${pattern}">
-																		<img src="/display?fileName=${product.product_fname}">
-																	</c:when>
-																	<c:otherwise>
-																		<c:out value="NO IMAGE"></c:out>
-																	</c:otherwise>
-																</c:choose>
-					
-															</c:if>
-										<div id="product_list_in_list">
-											<img class="product_imgList"
-												src="/display?fileName=${product.product_uuid }_${product.product_fname}">
-											<label id="product_list_index"> 상품번호 : </label>${product.product_seq }<br>
-											<label id="product_list_index"> 상품명 : </label>${product.product_name }<br>
-											<label id="product_list_index"> 가 격 : </label>${product.product_price }<br>
-
-											<a
-												href="/product/modify?product_seq=<c:out value="${product.product_seq}"/>">수정하기</a>
-											<a
-												href="/product/remove?product_seq=<c:out value="${product.product_seq}"/>">삭제하기</a>
-											<a href="/product/remove?product_seq=${product.product_seq}">삭제하기</a>
-										</div>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
- --%>
-
-
-
-
-
+<%-- <div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>--%>
 <section class="blog">
       <div class="container">
         <div class="section-intro pb-60px">
           <p>My Store</p>
           <h2>todayRoom's <span class="section-intro__style">My STORE</span></h2>
 						<sec:authentication property="principal.member" var="member"/>   <!-- 로그인 한 사람 seq -->
-        				<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
+        				<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${product.store.member_seq}">
+        				<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
 						<a href="/product/register">상품추가</a>
         </div>
 	
           <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 ccc">
           
-          <c:forEach var="product" items="${list}">
+          <c:forEach items="${pList}" var="product">
           
             <div class="card card-blog" id="product_card-blog">
               <div class="card-blog__img">

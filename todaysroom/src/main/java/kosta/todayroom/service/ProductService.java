@@ -16,7 +16,7 @@ public interface ProductService {
 //  -- 리스트 	: 스토어리스트, 상품리스트
 
 	public List<StoreVO> ProductStoreGetList();
-	public List<ProductVO> ProductItemGetList();
+	public List<ProductVO> ProductItemGetList(int member_seq);
 	
 	
 	

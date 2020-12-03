@@ -86,9 +86,7 @@
   align-items: center;
 }
 </style>
-<section>
-	<jsp:include page="../../header.jsp"></jsp:include>
-</section>
+<%@include file="../includes/header.jsp"%>
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="product_header">
 		<!-- <img src="/main_resource/img/product_register_img.png"/> -->
@@ -314,7 +312,7 @@
 								<button type="submit" value="submit" class="button button-register w-100">상품등록</button>
 							</div>
 							
-								<sec:authorize access="isAuthenticated()">
+						<sec:authorize access="isAuthenticated()">
 						<sec:authentication property="principal.member" var="member"/>
 						<input type="hidden" name="member_seq" value="${member.member_seq }">
 						</sec:authorize>
@@ -567,10 +565,7 @@ $(document).ready(function(e){
 </script>
 
 
-<section>
- 	<jsp:include page="../../footer.jsp"></jsp:include>
-</section>
-
+<%@include file="../includes/footer.jsp"%>
 
   
 </body>
