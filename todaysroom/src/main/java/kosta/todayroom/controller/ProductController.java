@@ -1,4 +1,4 @@
-package kosta.todayroom.controller;
+ package kosta.todayroom.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -48,6 +48,7 @@ public class ProductController {
 		log.info("list");
 		
 		model.addAttribute("list", productService.ProductItemGetList());
+		
 	} //end list
 	
 	
@@ -56,7 +57,8 @@ public class ProductController {
 			,@RequestParam ("product_name") List<String> product_name
 			,@RequestParam ("product_price") List<Integer> product_price
 			,@RequestParam("product_fname") List<MultipartFile> multipartFile
-			,@RequestParam("product_uuid") List<String> product_uuid ){
+			,@RequestParam("product_uuid") List<String> product_uuid 
+			,@RequestParam("product_uploadpath") List<String> product_uploadpath ){
 		
 		String uploadFolder = "C:\\upload";
 
@@ -72,14 +74,17 @@ public class ProductController {
 		productService.ProductStoreRegister(store);
 		
 		List<ProductVO> list = new ArrayList<ProductVO>();
+	
+		
+		
 		for (int i=0; i<product_name.size(); i++) {
 			list.add(new ProductVO());
 			list.get(i).setProduct_name(product_name.get(i));
 			list.get(i).setProduct_price(product_price.get(i));
-			//list.get(i).setProduct_uuid(product_uuid.get(i));
 			
+			//System.out.println("uploadPath ::!!!!!!!!" + uploadPath);
 			String uploadFileName = multipartFile.get(i).getOriginalFilename();
-			
+				
 			//db에 담는거
 			list.get(i).setProduct_fname(uploadFileName);
 			
@@ -94,15 +99,23 @@ public class ProductController {
 			// uuid담기
 			String productUuid = uuid.toString();
 			
+			
 			System.out.println("productUuid:  "+productUuid);
 			
+			//uuid db담기
 			list.get(i).setProduct_uuid(productUuid);
 
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
+			
+			//System.out.println(uploadPath);
 
 			try {
-				File saveFile = new File(uploadPath, uploadFileName);
+				File saveFile = new File(uploadPath, uploadFileName);				
 				multipartFile.get(i).transferTo(saveFile);
+				
+				//list.get(i).setProduct_uploadpath(uploadFolderPath);
+				list.get(i).setProduct_uploadpath(uploadFolderPath);
+				//System.out.println("uploadPath : " + uploadFolderPath);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -119,6 +132,7 @@ public class ProductController {
 //		log.info("ProductItemRegister: " + product);
 
 		rttr.addFlashAttribute("result", store.getStore_seq());
+		//rttr.addFlashAttribute("result", store.getStore_seq());
 
 		
 		return "redirect:/product/list";
@@ -128,6 +142,22 @@ public class ProductController {
 	@GetMapping("/register")
 	public void register(){
 		
+	}
+	
+	@GetMapping("/modify")
+	public void modify(){
+		
+	}
+	
+	@PostMapping("/modify")
+	public String ProductModify(StoreVO store, RedirectAttributes rttr) {
+		log.info("modify:" + store);
+		
+		if(productService.ProductStoreModify(store)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+		return "redirect:/product/list";
 	}
 	
 	
@@ -142,16 +172,7 @@ public class ProductController {
 		model.addAttribute("store", productStoreService.ProductStoreRead(store_seq));
 	}
 	
-	@PostMapping("/modify")
-	public String ProductModify(StoreVO store, RedirectAttributes rttr) {
-		log.info("modify:" + store);
-		
-		if(productStoreService.ProductStoreModify(store)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		
-		return "redirect:/product/list";
-	}
+	
 	
 	@PostMapping("/remove")
 	public String ProductRemove(@RequestParam("store_seq") Long store_seq, RedirectAttributes rttr){

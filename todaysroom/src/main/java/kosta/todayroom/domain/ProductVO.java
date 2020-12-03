@@ -16,6 +16,12 @@ public class ProductVO {
 	private int product_price;
 	private String product_fname;
 	private String product_uuid;
+	private String product_uploadpath;
+	
+	
+	private StoreVO store;
+	
+
 	
 	
 }

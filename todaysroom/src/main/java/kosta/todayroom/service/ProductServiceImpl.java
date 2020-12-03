@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kosta.todayroom.domain.ProductAttachVO;
 import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.domain.StoreVO;
 import kosta.todayroom.mapper.ProductAttachMapper;
@@ -101,6 +102,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productMapper.ProductStoreRemove(store_seq) == 1;
 	}
+
 
 	
 

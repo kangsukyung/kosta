@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import kosta.todayroom.domain.BoardAttachVO;
 import kosta.todayroom.domain.ProductAttachVO;
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -164,6 +165,7 @@ public class ProductUploadController {
 	public ResponseEntity<byte[]> getFile2(String fileName) {
 
 		log.info("fileName: " + fileName);
+
 		
 		File file = new File("c:\\upload\\" + fileName);
 
@@ -220,6 +222,9 @@ public class ProductUploadController {
 
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
+	
+	
+
 	
 
 	@PostMapping("/deleteFile")
