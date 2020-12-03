@@ -28,6 +28,7 @@
 </head>
 
 <body>
+<sec:authentication property="principal.member" var="member"/>
 
 	<section class="product_description_area">
 		<div class="container">
@@ -63,42 +64,36 @@
 						<div class="col-lg-6">
 							<div class="review_box">
 								<h4>상품수정</h4>
-								<form action="/product/modify" class="form-contact form-review mt-3" method="post">
-									<input type="hidden" name="product_seq" value="${product.product_seq }">
+									<h4 class="card-blog__title">상품번호 : ${product.product_seq }</h4>
+								<form class="contents-row login_form" action="/product/modify?${_csrf.parameterName}=${_csrf.token}" id="contents-register_form" method="post">
+									<%-- <input type="text" name="product_seq" value="${product.product_seq }"> --%>
+									
 								
-									<div class="form-group">
-										<label id="product_insert_label">상품명 </label> <input class="form-control" id="product_insert_input" name="product_name" type="text" placeholder="상품명을 입력하세요." value="${product.product_name}">
-									</div>	
-																	
-									<div class="form-group">
-										<label id="product_insert_label">가격 </label> <input class="form-control" id="product_insert_input2" name="product_price" type="text" placeholder="가격을입력하세요." value="${product.product_price}">
-									</div>
-									 
-							
-									
-									<%-- <div class="form-group">
-										<label id="product_insert_label">대분류 </label> <input class="form-control" id="product_insert_input2" name="product_lcategory" type="text" placeholder="대분류를 입력하세요." value="${productVO.product_lcategory}">
-									</div>
-									
-									<div class="form-group">
-										<label id="product_insert_label">소분류 </label> <input class="form-control" id="product_insert_input2" name="product_scategory" type="text" placeholder="소분류를 입력하세요." value="${productVO.product_scategory}">
-									</div> --%>
-
-
-									
-										<div class="form-group text-center text-md-right mt-3" id="ksk_btn">
-											<input type="submit" class="button button--active button-review" value="수정하기">
-											<button type="submit" class="button button--active button-review">취소하기</button>
+										<div class="form-group">
+											<label id="product_insert_label">상품명 </label> 
+											<input class="form-control" id="product_insert_input" name="product_name" type="text" placeholder="상품명을 입력하세요." value="${product.product_name}">
+										</div>	
+																		
+										<div class="form-group">
+											<label id="product_insert_label">가격 </label> <input class="form-control" id="product_insert_input2" name="product_price" type="text" placeholder="가격을입력하세요." value="${product.product_price}">
 										</div>
 										
-									<sec:authorize access="isAuthenticated()">
-									<sec:authentication property="principal.member" var="member"/>
-									<input type="hidden" name="member_seq" value="${member.member_seq }">
-									</sec:authorize>
+										
+										<%-- <div class="form-group">
+											<label id="product_insert_label">상품사진 </label> 
+											<input class="form-control" id="product_insert_input2" name="product_fname" type="file" placeholder="가격을입력하세요." value="${product.product_fname}">
+										</div>
+														<div class="select_img">
+															<img src="" />
+														</div>
+														 
+										
+													</div> --%>
 									
-									<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>	
-										
-										
+										<div class="col-md-12 form-group">
+											<button type="submit" value="submit" class="button button-register w-100">수정하기</button>
+										</div>
+								
 								</form>
 
 							</div>
@@ -133,7 +128,19 @@ $(document).ready(function() {
 })
 
 </script>
-
+	<script>
+														 
+														  $("#gdsImg").change(function(){
+														   if(this.files && this.files[0]) {
+														    var reader = new FileReader;
+														    reader.onload = function(data) {
+														     $(".select_img img").attr("src", data.target.result).width(200);        
+														    }
+														    reader.readAsDataURL(this.files[0]);
+														   }
+														  }); 
+											</script>
+														<input type="hidden" <%=request.getRealPath("/") %> />s
 
 
 </body>

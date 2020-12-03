@@ -148,16 +148,30 @@ public class ProductController {
 		
 	}
 	
-	@GetMapping("/modify")
-	public void modify(){
+	@GetMapping({ "/read", "/modify" })
+	public void modify(@RequestParam("product_seq") int product_seq, Model model) {
+		
+		log.info("read");
+		
+		productService.ProductItemRead(product_seq);
+		
+		log.info("dkdkdkdkdkr");
+		
+		model.addAttribute("product", productService.ProductItemRead(product_seq));
+		//model.addAttribute("product", productService.ProductItemModify(product));
+
 		
 	}
 	
 	@PostMapping("/modify")
-	public String ProductModify(StoreVO store, RedirectAttributes rttr) {
-		log.info("modify:" + store);
+	public String ProductModify(ProductVO product, RedirectAttributes rttr, Model model) {
 		
-		if(productService.ProductStoreModify(store)) {
+		System.out.println("여기들어옴?");
+		log.info("들어왓니");
+		
+		log.info("modify:" + product);
+		
+		if(productService.ProductItemModify(product)) {
 			rttr.addFlashAttribute("result", "success");
 		}
 		
@@ -170,15 +184,15 @@ public class ProductController {
 	
 	
 	/*@GetMapping("/read")
-	public void ProductRead(@RequestParam("store_seq") Long store_seq, Model model) {
+	public void ProductRead(@RequestParam("product_seq") int product_seq, Model model) {
 		
 		log.info("/read");
-		model.addAttribute("store", productStoreService.ProductStoreRead(store_seq));
-	}
+		model.addAttribute("product", productService.ProductItemRead(product_seq));
+	}*/
 	
 	
 	
-	@PostMapping("/remove")
+	/*@PostMapping("/remove")
 	public String ProductRemove(@RequestParam("store_seq") Long store_seq, RedirectAttributes rttr){
 		
 		log.info("remove............." + store_seq);

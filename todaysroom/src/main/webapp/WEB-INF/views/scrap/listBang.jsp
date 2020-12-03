@@ -34,7 +34,7 @@
 		<div>
 			<h3 class="scrap_title">스크랩북</h3>
 			<p class="scrap_nickname">
-				<span>모든 글</span>
+				<span>방들이 글</span>
 			</p>
 		</div>
 		

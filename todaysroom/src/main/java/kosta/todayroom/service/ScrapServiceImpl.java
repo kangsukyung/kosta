@@ -37,16 +37,32 @@ public class ScrapServiceImpl implements ScrapService {
 	
 	@Override
 	public List<ScrapVO> ScrapAttachGetList(int member_seq){
-		log.info(" --------STORE ATTACH LIST -------");
+		log.info(" --------ScrapAttachGetList -------");
 		
 		return scrapMapper.ScrapAttachGetList(member_seq);
 	}
 
 	@Override
 	public List<ScrapVO> ScrapBangList(int member_seq) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("--------- ScrapBangList ---------");
+		
+		//System.out.println("스크랩목록:     " + scrapMapper.ScrapGetList());
+		
+		return scrapMapper.ScrapBangList(member_seq);
 	}
+	
+	
+	@Override
+	public List<ScrapVO> ScrapKnowList(int member_seq) {
+		log.info("--------- ScrapKnowList ---------");
+		
+		//System.out.println("스크랩목록:     " + scrapMapper.ScrapGetList());
+		
+		return scrapMapper.ScrapKnowList(member_seq);
+	}
+	
+	
+	
 	
 	@Override
 	public void ScrapRegister(ScrapVO scrap) {
@@ -65,6 +81,10 @@ public class ScrapServiceImpl implements ScrapService {
 		
 		return scrapMapper.ScrapRemove(scrap_seq) == 1;
 	}
+	
+	
+
+	
 
 	
 

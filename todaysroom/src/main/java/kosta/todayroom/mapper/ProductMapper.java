@@ -20,15 +20,16 @@ public interface ProductMapper {
 	public void ProductStoreRegister(StoreVO store);
 	public void ProductItemRegister(List<ProductVO> product);
 	
-	
+
+	//상품수정
+	public int ProductItemModify(ProductVO product);
 	
 	
 	public void ProductStoreRegisterSelectKey(StoreVO store);
 	
-	public StoreVO ProductStoreRead(Long store_seq);
+	public ProductVO ProductItemRead(int product_seq);
 	
 	public int ProductStoreRemove(Long store_seq);
 	
-	public int ProductStoreModify(StoreVO store);
 
 }

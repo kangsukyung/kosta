@@ -18,13 +18,13 @@ public interface ProductService {
 	public List<StoreVO> ProductStoreGetList();
 	public List<ProductVO> ProductItemGetList(int member_seq);
 	
+//	상품수정	
+	public boolean ProductItemModify(ProductVO product);
 	
 	
 	
+	public ProductVO ProductItemRead(int product_seq);
 	
-	public StoreVO ProductStoreRead(Long store_seq);
-	
-	public boolean ProductStoreModify(StoreVO store);
 	
 	public boolean ProductStoreRemove(Long store_seq);
 	

@@ -42,7 +42,7 @@
 
 
 
-
+<!-- 모든스크랩글 -->
 <resultMap type="kosta.todayroom.domain.ScrapVO" id="scrapMap">
 	<id property="board_seq" column="board_seq"/>
 	<result column="scrap_seq" property="scrap_seq"/>
@@ -87,43 +87,76 @@
 
 
 
-
-<!-- <resultMap type="BoardVO" id="Board">
-	<result column="board_seq" property="board_Seq"/>
-	<result column="board_thumbnail" property="board_Thumbnail"/>
-	<result column="board_title" property="board_Title"/>
-</resultMap>
-
-<resultMap type="ScrapVO" id="ScrapBang">
-	<result column="scrap_seq" property="scrap_seq"/>
-	<result column="member_seq" property="member_seq"/>
-	<result column="board_seq" property="board_seq"/>
-	
-	<association property="board" javaType="kosta.todayroom.domain.BoardVO">
-	
-
-	<result column="board_seq" property="board_seq"/>
-	<result column="board_thumbnail" property="board_thumbnail"/>
-	<result column="board_title" property="board_title"/>
-
-	
-	
-	</association>
-</resultMap> -->
-
-<!-- <select id="ScrapBangList" resultMap="ScrapBang">
+<!-- 방들이만 -->
+<select id="ScrapBangList" resultMap="Scrap">
 	SELECT *
   	FROM scrap s
  	INNER JOIN board b
   	ON s.board_seq = b.board_seq
   	where b.BOARD_CLASSIFICATION = 'bang'
-    AND s.member_seq = 92
+    AND s.member_seq = #{member_seq}
+
+</select>
+
+
+
+
+<!-- 노하루 -->
+<select id="ScrapKnowList" resultMap="Scrap">
+	SELECT *
+  	FROM scrap s
+ 	INNER JOIN board b
+  	ON s.board_seq = b.board_seq
+  	where b.BOARD_CLASSIFICATION = 'knowhow'
+    AND s.member_seq = #{member_seq}
+
+</select>
+
+
+
+<!-- 닉네임보기 -->
+<!-- <resultMap type="MemberVO" id="member">
+	<result column="member_seq" property="member_Seq"/>
+	<result column="member_nickname" property="member_nickname"/>
+</resultMap>
+
+<resultMap type="ScrapVO" id="Scrap">
+	<result column="scrap_seq" property="scrap_seq"/>
+	<result column="member_seq" property="member_seq"/>
+	<result column="board_seq" property="board_seq"/>
+	
+	<association property="member" javaType="kosta.todayroom.domain.MemberVO">
+	
+
+	<result column="member_seq" property="member_Seq"/>
+	<result column="member_nickname" property="member_nickname"/>
+	
+	
+	</association>
+</resultMap>
+
+
+<select id="ScrapNickname" resultMap="Scrap">
+SELECT *
+  	FROM scrap s
+ 	INNER JOIN member m
+  	ON s.member_seq = m.member_seq
+    where s.member_seq = #{member_seq}
+
 
 </select> -->
 
 
 
 
+
+
+
+
+
+
+
+<!-- 스크랩 삭제 -->
 <delete id="ScrapRemove">
 	delete from scrap where scrap_seq = #{scrap_seq}
 </delete>
