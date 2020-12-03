@@ -33,8 +33,8 @@
 			<c:forEach items="${list }" var="item">
 				<li class="list-items"><a href="/member/users/${item.key }"></a>
 					<div class="img-wrap">
-												<img src="${item.value.board_thumbnail }">
-<!-- 						<img src="/main_resource/img/main-banner.jpg"> -->
+<%-- 												<img src="${item.value.board_thumbnail }"> --%>
+						<img src="/main_resource/img/main-banner.jpg">
 					</div>
 					<div class="content-wrap">
 						<img src="/member/display?fileId=${item.value.member_id }">
