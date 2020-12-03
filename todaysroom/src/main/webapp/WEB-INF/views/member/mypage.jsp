@@ -32,7 +32,7 @@
 	<sec:authentication property="principal.member" var="member"/>
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
+		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>마이페이지</h1>

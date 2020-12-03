@@ -25,7 +25,7 @@
 	 <%@include file="../includes/header.jsp"%>
 	 <sec:authentication property="principal.member" var="member"/>
 	 <section class="blog-banner-area" id="category">
-		<div class="container h-100">
+		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>고객센터</h1>
@@ -145,12 +145,14 @@
          value=<fmt:formatDate pattern="yyyy-MM-dd" value="${one.oi_date }"/>  
          readonly="readonly">
         </div>
-
-<button data-oper='modify' class="btn btn-default" id="modifyButton" style="background-color: #e9ecef; display: none;">수정</button>
-<button data-oper='modify' class="btn btn-default" id="modifyButtonForm" style="background-color: #e9ecef;">수정</button>
-<button data-oper='list' class="btn btn-info" id="listButton">목록</button>
-<button data-oper='delete' class="btn btn-info" id="deleteButton"style="background: #c5322d;">삭제</button>
-
+    <div>
+<c:if test="${one.oi_answer==null}">
+	<button data-oper='modify' class="btn btn-default" id="modifyButton" style="background-color: #e9ecef; display: none;">수정</button>
+	<button data-oper='modify' class="btn btn-default" id="modifyButtonForm" style="background-color: #e9ecef;">수정</button>
+	<button data-oper='delete' class="btn btn-info" id="deleteButton"style="background: #c5322d;">삭제</button>
+	<button data-oper='list' class="btn btn-info" id="listButton">목록</button>
+</c:if>
+	</div>
 <form id='listForm' action="/oneInquriy/list" method="get">
   <input type='hidden' name='pageNum' value="${cri.pageNum}">
 </form>
@@ -175,6 +177,29 @@
   </div>
   <!-- end panel -->
 </div>
+<c:if test="${one.oi_answer!=null}">
+<div class='row'>
+
+  <div class="col-lg-12">
+
+    <div class="panel panel-default">    
+      <div class="panel-heading">
+        <i class="fa fa-comments fa-fw"></i>답변<button class="btn btn-primary btn-xs pull-right" id="listButton" style="border-color: #f5f5f5;height: 30px;font-size: 13px;color: black; background-color: white;">목록</button>
+      </div>      
+      <div style="padding-left: 20px;">${one.oi_answer}</div>
+      
+      <div class="panel-body">        
+      
+        <ul class="chat">
+
+        </ul>
+      </div>
+
+	<div class="panel-footer"></div>
+	</div>
+  </div>
+</div>
+</c:if>
           </section>
           </div>
        		</div>
