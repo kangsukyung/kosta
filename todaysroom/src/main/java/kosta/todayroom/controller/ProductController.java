@@ -44,10 +44,11 @@ public class ProductController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		log.info("list");
-		
-		model.addAttribute("list", productService.ProductItemGetList());
+	public void list(@RequestParam("seq") int member_seq ,Model model) {
+		log.warn(member_seq);
+		List<ProductVO> pr=productService.ProductItemGetList(member_seq);
+		log.warn(pr);
+		model.addAttribute("pList", productService.ProductItemGetList(member_seq));
 		
 	} //end list
 	

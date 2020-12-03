@@ -70,11 +70,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<ProductVO> ProductItemGetList() {
+	public List<ProductVO> ProductItemGetList(int member_seq) {
 		
 		log.info("Product Item List");
 		
-		return productMapper.ProductItemgetList();
+		return productMapper.ProductItemgetList(member_seq);
 	}
 	
 
