@@ -98,7 +98,7 @@
 						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_2')">
-						<li><a href="/product/list?seq=${member.member_seq}" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+						<li><a href="/product/list" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
 					</sec:authorize>
 				</ul>
           </div>
