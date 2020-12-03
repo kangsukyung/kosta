@@ -128,14 +128,14 @@
 		                           	<input type="hidden" class="uuid"  value="${attach[0].uuid }">
 		                           	<input type="hidden" class="filename"  value="${attach[0].fileName }">	 --%>								
 									<input type="hidden" name='product_seq' value="${product.product_seq }">
-									<button value="${status.count}" class="production-select-item" id="product_seq" type="button">
-											<%-- <input type="hidden" class="uploadpath3"  value="${product.product_uploadpath }">
-		                		           	<input type="hidden" class="uuid3"  value="${product.product_uuid }">
-		                        		   	<input type="hidden" class="filename3"  value="${product.product_fname }"> --%>
+									<input type="hidden" class="product_uploadpath"  value="${product.product_uploadpath }">
+		                		    <input type="hidden" class="product_uuid"  value="${product.product_uuid }">
+		                        	<input type="hidden" class="product_filename"  value="${product.product_fname }">
 									
+									<button value="${status.count}" class="production-select-item" id="product_seq" type="button">
 											<div class="production-select-item__index">${status.count }</div>
 											<div class="production-select-item__image">
-												<img class="image" id="product_image" alt="" src="/display?fileName=${product.product_uuid }_${product.product_fname}">
+												<img class="image" id="product_image" alt="" src="">
 											</div>
 											<div class="production-select-item__contents">
 												<span class="production-select-item__contents__name" id="product_name"> ${product.product_name }</span>

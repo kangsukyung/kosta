@@ -68,7 +68,10 @@
                               <td>
                                   <div class="media">
                                       <div class="d-flex">
-                                          <img src="/display?fileName=${basket.productvo.product_uuid }_${basket.productvo.product_fname}" alt="">
+	  									<input type="hidden" class="product_uploadpath"  value="${basket.productvo.product_uploadpath }">
+			                		    <input type="hidden" class="product_uuid"  value="${basket.productvo.product_uuid }">
+			                        	<input type="hidden" class="product_filename"  value="${basket.productvo.product_fname }">                                    
+	                                    <img id="product_image"  src="/display?fileName=${basket.productvo.product_uuid }_${basket.productvo.product_fname}" alt="">
                                       </div>
                                       <div class="media-body">
                                           <a href="/store/read?store_seq=${basket.productvo.store_seq }">
