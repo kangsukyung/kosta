@@ -355,3 +355,9 @@ section.blog{
 	padding-right: 5px !important;
 	max-width : none !important;
 }
+
+
+.card-blog__link{
+	border: none !important;
+	background: none !important;
+}

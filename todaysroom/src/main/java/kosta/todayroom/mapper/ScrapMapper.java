@@ -7,13 +7,16 @@ import kosta.todayroom.domain.ScrapVO;
 public interface ScrapMapper {
 	
 	
-	//스크랩목록
-	public List<ScrapVO> ScrapGetList();
-	public List<ScrapVO> ScrapAttachGetList();
+	//스크랩목록_모든글
+	public List<ScrapVO> ScrapGetList(int member_seq);
+	public List<ScrapVO> ScrapAttachGetList(int member_seq);
 	
 	//스크랩목록-방들이만
-	public List<ScrapVO> ScrapBangList();
+	public List<ScrapVO> ScrapBangList(int member_seq);
 	
+	//스크랩목록- 노하우
+	
+	//스크랩등록
 	public void ScrapRegister(ScrapVO scrap);
 	
 	//삭제
