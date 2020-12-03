@@ -10,7 +10,38 @@ $(function() {
 		};
 	})
 
+	$(".single-prd-item").each(function(i, obj) {
+		var uploadpath = $(this).find(".uploadpath").val();
+		var uuid = $(this).find(".uuid").val();
+		var filename = $(this).find(".filename").val();
+		
+		var url = encodeURIComponent(uploadpath + "\\" + uuid + "_" + filename);
+		var urlstr = "/product/display?fileName="+url;
+		$(this).find(".img-fluid").attr("src",urlstr);
+		
+	})
+	
+		var uploadpath = $(this).find(".uploadpath2").val();
+		var uuid = $(this).find(".uuid2").val();
+		var filename = $(this).find(".filename2").val();
+		
+		var url = encodeURIComponent(uploadpath + "\\" + uuid + "_" + filename);
+		var urlstr = "/product/display?fileName="+url;
+		$(this).find(".product_detail_image").attr("src",urlstr);
 
+		
+		$(".production-select-list__item").each(function(i,obj){
+			var product_uploadpath = $(this).find(".product_uploadpath").val();
+			var product_uuid = $(this).find(".product_uuid").val();
+			var product_filename = $(this).find(".product_filename").val();
+			
+			var product_url = encodeURIComponent(product_uploadpath + "\\" + product_uuid + "_" + product_filename);
+			var product_urlstr = "/product/display?fileName="+product_url;
+			$(this).find(".image").attr("src",product_urlstr);
+			
+		})
+		
+		
  $(".production-select-list__item").on("click","button", function() {
 	   //상품 클릭하면 장바구니 옵션 폼 생성
 	var product_seq = $(this).parent().find("input[name=product_seq]").val();
@@ -99,25 +130,27 @@ $(function() {
    })
 
    
-   //요기부터 스토어 추천 리스트 해야함
+   //스토어 추천 리스트
    var store_status_count = $(".store_status_count").data("count");
-   var store_title = $(".store_title").html();
 	var store_item_category = $(".store_lcategory").html();
 	
-   var store_lcategory = $(".store_lcategory").html();
 	var store_size = parseInt($(".store_list_hidden .store_size").html());
 	var list_str = "";
 	
-	//인덱스 1씩 더하면서 비교해야함
-	for (var i = 0; i < store_size; i++) {
-		if(store_lcategory == store_item_category) {
+	var store_price = $("input[name='store_price']").get();
+	var store_lcategory = $("input[name='store_lcategory_hidden']").get();
+	var store_title = $("input[name='store_title_hidden']").get();
+	var subsub = $("input[name='store_lcategory_hidden']").get();
+
+	for (var i = 0; i < 8; i++) {
+		if(store_lcategory[i].value == store_item_category) {
 			list_str += '<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">'
 				+'       <div class="single-search-product-wrapper">'
 				+'         <div class="single-search-product d-flex">'
 				+'           <a href="#"><img src="#" alt=""></a>'
 				+'           <div class="desc">'
-				+'               <a href="#" class="title">' + store_title + '</a>'
-				+'               <div class="price">$170.00</div>'
+				+'               <a href="#" class="title">' + store_title[i].value + '</a>'
+				+'               <div class="price">' +store_price[i].value + '원 외</div>'
 				+'           </div>'
 				+'         </div>'
 				+'       </div>'

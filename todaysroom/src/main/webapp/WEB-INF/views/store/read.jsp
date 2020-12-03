@@ -26,7 +26,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<!--================ End Header Menu Area =================-->
-	<jsp:include page="/WEB-INF/header.jsp"></jsp:include>
+	<%@include file="../includes/header.jsp"%>
 	<!-- ================ start banner area ================= -->
 
 	<section class="blog-banner-area" id="blog">
@@ -53,7 +53,10 @@
 		<c:forEach items="${store_list }" var="store" varStatus="status">
 			<div class="store_status_count" data-count="${status.index }">
 				<div class="store_title">${store.store_title }</div>
-				<div class="store_lcategory">${store.store_lcategory }</div>
+				<div class="store_lcategory_hidden">${store.store_lcategory }</div>
+				<input type="hidden" name="store_lcategory_hidden" value="${store.store_lcategory }">
+				<input type="hidden" name="store_title_hidden" value="${store.store_title }">
+				<input type="hidden" name="store_price" value="${store.store_price }">
 				<div class="store_scategory">${store.store_scategory }</div>
 			</div>
 		</c:forEach>
@@ -65,9 +68,13 @@
 				<div class="col-lg-6">
 					<div class="owl-carousel owl-theme s_Product_carousel">
 						<div class="single-prd-item">
+							<input type="hidden" class="uploadpath"  value="${attach[0].uploadPath }">
+                           	<input type="hidden" class="uuid"  value="${attach[0].uuid }">
+                           	<input type="hidden" class="filename"  value="${attach[0].fileName }">
+
 
 							<img class="img-fluid"
-								 src="/display?fileName=${attach[0].uuid }_${attach[0].fileName}" alt="">
+								 src="" alt="" onerror="this.src='/main_resource/img/stimg.png'">
 						</div>
 						<!-- <div class="single-prd-item">
 							<img class="img-fluid" src="img/category/s-p1.jpg" alt="">
@@ -82,8 +89,8 @@
 						<h3>${store.store_title }</h3>
 						<div hidden="" class="store_lcategory">${store.store_lcategory }</div>
 						<c:forEach items="${list }" var="product" varStatus="status"
-							begin="0" end="0">
-							<h2 class="product_price">${product.product_price }원외</h2>
+							begin="0" end="0">							
+							<h2 class="product_price">${product.product_price }원 외</h2>
 						</c:forEach>
 						<button class="production-selling-header_action_button_hw"
 							type="button">
@@ -118,11 +125,18 @@
 							<ul class="production-select-list production-select-dropdown__list">
 								<c:forEach items="${list }" var="product" varStatus="status">
 									<li class="production-select-list__item">
+<%-- 									<input type="hidden" class="uploadpath"  value="${attach[0].uploadPath }">
+		                           	<input type="hidden" class="uuid"  value="${attach[0].uuid }">
+		                           	<input type="hidden" class="filename"  value="${attach[0].fileName }">	 --%>								
 									<input type="hidden" name='product_seq' value="${product.product_seq }">
+									<input type="hidden" class="product_uploadpath"  value="${product.product_uploadpath }">
+		                		    <input type="hidden" class="product_uuid"  value="${product.product_uuid }">
+		                        	<input type="hidden" class="product_filename"  value="${product.product_fname }">
+									
 									<button value="${status.count}" class="production-select-item" id="product_seq" type="button">
 											<div class="production-select-item__index">${status.count }</div>
 											<div class="production-select-item__image">
-												<img class="image" id="product_image" alt="" src="/display?fileName=${product.product_uuid }_${product.product_fname}">
+												<img class="image" id="product_image_each" alt="" src="" onerror="this.src='/main_resource/img/stimg.png'">
 											</div>
 											<div class="production-select-item__contents">
 												<span class="production-select-item__contents__name" id="product_name"> ${product.product_name }</span>
@@ -172,77 +186,78 @@
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item"><a class="nav-link active" id="home-tab"
+				<li class="nav-item"><a class="nav-link" id="home-tab"
 					data-toggle="tab" href="#home" role="tab" aria-controls="home"
-					aria-selected="false">제품 상세</a></li>
-				<li class="nav-item"><a class="nav-link" id="review-tab"
+					aria-selected="true">제품 상세</a></li>
+				<li class="nav-item"><a class="nav-link active" id="review-tab"
 					data-toggle="tab" href="#review" role="tab" aria-controls="review"
-					aria-selected="true">리뷰</a></li>
+					aria-selected="false">리뷰</a></li>
 				<li>
 					<button type="button" class="btn btn-primary" id="inquiry-button"
 						data-toggle="modal" data-target="#exampleModal">문의하기</button>
 				</li>
 			</ul>
 			<div class="tab-cotent" id="myTabContent">
+				<input type="hidden" class="uploadpath2"  value="${attach[1].uploadPath }">
+                <input type="hidden" class="uuid2"  value="${attach[1].uuid }">
+                <input type="hidden" class="filename2"  value="${attach[1].fileName }">			
 				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">				
-					<img alt="제품상세이미지" src="/display?fileName=${attach[1].uuid }_${attach[1].fileName}">
+					<img class="product_detail_image"  alt="제품상세이미지" src="" onerror="this.src='/main_resource/img/stimg.png'">
 				</div>
-				<div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">	
-					<jsp:include page="../review/review.jsp"></jsp:include>
-				</div>
-				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-					aria-labelledby="exampleModalLabel" aria-hidden="true"
-					data-backdrop="static">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title" id="exampleModalLabel">상품 문의하기</h4>
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<form id="my-form" me>
-									<div class="btn-group btn-group-toggle" data-toggle="buttons">
-										<label class="btn btn-default btn-lg"> <input
-											type="radio" name="pi_type" value="product"> 상품
-										</label> <label class="btn btn-default btn-lg"> <input
-											type="radio" name="pi_type" value="shipping"> 배송
-										</label> <label class="btn btn-default btn-lg"> <input
-											type="radio" name="pi_type" value="return"> 반품
-										</label> <label class="btn btn-default btn-lg"> <input
-											type="radio" name="pi_type" value="exchange"> 교환
-										</label> <label class="btn btn-default btn-lg"> <input
-											type="radio" name="pi_type" value="refund"> 환불
-										</label> <label class="btn btn-default btn-lg"> <input
-											type="radio" name="pi_type" value="etc"> 기타
-										</label>
-									</div>
-									<div class="form-group">
-										<label for="message-text" class="control-label">문의내용</label>
-										<textarea class="form-control" id="message-text"
-											name="pi_content"></textarea>
-									</div>
-									<input hidden="hidden" name="member_seq" value="1">
-									<!-- value 값 추후 조정 필요 -->
-									<input hidden="hidden" name="product_seq" value="1">
-								</form>
-								<div>문의내용에 대한 답변은 ‘마이페이지 &gt; 나의 쇼핑 &gt; 나의 문의내역’ 또는 ‘상품
-									상세페이지’에서 확인 가능합니다.</div>
-							</div>
-							<div class="modal-footer">
-								<button type="submit" form="my-form" class="btn btn-primary"
-									id="inquiry-submit">문의하기</button>
-							</div>
+			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+				aria-labelledby="exampleModalLabel" aria-hidden="true"
+				data-backdrop="static">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="exampleModalLabel">상품 문의하기</h4>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form id="my-form" me>
+								<div class="btn-group btn-group-toggle" data-toggle="buttons">
+									<label class="btn btn-default btn-lg"> <input
+										type="radio" name="pi_type" value="product"> 상품
+									</label> <label class="btn btn-default btn-lg"> <input
+										type="radio" name="pi_type" value="shipping"> 배송
+									</label> <label class="btn btn-default btn-lg"> <input
+										type="radio" name="pi_type" value="return"> 반품
+									</label> <label class="btn btn-default btn-lg"> <input
+										type="radio" name="pi_type" value="exchange"> 교환
+									</label> <label class="btn btn-default btn-lg"> <input
+										type="radio" name="pi_type" value="refund"> 환불
+									</label> <label class="btn btn-default btn-lg"> <input
+										type="radio" name="pi_type" value="etc"> 기타
+									</label>
+								</div>
+								<div class="form-group">
+									<label for="message-text" class="control-label">문의내용</label>
+									<textarea class="form-control" id="message-text"
+										name="pi_content"></textarea>
+								</div>
+								<input hidden="hidden" name="member_seq" value="1">
+								<!-- value 값 추후 조정 필요 -->
+								<input hidden="hidden" name="product_seq" value="1">
+							</form>
+							<div>문의내용에 대한 답변은 ‘마이페이지 &gt; 나의 쇼핑 &gt; 나의 문의내역’ 또는 ‘상품
+								상세페이지’에서 확인 가능합니다.</div>
+						</div>
+						<div class="modal-footer">
+							<button type="submit" form="my-form" class="btn btn-primary"
+								id="inquiry-submit">문의하기</button>
 						</div>
 					</div>
 				</div>
-			<%-- <div class="tab-content" id="myTabContent">
+			</div>
+			<div class="tab-content" id="myTabContent">
 				<div class="tab-pane fade" id="home" role="tabpanel"
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
+ 				<jsp:include page="../review/review.jsp"></jsp:include>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
@@ -385,7 +400,7 @@
 						</div>
 					</div>
 					</div>
-				</div> --%>
+				</div>
 			</div>
 			</div>
 	</section>
@@ -399,7 +414,7 @@
 		<div class="container">
 			<div class="section-intro pb-60px">
         <p>Popular Item in the market</p>
-        <h2>Top <span class="section-intro__style">Product</span></h2>
+        <h2><span class="section-intro__style">추천 상품</span></h2>
       </div>
 			<div class="row mt-30" id="recommend_list">
         <!-- <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
@@ -514,11 +529,10 @@
 
 	<!--================ End footer Area  =================-->
 	<section>
-		<jsp:include page="/WEB-INF/footer.jsp"></jsp:include>
+		<%@include file="../includes/footer.jsp"%>
 	</section>
 
 
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

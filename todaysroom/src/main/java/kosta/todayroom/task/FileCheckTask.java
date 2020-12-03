@@ -36,26 +36,26 @@ public class FileCheckTask {
 		return str.replace("-", File.separator);
 	}
 	
-	@Scheduled(cron="0 0 10 * * *")
-	public void checkFiles() throws Exception {
-		//File list in database
-		List<BoardAttachVO> fileList = attachMapper.getOldFiles();
-		
-		//ready for check file in directory with database file list
-		List<Path> fileListPaths = fileList.stream().map(vo -> Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName())).collect(Collectors.toList());
-		
-		//image file has thumnail file
-		fileList.stream().filter(vo -> vo.isFileType() == true).map(vo -> Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid() + "_" + vo.getFileName())).forEach(p -> fileListPaths.add(p));
-		
-		fileListPaths.forEach(p -> log.warn(p));
-		
-		//file in yesterday directory
-		File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile();
-		
-		File[] removeFiles = targetDir.listFiles(file -> fileListPaths.contains(file.toPath()) == false);
-		
-		for (File file : removeFiles) {
-			file.delete();
-		}
-	}
+//	@Scheduled(cron="0 0 10 * * *")
+//	public void checkFiles() throws Exception {
+//		//File list in database
+//		List<BoardAttachVO> fileList = attachMapper.getOldFiles();
+//		
+//		//ready for check file in directory with database file list
+//		List<Path> fileListPaths = fileList.stream().map(vo -> Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName())).collect(Collectors.toList());
+//		
+//		//image file has thumnail file
+//		fileList.stream().filter(vo -> vo.isFileType() == true).map(vo -> Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid() + "_" + vo.getFileName())).forEach(p -> fileListPaths.add(p));
+//		
+//		fileListPaths.forEach(p -> log.warn(p));
+//		
+//		//file in yesterday directory
+//		File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile();
+//		
+//		File[] removeFiles = targetDir.listFiles(file -> fileListPaths.contains(file.toPath()) == false);
+//		
+//		for (File file : removeFiles) {
+//			file.delete();
+//		}
+//	}
 }

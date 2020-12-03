@@ -107,4 +107,9 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.readThumbnail(board_seq, fileName);
 	}
 
+	@Override
+	public List<MemberVO> memberList() {
+		return mapper.memberList();
+	}
+
 }
