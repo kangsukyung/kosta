@@ -148,7 +148,7 @@
                   <li><a href="#">상품번호 </a></li>
                   <li><a href="#"><i class="ti-comments-smiley"></i> ${product.product_seq }</a></li>
                 </ul>
-                <h4 class="card-blog__title"><a href="single-blog.html">${product.product_name }</a></h4>
+                <h4 class="card-blog__title">${product.product_name }</h4>
                 <p>${product.product_price }</p>
                 <a class="card-blog__link" href="/product/modify?product_seq=<c:out value="${product.product_seq}"/>">수정하기 <i class="ti-arrow-right"></i></a>
               </div>

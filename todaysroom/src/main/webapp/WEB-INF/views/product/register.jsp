@@ -53,7 +53,7 @@
     flex-flow: row;
     justify-content: center;
     align-items: center;
-    margi
+    }
 
 .uploadResult ul li {
 	list-style: none;
@@ -85,6 +85,7 @@
   align-items: center;
 }
 </style>
+
 <%@include file="../includes/header.jsp"%>
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="product_header">

@@ -15,9 +15,13 @@ public interface ScrapMapper {
 	public List<ScrapVO> ScrapBangList(int member_seq);
 	
 	//스크랩목록- 노하우
+	public List<ScrapVO> ScrapKnowList(int member_seq);
 	
 	//스크랩등록
 	public void ScrapRegister(ScrapVO scrap);
+	
+	/*//닉네임보기
+	public void ScrapNickname(int member_seq);*/
 	
 	//삭제
 	public int ScrapRemove(Long scrap_seq);
