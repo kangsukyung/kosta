@@ -31,7 +31,7 @@
 <body>
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
+		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>마이페이지</h1>
@@ -59,22 +59,7 @@
             <div class="head">프로필</div>
             <ul class="main-categories">
 					<div>
-					<c:if test="${member.member_profile!=null}">
-						<c:set var="head" value="${fn:substring(member.member_profile,0, fn:length(member.member_profile)-4) }"></c:set>
-						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
-						<c:choose>
-							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-								<a href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do"><img class="author_img rounded-circle" src="/member/display?fileId=${member.member_id}" alt="" width="130" height="130"></a>
-							</c:when>
-							<c:otherwise>
-								<c:out value="NO IMAGE"></c:out>
-							</c:otherwise>
-						</c:choose>					
-					</c:if>
-					
-					<c:if test="${member.member_profile ==null}">
-						<a href="/member/update"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png"alt="" width="130" height="130"></a>
-					</c:if>
+						<a href="/member/modify"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" onerror="this.src='/main_resource/img/member_basic.png'" alt="" width="130" height="130"></a>
 							<h4 style=" padding-top: 10px;">${member.member_nickname}님 프로필</h4>
 							<div class="social_icon">
 							<br>	
@@ -85,7 +70,7 @@
             </ul>
           </div>
           <div class="sidebar-filter">
-            <div class="top-filter-head">카테고리</div>
+            <div class="top-filter-head" style="margin-bottom: 10px;">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
 					<li><a href="/member/mypage" class="d-flex justify-content-between"><p>마이페이지</p></a></li>
 					<li><a href="/productInquiry/list" class="d-flex justify-content-between"><p>상품문의목록</p></a></li>
@@ -97,7 +82,8 @@
 						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_2')">
-						<li><a href="/product/list" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+						<li><a href="/product/list?seq=${member.member_seq}" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+						<li><a href="/productInquiry/replylist?member_seq=${member.member_seq}" class="d-flex justify-content-between"><p>스토어문의목록</p></a></li>			
 					</sec:authorize>
 				</ul>
           </div>
@@ -136,21 +122,7 @@
     			         	<font class="member_font_padding" id="chkNotice" size="2" style="display: none;">입력한 비밀번호가 일치하지 않습니다</font>
 							<div class="col-md-12 form-group member_signup" ><input type="text" class="form-control-member_singup" id="member_address" name="member_address" placeholder="주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '주소'" value="${member.member_address}" style="padding-left: 10px;" readonly="readonly"><button type="button" onclick="openZipSearch(member_address)">주소찾기</button></div>
     			          	
-    			     <c:if test="${member.member_profile!=null}">
-						<c:set var="head" value="${fn:substring(member.member_profile,0, fn:length(member.member_profile)-4) }"></c:set>
-						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
-						<c:choose>
-							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-	    			          	<img id="profileImg"  class="author_img rounded-circle mypageUpdate_img" src="/member/display?fileId=${member.member_id}" alt="" width="200px" height="200">
-							</c:when>
-							<c:otherwise>
-								<c:out value="NO IMAGE"></c:out>
-							</c:otherwise>
-						</c:choose>					
-					</c:if>
-					<c:if test="${member.member_profile ==null}">
-		    			<img  id="basicImg" class="author_img rounded-circle mypageUpdate_img" src="/main_resource/img/member_basic.png" alt="" width="200px" height="200">
-					</c:if>
+	    			        <img id="profileImg"  class="author_img rounded-circle mypageUpdate_img" src="/member/display?fileId=${member.member_id}" onerror="this.src='/main_resource/img/member_basic.png'" alt="" width="200" height="200">
 							<div class="col-md-10 form-group">
 								<input type="file" class="mypageUdate_type" name="profile" id="fileChange" accept=".gif, .jpg, .png" onchange="setThumbnail(event);" style="display: none;" >
 							</div>
@@ -353,14 +325,8 @@ function checkForm() {
 	  console.log(memberProfile);
 	  var reader = new FileReader(); 
 	  reader.onload = function(event) {
-		  if(memberProfile==''){
-			  var img = document.getElementById("basicImg"); 
-			  img.setAttribute("src", event.target.result); 
-		  }else{
-			  console.log("1");
 		  	  var img = document.getElementById("profileImg"); 
 		  	  img.setAttribute("src", event.target.result); 
-		  }
 		}
 	 reader.readAsDataURL(event.target.files[0]); 
   }
