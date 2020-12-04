@@ -14,8 +14,6 @@
     <!-- Bootstrap -->
     <link href="/main_resource/css/admin_cs/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="/main_resource/css/admin_cs/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
     <link href="/main_resource/css/admin_cs/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
    <link href="/main_resource/css/admin_cs/green.css" rel="stylesheet">
@@ -151,7 +149,6 @@
                     <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
                       <li class="nav-item">
                         <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                           <span>
                             <span>John Smith</span>
                             <span class="time">3 mins ago</span>
@@ -163,7 +160,6 @@
                       </li>
                       <li class="nav-item">
                         <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                           <span>
                             <span>John Smith</span>
                             <span class="time">3 mins ago</span>
@@ -175,7 +171,6 @@
                       </li>
                       <li class="nav-item">
                         <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                           <span>
                             <span>John Smith</span>
                             <span class="time">3 mins ago</span>
@@ -187,7 +182,6 @@
                       </li>
                       <li class="nav-item">
                         <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
                           <span>
                             <span>John Smith</span>
                             <span class="time">3 mins ago</span>
@@ -259,7 +253,8 @@
                       	    <td class="">${one.member_seq }</td>
                             <td class="">${one.oi_title }</td>
                             <td class="">${one.oi_content }</td>
-                            <td class="last"><a href="">답변하기</a>
+                            <td class="last">
+                            <a href="/admin/oneReadModify?seq=${one.oi_seq}">답변하기</a>
                             </td>
                           </tr>
                           </c:forEach>
@@ -286,18 +281,7 @@
       </div>
     </div>
 
-    <!-- jQuery -->
     <script src="/main_resource/js/admin_js/jquery.min.js"></script>
-    <!-- Bootstrap -->
-   <script src="/main_resource/js/admin_js/bootstrap.bundle.min.js"></script>
-    <!-- FastClick -->
-    <script src="/main_resource/js/admin_js/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="/main_resource/js/admin_js/nprogress.js"></script>
-    <!-- iCheck -->
-    <script src="/main_resource/js/admin_js/icheck.min.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="/main_resource/js/admin_js/custom.min.js"></script>
     
     <script>
  	 $("#adminLogout").click(function() {

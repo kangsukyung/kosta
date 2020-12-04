@@ -56,6 +56,12 @@ public class OneInquiryServiceImpl implements OneInquiryService{
 	public List<One_inquiryVO> oneList() {
 		return mapper.oneList();
 	}
+
+	@Transactional
+	@Override
+	public int updateOne(One_inquiryVO vo) {
+		return mapper.updateOne(vo);
+	}
 	
 	
 	
