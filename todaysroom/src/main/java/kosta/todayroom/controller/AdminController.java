@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kosta.todayroom.domain.Criteria;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.domain.One_inquiryVO;
+import kosta.todayroom.domain.PageDTO;
 import kosta.todayroom.service.MemberService;
 import kosta.todayroom.service.OneInquiryService;
 import lombok.AllArgsConstructor;
@@ -27,17 +29,22 @@ public class AdminController {
 	private MemberService mService;
 	private OneInquiryService oService;
 	
-	@GetMapping("/read")
-	public void read(Model model){
-		List<MemberVO> member=mService.memberList();
-		log.warn(member);
+	@GetMapping("/memberRead")
+	public void read(Model model, Criteria cri){
+		List<MemberVO> members=mService.memberList();
+		List<MemberVO> member=mService.adminread(cri.getPageNum(), cri.getAmount());
+		int total=members.size();
 		model.addAttribute("member", member);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	};
 	
 	@GetMapping("/oneRead")
-	public void oneRead(Model model){
-		List<One_inquiryVO> one=oService.oneList();
+	public void oneRead(Model model, Criteria cri){
+		List<One_inquiryVO> oneSize=oService.oneList();
+		List<One_inquiryVO> one=oService.adminread(cri.getPageNum(), cri.getAmount());
+		int total=oneSize.size();
 		model.addAttribute("one", one);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	};
 	
 	@GetMapping("/oneReadModify")

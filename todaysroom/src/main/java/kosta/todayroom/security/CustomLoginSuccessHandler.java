@@ -44,7 +44,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		}else if(roleNames.contains("ROLE_100")){
 			MemberVO member=service.idCheck(request.getParameter("username"));
 			service.countUpdate(member.getMember_seq(), 0);
-			response.getWriter().print("<script>alert('관리자 페이지로 이동합니다.'); location.href='/admin/read'</script>");
+			response.getWriter().print("<script>alert('관리자 페이지로 이동합니다.'); location.href='/admin/memberRead'</script>");
 		}else{
 			MemberVO member=service.idCheck(request.getParameter("username"));
 			service.countUpdate(member.getMember_seq(), 0);

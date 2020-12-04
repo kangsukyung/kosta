@@ -14,6 +14,10 @@ public interface OneInquiryMapper {
 			@Param("amount") int amount, 
 			@Param("seq") int seq
 	);
+	public List<One_inquiryVO> adminread(
+			@Param("pageNum") int pageNum,
+			@Param("amount") int amount 
+			);
 	public int total(int seq);
 	public One_inquiryVO getRead(int seq);
 	public int delete(int seq);

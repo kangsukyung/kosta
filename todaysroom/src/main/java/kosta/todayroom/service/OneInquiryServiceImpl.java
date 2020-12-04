@@ -62,6 +62,13 @@ public class OneInquiryServiceImpl implements OneInquiryService{
 	public int updateOne(One_inquiryVO vo) {
 		return mapper.updateOne(vo);
 	}
+
+	@Override
+	public List<One_inquiryVO> adminread(int pageNum, int amount) {
+		log.warn(pageNum);
+		log.warn(amount);
+		return mapper.adminread(pageNum, amount);
+	}
 	
 	
 	

@@ -49,4 +49,18 @@
 		set oi_answer=#{oi_answer}
 		where oi_seq=#{oi_seq}
 	</update>
+	
+	<select id="adminread" parameterType="int" resultType="kosta.todayroom.domain.One_inquiryVO">
+		
+		<![CDATA[
+		select oi_seq, oi_title, oi_date, member_seq,oi_answer
+		from ( select /*+INDEX_DESC(ONE_INQUIRY PK_ONE_INQUIRY)*/ 
+				rownum rn, oi_seq, oi_title, oi_date, member_seq, oi_answer
+					from ONE_INQUIRY
+					where rownum <= #{pageNum} * #{amount}
+				)
+			where rn>(#{pageNum}-1)* #{amount} 
+		]]>
+			AND oi_answer IS NULL
+	</select>
 </mapper>
