@@ -155,7 +155,7 @@ $(document).ready(function() {
 				 $.ajax({
 	                   url:"/members/sendSms.do",
 	                   type:"get",
-	                   data:{phoneb: phoneb },
+	                   data:{phone: phoneb },
 	                 	success:function(data){
 	                 		  cerNum.value=data;
 	                 		  console.log(cerNum.value);

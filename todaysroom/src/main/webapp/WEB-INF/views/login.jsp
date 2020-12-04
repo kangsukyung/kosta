@@ -198,7 +198,6 @@ var updateMember=document.getElementById("updateMember");
 	  $("#id_phone_sub").click(function() {//아이디 찾기 휴대폰 인증
 		var member_name=namet.val();//모달  이름창
 		var id_phone=id_phonet.val();//모달 아이디 핸드폰번호창
-		
 		console.log(id_phone);
 		console.log(member_name);
 		if(phoneJ.test(id_phone)){
