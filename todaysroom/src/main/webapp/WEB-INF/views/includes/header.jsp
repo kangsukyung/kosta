@@ -27,7 +27,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-          <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/board/listAction.do"><img src="/main_resource/img/logoimg2.png" alt=""></a>
+          <a class="navbar-brand logo_h" href="/board/list"><img src="/main_resource/img/logoimg2.png" alt=""></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -45,7 +45,7 @@
                   </ul>
 				</li>
               <li class="nav-item submenu dropdown">
-                <a href="/store/list?pageNum=1&amount=6" class="nav-link dropdown-toggle">스토어</a>
+                <a href="/store/list?pageNum=1&amount=12" class="nav-link dropdown-toggle">스토어</a>
                 <%-- <ul class="dropdown-menu">
                   <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/store/listStoreAction.do">카테고리</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">특가</a></li>
