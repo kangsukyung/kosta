@@ -210,7 +210,7 @@
 							<div class="quotes"><h1><c:out value="${board.board_title}"/></h1></div>
 							<div class="row" id="picture_row">
 								<div class="col-lg-12 mt-4">
-									<p><c:out value="${board.board_content}"/></p>
+									<p style="white-space: pre;"><c:out value="${board.board_content}"/></p>
 									<p>MCSE boot camps have its supporters and its detractors.
 										Some people do not understand why you should have to spend
 										money on boot camp when you can get the MCSE study materials
@@ -225,48 +225,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="navigation-area">
-						<div class="row">
-							<div
-								class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-								<div class="thumb">
-									<a href="#"> <img class="img-fluid"
-										src="${pageContext.request.contextPath}/main_resource/img/blog/prev.jpg"
-										alt="">
-									</a>
-								</div>
-								<div class="arrow">
-									<a href="#"> <span class="lnr text-white lnr-arrow-left"></span>
-									</a>
-								</div>
-								<div class="detials">
-									<p>Prev Post</p>
-									<a href="#">
-										<h4>Space The Final Frontier</h4>
-									</a>
-								</div>
-							</div>
-							<div
-								class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-								<div class="detials">
-									<p>Next Post</p>
-									<a href="#">
-										<h4>Telescopes 101</h4>
-									</a>
-								</div>
-								<div class="arrow">
-									<a href="#"> <span class="lnr text-white lnr-arrow-right"></span>
-									</a>
-								</div>
-								<div class="thumb">
-									<a href="#"> <img class="img-fluid"
-										src="/main_resource/img/blog/next.jpg"
-										alt="">
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+
 					<!-- <div class="comments-area"> -->
 						<jsp:include page="../comments/comments.jsp"></jsp:include>
 					<!-- </div> -->

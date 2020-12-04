@@ -28,7 +28,7 @@ public class ProductInquiryReplyController {
 	private MemberService mService;
 	
 	@GetMapping("/replylist")
-	public void replyList(@RequestParam("member_seq") int member_seq, ProductInquiryCriteria cri, Model model, @RequestParam(value="result", required=false) String result){
+	public void replyList(ProductInquiryCriteria cri, Model model, @RequestParam(value="result", required=false) String result){
 		
 		log.info("reply list.....");
 		
