@@ -69,9 +69,6 @@
 								<li><a href="/board/list?filter=qa" class="d-flex justify-content-between">
 										<p>질문과답변</p><p><c:if test="${pageMaker.cri.filter eq 'qa' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
-								<li><a href="/board/register" class="d-flex justify-content-between">
-										<p>글 등록 잠시만 쓸게욤~</p>
-								</a></li>
 							</ul>
 						</aside>
 					</div>
