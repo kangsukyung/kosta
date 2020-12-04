@@ -186,10 +186,10 @@
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item"><a class="nav-link" id="home-tab"
+				<li class="nav-item"><a class="nav-link active" id="home-tab"
 					data-toggle="tab" href="#home" role="tab" aria-controls="home"
 					aria-selected="true">제품 상세</a></li>
-				<li class="nav-item"><a class="nav-link active" id="review-tab"
+				<li class="nav-item"><a class="nav-link" id="review-tab"
 					data-toggle="tab" href="#review" role="tab" aria-controls="review"
 					aria-selected="false">리뷰</a></li>
 				<li>
@@ -253,11 +253,12 @@
 				</div>
 			</div>
 			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade" id="home" role="tabpanel"
-					aria-labelledby="home-tab">
+				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
- 				<jsp:include page="../review/review.jsp"></jsp:include>
+				<div class="" id="review" role="tabpanel" aria-labelledby="review-tab">
+ 					<jsp:include page="../review/review.jsp"></jsp:include>
+ 				</div>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
