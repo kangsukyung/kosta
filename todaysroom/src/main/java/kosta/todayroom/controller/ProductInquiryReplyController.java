@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import kosta.todayroom.domain.ProductInquiryCriteria;
 import kosta.todayroom.domain.ProductInquiryPageDTO;
 import kosta.todayroom.domain.ProductInquiryVO;
+import kosta.todayroom.service.MemberService;
 import kosta.todayroom.service.ProductInquiryReplyService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -23,9 +24,11 @@ public class ProductInquiryReplyController {
 	
 	@Setter(onMethod_ = @Autowired)
 	private ProductInquiryReplyService service;
+	@Setter(onMethod_=@Autowired)
+	private MemberService mService;
 	
 	@GetMapping("/replylist")
-	public void replyList(ProductInquiryCriteria cri, Model model, @RequestParam(value="result", required=false) String result){
+	public void replyList(@RequestParam("member_seq") int member_seq, ProductInquiryCriteria cri, Model model, @RequestParam(value="result", required=false) String result){
 		
 		log.info("reply list.....");
 		

@@ -20,7 +20,6 @@
 <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/board.css">
-<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/main_resource/vendors/skrollr.min.js"></script>
 <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

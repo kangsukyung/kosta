@@ -81,7 +81,7 @@
 		<div class="container h-100" id="containerH100"
 			style="background-position: center;">
 			<div class="blog-banner">
-				<div class="text-center" style="background-color: white; opacity:0.7;">
+				<div class="text-center" style="background-color: white; opacity:0.9;">
 					<h1>
 						<c:out value="${board.board_title }" />
 					</h1>
@@ -156,7 +156,7 @@
 					<div class="single-post row">
 						<div class="col-lg-12">
 							<div class="feature-img">
-
+								<img style="width: 90%; height: 90%;" class="feature-img-img1" src="" onerror="this.src='/main_resource/img/stimg.png'">
 							</div>
 						</div>
 						<div class="col-lg-3  col-md-3">
@@ -313,7 +313,6 @@
 
 
 
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -374,14 +373,14 @@
 					           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
 					           
 					           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
-					           str += "<img src='/board/display?fileName="+fileCallPath+"'>";
+					           str += "<img onerror='this.src="+'"/main_resource/img/stimg.png"'+"' src='/board/display?fileName="+fileCallPath+"'>";
 					           str += "</div>";
 					           str +"</li></div>";
 					         }else{
 					             
 					           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
 					           str += "<span> "+ attach.fileName+"</span><br/>";
-					           str += "<img src='/main_resource/img/attach.png'></a>";
+					           str += "<img onerror='this.src="+'"/main_resource/img/stimg.png"'+"' src='/board/display?fileName="+fileCallPath+"'>";
 					           str += "</div>";
 					           str += "</li></div>";
 					         }
@@ -392,13 +391,14 @@
 					         var thumbnailPath = encodeURIComponent(attach.uploadPath + "/"+attach.uuid +"_"+attach.fileName);
 					         str2 += "<img style='width:90%; height:90%;'" + " class='img-fluid'" + " src='/board/display?fileName="+thumbnailPath+"'>";
 					         str3 = thumbnailPath;
+					         str4 = "/board/display?fileName="+thumbnailPath;
 						}
 				       
 				         $("#picture_row").prepend(str);
 				         str = "";
 				       });
 				       
-				         $(".feature-img").append(str2);
+				         $(".feature-img").children(".feature-img-img1").attr("src", str4);
 				         $("#containerH100").css({'background-image':"url(/board/display?fileName="+str3+")"});
 				       
 				       
