@@ -27,7 +27,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException {
 		response.setContentType("text/html; charset=UTF-8");
-		
+	
 		log.warn("Login Success");
 		log.warn(auth.getAuthorities());
 		List<String> roleNames=new ArrayList<>();
@@ -51,5 +51,5 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 			response.getWriter().print("<script>alert('로그인에 성공하셨습니다.'); location.href='/member/mypage'</script>");			
 		}
 		
-	}	
+	}
 }

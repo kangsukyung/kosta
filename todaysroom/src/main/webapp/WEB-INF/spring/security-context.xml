@@ -31,7 +31,10 @@
 							
 		<security:intercept-url pattern="/productInquiry/*"
 			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
-			
+		
+		<security:intercept-url pattern="/const/register"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+				
 		<security:intercept-url pattern="/basket/*"
 			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
 			
@@ -56,6 +59,8 @@
 			access="hasAnyRole('ROLE_1,ROLE_2')"/>
 		<security:intercept-url pattern="/vendor/register"
 			access="hasAnyRole('ROLE_1,ROLE_3')"/>
+		<security:intercept-url pattern="/const/register"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 		<security:intercept-url pattern="/oneInquriy/register"
 			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 		<security:intercept-url pattern="/oneInquriy/get"
