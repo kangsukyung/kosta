@@ -24,7 +24,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/vendors/nouislider/nouislider.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/style.css">
 
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/skrollr.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -54,7 +53,7 @@
     flex-flow: row;
     justify-content: center;
     align-items: center;
-    margi
+    }
 
 .uploadResult ul li {
 	list-style: none;
@@ -86,6 +85,7 @@
   align-items: center;
 }
 </style>
+
 <%@include file="../includes/header.jsp"%>
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="product_header">

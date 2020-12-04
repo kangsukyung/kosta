@@ -1,8 +1,10 @@
 	
 $(document).ready(function() {
+	var memValue = $("#review_member_seq").val();
+	var myMemValue = $("#my_member_seq").val();
 	
 	showList(1);
-	
+	 $("#reviewModBtn").css('display','none');
 	//리스트 보여주는거
 	function showList(page){
 		var store_seq = $("#review_store_seq").val();//현재 store번호
@@ -10,6 +12,7 @@ $(document).ready(function() {
 		console.log("my member value : "+myMemValue);
 		var reviewMemValue = $("#review_member_seq").val();	//리뷰 쓴 사람의 seq
 		console.log("review_member_seq : "+reviewMemValue);
+		
 		ReviewService.getList({store_seq:store_seq,page: page|| 1 }, function(reviewCnt, reviewList) {
 			
 			console.log("showList - reviewCnt : "+ reviewCnt );
@@ -37,12 +40,16 @@ $(document).ready(function() {
 				str +="			<a class='post_tag a_jsb' href='#'>"+reviewList[i].member_seq+"</a>"
 				str +="			<p>"+reviewList[i].review_date+"</p>"
 				str +="				<div class='d-flex'>"
-				str +="					<img src='../../../upload/${head}_small.${pattern}'>"
+				/*str +="					<img src='../../../upload/${head}_small.${pattern}'>"*/
 				str +="				</div>"
-				str +="			<img src='../../main_resource/img/blog/main-blog/m-blog-1.jpg alt=''>"
+				/*str +="			<img src='../../main_resource/img/blog/main-blog/m-blog-1.jpg alt=''>"*/
 				str +="			<div class='blog_details'>"
 				str +="				<p>"+reviewList[i].review_content+"</p>"
+								if(myMemValue == reviewList[i].member_seq){
+				str +="			<p id='review_modify_btn' data-seq='"+reviewList[i].review_seq+"' data-content='"+reviewList[i].review_content+"'>수정하기</p>"
+				str +="			<p id='review_remove_btn' data-seq='"+reviewList[i].review_seq+"' >삭제하기</p>"
 				/*str +="				<a class='button button-blog' href='#'>View More?-글자수 제한 둬서 너무많아지면 view more </a>"*/
+								}
 				str +="			</div>"
 				str +="			<div class='update_div'>"
 				/*str +="				<a class='date reviewModify'>수정하기</a>"
@@ -127,9 +134,9 @@ $(document).ready(function() {
 				review_content : $("#message").val(),
 				shoporder_seq : 22,	//주문내역있어야됨
 				member_seq : $("#my_member_seq").val(),
-				store_seq : $("#review_store_seq").val(),
+				store_seq : $("#review_store_seq").val(),//?????????왜 두개야
 				product_seq : $("#review_store_seq").val(),	//제품 선택해야됨
-				store_seq : $("#review_store_seq").val()
+				store_seq : $("#review_store_seq").val()//?????????왜 두개야
 				
 		};
 		console.log(review);
@@ -147,12 +154,6 @@ $(document).ready(function() {
 	});
 	});
 	
-	
-	//update
-	/*$(document).on("click",".reviewModify",function(){
-		console.log("update");
-	});*/
-	
 	//delete
 	/*$(document).on("click",".reviewRemove",function(){
 		console.log("delete"+$(this).data("member_seq"));
@@ -166,14 +167,16 @@ $(document).ready(function() {
 
 	$('#popup_open_btn').on('click', function() {
 	    // 모달창 띄우기
+		$("#reviewModBtn").css('display','none');
+		$("#reviewAddBtn").css('display','');
 	    modal('#my_modal');
 	    $("html, body").css("overflow",'hidden');
+	    
 	});
-
 
 	function modal(id) {
 	    var zIndex = 9999;
-	   
+	    
 	    // 모달 div 뒤에 희끄무레한 레이어
 	    var bg = document.createElement('div');
 	    $('document.body').css({
@@ -211,7 +214,52 @@ $(document).ready(function() {
 	        msTransform: 'translate(-50%, -50%)',
 	        webkitTransform: 'translate(-50%, -50%)'
 	    });
-	}
+	}//modal end
+	//----------------------------------review modify------------------------------------------------------
+	//update
+	$(".review_sidebar_jsb").on("click", "#review_modify_btn", function(e){
+		modal('#my_modal');
+		$(".review-modal__title").html("리뷰수정");
+		
+		var review_content = $(this).data("content");
+		var review_seq = $(this).data("seq");
+		console.log("adjdjdafjdfa : "+review_content);
+		$("#message").val(review_content);
+		
+		$("#reviewModBtn").css('display','');
+		$("#reviewAddBtn").css('display','none');
+		
+		$("#reviewModBtn").on("click",function(e){
+			e.preventDefault();
+		var review = {
+				review_content : $("#message").val(),
+				review_seq : $("#my_member_seq").val()
+		};
+		console.log(review);
+		
+		ReviewService.update(review, function(result){
+			$('#my_modal').css("display",'none');
+	        $("html, body").css("overflow",'auto');
+	        console.log("페이지 번호! : "+pageNum);
+			showList(pageNum);
+			
+		});
+		});
+	});
+	
+	//----------------------------------review remove------------------------------------------------------
+	//remove
+	
+	$(".review_sidebar_jsb").on("click", "#review_remove_btn", function(e){
+		
+		var review_seq = $(this).data("seq");
+		
+		ReviewService.remove(review_seq, function(result){
+			alert(result);
+			//showList(pageNum);
+		});
+	});
+	
 	
 	
 	//----------------------------------store button event------------------------------------------------------
@@ -257,7 +305,7 @@ $(document).ready(function() {
 	        error();
 	      }
 	    });
-	}
+	}//getList
 	
 	
 	function add(review, callback, error) {
@@ -286,11 +334,58 @@ $(document).ready(function() {
 				}
 			}
 		});
+	}//add
+	
+	function update(review, callback, error) {
+
+
+		$.ajax({
+			type : 'put',
+			url : '/review/' + review.review_seq,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+			},
+			data : JSON.stringify(review),
+			contentType : "application/json; charset=utf-8",
+			success : function(result, status, xhr) {
+				if (callback) {
+					callback(result);
+				}
+			},
+			error : function(xhr, status, er) {
+				if (error) {
+					error(er);
+				}
+			}
+		});
+	}
+	
+	
+	function remove(review_seq, callback, error) {
+		$.ajax({
+			type : 'delete',
+			url : '/review/' + review_seq,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue)
+			},
+			success : function(deleteResult, status, xhr) {
+				if (callback) {
+					callback(deleteResult);
+				}
+			},
+			error : function(xhr, status, er) {
+				if (error) {
+					error(er);
+				}
+			}
+		});
 	}
 	
 	return {
 		getList:getList,
-		add:add
+		add:add,
+		update:update,
+		remove:remove
 	};
 		
 		

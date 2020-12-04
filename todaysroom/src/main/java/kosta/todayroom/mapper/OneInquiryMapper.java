@@ -18,4 +18,6 @@ public interface OneInquiryMapper {
 	public One_inquiryVO getRead(int seq);
 	public int delete(int seq);
 	public int modify(One_inquiryVO vo);
+	public List<One_inquiryVO> oneList();
+	public int updateOne(One_inquiryVO vo);
 }

@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/board_listdetail.css">
 
+
+
 <style>
 .uploadResult {
   width:100%;

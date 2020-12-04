@@ -22,4 +22,5 @@ public interface MemberService {
 	public List<BoardVO> MyRoomList(int seq);
 	public List<BoardVO> MyKnowhowList(int seq);
 	public BoardAttachVO readThumbnail(int board_seq, String fileName);
+	public List<MemberVO> memberList();
 }

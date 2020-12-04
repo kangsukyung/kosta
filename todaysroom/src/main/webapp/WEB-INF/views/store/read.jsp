@@ -56,6 +56,8 @@
 				<div class="store_lcategory_hidden">${store.store_lcategory }</div>
 				<input type="hidden" name="store_lcategory_hidden" value="${store.store_lcategory }">
 				<input type="hidden" name="store_title_hidden" value="${store.store_title }">
+				<input type="hidden" name="store_price" value="${store.store_price }">
+				<input type="hidden" name="store_seq" value="${store.store_seq }">
 				<div class="store_scategory">${store.store_scategory }</div>
 			</div>
 		</c:forEach>
@@ -89,7 +91,7 @@
 						<div hidden="" class="store_lcategory">${store.store_lcategory }</div>
 						<c:forEach items="${list }" var="product" varStatus="status"
 							begin="0" end="0">							
-							<h2 class="product_price">${product.product_price }원외</h2>
+							<h2 class="product_price">${product.product_price }원 외</h2>
 						</c:forEach>
 						<button class="production-selling-header_action_button_hw"
 							type="button">
@@ -185,10 +187,10 @@
 	<section class="product_description_area">
 		<div class="container">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
-				<li class="nav-item"><a class="nav-link" id="home-tab"
+				<li class="nav-item"><a class="nav-link active" id="home-tab"
 					data-toggle="tab" href="#home" role="tab" aria-controls="home"
 					aria-selected="true">제품 상세</a></li>
-				<li class="nav-item"><a class="nav-link active" id="review-tab"
+				<li class="nav-item"><a class="nav-link" id="review-tab"
 					data-toggle="tab" href="#review" role="tab" aria-controls="review"
 					aria-selected="false">리뷰</a></li>
 				<li>
@@ -232,14 +234,22 @@
 										type="radio" name="pi_type" value="etc"> 기타
 									</label>
 								</div>
-								<div class="form-group">
+								<div>
+									<select name="product_seq">
+										<c:forEach items="${list }" var="product">
+											<option value="${product.product_seq }">${product.product_name }</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="form-group" id="textarea-clear">
 									<label for="message-text" class="control-label">문의내용</label>
 									<textarea class="form-control" id="message-text"
 										name="pi_content"></textarea>
 								</div>
-								<input hidden="hidden" name="member_seq" value="1">
+								<input hidden="hidden" name="member_seq" value="${member.member_seq }">
 								<!-- value 값 추후 조정 필요 -->
-								<input hidden="hidden" name="product_seq" value="1">
+								
+								<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
 							</form>
 							<div>문의내용에 대한 답변은 ‘마이페이지 &gt; 나의 쇼핑 &gt; 나의 문의내역’ 또는 ‘상품
 								상세페이지’에서 확인 가능합니다.</div>
@@ -252,11 +262,13 @@
 				</div>
 			</div>
 			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade" id="home" role="tabpanel"
+				<div class="" id="home" role="tabpanel"
 					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
-<%-- 				<jsp:include page="../review/review.jsp"></jsp:include> --%>
+				<div class="" id="review" role="tabpanel" aria-labelledby="review-tab">
+ 					<jsp:include page="../review/review.jsp"></jsp:include>
+ 				</div>
 				<div class="tab-pane fade" id="contact" role="tabpanel"
 					aria-labelledby="contact-tab">
 					<div class="row">
@@ -404,7 +416,7 @@
 			</div>
 	</section>
 	<section>
-	<jsp:include page="../review/review.jsp"></jsp:include>
+	<%-- <jsp:include page="../review/review.jsp"></jsp:include> --%>
 	</section>
 	<!--================End Product Description Area =================-->
 	
@@ -413,7 +425,7 @@
 		<div class="container">
 			<div class="section-intro pb-60px">
         <p>Popular Item in the market</p>
-        <h2>Top <span class="section-intro__style">Product</span></h2>
+        <h2><span class="section-intro__style">추천 상품</span></h2>
       </div>
 			<div class="row mt-30" id="recommend_list">
         <!-- <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
@@ -531,8 +543,6 @@
 		<%@include file="../includes/footer.jsp"%>
 	</section>
 
-
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -541,7 +551,7 @@
 	<script src="/main_resource/vendors/mail-script.js"></script>
 	<script src="/main_resource/js/main.js"></script>
 	<script src="/main_resource/js/store_read.js"></script>
-	<!-- <script type="text/javascript" src="/main_resource/js/product_inquiry.js"></script> -->
-	<!-- <script src="/main_resource/js/review.js"></script> -->
+	<script type="text/javascript" src="/main_resource/js/product_inquiry.js"></script>
+	<script src="/main_resource/js/review.js"></script>
 </body>
 </html>
