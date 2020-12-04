@@ -64,11 +64,11 @@
 						<div class="col-lg-6">
 							<div class="review_box">
 								<h4>상품수정</h4>
-									<h4 class="card-blog__title">상품번호 : ${product.product_seq }</h4>
 								<form class="contents-row login_form" action="/product/modify?${_csrf.parameterName}=${_csrf.token}" id="contents-register_form" method="post">
 									<%-- <input type="text" name="product_seq" value="${product.product_seq }"> --%>
 									
-								
+									<h4 class="card-blog__title">상품번호 : ${product.product_seq }</h4>
+									<input type="hidden" name="product_seq" value="${product.product_seq }">
 										<div class="form-group">
 											<label id="product_insert_label">상품명 </label> 
 											<input class="form-control" id="product_insert_input" name="product_name" type="text" placeholder="상품명을 입력하세요." value="${product.product_name}">

@@ -155,6 +155,9 @@ public class ProductController {
 		
 		productService.ProductItemRead(product_seq);
 		
+		System.out.println("product_seq    :  " +product_seq);
+		
+		
 		log.info("dkdkdkdkdkr");
 		
 		model.addAttribute("product", productService.ProductItemRead(product_seq));
@@ -169,12 +172,11 @@ public class ProductController {
 		System.out.println("여기들어옴?");
 		log.info("들어왓니");
 		
-		log.info("modify:" + product);
+		log.warn(product);
+		int num=productService.ProductItemModify(product);
 		
-		if(productService.ProductItemModify(product)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		
+//		log.warn(num);
+//		return null;
 		return "redirect:/product/list";
 	}
 	

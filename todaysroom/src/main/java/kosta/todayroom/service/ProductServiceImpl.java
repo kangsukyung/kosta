@@ -86,11 +86,13 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public boolean ProductItemModify(ProductVO product) {
+	public int ProductItemModify(ProductVO product) {
 		
+		log.warn("bbbbㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
 		log.info("Product Modify................." + product);
+		log.warn(product);
 		
-		return productMapper.ProductItemModify(product) == 1;
+		return productMapper.ProductItemModify(product);
 		
 
 

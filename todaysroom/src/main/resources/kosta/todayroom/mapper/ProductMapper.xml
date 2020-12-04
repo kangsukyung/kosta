@@ -84,10 +84,9 @@ select SEQ_PRODUCT_PRODUCT_SEQ.NEXTVAL, SEQ_STORE_STORE_SEQ.CURRVAL, A.* from(
 <!-- 하나의 상품 수정 -->
 
 <update id="ProductItemModify">
-	update product
-	set product_name = ${product_name},
-	product_price = ${product_name}
-	where product_seq = ${product_seq}
+	update product set product_name = #{product_name},
+	product_price = #{product_price}
+	where product_seq = #{product_seq}
 </update>
 
 

@@ -19,7 +19,7 @@ public interface ProductService {
 	public List<ProductVO> ProductItemGetList(int member_seq);
 	
 //	상품수정	
-	public boolean ProductItemModify(ProductVO product);
+	public int ProductItemModify(ProductVO product);
 	
 	
 	
