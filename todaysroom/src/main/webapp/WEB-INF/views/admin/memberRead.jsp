@@ -232,9 +232,9 @@
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr class="headings">
-                            <!-- <th>
+                            <th>
                               <input type="checkbox" id="check-all" class="flat">
-                            </th> -->
+                            </th>
                             <th class="column-title">멤버번호 </th>
                             <th class="column-title">이름</th>
                             <th class="column-title">핸드폰번호 </th>
@@ -254,9 +254,9 @@
                           <c:forEach items="${member}" var="member">
                           <tr class="even pointer">
                           
-                            <!-- <td class="a-center ">
+                            <td class="a-center ">
                               <input type="checkbox" class="flat" name="table_records">
-                            </td> -->
+                            </td>
                       	    <td class="">${member.member_seq }</td>
                             <td class="">${member.member_name }</td>
                             <td class="">${member.member_phone }</td>
@@ -290,8 +290,9 @@
 					</ul>
 				</div>
                     </div>
-             <form id='actionFormread' method='get' action="/admin/memberRead">
+             <form id='actionFormread' method='get' action="/admin/memberRead?">
 				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
 			</form>	
                   </div>
                 </div>
@@ -311,23 +312,22 @@
       </div>
     </div>
    <script src="/main_resource/js/admin_js/jquery.min.js"></script>
-    <script>
+   <script>
  	 $("#adminLogout").click(function() {
  		if (confirm("로그아웃하시겠습니까?") == true){  
  			document.getElementById('logout-form').submit();
  		  }else{ 
  		      return;
  		  }
- 		
   	});
- 		$(".paginate_button a").on("click", function(e) {
- 			e.preventDefault();
- 			console.log('click');
- 			var actionForm=$("#actionFormread");
- 		
- 			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
- 			actionForm.submit();
- 		});
+ 	$(".paginate_button a").on("click", function(e) {
+			e.preventDefault();
+			console.log('click');
+			var actionForm=$("#actionFormread");
+		
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+			actionForm.submit();
+		});
   </script>
   </body>
 </html>

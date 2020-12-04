@@ -17,8 +17,17 @@ public class LoginController {
 	@GetMapping("/login")
 	public void loginForm(@Param("num") String num, Model model, HttpServletRequest request){
 		String old_url = request.getHeader("referer");
+		log.warn(old_url);
 		
-		request.getSession().setAttribute("prevPage", old_url);
+		if(old_url.equals("http://localhost:8081/login")||
+		   old_url.equals("http://localhost:8081/member/register")||
+		   old_url.equals("http://localhost:8081/admin/oneModify")||
+		   old_url.equals("http://localhost:8081/admin/memberRead")||	   
+		   old_url.equals("http://localhost:8081/admin/oneRead")){
+			request.getSession().setAttribute("prevPage", "http://localhost:8081/member/mypage");
+		}else{
+			request.getSession().setAttribute("prevPage", old_url);
+		}
 		
 		try {
 			if(num.equals("1")|| num.equals("2")){

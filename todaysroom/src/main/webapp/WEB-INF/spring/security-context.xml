@@ -46,7 +46,11 @@
 		<security:intercept-url pattern="/productInquiry/replylist"
 			access="hasRole('ROLE_2')"/>
 		
-		<security:intercept-url pattern="/admin/read"
+		<security:intercept-url pattern="/admin/memberRead"
+			access="hasRole('ROLE_100')"/>
+		<security:intercept-url pattern="/admin/oneRead"
+			access="hasRole('ROLE_100')"/>
+		<security:intercept-url pattern="/admin/oneReadModify"
 			access="hasRole('ROLE_100')"/>
 			
 		<security:intercept-url pattern="/member/mypage"
