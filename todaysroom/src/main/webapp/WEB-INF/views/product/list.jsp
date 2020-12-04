@@ -64,68 +64,55 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-3 col-lg-4 col-md-5">
-					<div class="sidebar-categories">
-						<div class="head">프로필</div>
-						<ul class="main-categories">
-							<div>
-								<input type="hidden" name="seq" value="${member.member_seq }">
-								<c:if test="${member.member_profile!=null}">
-									<c:set var="head"
-										value="${fn:substring(member.member_profile,0, fn:length(member.member_profile)-4) }"></c:set>
-									<c:set var="pattern"
-										value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
-									<c:choose>
-										<c:when
-											test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-											<a
-												href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do"><img
-												class="author_img rounded-circle"
-												src="/kosta1200/upload/${member.member_profile}" alt=""
-												width="130" height="130"></a>
-										</c:when>
-										<c:otherwise>
-											<c:out value="NO IMAGE"></c:out>
-										</c:otherwise>
-									</c:choose>
-								</c:if>
-								<c:if test="${member.member_profile ==null}">
-									<a
-										href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do"><img
-										class="author_img rounded-circle"
-										src="${pageContext.request.contextPath}/upload/member_basic.png"
-										alt="" width="130" height="130"></a>
-								</c:if>
-								<h4 style="padding-top: 10px;">${member.member_nickname}님
-									프로필</h4>
-								<div class="social_icon">
-									<br> <a href="#"> <i class="ti-heart"> 좋아요</i></a> <a
-										href="#"> <i class="fab fa-twitter"> 팔로잉</i></a>
-								</div>
+          <div class="sidebar-categories">
+            <div class="head">프로필</div>
+            <ul class="main-categories">
+				<sec:authorize access="isAuthenticated()">
+					<div>
+					
+					<c:if test="${member.member_profile !=null}">
+						<c:set var="head" value="${fn:substring(member.member_profile,0, fn:length(member.member_profile)-4) }"></c:set>
+						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
+						<c:choose>
+							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
+								<a href="/member/modify"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" alt="" width="130" height="130"></a>
+							</c:when>
+							<c:otherwise>
+								<c:out value="NO IMAGE"></c:out>
+							</c:otherwise>
+						</c:choose>						
+					</c:if>
+					<c:if test="${member.member_profile ==null}">
+						<a href="/member/modify"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
+					</c:if>
+							<h4 style=" padding-top: 10px;"><sec:authentication property="principal.member.member_id"/>님 프로필</h4>
+							<div class="social_icon">
+							<br>
+								<a href="/scrap/list"> <i class="ti-heart"> 스크랩</i></a> 
+								<a href="/follow/list"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
-						</ul>
 					</div>
-					<div class="sidebar-filter">
-						<div class="top-filter-head">카테고리</div>
-						<ul class="list cat-list mypage_category_list">
-							<li><a
-								href="${pageContext.request.contextPath}/Member/Member_Mypage.do"
-								class="d-flex justify-content-between"><p>프로필</p></a></li>
-							<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/Member/MemberUpdate_form.do"
-								class="d-flex justify-content-between"><p>설정</p></a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/Member/ConstractorSignup_form.do"
-								class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
-							<li><a
-								href="${pageContext.request.contextPath}/Member/VendorSignup_form.do"
-								class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
-							<c:if test="${member.member_rating eq '2' }">
-								<li><a href="#" class="d-flex justify-content-between"><p>마이스토어</p></a></li>
-							</c:if>
-						</ul>
-					</div>
-				</div>
+				</sec:authorize>
+            </ul>
+          </div>
+          <div class="sidebar-filter">
+            <div class="top-filter-head" style="margin-bottom: 10px;">카테고리</div>
+ 				<ul class="list cat-list mypage_category_list">
+					<li><a href="/member/mypage" class="d-flex justify-content-between"><p>마이페이지</p></a></li>
+					<li><a href="/productInquiry/list" class="d-flex justify-content-between"><p>상품문의목록</p></a></li>
+					<li><a href="/member/modify" class="d-flex justify-content-between"><p>유저정보 수정</p></a></li>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
+						<li><a href="/contractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_3')">
+						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
+					</sec:authorize>
+					<sec:authorize access="hasRole('ROLE_2')">
+						<li><a href="/product/list" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+					</sec:authorize>
+				</ul>
+          </div>
+        </div>
 
 
 
@@ -149,15 +136,19 @@
           
             <div class="card card-blog" id="product_card-blog">
               <div class="card-blog__img">
-                <img class="card-img rounded-0" src="/product/display?fileName=${product.product_uuid }_${product.product_fname}">
-                <%-- <c:out value="${product.product_uuid }_${product.product_fname}"></c:out> --%>
+                <div class="test1">
+			              	<input type="hidden" class="product_uploadpath"  value="${product.product_uploadpath }">
+		                	<input type="hidden" class="product_uuid"  value="${product.product_uuid }">
+		                    <input type="hidden" class="product_filename"  value="${product.product_fname }">
+			        <img class="card-img rounded-0" id="product_img_list" src="">      	
+				</div>
               </div>
               <div class="card-body">
                 <ul class="card-blog__info">
                   <li><a href="#">상품번호 </a></li>
                   <li><a href="#"><i class="ti-comments-smiley"></i> ${product.product_seq }</a></li>
                 </ul>
-                <h4 class="card-blog__title"><a href="single-blog.html">${product.product_name }</a></h4>
+                <h4 class="card-blog__title">${product.product_name }</h4>
                 <p>${product.product_price }</p>
                 <a class="card-blog__link" href="/product/modify?product_seq=<c:out value="${product.product_seq}"/>">수정하기 <i class="ti-arrow-right"></i></a>
               </div>
@@ -174,116 +165,34 @@
     </section>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <div class="container">
-	<div class="section-intro pb-60px">
-		<p>Popular Item in the market</p>
-			<h2>
-				Best <span class="section-intro__style">Sellers</span>
-			</h2>
-	</div>
-
-	<div class="owl-carousel owl-theme owl-loaded owl-drag" id="bestSellerCarousel">
-		<div class="owl-stage-outer">
-			<div class="owl-stage" style="transform: translate3d(-3135px, 0px, 0px); transition: all 0.25s ease 0s; width: 4560px;">
-					<div class="owl-item cloned" style="width: 255px; margin-right: 30px;">
-						<div class="card text-center card-product">
-							<div class="card-product__img">
-								<img class="img-fluid" src="img/product/product1.png" alt="">
-							</div>
-							
-							<div class="card-body">
-								<p>Accessories</p>
-									<h4 class="card-product__title">
-										<a href="single-product.html">Quartz Belt Watch11</a>
-									</h4>
-										<p class="card-product__price">$150.00</p>
-							</div>
-						</div>
-					</div>
-	
-	
-			</div>
-	
-		</div>
-							
-							
-		<div class="owl-nav">
-			<button type="button" role="presentation" class="owl-prev">
-				<i class="ti-arrow-left"></i>
-			</button>
-			<button type="button" role="presentation" class="owl-next">
-				<i class="ti-arrow-right"></i>
-			</button>
-		</div>
-		<div class="owl-dots disabled"></div>
-	</div>
-</div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 			</div>
 		</div>
 	</section>
+	
+	
+	
+<script>
+
+$(document).ready(function() {
+
+	$(".test1").each(function(i,obj){
+		var product_uploadpath = $(this).find(".product_uploadpath").val();
+		var product_uuid = $(this).find(".product_uuid").val();
+		var product_filename = $(this).find(".product_filename").val();
+		
+		var product_url = encodeURIComponent(product_uploadpath + "\\" + product_uuid + "_" + product_filename);
+		var product_urlstr = "/product/display?fileName="+product_url;
+
+		
+		$(this).find(".card-img").attr("src",product_urlstr);
+		
+	})
+	
+
+	
+})
+
+</script>	
 
 	<%@include file="../includes/footer.jsp"%>
 

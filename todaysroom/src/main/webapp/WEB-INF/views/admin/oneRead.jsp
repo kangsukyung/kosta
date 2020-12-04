@@ -13,6 +13,7 @@
 
     <!-- Bootstrap -->
     <link href="/main_resource/css/admin_cs/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link href="/main_resource/css/admin_cs/nprogress.css" rel="stylesheet">
     <!-- iCheck -->
    <link href="/main_resource/css/admin_cs/green.css" rel="stylesheet">
@@ -81,7 +82,7 @@
                       <li><a href="calendar.html">Calendar</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-table"></i> 판매자신청목록 <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-table"></i> 판매자 신청목록 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="tables.html">Tables</a></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
@@ -211,7 +212,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>테이블 <small>오늘의방 유저목록</small></h3>
+                <h3>테이블 <small>오늘의방 문의목록</small></h3>
               </div>
             </div>
 
@@ -222,7 +223,7 @@
               <div class="col-md-12 col-sm-12  ">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>유저목록</h2>
+                    <h2>문의목록</h2>
                     
                     <div class="clearfix"></div>
                   </div>
@@ -232,17 +233,12 @@
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr class="headings">
-                            <th>
-                              <input type="checkbox" id="check-all" class="flat">
-                            </th>
+                          
+                            <th class="column-title">문의번호 </th>
                             <th class="column-title">멤버번호 </th>
-                            <th class="column-title">이름</th>
-                            <th class="column-title">핸드폰번호 </th>
-                            <th class="column-title">닉네임</th>
-                            <th class="column-title">주소</th>
-                            <th class="column-title">이메일</th>
-                            <th class="column-title">멤버등급</th>
-                            <th class="column-title no-link last"><span class="nobr">유저정보</span>
+                            <th class="column-title">제목</th>
+                            <th class="column-title">내용 </th>
+                            <th class="column-title no-link last"><span class="nobr">답변</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
                               <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
@@ -251,20 +247,14 @@
                         </thead>
 
                         <tbody>
-                          <c:forEach items="${member}" var="member">
+                          <c:forEach items="${one}" var="one">
                           <tr class="even pointer">
-                          
-                            <td class="a-center ">
-                              <input type="checkbox" class="flat" name="table_records">
-                            </td>
-                      	    <td class="">${member.member_seq }</td>
-                            <td class="">${member.member_name }</td>
-                            <td class="">${member.member_phone }</td>
-                            <td class="">${member.member_nickname }</td>
-                            <td class="">${member.member_address }</td>
-                            <td class="">${member.member_email }</td>
-                      	    <td class="">${member.member_rating }</td>
-                            <td class="last"><a href="">View</a>
+                      	    <td class="">${one.oi_seq}</td>
+                      	    <td class="">${one.member_seq }</td>
+                            <td class="">${one.oi_title }</td>
+                            <td class="">${one.oi_content }</td>
+                            <td class="last">
+                            <a href="/admin/oneReadModify?seq=${one.oi_seq}">답변하기</a>
                             </td>
                           </tr>
                           </c:forEach>
@@ -290,7 +280,9 @@
         <!-- /footer content -->
       </div>
     </div>
-   <script src="/main_resource/js/admin_js/jquery.min.js"></script>
+
+    <script src="/main_resource/js/admin_js/jquery.min.js"></script>
+    
     <script>
  	 $("#adminLogout").click(function() {
  		if (confirm("로그아웃하시겠습니까?") == true){  

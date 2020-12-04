@@ -32,7 +32,7 @@
 	<sec:authentication property="principal.member" var="member"/>
 	<!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
+		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>마이페이지</h1>
@@ -60,21 +60,7 @@
 				<sec:authorize access="isAuthenticated()">
 					<div>
 					
-					<c:if test="${member.member_profile !=null}">
-						<c:set var="head" value="${fn:substring(member.member_profile,0, fn:length(member.member_profile)-4) }"></c:set>
-						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
-						<c:choose>
-							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-								<a href="/member/modify"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" alt="" width="130" height="130"></a>
-							</c:when>
-							<c:otherwise>
-								<c:out value="NO IMAGE"></c:out>
-							</c:otherwise>
-						</c:choose>						
-					</c:if>
-					<c:if test="${member.member_profile ==null}">
-						<a href="/member/modify"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
-					</c:if>
+						<a href="/member/modify"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" onerror="this.src='/main_resource/img/member_basic.png'" alt="" width="130" height="130"></a>
 							<h4 style=" padding-top: 10px;"><sec:authentication property="principal.member.member_id"/>님 프로필</h4>
 							<div class="social_icon">
 							<br>
@@ -99,6 +85,7 @@
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_2')">
 						<li><a href="/product/list?seq=${member.member_seq}" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+						<li><a href="/productInquiry/replylist" class="d-flex justify-content-between"><p>스토어문의목록</p></a></li>			
 					</sec:authorize>
 				</ul>
           </div>

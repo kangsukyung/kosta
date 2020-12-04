@@ -6,6 +6,12 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 
+	<script src="../../../main_resource/vendors/skrollr.min.js"></script>
+	<script src="../../../main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
+	<script src="../../../main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+	<script src="../../../main_resource/vendors/jquery.ajaxchimp.min.js"></script>
+	<script src="../../../main_resource/vendors/mail-script.js"></script>
+
 <link rel="stylesheet" href="../../../main_resource/css/style.css">
 <link rel="stylesheet" href="../../../main_resource/css/comments.css">
 <html>

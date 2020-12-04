@@ -18,7 +18,6 @@
   <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
   <link rel="stylesheet" href="/main_resource/css/style.css">
   <link rel="stylesheet" href="/main_resource/css/board.css">
-  <script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="/main_resource/vendors/skrollr.min.js"></script>
   <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -230,10 +229,10 @@
 							
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="thumbnail_image" name="board_thumbnail" placeholder="Thumbnail image" value="${board.board_thumbnail }">
+								<input type="hidden" class="form-control" id="thumbnail_image" name="board_thumbnail" placeholder="Thumbnail image" value="${board.board_thumbnail }">
 				            </div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="thumbnail_image" name="board_picture" placeholder="Thumbnail image" value="${board.board_picture }">
+								<input type="hidden" class="form-control" id="thumbnail_image" name="board_picture" placeholder="Thumbnail image" value="${board.board_picture }">
 				            </div>
 				            
 				            <div class="col-md-12 form-group">
@@ -246,7 +245,7 @@
 							
 							<div class="col-md-12 form-group">
 								<input type="hidden" name="board_seq" value="${board.board_seq }">
-								<button type="submit" value="submit" class="button button-register w-100">글 수정</button>
+								<button type="submit" value="submit" class="button button-tracking w-100">글 수정</button>
 							</div>
 						</form>
 					</div>

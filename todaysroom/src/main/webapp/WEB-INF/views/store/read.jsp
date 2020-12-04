@@ -253,7 +253,8 @@
 				</div>
 			</div>
 			<div class="tab-content" id="myTabContent">
-				<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<div class="" id="home" role="tabpanel"
+					aria-labelledby="home-tab">
 					<p>${board.board_content }</p>
 				</div>
 				<div class="" id="review" role="tabpanel" aria-labelledby="review-tab">

@@ -17,7 +17,7 @@
 	<%@include file="includes/header.jsp"%>
 <body>
 	<section class="blog-banner-area" id="category">
-		<div class="container h-100">
+		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;" >
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>로그인 </h1>

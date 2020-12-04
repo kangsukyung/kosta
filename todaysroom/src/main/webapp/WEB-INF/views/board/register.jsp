@@ -19,15 +19,7 @@
 <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/board.css">
-<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
-<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="/main_resource/vendors/skrollr.min.js"></script>
-<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
-<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
-<script src="/main_resource/vendors/mail-script.js"></script>
-<script src="/main_resource/js/main.js"></script>
-<script src="/main_resource/js/board.js"></script>
+
 </head>
 <style>
 		.upload-btn-wrapper {
@@ -96,6 +88,17 @@
 <body>
 	<section><%@include file="../includes/header.jsp"%>
 	</section>
+	
+	
+<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/main_resource/vendors/skrollr.min.js"></script>
+<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="/main_resource/vendors/mail-script.js"></script>
+<script src="/main_resource/js/main.js"></script>
+	
+	
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="category">
 	<div class="container h-100">
@@ -211,7 +214,7 @@
     									 left: 90%;
     									 width: fit-content;" id="counter">(0 / 30)</span>
 						</div>
-						<br>
+						<br><br>
 						<div class="col-md-12 form-group">
 							<textarea rows="30%" cols="70" class="form-control" id="contents"
 								name="board_content" placeholder="내용을 입력해주세요."></textarea>
@@ -555,6 +558,33 @@
 			        }
 			    }); //$.ajax
 			});
+			
+			
+			$(function() {
+				$("#select_option").on("change", function() {
+					$("#select3").empty();
+					if (this.value == "bang") {
+						$("#select3").hide().load("/main_resource/js/board_bang.html", function() {
+							$(this).fadeIn().trigger("create");
+							background_color_ch();
+						});
+					}else if (this.value == "knowhow") {
+						$("#select3").hide().load("/main_resource/js/board_knowhow.html", function() {
+							$(this).fadeIn();
+						});
+					}else if (this.value == "qa") {
+						$("#select3").empty();
+					}
+					return false;
+				});
+			});
+
+			background_color_ch = function() {
+				var background_color_ch = document.getElementById("board_color_select_option");
+				background_color_ch.style.backgroundColor = background_color_ch.value;
+			}
+			
+			
 
 		});
 	</script>
