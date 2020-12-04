@@ -2,11 +2,32 @@
 $(document).ready(function() {
 	var memValue = $("#review_member_seq").val();
 	var myMemValue = $("#my_member_seq").val();
+	var member_path = $("#member_path").val();
+	var member_profile = $("#member_path").val();
+	
+	$(".review_sidebar_select_jsb li").each(function(i,obj){
+		var product_uploadpath = $(this).find(".product_uploadpath").val();
+		var product_uuid = $(this).find(".product_uuid").val();
+		var product_filename = $(this).find(".product_filename").val();
+		console.log("파일 명 : "+product_filename);
+		
+		var product_url = encodeURIComponent(product_uploadpath + "\\" + product_uuid + "_" + product_filename);
+		var product_urlstr = "/product/display?fileName="+product_url;
+		console.log("이미지 경로 : "+product_urlstr);
+		$(this).find(".img-fluid").attr("src",product_urlstr);
+		
+
+		console.log("이미지 경로 : "+$(".img-fluid").attr("src"));
+		
+	});
 	
 	showList(1);
 	 $("#reviewModBtn").css('display','none');
 	//리스트 보여주는거
 	function showList(page){
+		
+		var product_item_review = $(".product_filename").val();
+		console.log("product_item_review : "+product_item_review);
 		var store_seq = $("#review_store_seq").val();//현재 store번호
 		var myMemValue = $("#my_member_seq").val();	//로그인 한 사람의 seq
 		console.log("my member value : "+myMemValue);
@@ -19,6 +40,7 @@ $(document).ready(function() {
 			
 		    if(page == -1){
 		    	pageNum = Math.ceil(reviewCnt/5.0);
+		    	console.log("pageNum : "+ pageNum);
 		    	showList(pageNum);
 		    	return;
 		    }
@@ -28,12 +50,12 @@ $(document).ready(function() {
 				return;
 			}
 			
-			str+="<a class='review_sidebar_alig_jsb'>최신순</a><a class='review_sidebar_alig_jsb'>평점순</a>"
+			/*str+="<a class='review_sidebar_alig_jsb'>최신순</a><a class='review_sidebar_alig_jsb'>평점순</a>"*/
 			
 			for (var i = 0, len = reviewList.length || 0; i < len; i++) {
 				str +="<article class='row blog_item blog_item_jsb'>"
 				str +="	<div class='thumb'>"
-				str +="		<img src='../../../main_resource/img/blog/c1.jpg' alt=''>"
+				str +="		<img src='' alt=''>"
 				str +="	</div>"
 				str +="	<div class='col-md-9'>"
 				str +="		<div class='blog_post'>"
@@ -119,6 +141,7 @@ $(document).ready(function() {
 	//------------------------------insert----------------------------------------------------------
 	//insert
 	modalRegisterBtn.on("click",function(e){
+		//rating = 0;
 		e.preventDefault();
 		console.log("modalContent.val():" + $("#message").val());//undifiend
 		
@@ -129,14 +152,14 @@ $(document).ready(function() {
 		
 		//토큰
 		var csrfTokenValue = $("#csrf").attr("value");
-		
+		console.log("저장할 때 rating : "+rating);
 		var review = {
 				review_content : $("#message").val(),
 				shoporder_seq : 22,	//주문내역있어야됨
 				member_seq : $("#my_member_seq").val(),
-				store_seq : $("#review_store_seq").val(),//?????????왜 두개야
-				product_seq : $("#review_store_seq").val(),	//제품 선택해야됨
-				store_seq : $("#review_store_seq").val()//?????????왜 두개야
+				store_seq : $("#review_store_seq").val(),
+				product_seq : product_seq,	//제품 선택해야됨
+				review_rating : rating
 				
 		};
 		console.log(review);
@@ -149,24 +172,40 @@ $(document).ready(function() {
 			$('#my_modal').hide();
 			$('#my_modal').css("display",'none');
 			$("html, body").css("overflow",'auto');
-			showList(-1);
+			showList(1);
 		});
 	});
+	var img_src = "";
+	//상품옵션 선택 버튼
+	$(".review_sidebar_select_jsb li").on("click",function(){
+		var product_name = $(this).attr('id');
+		console.log("클릭했을 때 제품명 : "+product_name);
+		$(".review-modal__form__product__contents__name").text(product_name);
+		img_src = $(this).find($(".img-fluid")).attr("src");
+		$(".review-modal__form__product__image").attr("src",img_src);
+		
+		console.log("이미지 경로 : "+img_src);
+		
 	});
 	
-	//delete
-	/*$(document).on("click",".reviewRemove",function(){
-		console.log("delete"+$(this).data("member_seq"));
-	});*/
-
+	
 
 	//-----------------------------modal-----------------------------------------------------------
 	//모달
 
-	//var modal = "";
-
+	var product_seq = $(".review_sidebar_select_jsb li").attr('id');
+	
+	
+	
+	// 모달창 띄우기
 	$('#popup_open_btn').on('click', function() {
-	    // 모달창 띄우기
+		
+		$(".review-modal__form__product__image").attr("src",img_src).css("width","300px");
+		//별 새로고침
+		rating = 0;
+		$("#star_grade a").removeClass("on");
+		
+		$("#message").val('');
 		$("#reviewModBtn").css('display','none');
 		$("#reviewAddBtn").css('display','');
 	    modal('#my_modal');
@@ -176,25 +215,25 @@ $(document).ready(function() {
 
 	function modal(id) {
 	    var zIndex = 9999;
-	    
 	    // 모달 div 뒤에 희끄무레한 레이어
-	    var bg = document.createElement('div');
-	    $('document.body').css({
+	    $('document.body').append("<div id='bg'>");
+	    //var bg = document.createElement('div');
+	    $('#bg').css({
 	        position: 'fixed',
 	        zIndex: zIndex,
 	        left: '0px',
 	        top: '0px',
 	        width: '100%',
 	        height: '100%',
-	        overflow: 'auto',
+	        overflow: 'hidden',
 	        // 레이어 색갈은 여기서 바꾸면 됨
 	        backgroundColor: 'rgba(0,0,0,0.4)'
 	    });
-	    $('document.body').append(bg);
-	
+	    
+	    
 	    // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
 	    $('.modal_close_btn').on('click', function() {
-	        //bg.remove();
+	        $("#bg").removeAttr('style');
 	        $('#my_modal').css("display",'none');
 	        $("html, body").css("overflow",'auto');
 	    });
@@ -214,6 +253,8 @@ $(document).ready(function() {
 	        msTransform: 'translate(-50%, -50%)',
 	        webkitTransform: 'translate(-50%, -50%)'
 	    });
+	    
+	    
 	}//modal end
 	//----------------------------------review modify------------------------------------------------------
 	//update
@@ -233,14 +274,14 @@ $(document).ready(function() {
 			e.preventDefault();
 		var review = {
 				review_content : $("#message").val(),
-				review_seq : $("#my_member_seq").val()
+				review_seq : $("#my_member_seq").val(),
+				review_rating : rating
 		};
 		console.log(review);
 		
 		ReviewService.update(review, function(result){
 			$('#my_modal').css("display",'none');
 	        $("html, body").css("overflow",'auto');
-	        console.log("페이지 번호! : "+pageNum);
 			showList(pageNum);
 			
 		});
@@ -256,8 +297,8 @@ $(document).ready(function() {
 		
 		ReviewService.remove(review_seq, function(result){
 			alert(result);
-			//showList(pageNum);
 		});
+		showList(1);
 	});
 	
 	
@@ -268,7 +309,7 @@ $(document).ready(function() {
 	
 	$('#review-tab').click(function(e) {
 		$('#review-tab').addClass('active');
-		$('#review').css('display',"");
+		$('#review').css('display','');
 		$('#home').css('display',"none");
 		$('#home-tab').removeClass('active');
 	});
@@ -279,7 +320,30 @@ $(document).ready(function() {
 		$('#review-tab').removeClass('active');
 	});
 	
+});
+
+
+	//-----------------------------------making star-------------------------------------------------------------
+	var rating = 0;
+
+	/*$(".list li").mouseenter(function(){
+		console.log($(this).find("i"));
+		$(this).find("i").css("color","#fbd600");
+		
+	});*/
 	
+	$('#star_grade a').click(function(){
+        $(this).parent().children("a").removeClass("on");  /* 별점의 on 클래스 전부 제거 */ 
+        $(this).addClass("on").prevAll("a").addClass("on"); /* 클릭한 별과, 그 앞 까지 별점에 on 클래스 추가 */
+        
+        rating = $(this).attr("id");
+        console.log("rating : "+ rating);
+        
+        return false;
+    });
+	
+
+
 	//----------------------------------reviewService------------------------------------------------------
 	
 	

@@ -147,6 +147,13 @@
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
 						</div>
+						
+						<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal.member" var="member"/>
+						<input type="hidden" name="member_seq" value="${member.member_seq }">
+						</sec:authorize>
+						
+						
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
 								class="button button-tracking w-100"

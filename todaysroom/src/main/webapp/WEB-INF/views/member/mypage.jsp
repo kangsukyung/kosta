@@ -85,7 +85,7 @@
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_2')">
 						<li><a href="/product/list?seq=${member.member_seq}" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
-						<li><a href="/productInquiry/replylist?member_seq=${member.member_seq}" class="d-flex justify-content-between"><p>스토어문의목록</p></a></li>			
+						<li><a href="/productInquiry/replylist" class="d-flex justify-content-between"><p>스토어문의목록</p></a></li>			
 					</sec:authorize>
 				</ul>
           </div>
