@@ -137,24 +137,30 @@ $(function() {
 	var store_size = parseInt($(".store_list_hidden .store_size").html());
 	var list_str = "";
 	
+	var store_price = $("input[name='store_price']").get();
 	var store_lcategory = $("input[name='store_lcategory_hidden']").get();
 	var store_title = $("input[name='store_title_hidden']").get();
-	var subsub = $("input[name='store_lcategory_hidden']").get();
-
+	var store_seq = $("input[name='store_seq']").get();
+	
 	for (var i = 0; i < 8; i++) {
-		if(store_lcategory[i].value == store_item_category) {
-			list_str += '<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">'
-				+'       <div class="single-search-product-wrapper">'
-				+'         <div class="single-search-product d-flex">'
-				+'           <a href="#"><img src="#" alt=""></a>'
-				+'           <div class="desc">'
-				+'               <a href="#" class="title">' + store_title[i].value + '</a>'
-				+'               <div class="price">$170.00</div>'
-				+'           </div>'
-				+'         </div>'
-				+'       </div>'
-				+'     </div>'			
+		if (store_lcategory[i]) {
+			if (store_lcategory[i].value) {
+				if(store_lcategory[i].value == store_item_category) {
+					list_str += '<div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">'
+						+'       <div class="single-search-product-wrapper">'
+						+'         <div class="single-search-product d-flex">'
+						+'           <a href=" ' + store_seq[i].value + ' "><img src="#" alt=""></a>'
+						+'           <div class="desc">'
+						+'               <a href= "/store/read?store_seq=' + store_seq[i].value +'" class="title">' + store_title[i].value + '</a>'
+						+'               <div class="price">' +store_price[i].value + '원 외</div>'
+						+'           </div>'
+						+'         </div>'
+						+'       </div>'
+						+'     </div>'			
+				}
+			}
 		}
+		
 	}
    
 	$("#recommend_list").append(list_str);

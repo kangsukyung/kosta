@@ -15,18 +15,20 @@ $(function() {
 		
 	})
 	
+	//필터
 	$("#allsofa").click(function() {
 		var str = "";
 		var category = "";
-		$(".lattest-product-area").empty();
+		$(".lattest-product-area").empty();		
 		
-		$.getJSON("/store/pages/" + "sofa" + "/" + "1" + ".json", function(data) {
+		$.getJSON("/store/pages/" + "living" + "/" + "1" + ".json", function(data) {
 			$.each(data, function(i, item) {
+				console.log("몇개?")
 				str += '<div class="row row_product_hw col-lg-4">'
 				+'<div class="card text-center card-product">'
 				+'	<div class="card-product__img">'
 				+'		<img class="card-img"'
-				+'			src="/display?fileName=' + item.store_picture + '" alt="상품이미지">'
+				+'			src="/display?fileName=' + item.store_picture + '" alt="상품이미지" onerror="this.src=' + "'/main_resource/img/stimg.png'" + '">'
 				+'		<ul class="card-product__imgOverlay">'
 				+'			<li><button>'
 				+'					<i class="ti-search"></i>'
@@ -40,20 +42,19 @@ $(function() {
 				+'		</ul>'
 				+'	</div>'
 				+'	<div class="card-body">'
-				+'		<p>' + item.store_date+'</p>'
+				+'		<p>' + item.store_price+'</p>'
 				+'		<h4 class="card-product__title">'
 				+'			<a href="/store/read?store_seq='+item.store_seq+'">'+item.store_title+'</a>'
 				+'		</h4>'
 				+'	</div>'
 				+'</div>'
 				+'</div>'
-//				console.log(str);
-				$(".lattest-product-area").append(str);
 			})
+			$(".lattest-product-area").append(str);
 		}).fail(function(xhr, status, err) {
 			alert("fail");
 		});
-		
+
 		return false;
 	});
 
@@ -68,7 +69,7 @@ $(function() {
 				+'<div class="card text-center card-product">'
 				+'	<div class="card-product__img">'
 				+'		<img class="card-img"'
-				+'			src="/display?fileName=' + item.store_picture + '" alt="상품이미지">'
+				+'			src="/display?fileName=' + item.store_picture + '" alt="상품이미지" onerror="this.src=' + "'/main_resource/img/stimg.png'" + '">'
 				+'		<ul class="card-product__imgOverlay">'
 				+'			<li><button>'
 				+'					<i class="ti-search"></i>'
@@ -82,16 +83,15 @@ $(function() {
 				+'		</ul>'
 				+'	</div>'
 				+'	<div class="card-body">'
-				+'		<p>' + item.store_date+'</p>'
+				+'		<p>' + item.store_price+'</p>'
 				+'		<h4 class="card-product__title">'
 				+'			<a href="/store/read?store_seq='+item.store_seq+'">'+item.store_title+'</a>'
 				+'		</h4>'
 				+'	</div>'
 				+'</div>'
 				+'</div>'
-//				console.log(str);
-				$(".lattest-product-area").append(str);
 			})
+			$(".lattest-product-area").append(str);
 		}).fail(function(xhr, status, err) {
 			alert("fail");
 		});

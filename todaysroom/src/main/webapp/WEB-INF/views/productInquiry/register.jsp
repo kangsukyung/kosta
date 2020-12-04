@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="/main_resource/vendors/bootstrap/bootstrap.min.css">
-<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script
 	src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <script type="text/javascript" src="/main_resource/js/product_inquiry.js"></script> 

@@ -40,7 +40,7 @@
 					<sec:authentication property="principal.member" var="member"/>	<!-- 로그인 한 사람 seq? -->
 				</sec:authorize>
 					<input type="hidden" id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
-					<input type="hidden"  name="${review.store_seq}" value="${review.store_seq}">
+					<input type="hidden" id="review_store_seq" name="review_store_seq" value="${review.store_seq}">
 					<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="review-modal__form__product">
 					<img class="review-modal__form__product__image" src="../../main_resource/img/product/product1.png">
@@ -77,6 +77,7 @@
 				</div>
 				<div class="col-md-12">
 					<button id="reviewAddBtn" class="btn primary-btn">리뷰쓰기</button>
+					<button id="reviewModBtn" class="btn primary-btn">리뷰쓰기</button>
 				</div>
 			<!-- </div> -->
 			</form>

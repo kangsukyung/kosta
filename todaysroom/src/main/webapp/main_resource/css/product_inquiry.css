@@ -11,3 +11,8 @@
 	border-radius: 30px;
     padding: 7.5px 18px;
 }
+
+#textarea-clear{
+	clear:both;
+	padding-top:10px;
+}

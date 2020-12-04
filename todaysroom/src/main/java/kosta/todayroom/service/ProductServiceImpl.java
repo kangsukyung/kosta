@@ -79,18 +79,21 @@ public class ProductServiceImpl implements ProductService {
 	
 
 	@Override
-	public StoreVO ProductStoreRead(Long store_seq) {
-		log.info("ProductRead..........." + store_seq);
+	public ProductVO ProductItemRead(int product_seq) {
+		log.info("ProductRead..........." + product_seq);
 		
-		return productMapper.ProductStoreRead(store_seq);
+		return productMapper.ProductItemRead(product_seq);
 	}
 
 	@Override
-	public boolean ProductStoreModify(StoreVO store) {
+	public int ProductItemModify(ProductVO product) {
 		
-		log.info("Product Modify................." + store);
+		log.warn("bbbbㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
+		log.info("Product Modify................." + product);
+		log.warn(product);
 		
-		return productMapper.ProductStoreModify(store) == 1;
+		return productMapper.ProductItemModify(product);
+		
 
 
 	}

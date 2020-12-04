@@ -38,6 +38,7 @@
     INNER JOIN product p
   	ON s.store_seq = p.store_seq
   	where s.member_seq = #{member_seq}
+  	order by p.product_seq DESC
    
 </select>
 
@@ -71,19 +72,21 @@ select SEQ_PRODUCT_PRODUCT_SEQ.NEXTVAL, SEQ_STORE_STORE_SEQ.CURRVAL, A.* from(
 
 
 
-<select id="ProductStoreRead" resultType="kosta.todayroom.domain.StoreVO">
-	select * from store where store_seq = #{store_seq}
+<select id="ProductItemRead" resultType="kosta.todayroom.domain.ProductVO">
+	select * from product where product_seq = #{product_seq}
 </select>
 
-<delete id="ProductStoreRemove">
+<!-- <delete id="ProductStoreRemove">
 	delete from store where store_seq = #{store_seq}
 </delete>
+ -->
 
-<update id="ProductStoreModify">
-	update store
-	set store_title = #{store_title},
-	store_content = #{store_content}
-	where store_seq = #{store_seq}
+<!-- 하나의 상품 수정 -->
+
+<update id="ProductItemModify">
+	update product set product_name = #{product_name},
+	product_price = #{product_price}
+	where product_seq = #{product_seq}
 </update>
 
 
