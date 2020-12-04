@@ -20,6 +20,8 @@
 
     <!-- Custom Theme Style -->
     <link href="/main_resource/css/admin_cs/custom.min.css" rel="stylesheet">
+    <link href="/main_resource/css/admin_cs/_pagination.scss" rel="stylesheet">
+    <link href="/main_resource/css/admin_cs/_reboot.scss" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -28,7 +30,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="/admin/read" class="site_title"><i class="fa fa-paw"></i> <span>오늘의방</span></a>
+              <a href="/admin/memberRead" class="site_title"><i class="fa fa-paw"></i> <span>오늘의방</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -52,7 +54,7 @@
               <div class="menu_section">
                 <h3>목록</h3>
                 <ul class="nav side-menu">
-                  <li><a href="/admin/read"><i class="fa fa-home"></i> 유저목록 <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="/admin/memberRead"><i class="fa fa-home"></i> 유저목록 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.html">Dashboard</a></li>
                       <li><a href="index2.html">Dashboard2</a></li>
@@ -260,8 +262,30 @@
                           </c:forEach>
                         </tbody>
                       </table>
+                       <div class='dataTables_paginate paging_simple_numbers' id="datatable_paginate">
+					<ul class="pagination">
+
+ 						<c:if test="${pageMaker.prev}">
+							<li class="paginate_button previous disabled" id="datatable_previous"><a
+								href="${pageMaker.startPage -1}">Previous</a></li>
+						</c:if>
+
+						<c:forEach var="num" begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}">
+							<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} "> <a href="${num}">${num}</a> </li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next}">
+							<li class="paginate_button next"><a href="${pageMaker.endPage +1 }">Next</a></li>
+						</c:if>
+
+					</ul>
+				</div>
                     </div>
-							
+			<form id='actionForm' action="/admin/oneRead" method='get'>
+				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+			</form>	
 						
                   </div>
                 </div>
@@ -291,6 +315,15 @@
  		      return;
  		  }
   	});
+ 	 
+ 	$(".paginate_button a").on("click", function(e) {
+		e.preventDefault();
+		console.log('click');
+		var actionForm=$("#actionForm");
+	
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		actionForm.submit();
+	});
   </script>
   </body>
 </html>

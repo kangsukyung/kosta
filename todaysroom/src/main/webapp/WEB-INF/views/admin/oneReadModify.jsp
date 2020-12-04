@@ -22,7 +22,7 @@
 			<div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="/admin/read" class="site_title"><i class="fa fa-paw"></i> <span>오늘의방</span></a>
+              <a href="/admin/memberRead" class="site_title"><i class="fa fa-paw"></i> <span>오늘의방</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -46,7 +46,7 @@
               <div class="menu_section">
                 <h3>목록</h3>
                 <ul class="nav side-menu">
-                  <li><a href="/admin/read"><i class="fa fa-home"></i> 유저목록 <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="/admin/memberRead"><i class="fa fa-home"></i> 유저목록 <span class="fa fa-chevron-down"></span></a>
                     
                   </li>
                   <li><a><i class="fa fa-edit"></i> 신고목록 <span class="fa fa-chevron-down"></span></a>

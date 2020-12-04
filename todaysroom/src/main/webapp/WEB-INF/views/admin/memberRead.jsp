@@ -27,7 +27,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="/admin/read" class="site_title"><i class="fa fa-paw"></i> <span>오늘의방</span></a>
+              <a href="/admin/memberRead" class="site_title"><i class="fa fa-paw"></i> <span>오늘의방</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -51,7 +51,7 @@
               <div class="menu_section">
                 <h3>목록</h3>
                 <ul class="nav side-menu">
-                  <li><a href="/admin/read"><i class="fa fa-home"></i> 유저목록 <span class="fa fa-chevron-down"></span></a>
+                  <li><a href="/admin/memberRead"><i class="fa fa-home"></i> 유저목록 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.html">Dashboard</a></li>
                       <li><a href="index2.html">Dashboard2</a></li>
@@ -232,9 +232,9 @@
                       <table class="table table-striped jambo_table bulk_action">
                         <thead>
                           <tr class="headings">
-                            <th>
+                            <!-- <th>
                               <input type="checkbox" id="check-all" class="flat">
-                            </th>
+                            </th> -->
                             <th class="column-title">멤버번호 </th>
                             <th class="column-title">이름</th>
                             <th class="column-title">핸드폰번호 </th>
@@ -254,9 +254,9 @@
                           <c:forEach items="${member}" var="member">
                           <tr class="even pointer">
                           
-                            <td class="a-center ">
+                            <!-- <td class="a-center ">
                               <input type="checkbox" class="flat" name="table_records">
-                            </td>
+                            </td> -->
                       	    <td class="">${member.member_seq }</td>
                             <td class="">${member.member_name }</td>
                             <td class="">${member.member_phone }</td>
@@ -270,9 +270,29 @@
                           </c:forEach>
                         </tbody>
                       </table>
+                 <div class='dataTables_paginate paging_simple_numbers' id="datatable_paginate">
+					<ul class="pagination">
+
+ 						<c:if test="${pageMaker.prev}">
+							<li class="paginate_button previous disabled" id="datatable_previous"><a
+								href="${pageMaker.startPage -1}">Previous</a></li>
+						</c:if>
+
+						<c:forEach var="num" begin="${pageMaker.startPage}"
+							end="${pageMaker.endPage}">
+							<li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} "> <a href="${num}">${num}</a> </li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next}">
+							<li class="paginate_button next"><a href="${pageMaker.endPage +1 }">Next</a></li>
+						</c:if>
+
+					</ul>
+				</div>
                     </div>
-							
-						
+             <form id='actionFormread' method='get' action="/admin/memberRead">
+				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+			</form>	
                   </div>
                 </div>
               </div>
@@ -298,7 +318,16 @@
  		  }else{ 
  		      return;
  		  }
+ 		
   	});
+ 		$(".paginate_button a").on("click", function(e) {
+ 			e.preventDefault();
+ 			console.log('click');
+ 			var actionForm=$("#actionFormread");
+ 		
+ 			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+ 			actionForm.submit();
+ 		});
   </script>
   </body>
 </html>
