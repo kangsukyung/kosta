@@ -100,20 +100,12 @@ public class BoardController {
 
 	@Transactional
 	@PostMapping("/modify")
-	public String BoardModifyd(BoardVO board, RoomwarmingVO room, KnowhowVO know, RedirectAttributes rttr,
-			Model model) {
+	public String BoardModifyd(BoardVO board, RoomwarmingVO room, KnowhowVO know, 
+			RedirectAttributes rttr, Model model) {
 
 		if (service.modify(board)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-
-//		if (room.getRoomwarming_type() != null) {
-//			service.roomRegister(room);
-//		}
-//
-//		if (know.getKnowhow_style() != null) {
-//			service.knowhowRegister(know);
-//		}
 
 		return "redirect:/board/read?board_seq=" + board.getBoard_seq();
 	}
