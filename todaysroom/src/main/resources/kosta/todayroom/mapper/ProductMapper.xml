@@ -42,15 +42,7 @@
    
 </select>
 
-
-
-<!-- <select id="ProductItemgetList" resultType="kosta.todayroom.domain.ProductVO">
-
-	select * from product
-
-</select>
- -->
-
+<!-- 스토어글, 상품등록 동시에 하기 -->
 <insert id="ProductStoreRegister">
 		insert into store (store_seq, member_seq, store_title, store_content, store_name, store_price, store_date, store_lcategory, store_scategory)
 		values(SEQ_STORE_STORE_SEQ.nextval, #{member_seq}, #{store_title}, #{store_content}, #{store_name}, #{store_price}, sysdate, #{store_lcategory}, #{store_scategory})
@@ -70,16 +62,10 @@ select SEQ_PRODUCT_PRODUCT_SEQ.NEXTVAL, SEQ_STORE_STORE_SEQ.CURRVAL, A.* from(
  </foreach>) A
 </insert>
 
-
-
 <select id="ProductItemRead" resultType="kosta.todayroom.domain.ProductVO">
 	select * from product where product_seq = #{product_seq}
 </select>
 
-<!-- <delete id="ProductStoreRemove">
-	delete from store where store_seq = #{store_seq}
-</delete>
- -->
 
 <!-- 하나의 상품 수정 -->
 

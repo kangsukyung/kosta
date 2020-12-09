@@ -36,21 +36,16 @@ public class ProductServiceImpl implements ProductService {
 		log.info("ProductStore Register..........." + store);
 		
 		productMapper.ProductStoreRegister(store);
-		
-		
-		
+	
 		if (store.getAttachList() == null || store.getAttachList().size() <= 0) {
 			return;
 		}
-
 		store.getAttachList().forEach(attach -> {
 
 			attach.setStore_seq(store.getStore_seq());
 			productAttachMapper.ProductAttachRegister(attach); 
 		});
 	} //스토어, 파일 등록
-	
-	
 	
 	@Override
 	public void ProductItemRegister(List<ProductVO> product) {
