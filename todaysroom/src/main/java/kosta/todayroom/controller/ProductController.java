@@ -138,26 +138,16 @@ public class ProductController {
 		
 		System.out.println("product_seq    :  " +product_seq);
 		
-		
-		log.info("dkdkdkdkdkr");
-		
 		model.addAttribute("product", productService.ProductItemRead(product_seq));
-		//model.addAttribute("product", productService.ProductItemModify(product));
-
 		
 	}
 	
 	@PostMapping("/modify")
 	public String ProductModify(ProductVO product, RedirectAttributes rttr, Model model) {
 		
-		System.out.println("여기들어옴?");
-		log.info("들어왓니");
-		
 		log.warn(product);
-		int num=productService.ProductItemModify(product);
-		
-//		log.warn(num);
-//		return null;
+		int num = productService.ProductItemModify(product);
+
 		return "redirect:/product/list";
 	}
 	

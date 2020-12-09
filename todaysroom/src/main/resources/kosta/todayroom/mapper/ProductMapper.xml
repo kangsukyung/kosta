@@ -5,9 +5,6 @@
 <mapper namespace="kosta.todayroom.mapper.ProductMapper">
 
 
-<!-- <select id="ProductStoregetList" resultType="kosta.todayroom.domain.StoreVO">
-	select * from store
-</select> -->
 
 
 <resultMap type="StoreVO" id="store">
@@ -23,12 +20,8 @@
 	<result column="product_uuid" property="product_uuid"/>
 	<result column="product_uploadpath" property="product_uploadpath"/>
 	
-	<association property="store" javaType="kosta.todayroom.domain.StoreVO">
-	
-
-	<result column="member_seq" property="member_seq"/>
-
-	
+	<association property="store" javaType="kosta.todayroom.domain.StoreVO">	
+		<result column="member_seq" property="member_seq"/>
 	</association>
 </resultMap>
 

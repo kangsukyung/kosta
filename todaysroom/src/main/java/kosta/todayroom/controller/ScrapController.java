@@ -46,21 +46,6 @@ public class ScrapController {
 		model.addAttribute("list2", scrapService.ScrapGetList(member.getMember_seq()));
 		System.out.println(scrapService.ScrapGetList(member.getMember_seq()));
 		
-		/*List<ScrapVO> list1 = scrapService.ScrapAttachGetList();
-		List<ScrapVO> list2 = scrapService.ScrapGetList();
-		
-		LinkedHashMap<ScrapVO, ScrapVO> trueList = new LinkedHashMap<>();
-		
-		for(int i=0; i<list1.size(); i++){
-			ScrapVO temp1 = list1.get(i);
-			ScrapVO temp2 = list2.get(i);
-			
-			trueList.put(temp1, temp2);
-		}
-		
-		model.addAttribute("list", trueList);*/
-		
-		
 	} //end list
 	
 	
@@ -116,12 +101,10 @@ public class ScrapController {
 	@PostMapping("/register")
 	public String ScrapRegister(@RequestParam("board_seq") Long board_seq, ScrapVO scrap, RedirectAttributes rttr) {
 		
-
 		scrapService.ScrapRegister(scrap);
 		
 		rttr.addFlashAttribute("result", scrap.getScrap_seq());
 		
-
 		return "redirect:/board/read?board_seq="+board_seq;
 
 	}
@@ -139,8 +122,7 @@ public class ScrapController {
 	public String remove(@RequestParam("scrap_seq") Long scrap_seq, RedirectAttributes rttr) {
 
 		log.info("remove............." + scrap_seq);
-
-		
+	
 		if(scrapService.ScrapRemove(scrap_seq)) {
 			rttr.addFlashAttribute("result", "success");
 		}
