@@ -453,9 +453,7 @@
 				});
 				dropZone.on('drop', function(e) {
 					e.preventDefault();
-					// 드롭다운 영역 css
-					dropZone.css('background-color', '#FFFFFF');
-	
+					dropZone.css('background-color', '#FFFFFF');// 드롭다운 영역 css
 					var files = e.originalEvent.dataTransfer.files;
 					
 					if (files != null) {
@@ -478,9 +476,6 @@
 								dataType : 'json',
 								success : function(result) {
 									fileRemove(resultRemove);
-									console.log("???");
-									console.log(resultRemove);
-									console.log(result);
 									showUploadResult(result);
 									resultRemove = result;
 								}
