@@ -210,7 +210,7 @@
 							<div class="quotes"><h1><c:out value="${board.board_title}"/></h1></div>
 							<div class="row" id="picture_row">
 								<div class="col-lg-12 mt-4">
-									<p style="white-space: pre;"><c:out value="${board.board_content}"/></p>
+									<p style="white-space: pre-line;"><c:out value="${board.board_content}"/></p>
 									<p>MCSE boot camps have its supporters and its detractors.
 										Some people do not understand why you should have to spend
 										money on boot camp when you can get the MCSE study materials
