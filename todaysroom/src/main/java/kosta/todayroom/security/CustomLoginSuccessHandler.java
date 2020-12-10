@@ -42,13 +42,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 			request.getSession().invalidate();
 			response.getWriter().print("<script>alert('탈퇴한 회원입니다.'); location.href='/login?num=2'</script>");
 		}else if(roleNames.contains("ROLE_100")){
-<<<<<<< HEAD
-			response.getWriter().print("<script>alert('관리자 페이지로 이동합니다.'); location.href='/admin/read'</script>");
-=======
-			MemberVO member=service.idCheck(request.getParameter("username"));
-			service.countUpdate(member.getMember_seq(), 0);
-			response.getWriter().print("<script>alert('관리자 페이지로 이동합니다.'); location.href='/admin/memberRead'</script>");
->>>>>>> branch 'master' of https://github.com/kangsukyung/kosta.git
 		}else{
 			MemberVO member=service.idCheck(request.getParameter("username"));
 			service.countUpdate(member.getMember_seq(), 0);
