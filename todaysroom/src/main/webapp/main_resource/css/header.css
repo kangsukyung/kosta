@@ -39,7 +39,7 @@
 }
 
 #hw-searchbar.active input{
-	width: 200px;
+	width: 225px;
 	transition : all 0.3s ease-in-out;
 } 
 
@@ -56,4 +56,12 @@ ul#ui-id-1{
 
 ul#ui-id-1 li{
 	cursor: pointer;
+	width: 200px;
+	height:25px;
+}
+
+ul#ui-id-1 li div{
+	text-overflow: ellipsis;
+	overflow : hidden;
+	white-space : nowrap;
 }

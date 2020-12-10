@@ -63,6 +63,9 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> boardList(BoardCriteria cri) {
 
 		log.info("getList..........");
+		
+		cri.setKeyword("%"+cri.getKeyword()+"%");
+		System.out.println(cri.getKeyword());
 
 		return mapper.ListPaging(cri);
 	}
