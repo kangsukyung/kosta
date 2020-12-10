@@ -74,10 +74,13 @@ public class ProductController {
 			uploadPath.mkdirs();
 		}
 		
+
 		productService.ProductStoreRegister(store);
-	
+		
 		List<ProductVO> list = new ArrayList<ProductVO>();
 	
+		
+		
 		for (int i=0; i<product_name.size(); i++) {
 			list.add(new ProductVO());
 			list.get(i).setProduct_name(product_name.get(i));
@@ -88,15 +91,18 @@ public class ProductController {
 				
 			//db에 담는거
 			list.get(i).setProduct_fname(uploadFileName);
-				
+			
+			
 			//이미지업로드
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			log.info("only file name: " + uploadFileName);
 
 			UUID uuid = UUID.randomUUID();
-					
+			
+			
 			// uuid담기
 			String productUuid = uuid.toString();
+			
 			
 			System.out.println("productUuid:  "+productUuid);
 			
@@ -104,22 +110,35 @@ public class ProductController {
 			list.get(i).setProduct_uuid(productUuid);
 
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
+			
+			//System.out.println(uploadPath);
+
 			try {
 				File saveFile = new File(uploadPath, uploadFileName);				
 				multipartFile.get(i).transferTo(saveFile);
+				
+				//list.get(i).setProduct_uploadpath(uploadFolderPath);
 				list.get(i).setProduct_uploadpath(uploadFolderPath);
+				//System.out.println("uploadPath : " + uploadFolderPath);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 		}
+		
 		productService.ProductItemRegister(list);
+	
 		
 		log.info("==========================");
+		
 		log.info("ProductStoreRegister: " + store);
-		rttr.addFlashAttribute("result", store.getStore_seq());
+//		log.info("ProductItemRegister: " + product);
 
+		rttr.addFlashAttribute("result", store.getStore_seq());
+		//rttr.addFlashAttribute("result", store.getStore_seq());
+
+		
 		return "redirect:/product/list";
 	} //end register
 	
@@ -138,16 +157,26 @@ public class ProductController {
 		
 		System.out.println("product_seq    :  " +product_seq);
 		
+		
+		log.info("dkdkdkdkdkr");
+		
 		model.addAttribute("product", productService.ProductItemRead(product_seq));
+		//model.addAttribute("product", productService.ProductItemModify(product));
+
 		
 	}
 	
 	@PostMapping("/modify")
 	public String ProductModify(ProductVO product, RedirectAttributes rttr, Model model) {
 		
+		System.out.println("여기들어옴?");
+		log.info("들어왓니");
+		
 		log.warn(product);
-		int num = productService.ProductItemModify(product);
-
+		int num=productService.ProductItemModify(product);
+		
+//		log.warn(num);
+//		return null;
 		return "redirect:/product/list";
 	}
 	

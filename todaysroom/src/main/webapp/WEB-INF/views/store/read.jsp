@@ -57,7 +57,6 @@
 				<input type="hidden" name="store_lcategory_hidden" value="${store.store_lcategory }">
 				<input type="hidden" name="store_title_hidden" value="${store.store_title }">
 				<input type="hidden" name="store_price" value="${store.store_price }">
-				<input type="hidden" name="store_seq" value="${store.store_seq }">
 				<div class="store_scategory">${store.store_scategory }</div>
 			</div>
 		</c:forEach>
@@ -218,7 +217,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<form id="my-form" me>
+							<form id="my-form">
 								<div class="btn-group btn-group-toggle" data-toggle="buttons">
 									<label class="btn btn-default btn-lg"> <input
 										type="radio" name="pi_type" value="product"> 상품
@@ -234,14 +233,22 @@
 										type="radio" name="pi_type" value="etc"> 기타
 									</label>
 								</div>
-								<div class="form-group">
+								<div>
+									<select name="product_seq">
+										<c:forEach items="${list }" var="product">
+											<option value="${product.product_seq }">${product.product_name }</option>
+										</c:forEach>
+									</select>
+								</div>
+								<div class="form-group" id="textarea-clear">
 									<label for="message-text" class="control-label">문의내용</label>
 									<textarea class="form-control" id="message-text"
 										name="pi_content"></textarea>
 								</div>
-								<input hidden="hidden" name="member_seq" value="1">
+								<input hidden="hidden" name="member_seq" value="${member.member_seq }">
 								<!-- value 값 추후 조정 필요 -->
-								<input hidden="hidden" name="product_seq" value="1">
+								
+								<input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/>
 							</form>
 							<div>문의내용에 대한 답변은 ‘마이페이지 &gt; 나의 쇼핑 &gt; 나의 문의내역’ 또는 ‘상품
 								상세페이지’에서 확인 가능합니다.</div>
@@ -535,6 +542,7 @@
 		<%@include file="../includes/footer.jsp"%>
 	</section>
 
+
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -543,7 +551,7 @@
 	<script src="/main_resource/vendors/mail-script.js"></script>
 	<script src="/main_resource/js/main.js"></script>
 	<script src="/main_resource/js/store_read.js"></script>
-	<!-- <script type="text/javascript" src="/main_resource/js/product_inquiry.js"></script> -->
+	<script type="text/javascript" src="/main_resource/js/product_inquiry.js"></script>
 	<!-- <script src="/main_resource/js/review.js"></script> -->
 </body>
 </html>

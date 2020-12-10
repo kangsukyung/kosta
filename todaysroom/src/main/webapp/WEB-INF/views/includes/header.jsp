@@ -27,11 +27,7 @@
     <div class="main_menu">
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-<<<<<<< HEAD
-          <a class="navbar-brand logo_h" href="${pageContext.request.contextPath}/board/listAction.do"><img src="/main_resource/img/logoimg2.png" alt=""></a>
-=======
           <a class="navbar-brand logo_h" href="/board/list"><img src="/main_resource/img/logoimg2.png" alt=""></a>
->>>>>>> branch 'master' of https://github.com/kangsukyung/kosta.git
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>

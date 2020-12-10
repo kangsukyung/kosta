@@ -18,9 +18,14 @@
 	<result column="board_seq" property="board_seq"/>
 	
 	<association property="board" javaType="kosta.todayroom.domain.BoardVO">
-		<result column="board_seq" property="board_seq"/>
-		<result column="board_thumbnail" property="board_thumbnail"/>
-		<result column="board_title" property="board_title"/>
+	
+
+	<result column="board_seq" property="board_seq"/>
+	<result column="board_thumbnail" property="board_thumbnail"/>
+	<result column="board_title" property="board_title"/>
+
+	
+	
 	</association>
 </resultMap>
 
@@ -30,7 +35,7 @@
     INNER JOIN board b
   	ON s.board_seq = b.board_seq
   	where s.member_seq = #{member_seq}
-  	order by scrap_seq DESC 
+   
 </select>
 
 
@@ -61,6 +66,7 @@
     INNER JOIN board_attach b
   	ON s.board_seq = b.board_seq
   	where s.member_seq = #{member_seq}
+   
 </select>
 
 
@@ -89,14 +95,13 @@
   	ON s.board_seq = b.board_seq
   	where b.BOARD_CLASSIFICATION = 'bang'
     AND s.member_seq = #{member_seq}
-    order by scrap_seq DESC
 
 </select>
 
 
 
 
-<!-- 노하우 -->
+<!-- 노하루 -->
 <select id="ScrapKnowList" resultMap="Scrap">
 	SELECT *
   	FROM scrap s
@@ -104,7 +109,6 @@
   	ON s.board_seq = b.board_seq
   	where b.BOARD_CLASSIFICATION = 'knowhow'
     AND s.member_seq = #{member_seq}
-    order by scrap_seq DESC
 
 </select>
 

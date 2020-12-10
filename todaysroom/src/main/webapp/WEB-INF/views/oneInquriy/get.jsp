@@ -131,14 +131,6 @@
          value=<fmt:formatDate pattern="yyyy-MM-dd" value="${one.oi_date }"/>  
          readonly="readonly">
         </div>
-<<<<<<< HEAD
-
-<button data-oper='modify' class="btn btn-default" id="modifyButton" style="background-color: #e9ecef; display: none;">수정</button>
-<button data-oper='modify' class="btn btn-default" id="modifyButtonForm" style="background-color: #e9ecef;">수정</button>
-<button data-oper='list' class="btn btn-info" id="listButton">목록</button>
-<button data-oper='delete' class="btn btn-info" id="deleteButton"style="background: #c5322d;">삭제</button>
-
-=======
     <div>
 <c:if test="${one.oi_answer==null}">
 	<button data-oper='modify' class="btn btn-default" id="modifyButton" style="background-color: #e9ecef; display: none;">수정</button>
@@ -147,7 +139,6 @@
 	<button data-oper='list' class="btn btn-info" id="listButton">목록</button>
 </c:if>
 	</div>
->>>>>>> branch 'master' of https://github.com/kangsukyung/kosta.git
 <form id='listForm' action="/oneInquriy/list" method="get">
   <input type='hidden' name='pageNum' value="${cri.pageNum}">
 </form>

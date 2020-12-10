@@ -44,10 +44,6 @@
 			<input type="hidden"  id="comments_member_seq" name="comments_member_seq" value="${member.member_seq}"><!-- 글 쓴 사람 seq -->
 			<sec:authentication property="principal.member" var="member"/>	<!-- 로그인 한 사람 seq -->
 			<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
-<<<<<<< HEAD
-			<input type="hidden"  id="my_member_nickname" name="my_member_nickname" value="${member.member_nickname}">
-=======
->>>>>>> branch 'master' of https://github.com/kangsukyung/kosta.git
 			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="text" class="form-control" id="insert_content" name="comments_content" 
 					placeholder="댓글내용을 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '댓글내용을 입력해주세요'">
