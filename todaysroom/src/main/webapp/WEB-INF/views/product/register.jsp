@@ -24,7 +24,6 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/vendors/nouislider/nouislider.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/style.css">
 
-  <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/skrollr.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -54,7 +53,7 @@
     flex-flow: row;
     justify-content: center;
     align-items: center;
-    margi
+    }
 
 .uploadResult ul li {
 	list-style: none;
@@ -86,9 +85,8 @@
   align-items: center;
 }
 </style>
-<section>
-	<jsp:include page="../../header.jsp"></jsp:include>
-</section>
+
+<%@include file="../includes/header.jsp"%>
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="product_header">
 		<!-- <img src="/main_resource/img/product_register_img.png"/> -->
@@ -154,13 +152,13 @@
 												
 												<select id="ption2" name="store_scategory" size="1">
 													<option value="">선택해주세요.</option>
-													<option value="living">쇼파</option>
-													<option value="bed">침대</option>
-													<option value="clothes">드레스룸</option>
-													<option value="kitchen">주방</option>
-													<option value="study">학생/서재가구</option>
-													<option value="receiving">수납</option>
-													<option value="table">테이블</option>
+													<option value="sofa">소파</option>
+													<option value="reclinerSofa">리클라이너소파</option>
+													<option value="tvSet">거실수납장/TV장</option>
+													<option value="sofaTable">거실/소파테이블</option>
+													<option value="chair">의자</option>
+													<!-- <option value="receiving">수납</option>
+													<option value="table">테이블</option> -->
 												</select>
 											
 				            		</div>
@@ -242,6 +240,7 @@
 														<input class="form-control" id="product_insert_input" id="gdsImg" name="product_fname" 
 														type="file" placeholder="상품제목을 입력하세요." required="">
 														<input type="hidden" name="product_uuid">
+														<input type="hidden" name="product_uploadpath">
 														<div class="select_img"><img src="" /></div>
 														 
 														 <script>
@@ -313,7 +312,7 @@
 								<button type="submit" value="submit" class="button button-register w-100">상품등록</button>
 							</div>
 							
-								<sec:authorize access="isAuthenticated()">
+						<sec:authorize access="isAuthenticated()">
 						<sec:authentication property="principal.member" var="member"/>
 						<input type="hidden" name="member_seq" value="${member.member_seq }">
 						</sec:authorize>
@@ -465,26 +464,7 @@ $(document).ready(function(e){
     
     $(uploadResultArr).each(function(i, obj){
     
-        /* //image type
-        if(obj.image){
-          var fileCallPath =  encodeURIComponent( obj.uploadPath+ "/s_"+obj.uuid +"_"+obj.fileName);
-          str += "<li><div>";
-          str += "<span> "+ obj.fileName+"</span>";
-          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='image' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-          str += "<img src='/display?fileName="+fileCallPath+"'>";
-          str += "</div>";
-          str +"</li>";
-        }else{
-          var fileCallPath =  encodeURIComponent( obj.uploadPath+"/"+ obj.uuid +"_"+obj.fileName);            
-            var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
-              
-          str += "<li><div>";
-          str += "<span> "+ obj.fileName+"</span>";
-          str += "<button type='button' data-file=\'"+fileCallPath+"\' data-type='file' class='btn btn-warning btn-circle'><i class='fa fa-times'></i></button><br>";
-          str += "<img src='/resources/img/attach.png'></a>";
-          str += "</div>";
-          str +"</li>";
-        } */
+       
 		//image type
 		
     	if(obj.image){
@@ -585,10 +565,7 @@ $(document).ready(function(e){
 </script>
 
 
-<section>
- 	<jsp:include page="../../footer.jsp"></jsp:include>
-</section>
-
+<%@include file="../includes/footer.jsp"%>
 
   
 </body>

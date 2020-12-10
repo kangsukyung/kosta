@@ -1,6 +1,7 @@
 package kosta.todayroom.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.security.Principal;
@@ -8,9 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -31,14 +34,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kosta.todayroom.domain.BoardAttachVO;
+import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.CustomUser;
 import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.security.CustomUserDetailsService;
+import kosta.todayroom.service.BoardService;
 import kosta.todayroom.service.MemberService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -53,6 +60,9 @@ public class MemberController {
 
 	@Setter(onMethod_ = @Autowired)
 	private HttpServletRequest request;
+	
+	@Setter(onMethod_=@Autowired)
+	private BoardService boardService;
 
 	
 	@GetMapping("/register")
@@ -74,7 +84,16 @@ public class MemberController {
 	}
 
 	@GetMapping("/mypage")
-	public void mypage() {
+	public void mypage(Principal principal , Model model) {
+		MemberVO member=service.idCheck(principal.getName());
+		List<BoardVO> room=service.MyRoomList(member.getMember_seq());
+		List<BoardVO> knowhow=service.MyKnowhowList(member.getMember_seq());
+		
+		model.addAttribute("room", room);
+		model.addAttribute("knowhow", knowhow);
+		
+		log.warn(room);
+		log.warn(knowhow);
 	}
 	
 	@GetMapping("/users/{member_seq}")
@@ -88,13 +107,14 @@ public class MemberController {
 
 	@GetMapping("/modify")
 	public void updateForm() {
+		
 	}
 
 	@PostMapping("/modify")
 	public String update(@RequestParam("profile") MultipartFile profile, MemberVO vo) {
 //		log.info(profile.toString());
 //		log.warn(profile.toString());
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = "c:\\upload";
 		String uploadFolderPath = getFolder();
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 		String proname = vo.getMember_profile();
@@ -167,6 +187,24 @@ public class MemberController {
 		return "/logout";
 	}
 	
+	@RequestMapping(value="/update", method=RequestMethod.POST)
+	public String update(HttpServletRequest request,HttpServletResponse response){
+		//@RequestParam("memberID") String member_id, @RequestParam("memberPassword") String member_password
+		response.setContentType("text/html; charset=UTF-8");
+		
+		int num=service.update(request.getParameter("memberID"), request.getParameter("memberPassword"));
+		if(num>0){
+			try {
+				response.getWriter().print("<script>alert('변경에 성공하셨습니다'); location.href='/login'</script>");	
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else{
+			return "redirect:/login";
+		}
+		return null;
+	}
+	
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getFile(String fileId){
 //		log.info(fileId);
@@ -189,6 +227,31 @@ public class MemberController {
 		}
 		return result;
 	}
+	
+	// 이미지 섬네일 보여주기
+	@GetMapping("/displays")
+	@ResponseBody
+	public ResponseEntity<byte[]> getFiles(@RequestParam("fileName")String fileName, @RequestParam("board_seq") int board_seq) {
+		BoardAttachVO vo=service.readThumbnail(board_seq, fileName);
+		
+		String fileNameing=vo.getUploadPath()+"\\"+vo.getUuid()+"_"+fileName;
+
+		File file = new File("c:\\upload\\" + fileNameing);
+		log.warn(file);
+
+		ResponseEntity<byte[]> result = null;
+
+		try {
+			HttpHeaders header = new HttpHeaders();
+
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 
 
 	private String getFolder() {

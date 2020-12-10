@@ -38,6 +38,43 @@
 		]]>
 	</select>
 
+	<resultMap type="kosta.todayroom.domain.BoardVO" id="boardMap">
+  	<id property="board_seq" column="board_seq"></id>
+  	<result property="member_seq" column="member_seq"></result>
+  	<result property="board_title" column="board_title"></result>
+  	<result property="board_content" column="board_content"></result>
+  	<result property="board_date" column="board_date"></result>
+  	<result property="board_picture" column="board_picture"></result>
+  	<result property="board_thumbnail" column="board_thumbnail"></result>
+  	<result property="board_classification" column="board_classification"></result>
+  	<result property="board_views" column="board_views"></result>
+  	<result property="board_scraps" column="board_scraps"></result>
+  	<collection property="attachList" resultMap="attachMap" >	
+  	</collection>
+  	</resultMap>
+  	
+  
+  <resultMap type="kosta.todayroom.domain.BoardAttachVO" id="attachMap">
+  		<result property="uuid" column="uuid"></result>	
+  		<result property="uploadPath" column="uploadPath"></result>	
+  		<result property="fileName" column="fileName"></result>	
+  		<result property="fileType" column="fileType"></result>
+  		<result property="board_seq" column="board_seq"></result>
+  </resultMap>
+  
+	<select id="boardListAttach" resultMap="boardMap">
+		<![CDATA[ 
+			select * from (
+				select /*+ index_desc(b pk_board) */
+				rownum rn, b.*, ba.uuid, ba.uploadpath, ba.filename
+				from board b, board_attach ba
+				where rownum <= #{pageNum} * #{amount}
+				and b.board_seq = ba.board_seq
+				)
+			where rownum > (#{pageNum} - 1) * #{amount}
+		]]>
+	</select>
+
 	<select id="boardTotalCount" resultType="int">
 		select count(*) from board b
 		<choose>
@@ -115,6 +152,10 @@
 	
 	<delete id="removeKnowhow">
 		delete from knowhow where board_seq = #{board_seq}
+	</delete>
+	
+	<delete id="removeAttach">
+		delete from board_attach where board_seq = #{board_seq}
 	</delete>
 
 	<select id="memberList" resultType="kosta.todayroom.domain.MemberVO">

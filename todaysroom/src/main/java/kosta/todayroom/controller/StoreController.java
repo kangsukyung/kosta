@@ -41,10 +41,9 @@ public class StoreController {
 		model.addAttribute("list", service.StoreList(cri));
 //		model.addAttribute("attach", attach_service.ProductAttachList());
 		
-		cri.setAmount(6);
+		cri.setAmount(12);
 		int total = service.getTotal(cri);
-		
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("pageMaker", new PageDTO(cri, total*2));
 	}
 	
 	@GetMapping("/read")

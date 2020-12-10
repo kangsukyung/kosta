@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kosta.todayroom.domain.ProductAttachVO;
 import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.domain.StoreVO;
 import kosta.todayroom.mapper.ProductAttachMapper;
@@ -69,27 +70,30 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<ProductVO> ProductItemGetList() {
+	public List<ProductVO> ProductItemGetList(int member_seq) {
 		
 		log.info("Product Item List");
 		
-		return productMapper.ProductItemgetList();
+		return productMapper.ProductItemgetList(member_seq);
 	}
 	
 
 	@Override
-	public StoreVO ProductStoreRead(Long store_seq) {
-		log.info("ProductRead..........." + store_seq);
+	public ProductVO ProductItemRead(int product_seq) {
+		log.info("ProductRead..........." + product_seq);
 		
-		return productMapper.ProductStoreRead(store_seq);
+		return productMapper.ProductItemRead(product_seq);
 	}
 
 	@Override
-	public boolean ProductStoreModify(StoreVO store) {
+	public int ProductItemModify(ProductVO product) {
 		
-		log.info("Product Modify................." + store);
+		log.warn("bbbbㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
+		log.info("Product Modify................." + product);
+		log.warn(product);
 		
-		return productMapper.ProductStoreModify(store) == 1;
+		return productMapper.ProductItemModify(product);
+		
 
 
 	}
@@ -101,6 +105,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productMapper.ProductStoreRemove(store_seq) == 1;
 	}
+
 
 	
 

@@ -33,12 +33,13 @@
 			<c:forEach items="${list }" var="item">
 				<li class="list-items"><a href="/member/users/${item.key }"></a>
 					<div class="img-wrap">
-						<%-- 						<img src="${item.value.board_thumbnail }"> --%>
+<%-- 												<img src="${item.value.board_thumbnail }"> --%>
 						<img src="/main_resource/img/main-banner.jpg">
 					</div>
 					<div class="content-wrap">
-						<%-- 						<img src="${item.value.member_profile }"> --%>
-						<img src="/main_resource/img/main-banner.jpg">
+						<img src="/member/display?fileId=${item.value.member_id }">
+<%-- 												<img src="${item.value.member_profile }"> --%>
+<!-- 						<img src="/main_resource/img/main-banner.jpg"> -->
 						<div class="bname">${item.value.contractor_bname }</div>
 						<div class="address">${item.value.contractor_address }</div>
 					</div></li>
@@ -66,7 +67,6 @@
 
 	</div>
 
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

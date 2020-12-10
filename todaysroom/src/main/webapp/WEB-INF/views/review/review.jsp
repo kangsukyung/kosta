@@ -27,26 +27,51 @@
 </head>
 <body>
 	<!-- modal start -->
+	<!-- 필요한 input들(?) -->
+	<input type="hidden"  id="review_store_seq" name="review_store_seq" value="${store.store_seq}">
+	<input type="hidden" id="review_member_seq" name="review_member_seq" value="${store.member_seq}"><!-- 글 쓴 사람 seq? -->
 	<div id="my_modal">
 	    <div class="review-modal__title">
 			리뷰작성
 		</div>
 			<form class="review-modal__form"><!-- enctype="multipart/form-data" -->
 			<!-- <div class="review-modal__form"> -->
-					<input type="hidden"  name="${review.store_seq}" value="${review.store_seq}">
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="principal.member" var="member"/>	<!-- 로그인 한 사람 seq? -->
+				</sec:authorize>
+					<input type="hidden" id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
+					<input type="hidden" id="review_store_seq" name="review_store_seq" value="${review.store_seq}">
+					<input type="hidden" id="member_profile" name="member_profile" value="${member.member_profile}">
+					<input type="hidden" id="member_path" name="member_path" value="${member.member_path}">
 					<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<div class="review-modal__form__product">
 					<img class="review-modal__form__product__image" src="../../main_resource/img/product/product1.png">
 					<div class="review-modal__form__product__contents">
 						<div class="review-modal__form__product__contents__brand">제품명</div>
-						<div class="review-modal__form__product__contents__name">
-						제품설명 롸라라라롸라라라라ㅏㄹ
-						</div>
+						<div class="review-modal__form__product__contents__name">제품명</div>
 						<div class="review-modal__form__product__contents__options"></div>
 					</div>
 				</div>
-				<div class="col-md-12 text-right">
-					<input type="file" class="ti-search" name="review_picture">사진 첨부하기
+				<!-- <div class="col-md-12 text-left">
+					<input type="file" class="ti-search" name="review_picture">
+				</div> -->
+				<div class="review_box">
+					<div class="col-md-12 text-left">
+						<!-- <ul class="list">
+							<li><a href="#"><i class="fa fa-star fa-star1"></i></a></li>
+							<li><a href="#"><i class="fa fa-star fa-star2"></i></a></li>
+							<li><a href="#"><i class="fa fa-star fa-star3"></i></a></li>
+							<li><a href="#"><i class="fa fa-star fa-star4"></i></a></li>
+							<li><a href="#"><i class="fa fa-star fa-star5"></i></a></li>
+						</ul> -->
+						<p id="star_grade">
+					        <a href="#" id="1">★</a>
+					        <a href="#" id="2">★</a>
+					        <a href="#" id="3">★</a>
+					        <a href="#" id="4">★</a>
+					        <a href="#" id="5">★</a>
+						</p>
+					</div>
 				</div>
 				<div class="review-modal__section">
 					<div class="review-modal__section__title">리뷰 내용</div>
@@ -59,6 +84,7 @@
 				</div>
 				<div class="col-md-12">
 					<button id="reviewAddBtn" class="btn primary-btn">리뷰쓰기</button>
+					<button id="reviewModBtn" class="btn primary-btn">리뷰쓰기</button>
 				</div>
 			<!-- </div> -->
 			</form>
@@ -72,23 +98,35 @@
 			<div class="review_sidebar_count_jsb" >
 				<h4 >리뷰  ${reviewCnt}</h4>
 			</div>
-			<div class="review_sidebar_button_jsb">
-				<a id="popup_open_btn">리뷰쓰기</a>
-			</div>
-			<div class="review_sidebar_select_jsb">
+			<sec:authorize access="isAnonymous()">
+				<div class="review_sidebar_button_jsb">
+					<a id="popup_open_btn" onclick="location.href='/login'">로그인 후 리뷰쓰기</a>
+				</div>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<div class="review_sidebar_button_jsb">
+					<a id="popup_open_btn">리뷰쓰기</a>
+				</div>
+			</sec:authorize>
+				<div class="review_sidebar_select_jsb">
 	                 <div class="nice-select" tabindex="0"><span class="current">상품옵션</span>
 	                  <ul class="list">
-	                  <!-- 글번호 불러오면 상품들 다 가져올 수 있다고 함 -->
-	                  <li data-value="1" class="option selected focus">안마의자 핑크</li>
-	                  <li data-value="1" class="option">안마의자 블랙</li>
-	                  <li data-value="1" class="option">안마의자 옐로</li>
+						<c:forEach items="${list}" var="product" varStatus="status">
+	                  		<li data-value="${status.count}" id="${product.product_name}" class="option selected focus" >${product.product_name}
+								<input type="hidden" name='product_seq' value="${product.product_seq }">
+								<input type="hidden" class="product_uploadpath"  value="${product.product_uploadpath }">
+		               		    <input type="hidden" class="product_uuid"  value="${product.product_uuid }">
+		                       	<input type="hidden" class="product_filename"  value="${product.product_fname }">
+	                        	<input type="hidden" class="img-fluid"  src="">
+	                  		</li>
+	   						
+	   					</c:forEach>
 	                  </ul>
 	                 </div>
-	   		</div>
+		   		</div>
 	        <div class="blog_left_sidebar">
-	        	<a class="review_sidebar_alig_jsb">추천순</a>
-	        	<a class="review_sidebar_alig_jsb">최신순</a>
-	        	<a class="review_sidebar_alig_jsb">평점</a>
+	        	<!-- <a class="review_sidebar_alig_jsb">최신순</a>
+	        	<a class="review_sidebar_alig_jsb">평점순</a> -->
 	        	<!-- review list 시작 -->
 	            <div class="production-review-item__container">
 	            </div>

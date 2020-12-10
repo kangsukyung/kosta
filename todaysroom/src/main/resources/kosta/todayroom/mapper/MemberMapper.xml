@@ -62,4 +62,42 @@
 	<select id="passwordFound" parameterType="String" resultType="kosta.todayroom.domain.MemberVO">
 		select * from member where member_id=#{member_id} AND member_phone=#{member_phone}
 	</select>
+	<update id="update" parameterType="String">
+		update member
+		set member_count=0,
+			member_rating=1,
+			member_password=#{password}
+		where member_id=#{member_id}
+	</update>
+	
+	<select id="idFound" parameterType="String" resultType="kosta.todayroom.domain.MemberVO">
+		select * from member where member_name=#{member_name} AND member_phone=#{member_phone}
+	</select>
+	
+	<select id="MyRoomList" parameterType="int" resultType="kosta.todayroom.domain.BoardVO">
+		select * from roomwarming r, board b where b.member_seq=#{seq} AND b.board_seq=r.board_seq
+	</select>
+ 	<select id="MyKnowhowList" parameterType="int" resultType="kosta.todayroom.domain.BoardVO">
+ 		select * from board b, Knowhow k where b.member_seq=#{seq} AND b.board_seq=k.board_seq	
+	</select>
+	<select id="readThumbnail" resultType="kosta.todayroom.domain.BoardAttachVO">
+		select * from board_attach where board_seq = #{board_seq} and filename = #{fileName}
+	</select>
+	
+	<select id="memberList" resultType="kosta.todayroom.domain.MemberVO">
+		select *from member ORDER BY member_seq DESC
+	</select>
+	
+	<select id="adminread" parameterType="int" resultType="kosta.todayroom.domain.MemberVO">
+		
+		<![CDATA[
+		select *
+		from ( select /*+INDEX_DESC(member SYS_C004015)*/ 
+				rownum rn, member_seq, member_id, member_nickname, member_name, member_address, member_phone, member_email, member_rating
+					from member
+					where rownum <= #{pageNum} * #{amount}
+				)
+			where rn>(#{pageNum}-1)* #{amount} 
+		]]>
+	</select>
 </mapper>

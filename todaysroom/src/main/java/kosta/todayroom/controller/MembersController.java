@@ -63,12 +63,11 @@ public class MembersController {
 //		String api_key = "NCSOTVDQJYTSJA4L";
 //		String api_secret = "B9KVBAWY3OW51XAGN0F46REDTXWH9KN0";
 //		Message coolsms = new Message(api_key, api_secret);
-
-//		HashMap<String, String> set = new HashMap<String, String>();
 //
-//		log.warn(request.getParameter("phoneb"));
-//		set.put("to", (String) request.getParameter("phoneb")); // 받는 사람
-//		set.put("from", (String) request.getParameter("phoneb")); // 발신번호
+//		HashMap<String, String> set = new HashMap<String, String>();
+//		
+//		set.put("to", (String) request.getParameter("phone")); // 받는 사람
+//		set.put("from", (String) request.getParameter("phone")); // 발신번호
 //		set.put("text", "안녕하세요 인증번호는 ["+numStr+"]입니다"); // 문자내용
 //		set.put("type", "sms"); // 문자 타입
 //		try {
@@ -91,6 +90,15 @@ public class MembersController {
 		if(member==null){
 			return "0";
 		}
+		return member.getMember_id();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/idFound", method = RequestMethod.POST)
+	public String idFound(@RequestParam("id_phone") String member_phone,@RequestParam("member_name") String member_name){
+		log.warn(member_phone);
+		log.warn(member_name);
+		MemberVO member=service.idFound(member_name, member_phone);
 		return member.getMember_id();
 	}
 }

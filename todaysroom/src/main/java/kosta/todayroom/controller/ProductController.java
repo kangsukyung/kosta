@@ -1,7 +1,8 @@
-package kosta.todayroom.controller;
+ package kosta.todayroom.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.domain.StoreVO;
+import kosta.todayroom.service.MemberService;
 import kosta.todayroom.service.ProductService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -31,6 +34,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class ProductController {
 	
 	private ProductService productService;
+	private MemberService service;
 	
 	private String getFolder() {
 
@@ -44,10 +48,11 @@ public class ProductController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		log.info("list");
+	public void list(Model model, Principal principal) {
+		MemberVO member=service.idCheck(principal.getName());
 		
-		model.addAttribute("list", productService.ProductItemGetList());
+		List<ProductVO> pList=productService.ProductItemGetList(member.getMember_seq());
+		model.addAttribute("pList", pList);
 	} //end list
 	
 	
@@ -56,7 +61,8 @@ public class ProductController {
 			,@RequestParam ("product_name") List<String> product_name
 			,@RequestParam ("product_price") List<Integer> product_price
 			,@RequestParam("product_fname") List<MultipartFile> multipartFile
-			,@RequestParam("product_uuid") List<String> product_uuid ){
+			,@RequestParam("product_uuid") List<String> product_uuid 
+			,@RequestParam("product_uploadpath") List<String> product_uploadpath ){
 		
 		String uploadFolder = "C:\\upload";
 
@@ -64,18 +70,25 @@ public class ProductController {
 		// make folder --------
 		File uploadPath = new File(uploadFolder, uploadFolderPath);
 
+		if (uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		}
+		
 
 		productService.ProductStoreRegister(store);
 		
 		List<ProductVO> list = new ArrayList<ProductVO>();
+	
+		
+		
 		for (int i=0; i<product_name.size(); i++) {
 			list.add(new ProductVO());
 			list.get(i).setProduct_name(product_name.get(i));
 			list.get(i).setProduct_price(product_price.get(i));
-			//list.get(i).setProduct_uuid(product_uuid.get(i));
 			
+			//System.out.println("uploadPath ::!!!!!!!!" + uploadPath);
 			String uploadFileName = multipartFile.get(i).getOriginalFilename();
-			
+				
 			//db에 담는거
 			list.get(i).setProduct_fname(uploadFileName);
 			
@@ -90,15 +103,23 @@ public class ProductController {
 			// uuid담기
 			String productUuid = uuid.toString();
 			
+			
 			System.out.println("productUuid:  "+productUuid);
 			
+			//uuid db담기
 			list.get(i).setProduct_uuid(productUuid);
 
 			uploadFileName = uuid.toString() + "_" + uploadFileName;
+			
+			//System.out.println(uploadPath);
 
 			try {
-				File saveFile = new File(uploadPath, uploadFileName);
+				File saveFile = new File(uploadPath, uploadFileName);				
 				multipartFile.get(i).transferTo(saveFile);
+				
+				//list.get(i).setProduct_uploadpath(uploadFolderPath);
+				list.get(i).setProduct_uploadpath(uploadFolderPath);
+				//System.out.println("uploadPath : " + uploadFolderPath);
 
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -115,6 +136,7 @@ public class ProductController {
 //		log.info("ProductItemRegister: " + product);
 
 		rttr.addFlashAttribute("result", store.getStore_seq());
+		//rttr.addFlashAttribute("result", store.getStore_seq());
 
 		
 		return "redirect:/product/list";
@@ -126,30 +148,53 @@ public class ProductController {
 		
 	}
 	
+	@GetMapping({ "/read", "/modify" })
+	public void modify(@RequestParam("product_seq") int product_seq, Model model) {
+		
+		log.info("read");
+		
+		productService.ProductItemRead(product_seq);
+		
+		System.out.println("product_seq    :  " +product_seq);
+		
+		
+		log.info("dkdkdkdkdkr");
+		
+		model.addAttribute("product", productService.ProductItemRead(product_seq));
+		//model.addAttribute("product", productService.ProductItemModify(product));
+
+		
+	}
+	
+	@PostMapping("/modify")
+	public String ProductModify(ProductVO product, RedirectAttributes rttr, Model model) {
+		
+		System.out.println("여기들어옴?");
+		log.info("들어왓니");
+		
+		log.warn(product);
+		int num=productService.ProductItemModify(product);
+		
+//		log.warn(num);
+//		return null;
+		return "redirect:/product/list";
+	}
+	
 	
 	
 	
 	
 	
 	/*@GetMapping("/read")
-	public void ProductRead(@RequestParam("store_seq") Long store_seq, Model model) {
+	public void ProductRead(@RequestParam("product_seq") int product_seq, Model model) {
 		
 		log.info("/read");
-		model.addAttribute("store", productStoreService.ProductStoreRead(store_seq));
-	}
+		model.addAttribute("product", productService.ProductItemRead(product_seq));
+	}*/
 	
-	@PostMapping("/modify")
-	public String ProductModify(StoreVO store, RedirectAttributes rttr) {
-		log.info("modify:" + store);
-		
-		if(productStoreService.ProductStoreModify(store)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		
-		return "redirect:/product/list";
-	}
 	
-	@PostMapping("/remove")
+	
+	/*@PostMapping("/remove")
 	public String ProductRemove(@RequestParam("store_seq") Long store_seq, RedirectAttributes rttr){
 		
 		log.info("remove............." + store_seq);

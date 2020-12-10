@@ -22,7 +22,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<section>
-		<%@include file="../includes/header.jsp" %>
+		<%@include file="../includes/header.jsp"%>
 	</section>
 	<!--================ End Header Menu Area =================-->
 
@@ -54,8 +54,8 @@
 						<aside class="single_sidebar_widget post_category_widget">
 							<h4 class="widget_title">Post Catgories</h4>
 							<ul class="list cat-list">
-								<li><a href="/board/list" class="d-flex justify-content-between">
-										<p>HOME</p><p><c:if test="${pageMaker.cri.filter eq null }"><c:out value="${pageMaker.total}"/></c:if></p>
+								<li><a href="/board/list?filter=all" class="d-flex justify-content-between">
+										<p>HOME</p><p><c:if test="${(pageMaker.cri.filter eq 'all') or (pageMaker.cri.filter eq null)}"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
 								<li><a href="/board/list?filter=bang&roomwarming=셀프" class="d-flex justify-content-between">
 										<p>방들이</p><p><c:if test="${pageMaker.cri.roomwarming eq '셀프' }"><c:out value="${pageMaker.total}"/></c:if></p>
@@ -68,9 +68,6 @@
 								</a></li>
 								<li><a href="/board/list?filter=qa" class="d-flex justify-content-between">
 										<p>질문과답변</p><p><c:if test="${pageMaker.cri.filter eq 'qa' }"><c:out value="${pageMaker.total}"/></c:if></p>
-								</a></li>
-								<li><a href="/board/register" class="d-flex justify-content-between">
-										<p>글 등록 잠시만 쓸게욤~</p>
 								</a></li>
 							</ul>
 						</aside>
@@ -146,7 +143,7 @@
 										<div class="col-md-9">
 											<div class="blog_post">
 												<div class="img_post_plz" title="${board.board_seq}">
-												
+													<img class="boardAttachImg" src="" onerror="this.src='/main_resource/img/stimg.png'">
 												</div>
 												<input class="imgBoardID" type="hidden" name="imgBoardSeq" value="${board.board_seq}">
 												<input class="imgBoardID" type="hidden" name="imgBoardThumbnail" value="${board.board_thumbnail}">
@@ -202,10 +199,11 @@
 								</c:if>
 							</ul>
 
-							<form id="actionForm" action="/board/list" method="get">
-								<input type="hidden" name="pageNum"
-									value="${pageMaker.cri.pageNum }"> <input type="hidden"
-									name="amount" value="${pageMaker.cri.amount }">
+							<form id="actionFormCri" action="/board/list" method="get">
+								<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+								<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+								<input type="hidden" name="filter" value="${pageMaker.cri.filter }">
+								<input type="hidden" name="roomwarming" value="${pageMaker.cri.roomwarming }">
 							</form>
 
 						</nav>
@@ -225,7 +223,6 @@
 
 
 
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -237,7 +234,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var actionForm = $("#actionForm");
+			var actionForm = $("#actionFormCri");
 			$(".page-item a").on("click", function(e) {
 				e.preventDefault();
 
@@ -285,7 +282,8 @@
 									if (str == null || str.length == 0) {
 										var thumbnailPath = encodeURIComponent(attach.uploadPath + "/s_"+attach.uuid +"_"+attach.fileName);
 										str = "<img src='/board/display?fileName="+thumbnailPath+"'>";
-										$("div[title='"+key+"']").append(str);
+										str2 = "/board/display?fileName="+thumbnailPath;
+										$("div[title='"+key+"']").children(".boardAttachImg").attr("src", str2);
 									}
 								}
 							}

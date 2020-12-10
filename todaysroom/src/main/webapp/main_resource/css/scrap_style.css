@@ -1,0 +1,363 @@
+
+.scrap_list{
+	border: solid;
+    width: 1080px;
+    height: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+	
+}
+
+.scrapList_header{
+text-align: center;
+    margin-top: 100px;
+    }
+
+
+.scrap_img{
+	border: solid;
+    width: 200px;
+    height: 200px;
+	
+}
+
+.scrap_board_title{
+	border: solid;
+    width: 200px;
+}
+
+.scrap_nav a{
+	    margin: 30px;
+}
+
+.scrap_1_list{
+	float: left;
+    margin: 50px;
+}
+
+
+.TEST{
+	float: left;
+    margin-right: 20px;
+}
+
+#scrap_boardTitle{
+	font-weight: bold;
+}
+
+
+#board_title{
+	color: black !important;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.ksk-right{
+	text-align: right !important;
+}
+
+#ksk_btn{
+	text-align: center !important;
+}
+
+#product_insert_input{
+	width: 60%;
+    float: right;
+    margin-right: 50px;
+}
+
+#product_insert_input2{
+	width: 60%;
+    float: right;
+    margin-right: 50px;
+}
+
+#product_insert_label{
+	margin-bottom: 1.5rem !important;
+	font-weight: bold;
+	margin-right: 70px;
+}
+
+
+#product_insert_category1 {
+    border-radius: 0px;
+    border: 1px solid #eee;
+    padding-right: 30px;
+    height: 38px;
+    color: #999999;
+    margin-left: 50px;
+}
+
+#product_insert_category2 {
+    border-radius: 0px;
+    border: 1px solid #eee;
+    padding-right: 34px;
+    height: 38px;
+    color: #999999;
+}
+
+
+#ksk_row{
+	margin-top: 20px !important;
+}
+
+
+
+.ProductList{
+	width: 65%;
+    height: 400px;
+}
+
+.ScrapList{
+	width: 65%;
+    height: 400px;
+}
+
+#ProductList_box{
+	padding: 50px 10px;	
+}
+
+#ProductList_area{
+	margin-top: -40px;
+	height: 380px;	
+	overflow-y: auto !important;
+}
+
+#ProductList_btn1{
+	background-color: lightgray !important;
+	margin-bottom: 10px;
+}
+
+
+#ProductList_btn2{
+	background-color: lightgray !important;
+}
+
+
+#ProductList_detail{
+	padding: 7px;
+}
+
+
+
+.ProductFname {
+    border: solid;
+    width: 200px;
+    height: 210px;
+    float: left;
+}
+
+.ProductDetail {
+    border: solid;
+    width: 450px;
+    height: 210px;
+    margin-bottom: 5px;
+    margin-left: 212px;
+}
+
+
+#product_picture{
+	width: 300px;
+    border: solid;
+    height: 300px;
+    margin-right: auto;
+    margin-left: 66px;
+}
+
+
+#product_img{
+	width: 300px;
+    height: 300px;
+}
+
+
+.scrap_list{
+	border: solid;
+    width: 1080px;
+    height: 1000px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+	
+}
+
+.scrapList_header{
+text-align: center;
+    margin-top: 100px;
+    }
+
+
+.scrap_img{
+	border: solid;
+    width: 200px;
+    height: 200px;
+	
+}
+
+.scrap_board_title{
+	border: solid;
+    width: 200px;
+}
+
+.scrap_nav a{
+	    margin: 30px;
+}
+
+.scrap_1_list{
+	float: left;
+    margin: 50px;
+}
+
+
+@charset "EUC-KR";
+.contents-col-lg-6{
+	-ms-flex:0 0 100%;
+	flex:0 0 100%;
+	max-width:100%
+	};
+
+.contents-row login_form{
+	max-width: 80%;
+    margin: auto;
+    float: none;
+}
+
+#contents-register_form{
+	max-width: 80%;
+    margin: auto;
+    float: none;
+}
+
+.dropdown_bang_selection{
+	position: absolute;
+	margin: 10px 10px;
+}
+
+.col-md-12{
+	margin-bottom: 30px;
+}
+
+#dropdownMenuButton{
+	margin-left: 30px;
+}
+
+.selectoption{
+	position: absolute;
+	margin-left: 150px;
+}
+
+.login_form .form-group{
+	margin-bottom: 50px;
+}
+
+.contents-form-control{
+	height: 40px;
+}
+
+.sectionoption{
+	position: absolute;
+}
+
+#color_btn{
+	border-radius: 5em;
+}
+
+.board_select_option{
+	-webkit-tap-highlight-color: transparent;
+    background-color: #fff;
+    border-radius: 5px;
+    border: solid 1px #e8e8e8;
+    box-sizing: border-box;
+    clear: both;
+    cursor: pointer;
+    display: block;
+    float: left;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: normal;
+    height: 42px;
+    line-height: 40px;
+    outline: none;
+    padding-left: 18px;
+    padding-right: 30px;
+    position: relative;
+    text-align: left !important;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+    width: auto;
+    color: currentColor;
+}
+
+#board_color_select_option{
+	    background-color: aliceblue;
+}
+
+
+
+
+#product_insert_label_content{
+	float: left;
+    margin-left: 87px;
+    margin-right: 156px;
+    font-weight: bold;
+}
+
+#store_content{
+	width: 500px;
+    height: 300px;
+    margin-left: 14px;
+}
+
+
+#product_header{
+	background: url(../../main_resource/img/product_register_img.png) no-repeat;
+    background-size: cover;
+}
+
+#select-boxes{
+	width: 60%;
+    float: right;
+    margin-right: 50px;
+}
+
+#select-boxes .nice-select{
+	clear: none !important;
+}
+
+.product_imgList{
+	width: 150px !important;
+    height: 150px !important;
+}
+
+
+
+
+.ccc{
+	flex : none !important;
+	max-width : none !important;
+	margin-left: 15em !important;
+} 
+
+section.blog{
+	width: 75%;
+}
+
+.card-blog{
+	width:33% !important;
+	display:inline-block !important;
+	padding-right: 5px !important;
+	max-width : none !important;
+}
+
+
+.card-blog__link{
+	border: none !important;
+	background: none !important;
+}

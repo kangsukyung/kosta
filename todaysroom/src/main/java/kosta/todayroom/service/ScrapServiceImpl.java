@@ -25,16 +25,44 @@ public class ScrapServiceImpl implements ScrapService {
 	
 
 	@Override
-	public List<ScrapVO> ScrapgetList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ScrapVO> ScrapGetList(int member_seq) {
+		log.info("--------- STORE ALL LIST ---------");
+		
+		//System.out.println("스크랩목록:     " + scrapMapper.ScrapGetList());
+		
+		return scrapMapper.ScrapGetList(member_seq);
+
+		
+	}
+	
+	@Override
+	public List<ScrapVO> ScrapAttachGetList(int member_seq){
+		log.info(" --------ScrapAttachGetList -------");
+		
+		return scrapMapper.ScrapAttachGetList(member_seq);
 	}
 
 	@Override
-	public List<ScrapVO> ScrapBangList() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ScrapVO> ScrapBangList(int member_seq) {
+		log.info("--------- ScrapBangList ---------");
+		
+		//System.out.println("스크랩목록:     " + scrapMapper.ScrapGetList());
+		
+		return scrapMapper.ScrapBangList(member_seq);
 	}
+	
+	
+	@Override
+	public List<ScrapVO> ScrapKnowList(int member_seq) {
+		log.info("--------- ScrapKnowList ---------");
+		
+		//System.out.println("스크랩목록:     " + scrapMapper.ScrapGetList());
+		
+		return scrapMapper.ScrapKnowList(member_seq);
+	}
+	
+	
+	
 	
 	@Override
 	public void ScrapRegister(ScrapVO scrap) {
@@ -44,6 +72,19 @@ public class ScrapServiceImpl implements ScrapService {
 		scrapMapper.ScrapRegister(scrap);
 
 	} //스크랩 등록
+	
+	
+	@Override
+	public boolean ScrapRemove(Long scrap_seq){
+		
+		log.info("ScrapRemove................." + scrap_seq);
+		
+		return scrapMapper.ScrapRemove(scrap_seq) == 1;
+	}
+	
+	
+
+	
 
 	
 

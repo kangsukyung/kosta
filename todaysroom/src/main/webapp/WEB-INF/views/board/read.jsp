@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
@@ -19,6 +19,8 @@
 <link rel="stylesheet" href="/main_resource/vendors/owl-carousel/owl.carousel.min.css">
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/board_listdetail.css">
+
+
 
 <style>
 .uploadResult {
@@ -71,7 +73,7 @@
 <body>
 	<!--================ Start Header Menu Area =================-->
 	<section>
-		<%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
+		<%@include file="../includes/header.jsp"%>
 	</section>
 	<!--================ End Header Menu Area =================-->
 
@@ -81,7 +83,7 @@
 		<div class="container h-100" id="containerH100"
 			style="background-position: center;">
 			<div class="blog-banner">
-				<div class="text-center" style="background-color: white; opacity:0.7;">
+				<div class="text-center" style="background-color: white; opacity:0.9;">
 					<h1>
 						<c:out value="${board.board_title }" />
 					</h1>
@@ -109,7 +111,7 @@
 					<ul class="blog_meta list" id="blog_meta-list-member">
 						<li class="li_fixed_style"><a href="#"
 							class="blog_meta_list_a"> <i class="lnr lnr-user"></i>
-								<div class="blog_meta_list_div">${member.member_name }</div>
+								<div class="blog_meta_list_div">${bmember.member_name }</div>
 
 						</a></li>
 						<li class="li_fixed_style"><a href="#"
@@ -156,7 +158,7 @@
 					<div class="single-post row">
 						<div class="col-lg-12">
 							<div class="feature-img">
-
+								<img style="width: 90%; height: 90%;" class="feature-img-img1" src="" onerror="this.src='/main_resource/img/stimg.png'">
 							</div>
 						</div>
 						<div class="col-lg-3  col-md-3">
@@ -166,7 +168,7 @@
 									<a href="#">Politics,</a> <a href="#">Lifestyle</a>
 								</div>
 								<ul class="blog_meta list">
-									<li><a href="#">${member.member_name } <i
+									<li><a href="#">${bmember.member_name } <i
 											class="lnr lnr-user"></i>
 									</a></li>
 									<li><a href="#"><fmt:formatDate
@@ -183,7 +185,7 @@
 												value="${member.member_seq }"> <i
 												class="lnr lnr-bubble"></i>
 											</a> <input class="button button-blog" type="submit"
-												value="½ºÅ©·¦ÇÏ±â">
+												value="ìŠ¤í¬ë©í•˜ê¸°">
 											<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
 										</form>
 									</li>
@@ -208,7 +210,7 @@
 							<div class="quotes"><h1><c:out value="${board.board_title}"/></h1></div>
 							<div class="row" id="picture_row">
 								<div class="col-lg-12 mt-4">
-									<p><c:out value="${board.board_content}"/></p>
+									<p style="white-space: pre-line;"><c:out value="${board.board_content}"/></p>
 									<p>MCSE boot camps have its supporters and its detractors.
 										Some people do not understand why you should have to spend
 										money on boot camp when you can get the MCSE study materials
@@ -223,62 +225,21 @@
 							</div>
 						</div>
 					</div>
-					<div class="navigation-area">
-						<div class="row">
-							<div
-								class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-								<div class="thumb">
-									<a href="#"> <img class="img-fluid"
-										src="${pageContext.request.contextPath}/main_resource/img/blog/prev.jpg"
-										alt="">
-									</a>
-								</div>
-								<div class="arrow">
-									<a href="#"> <span class="lnr text-white lnr-arrow-left"></span>
-									</a>
-								</div>
-								<div class="detials">
-									<p>Prev Post</p>
-									<a href="#">
-										<h4>Space The Final Frontier</h4>
-									</a>
-								</div>
-							</div>
-							<div
-								class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-								<div class="detials">
-									<p>Next Post</p>
-									<a href="#">
-										<h4>Telescopes 101</h4>
-									</a>
-								</div>
-								<div class="arrow">
-									<a href="#"> <span class="lnr text-white lnr-arrow-right"></span>
-									</a>
-								</div>
-								<div class="thumb">
-									<a href="#"> <img class="img-fluid"
-										src="/main_resource/img/blog/next.jpg"
-										alt="">
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+
 					<!-- <div class="comments-area"> -->
 						<jsp:include page="../comments/comments.jsp"></jsp:include>
 					<!-- </div> -->
 
 
-					<!-- Modal  Ãß°¡ -->
+					<!-- Modal  ì¶”ê°€ -->
 					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 						aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel">°Ô½Ã±Û »èÁ¦</h4>
+									<h4 class="modal-title" id="myModalLabel">ê²Œì‹œê¸€ ì‚­ì œ</h4>
 								</div>
-								<div class="modal-body">Ã³¸®°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.</div>
+								<div class="modal-body">ì²˜ë¦¬ê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Close</button>
@@ -307,13 +268,12 @@
 
 	<!--================ Start footer Area  =================-->
 	<section>
-		<%--  	<jsp:include page="../footer.jsp"></jsp:include> --%>
+		<%@include file="../includes/footer.jsp"%>
 	</section>
 	<!--================ End footer Area  =================-->
 
 
 
-	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -327,7 +287,7 @@
 		$(document).ready(function() {
 			var board_seq = $("input[name='board_seq']").val();
 
-			$(".modal-body").html(board_seq + "¹ø °Ô½Ã±ÛÀ» »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?")
+			$(".modal-body").html(board_seq + "ë²ˆ ê²Œì‹œê¸€ì„ ì‚­ì œ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")
 
 			var formObj = $("form");
 
@@ -374,14 +334,14 @@
 					           var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
 					           
 					           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
-					           str += "<img src='/board/display?fileName="+fileCallPath+"'>";
+					           str += "<img onerror='this.src="+'"/main_resource/img/stimg.png"'+"' src='/board/display?fileName="+fileCallPath+"'>";
 					           str += "</div>";
 					           str +"</li></div>";
 					         }else{
 					             
 					           str += "<div class='col-6'>"+"<li data-path='"+attach.uploadPath+"' data-uuid='"+attach.uuid+"' data-filename='"+attach.fileName+"' data-type='"+attach.fileType+"'"+"style='list-style: none'"+ "><div>";
 					           str += "<span> "+ attach.fileName+"</span><br/>";
-					           str += "<img src='/main_resource/img/attach.png'></a>";
+					           str += "<img onerror='this.src="+'"/main_resource/img/stimg.png"'+"' src='/board/display?fileName="+fileCallPath+"'>";
 					           str += "</div>";
 					           str += "</li></div>";
 					         }
@@ -392,13 +352,14 @@
 					         var thumbnailPath = encodeURIComponent(attach.uploadPath + "/"+attach.uuid +"_"+attach.fileName);
 					         str2 += "<img style='width:90%; height:90%;'" + " class='img-fluid'" + " src='/board/display?fileName="+thumbnailPath+"'>";
 					         str3 = thumbnailPath;
+					         str4 = "/board/display?fileName="+thumbnailPath;
 						}
 				       
 				         $("#picture_row").prepend(str);
 				         str = "";
 				       });
 				       
-				         $(".feature-img").append(str2);
+				         $(".feature-img").children(".feature-img-img1").attr("src", str4);
 				         $("#containerH100").css({'background-image':"url(/board/display?fileName="+str3+")"});
 				       
 				       

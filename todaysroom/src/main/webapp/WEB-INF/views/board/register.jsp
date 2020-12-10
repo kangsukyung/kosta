@@ -19,15 +19,7 @@
 <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/board.css">
-<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
-<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="/main_resource/vendors/skrollr.min.js"></script>
-<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
-<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
-<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
-<script src="/main_resource/vendors/mail-script.js"></script>
-<script src="/main_resource/js/main.js"></script>
-<script src="/main_resource/js/board.js"></script>
+
 </head>
 <style>
 		.upload-btn-wrapper {
@@ -61,7 +53,6 @@
 			margin-right: auto; 
 			padding: 5px; 
 			text-align: center; 
-			line-height: 500px; 
 			vertical-align:middle;
 		}
 		
@@ -95,8 +86,19 @@
 
 	</style>
 <body>
-	<section> <%-- 	<jsp:include page="../header.jsp"></jsp:include> --%>
+	<section><%@include file="../includes/header.jsp"%>
 	</section>
+	
+	
+<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+<script src="/main_resource/vendors/skrollr.min.js"></script>
+<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
+<script src="/main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
+<script src="/main_resource/vendors/jquery.ajaxchimp.min.js"></script>
+<script src="/main_resource/vendors/mail-script.js"></script>
+<script src="/main_resource/js/main.js"></script>
+	
+	
 	<!-- ================ start banner area ================= -->
 	<section class="blog-banner-area" id="category">
 	<div class="container h-100">
@@ -123,7 +125,7 @@
 				<div class="login_form_inner register_form_inner">
 					<h3>필수 입력 사항</h3>
 					<form role='form' class="contents-row login_form"
-						action="/board/register" id="contents-register_form" method="post"
+						action="/board/register?${_csrf.parameterName}=${_csrf.token}" id="contents-register_form" method="post"
 						encytype="multipart/form-data">
 
 						<div class="col-md-12 form-group">
@@ -167,7 +169,9 @@
 										
 										<div id="dropZone" style="width: 100%; height: 500px; border: 1px solid #ced4da; border-radius: 0.25em;">
 											<div id="fileDragDesc">
-												<p style="font-family: fantasy; font-size: xx-large; font-weight: bold;">썸네일 사진을 마우스로 끌어서 넣어주세요!</p>
+												<button id="thumbnail-btn" disabled="disabled" style="width: 95%; 
+												height: 95%; margin-top: 1.7%; font-size: xx-large; font-weight: bold; 
+												font-family: fantasy; border: aliceblue; color: #777;">썸네일 사진을 마우스로 끌어서 넣어주세요!</button>
 											</div>
 											<div><input type='hidden' name='attachList.uuid' value=''></div>
 
@@ -201,16 +205,16 @@
 						<br><br>
 						<div class="col-md-12 form-group">
 							<input type="text" class="form-control" id="title"
-								name="board_title" placeholder="제목을 입력해주세요." style="width: 882px;
+								name="board_title" placeholder="제목을 입력해주세요." style="width: 96%;
 																					    position: absolute;
 																					    padding-bottom: 21px;
 																					    font-size: 24px;">
 							<span style="color: #aaa;
     									 position: absolute;
-    									 left: 92%;
-    									 margin-top: 10px;" id="counter">(0 / 30)</span>
+    									 left: 90%;
+    									 width: fit-content;" id="counter">(0 / 30)</span>
 						</div>
-						<br>
+						<br><br>
 						<div class="col-md-12 form-group">
 							<textarea rows="30%" cols="70" class="form-control" id="contents"
 								name="board_content" placeholder="내용을 입력해주세요."></textarea>
@@ -221,10 +225,10 @@
 						<input type="hidden" name="member_seq" value="${member.member_seq }">
 						</sec:authorize>
 						
-						<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>						
+												
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
-								class="button button-register w-100">글 등록</button>
+								class="button button-tracking w-100" style="font-weight: bold; font-size: large;">글 등록</button>
 						</div>
 					</form>
 				</div>
@@ -237,10 +241,11 @@
 	<!--================End Login Box Area =================-->
 
 
-	<section> <%--  	<jsp:include page="../footer.jsp"></jsp:include> --%>
+	<section> <%@include file="../includes/footer.jsp"%>
 	</section>
 
 	<script type="text/javascript">
+		
 		$(document).ajaxSend(function(e, xhr, options) {
 			var csrfHeaderName = "${_csrf.headerName}";
 			var csrfTokenValue = "${_csrf.token}";
@@ -448,9 +453,7 @@
 				});
 				dropZone.on('drop', function(e) {
 					e.preventDefault();
-					// 드롭다운 영역 css
-					dropZone.css('background-color', '#FFFFFF');
-	
+					dropZone.css('background-color', '#FFFFFF');// 드롭다운 영역 css
 					var files = e.originalEvent.dataTransfer.files;
 					
 					if (files != null) {
@@ -473,9 +476,6 @@
 								dataType : 'json',
 								success : function(result) {
 									fileRemove(resultRemove);
-									console.log("???");
-									console.log(resultRemove);
-									console.log(result);
 									showUploadResult(result);
 									resultRemove = result;
 								}
@@ -553,6 +553,33 @@
 			        }
 			    }); //$.ajax
 			});
+			
+			
+			$(function() {
+				$("#select_option").on("change", function() {
+					$("#select3").empty();
+					if (this.value == "bang") {
+						$("#select3").hide().load("/main_resource/js/board_bang.html", function() {
+							$(this).fadeIn().trigger("create");
+							background_color_ch();
+						});
+					}else if (this.value == "knowhow") {
+						$("#select3").hide().load("/main_resource/js/board_knowhow.html", function() {
+							$(this).fadeIn();
+						});
+					}else if (this.value == "qa") {
+						$("#select3").empty();
+					}
+					return false;
+				});
+			});
+
+			background_color_ch = function() {
+				var background_color_ch = document.getElementById("board_color_select_option");
+				background_color_ch.style.backgroundColor = background_color_ch.value;
+			}
+			
+			
 
 		});
 	</script>

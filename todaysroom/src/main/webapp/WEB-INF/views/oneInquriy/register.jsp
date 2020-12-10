@@ -24,7 +24,7 @@
 	 <%@include file="../includes/header.jsp"%>
 	 
 	 <section class="blog-banner-area" id="category">
-		<div class="container h-100">
+		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>고객센터</h1>
@@ -33,7 +33,7 @@
           	  <br>
 			<nav aria-label="breadcrumb" class="banner-breadcrumb">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">고객센터</a></li>
+              <li class="breadcrumb-item"><a href="/oneInquriy/register">고객센터</a></li>
               <li class="breadcrumb-item active" aria-current="page"> 1:1문의</li>
             </ol>
           </nav>
@@ -52,29 +52,14 @@
             <div class="head">프로필</div>
             <ul class="main-categories">
 				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="principal.member" var="member"/>
 					<div>
 					
-					<c:if test="${member.member_profile !=null}">
-						<c:set var="head" value="${fn:substring(member.member_profile,0, fn:length(member.member_profile)-4) }"></c:set>
-						<c:set var="pattern" value="${fn:substring(member.member_profile, fn:length(head)+1, fn:length(member.member_profile))}"></c:set>
-						<c:choose>
-							<c:when test="${pattern=='jpg' || pattern=='png' || pattern=='gif' }">
-								<a href="/member/modify"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" alt="" width="130" height="130"></a>
-							</c:when>
-							<c:otherwise>
-								<c:out value="NO IMAGE"></c:out>
-							</c:otherwise>
-						</c:choose>					
-					</c:if>
-					<c:if test="${member.member_profile ==null}">
-						<a href="/member/modify"><img class="author_img rounded-circle" src="/main_resource/img/member_basic.png" alt="" width="130" height="130"></a>
-					</c:if>
+						<a href="/member/modify"><img class="author_img rounded-circle" src="/member/display?fileId=<sec:authentication property="principal.member.member_id"/>" onerror="this.src='/main_resource/img/member_basic.png'" alt="" width="130" height="130"></a>
 							<h4 style=" padding-top: 10px;"><sec:authentication property="principal.member.member_id"/>님 프로필</h4>
 							<div class="social_icon">
 							<br>
-								<a href="#"> <i class="ti-heart"> 좋아요</i></a> 
-								<a href="#"> <i class="fab fa-twitter"> 팔로잉</i></a> 
+								<a href="/scrap/list"> <i class="ti-heart"> 스크랩</i></a> 
+								<a href="/follow/list"> <i class="fab fa-twitter"> 팔로잉</i></a> 
 							</div>
 					</div>
 				</sec:authorize>
@@ -83,9 +68,9 @@
           <div class="sidebar-filter">
             <div class="top-filter-head" style="margin-bottom: 10px;">카테고리</div>
  				<ul class="list cat-list mypage_category_list">
-					<li><a href="${pageContext.request.contextPath}/Member/Member_Mypage.do" class="d-flex justify-content-between"><p>프로필</p></a></li>
-					<li><a href="#" class="d-flex justify-content-between"><p>주문목록</p></a></li>
-					<li><a href="/member/modify" class="d-flex justify-content-between"><p>설정</p></a></li>
+					<li><a href="/member/mypage" class="d-flex justify-content-between"><p>마이페이지</p></a></li>
+					<li><a href="/productInquiry/list" class="d-flex justify-content-between"><p>상품문의목록</p></a></li>
+					<li><a href="/member/modify" class="d-flex justify-content-between"><p>유저정보 수정</p></a></li>
 					<sec:authorize access="hasAnyRole('ROLE_1,ROLE_2')">
 						<li><a href="/contractor/register" class="d-flex justify-content-between"><p>전문가 신청</p></a></li>
 					</sec:authorize>
@@ -93,11 +78,12 @@
 						<li><a href="/vendor/register" class="d-flex justify-content-between"><p>판매자 신청</p></a></li>
 					</sec:authorize>
 					<sec:authorize access="hasRole('ROLE_2')">
-						<li><a href="${pageContext.request.contextPath}/Product/ProductListAction.do" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+						<li><a href="/product/list?seq=${member.member_seq}" class="d-flex justify-content-between"><p>마이스토어</p></a></li>			
+						<li><a href="/productInquiry/replylist?member_seq=${member.member_seq}" class="d-flex justify-content-between"><p>스토어문의목록</p></a></li>			
 					</sec:authorize>
 				</ul>
-		          </div>
-		        </div>
+          </div>
+        </div>
 		        
 		  <div class="col-xl-9 col-lg-8 col-md-7">
           <section class="lattest-product-area pb-40 category-list">

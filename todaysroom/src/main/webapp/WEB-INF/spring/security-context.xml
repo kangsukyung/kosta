@@ -21,22 +21,56 @@
 			access="permitAll"/>
 		<security:intercept-url pattern="/board/list"
 			access="permitAll"/>
+			
+		<security:intercept-url pattern="/board/register"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		<security:intercept-url pattern="/scrap/list "
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		<security:intercept-url pattern="/follow/list"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+							
+		<security:intercept-url pattern="/productInquiry/*"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+		
+		<security:intercept-url pattern="/const/register"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+				
+		<security:intercept-url pattern="/basket/*"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			
+		<security:intercept-url pattern="/product/register"
+			access="hasRole('ROLE_2')"/>
+		<security:intercept-url pattern="/product/list"
+			access="hasRole('ROLE_2')"/>
+		
+		<security:intercept-url pattern="/productInquiry/replylist"
+			access="hasRole('ROLE_2')"/>
+		
+		<security:intercept-url pattern="/admin/memberRead"
+			access="hasRole('ROLE_100')"/>
+		<security:intercept-url pattern="/admin/oneRead"
+			access="hasRole('ROLE_100')"/>
+		<security:intercept-url pattern="/admin/oneReadModify"
+			access="hasRole('ROLE_100')"/>
+			
 		<security:intercept-url pattern="/member/mypage"
-			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 		<security:intercept-url pattern="/member/users"
-			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 		<security:intercept-url pattern="/member/modify"
-			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 		<security:intercept-url pattern="/contractor/register"
 			access="hasAnyRole('ROLE_1,ROLE_2')"/>
 		<security:intercept-url pattern="/vendor/register"
 			access="hasAnyRole('ROLE_1,ROLE_3')"/>
+		<security:intercept-url pattern="/const/register"
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 		<security:intercept-url pattern="/oneInquriy/register"
-			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 		<security:intercept-url pattern="/oneInquriy/get"
-			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 		<security:intercept-url pattern="/oneInquriy/list"
-			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3')"/>
+			access="hasAnyRole('ROLE_1,ROLE_2,ROLE_3,ROLE_100')"/>
 			
 			
 		<security:form-login login-page="/login" authentication-success-handler-ref="customLoginSuccess" 
