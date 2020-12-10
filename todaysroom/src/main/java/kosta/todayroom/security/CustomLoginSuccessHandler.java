@@ -27,7 +27,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException {
 		response.setContentType("text/html; charset=UTF-8");
-		
+	
 		log.warn("Login Success");
 		log.warn(auth.getAuthorities());
 		List<String> roleNames=new ArrayList<>();
@@ -42,11 +42,17 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 			request.getSession().invalidate();
 			response.getWriter().print("<script>alert('탈퇴한 회원입니다.'); location.href='/login?num=2'</script>");
 		}else if(roleNames.contains("ROLE_100")){
+<<<<<<< HEAD
 			response.getWriter().print("<script>alert('관리자 페이지로 이동합니다.'); location.href='/admin/read'</script>");
+=======
+			MemberVO member=service.idCheck(request.getParameter("username"));
+			service.countUpdate(member.getMember_seq(), 0);
+			response.getWriter().print("<script>alert('관리자 페이지로 이동합니다.'); location.href='/admin/memberRead'</script>");
+>>>>>>> branch 'master' of https://github.com/kangsukyung/kosta.git
 		}else{
 			MemberVO member=service.idCheck(request.getParameter("username"));
 			service.countUpdate(member.getMember_seq(), 0);
-			response.getWriter().print("<script>alert('로그인에 성공하셨습니다.'); location.href='/member/mypage'</script>");			
+			response.getWriter().print("<script>alert('로그인에 성공하셨습니다.'); location.href='"+request.getSession().getAttribute("prevPage")+"'</script>");			
 		}
 		
 	}	

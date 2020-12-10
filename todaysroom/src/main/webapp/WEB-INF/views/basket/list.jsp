@@ -67,13 +67,20 @@
                           <tr>
                               <td>
                                   <div class="media_product">
+<<<<<<< HEAD
                                       <div class="d-flex">
 	  									<input type="hidden" class="product_uploadpath"  value="${basket.productvo.product_uploadpath }">
 			                		    <input type="hidden" class="product_uuid"  value="${basket.productvo.product_uuid }">
 			                        	<input type="hidden" class="product_filename"  value="${basket.productvo.product_fname }">                                    
 	                                    <img class="product_image" src="22" alt="">
                                       </div>
+=======
+>>>>>>> branch 'master' of https://github.com/kangsukyung/kosta.git
                                       <div class="media-body">
+	  									<input type="hidden" class="product_uploadpath"  value="${basket.productvo.product_uploadpath }">
+			                		    <input type="hidden" class="product_uuid"  value="${basket.productvo.product_uuid }">
+			                        	<input type="hidden" class="product_filename"  value="${basket.productvo.product_fname }">                                    
+	                                    <img class="product_image" src="" alt="" style="width:150px">
                                           <a href="/store/read?store_seq=${basket.productvo.store_seq }">
                                           <p>${basket.productvo.product_name }</p></a>
                                           <button class="carted-product__delete" type="button" aria-label="삭제" data-basket_seq=${basket.basket_seq }>

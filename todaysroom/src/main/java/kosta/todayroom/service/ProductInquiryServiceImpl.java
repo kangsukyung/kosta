@@ -1,8 +1,11 @@
 package kosta.todayroom.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import kosta.todayroom.domain.ProductInquiryVO;
+import kosta.todayroom.domain.ProductVO;
 import kosta.todayroom.mapper.ProductInquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +19,6 @@ public class ProductInquiryServiceImpl implements ProductInquiryService {
 	
 	@Setter(onMethod_=@Autowired)
 	ProductInquiryMapper mapper;
-	
-//	@Setter(onMethod_=@Autowired)
-//	ProductMapper productMapper;
 
 	@Override
 	public int register(ProductInquiryVO product_inquiryVO) {
@@ -33,27 +33,24 @@ public class ProductInquiryServiceImpl implements ProductInquiryService {
 	}
 
 	@Override
-	public List<ProductInquiryVO> list() {
+	public Map<ProductInquiryVO, ProductVO> list(int member_seq) {
 		// TODO Auto-generated method stub
-//		List<ProductInquiryVO> inquiryList = mapper.list();
-//		List<Product> productList = productMapper.list();
-//		
-//		Map<ProductVO, ProductInquiryVO> list = new LinkedHashMap<ProductVO, ProductInquiryVO>();
-//		
-//		ProductVO product = null;
-//		ProductInquiryVO inquiry = null;
-//		
-//		for(int i=0; i<inquiryList.size(); i++) {
-//			inquiry = inquiryList.get(i);
-//			
-//			product = productMapper.detailProductService(inquiry.getProduct_seq());
-//			
-//			System.out.println(inquiry);
-//			
-//			list.put(product, inquiry);
-//		}
+		List<ProductInquiryVO> inquiryList = mapper.list(member_seq);
 		
-		return mapper.list();
+		Map<ProductInquiryVO, ProductVO> list = new LinkedHashMap<ProductInquiryVO, ProductVO>();
+		
+		ProductVO product = null;
+		ProductInquiryVO inquiry = null;
+		
+		for(int i=0; i<inquiryList.size(); i++) {
+			inquiry = inquiryList.get(i);
+			
+			product = mapper.productRead(inquiry.getProduct_seq());
+			
+			list.put(inquiry, product);
+		}
+		
+		return list;
 	}
 
 	@Override

@@ -137,7 +137,6 @@
 	<jsp:include page="../footer.jsp"></jsp:include>
 
 
-	<script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="${pageContext.request.contextPath}/main_resource/vendors/skrollr.min.js"></script>
 	<script src="${pageContext.request.contextPath}/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

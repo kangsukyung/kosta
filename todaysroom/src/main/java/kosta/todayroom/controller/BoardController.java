@@ -38,8 +38,8 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("/list")
-	public void BoardList(BoardCriteria cri, @RequestParam(value="filter", required=false) String filter, @RequestParam(value="roomwarming", required=false) String roomwarming, Model model) {
-		log.info("list..........");
+	public void BoardList(BoardCriteria cri, @RequestParam(value="filter", required=false) 
+		String filter, @RequestParam(value="roomwarming", required=false) String roomwarming, Model model) {
 		
 		if (filter != null) {
 			cri.setFilter(filter);
@@ -48,6 +48,8 @@ public class BoardController {
 		if (roomwarming != null) {
 			cri.setRoomwarming(roomwarming);
 		}
+		
+		model.addAttribute("boardAttachList", service.boardListAttach(cri));
 		
 		log.info("여기");
 		log.info(service.boardListAttach(cri));
@@ -73,15 +75,6 @@ public class BoardController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String BoardRegister(BoardVO board, RoomwarmingVO room, KnowhowVO know, RedirectAttributes rttr) {
-		log.info("========== INSERT ==========");
-		
-		log.info("register : " + board);
-
-		if (board.getAttachList() != null) {
-			board.getAttachList().forEach(attach -> log.info(attach));
-		}
-
-		log.info("========== INSERT ==========");
 
 		service.register(board);
 
@@ -112,20 +105,12 @@ public class BoardController {
 
 	@Transactional
 	@PostMapping("/modify")
-	public String BoardModifyd(BoardVO board, RoomwarmingVO room, KnowhowVO know, RedirectAttributes rttr,
-			Model model) {
+	public String BoardModifyd(BoardVO board, RoomwarmingVO room, KnowhowVO know, 
+			RedirectAttributes rttr, Model model) {
 
 		if (service.modify(board)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-
-//		if (room.getRoomwarming_type() != null) {
-//			service.roomRegister(room);
-//		}
-//
-//		if (know.getKnowhow_style() != null) {
-//			service.knowhowRegister(know);
-//		}
 
 		return "redirect:/board/read?board_seq=" + board.getBoard_seq();
 	}

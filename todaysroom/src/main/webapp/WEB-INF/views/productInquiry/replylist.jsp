@@ -45,6 +45,7 @@
 	
 }
 
+<<<<<<< HEAD
 </style>
 
 </head>
@@ -73,6 +74,38 @@
 							<button id='regBtn1' type="button" class="btn pull-left" value="all">전체 상품 보기</button>
 							<button id='regBtn2' type="button" class="btn pull-left" value="no_answer">답변 미등록 상품보기</button>
 							<button id='regBtn3' type="button" class="btn pull-left" value="yes_answer">답변 등록 상품보기</button>
+=======
+
+
+</style>
+
+</head>
+
+<body>
+<%@include file="../includes/header.jsp"%>
+	<div id="wrapper">
+
+		<div id="page-wrapper" style="margin: 0 0 0 0; min-height: auto;">
+
+
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">
+						<a href="/productInquiry/replylist" style="color: #222; font-weight: bold;">상품 문의 목록</a>
+					</h1>
+				</div>
+				<!-- /.col-lg-12 -->
+			</div>
+			<!-- /.row -->
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading" style="height: 55px;">
+							<button style="font-size: large;" id='regBtn1' type="button" class="btn pull-left" value="all">전체 상품 보기</button>
+							<button style="font-size: large;" id='regBtn2' type="button" class="btn pull-left" value="no_answer">답변 미등록 상품보기</button>
+							<button style="font-size: large;" id='regBtn3' type="button" class="btn pull-left" value="yes_answer">답변 등록 상품보기</button>
+>>>>>>> branch 'master' of https://github.com/kangsukyung/kosta.git
 						</div>
 
 						<!-- /.panel-heading -->
