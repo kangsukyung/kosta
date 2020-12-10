@@ -20,12 +20,12 @@
    <!-- Root Context: defines shared resources visible to all other web components -->
    <context:annotation-config></context:annotation-config>
    
-    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+   <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
       <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
       <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@todaysroom.c5geaby6gfsu.ap-northeast-2.rds.amazonaws.com:1521:ORCL"/>
       <property name="username" value="todaysroom"/>
       <property name="password" value="kosta1234"/>
-   </bean> 
+   </bean>
    
    <!-- <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
       <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>

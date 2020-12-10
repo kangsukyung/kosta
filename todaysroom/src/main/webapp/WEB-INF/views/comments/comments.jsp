@@ -5,12 +5,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
-
+<script src="../../../main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="../../../main_resource/vendors/skrollr.min.js"></script>
 	<script src="../../../main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
 	<script src="../../../main_resource/vendors/nice-select/jquery.nice-select.min.js"></script>
 	<script src="../../../main_resource/vendors/jquery.ajaxchimp.min.js"></script>
 	<script src="../../../main_resource/vendors/mail-script.js"></script>
+
+<link rel="icon" href="../../../main_resource/img/Fevicon.png" type="image/png">
+<link rel="stylesheet" href="../../../main_resource/vendors/bootstrap/bootstrap.min.css">
+<link rel="stylesheet" href="../../../main_resource/vendors/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="../../../main_resource/vendors/themify-icons/themify-icons.css">
+<link rel="stylesheet" href="../../../main_resource/vendors/linericon/style.css">
+<link rel="stylesheet" href="../../../main_resource/vendors/owl-carousel/owl.theme.default.min.css">
+<link rel="stylesheet" href="../../../main_resource/vendors/owl-carousel/owl.carousel.min.css">
 
 <link rel="stylesheet" href="../../../main_resource/css/style.css">
 <link rel="stylesheet" href="../../../main_resource/css/comments.css">
@@ -44,6 +52,7 @@
 			<input type="hidden"  id="comments_member_seq" name="comments_member_seq" value="${member.member_seq}"><!-- 글 쓴 사람 seq -->
 			<sec:authentication property="principal.member" var="member"/>	<!-- 로그인 한 사람 seq -->
 			<input type="hidden"  id="my_member_seq" name="my_member_seq" value="${member.member_seq}">
+			<input type="hidden"  id="my_member_nickname" name="my_member_nickname" value="${member.member_nickname}">
 			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="text" class="form-control" id="insert_content" name="comments_content" 
 					placeholder="댓글내용을 입력해주세요" onfocus="this.placeholder = ''" onblur="this.placeholder = '댓글내용을 입력해주세요'">

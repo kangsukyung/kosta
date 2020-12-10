@@ -17,7 +17,7 @@
 	
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
-		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;">
+		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1 >전문가 신청</h1>
@@ -55,7 +55,7 @@
 							<input type="hidden" name="member_seq" value="${member.member_seq }">
 							<div class="col-md-12 form-group"><input type="text" class="form-control" id="contractor_bname" name="contractor_bname" placeholder="상호명" onfocus="this.placeholder = ''" onblur="this.placeholder = '상호명'"></div>
 							<div class="col-md-12 form-group"><input type="text" class="form-control" style="margin-top: 50px;" id="contractor_name" name="contractor_name" placeholder="사업자대표명" onfocus="this.placeholder = ''" onblur="this.placeholder = '사업자대표명'"></div>
-							<div class="col-md-12 form-group member_signup"><input type="text" class="form-control-member_singup"  style="padding-left: 10px;margin-top: 50px;float: left;" id="contractor_address" name="contractor_address" placeholder="사업지주소"  onblur="this.placeholder = '사업지주소'" readonly="readonly"><button type="button" onclick="openZipSearch(contractor_address)" style="margin-top: 55px;">주소찾기</button></div>
+							<div class="col-md-12 form-group member_signup"><input type="text" class="form-control-member_singup"  style="padding-left: 10px;margin-top: 50px;float: left;" id="contractor_address" name="contractor_address" placeholder="사업지주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '사업지주소'"><button type="button" onclick="openZipSearch(contractor_address)" style="margin-top: 55px;">주소찾기</button></div>
 							<div><input type="hidden" name="${_csrf.parameterName}"value="${_csrf.token}"/></div>
 							<div class="col-md-10 form-group">
 								<button type="submit" value="submit" class="button button-register w-100" style="margin-top: 80px; background: #384aeb;">전문가 신청</button>

@@ -1,13 +1,8 @@
-@charset "UTF-8";
+@charset "EUC-KR";
 
 .row_product_hw {
-   float: left !important;
-   margin-right: 20px;
-   display: table;
-}
-
-.lattest-product-area .row {
-   height: 400px;
+	float: left !important;
+	margin-right: 20px;
 }
 
 .card-img {

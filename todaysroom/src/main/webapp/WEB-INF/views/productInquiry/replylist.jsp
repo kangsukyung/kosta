@@ -45,8 +45,6 @@
 	
 }
 
-
-
 </style>
 
 </head>
@@ -72,9 +70,9 @@
 				<div class="col-lg-12">
 					<div class="panel panel-default">
 						<div class="panel-heading" style="height: 55px;">
-							<button style="font-size: large;" id='regBtn1' type="button" class="btn pull-left" value="all">전체 상품 보기</button>
-							<button style="font-size: large;" id='regBtn2' type="button" class="btn pull-left" value="no_answer">답변 미등록 상품보기</button>
-							<button style="font-size: large;" id='regBtn3' type="button" class="btn pull-left" value="yes_answer">답변 등록 상품보기</button>
+							<button id='regBtn1' type="button" class="btn pull-left" value="all">전체 상품 보기</button>
+							<button id='regBtn2' type="button" class="btn pull-left" value="no_answer">답변 미등록 상품보기</button>
+							<button id='regBtn3' type="button" class="btn pull-left" value="yes_answer">답변 등록 상품보기</button>
 						</div>
 
 						<!-- /.panel-heading -->

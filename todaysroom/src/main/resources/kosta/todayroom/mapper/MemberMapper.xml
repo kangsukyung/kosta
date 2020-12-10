@@ -87,17 +87,4 @@
 	<select id="memberList" resultType="kosta.todayroom.domain.MemberVO">
 		select *from member ORDER BY member_seq DESC
 	</select>
-	
-	<select id="adminread" parameterType="int" resultType="kosta.todayroom.domain.MemberVO">
-		
-		<![CDATA[
-		select *
-		from ( select /*+INDEX_DESC(member SYS_C004015)*/ 
-				rownum rn, member_seq, member_id, member_nickname, member_name, member_address, member_phone, member_email, member_rating
-					from member
-					where rownum <= #{pageNum} * #{amount}
-				)
-			where rn>(#{pageNum}-1)* #{amount} 
-		]]>
-	</select>
 </mapper>

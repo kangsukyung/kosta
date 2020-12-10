@@ -43,7 +43,8 @@ public class StoreController {
 		
 		cri.setAmount(12);
 		int total = service.getTotal(cri);
-		model.addAttribute("pageMaker", new PageDTO(cri, total*2));
+		
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
 	@GetMapping("/read")

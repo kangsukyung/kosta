@@ -39,28 +39,4 @@
 			oi_content=#{oi_content}
 		where oi_seq=#{oi_seq}
 	</update>
-	
-	<select id="oneList" resultType="kosta.todayroom.domain.One_inquiryVO">
-		select * from ONE_INQUIRY where oi_answer IS NULL ORDER BY oi_seq DESC
-	</select>
-	
-	<update id="updateOne" parameterType="kosta.todayroom.domain.One_inquiryVO">
-		update ONE_INQUIRY
-		set oi_answer=#{oi_answer}
-		where oi_seq=#{oi_seq}
-	</update>
-	
-	<select id="adminread" parameterType="int" resultType="kosta.todayroom.domain.One_inquiryVO">
-		
-		<![CDATA[
-		select *
-		from ( select /*+INDEX_DESC(ONE_INQUIRY PK_ONE_INQUIRY)*/ 
-				rownum rn, oi_seq, oi_title, oi_date, member_seq, oi_content ,oi_answer
-					from ONE_INQUIRY
-					where rownum <= #{pageNum} * #{amount}
-				)
-			where rn>(#{pageNum}-1)* #{amount} 
-		]]>
-			AND oi_answer IS NULL
-	</select>
 </mapper>

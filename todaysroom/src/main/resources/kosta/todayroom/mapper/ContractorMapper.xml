@@ -32,10 +32,6 @@
 			where r=1
 		]]>
 	</select>
-	
-	<select id="readMemberVO" resultType="kosta.todayroom.domain.MemberVO">
-		select * from member where member_seq = #{member_seq}
-	</select>
 
 	<delete id="delete" parameterType="int">
 		delete from contractor where

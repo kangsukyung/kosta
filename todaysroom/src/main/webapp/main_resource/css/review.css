@@ -186,12 +186,3 @@
     	margin-left: 0 !important;
     	border-bottom: 1px solid #ededed;
     }
-    
-    
-    #star_grade a{
-        text-decoration: none;
-        color: gray;
-    }
-    #star_grade a.on{
-        color: red;
-    }

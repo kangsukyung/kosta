@@ -38,8 +38,7 @@ $(function(){
 				return;
 			}
 			
-//			location.href='board/list?keyword='+keyword;
-			location.href='board/list';
+//			location.href='listAction.do?keyword='+keyword;
 		})
 	});
 });

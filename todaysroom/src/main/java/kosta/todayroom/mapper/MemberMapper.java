@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import kosta.todayroom.domain.BoardAttachVO;
 import kosta.todayroom.domain.BoardVO;
 import kosta.todayroom.domain.MemberVO;
-import kosta.todayroom.domain.One_inquiryVO;
 
 public interface MemberMapper {
 	public MemberVO idCheck(String id);
@@ -25,5 +24,4 @@ public interface MemberMapper {
 	public List<BoardVO> MyKnowhowList(int seq);
 	public BoardAttachVO readThumbnail(@Param("board_seq")int board_seq, @Param("fileName")String fileName);
 	public List<MemberVO> memberList();
-	public List<MemberVO> adminread(@Param("pageNum") int pageNum,@Param("amount") int amount );
 }

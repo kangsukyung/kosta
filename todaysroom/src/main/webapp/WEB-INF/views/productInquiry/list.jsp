@@ -39,13 +39,13 @@
 						<!-- 					</div> -->
 						<div class="desc">
 							<h5>
-								<span hidden="hidden" class="inquiry-seq">${inquiry.key.pi_seq }</span>
-								<a href="/store/read?store_seq=${inquiry.value.store_seq}">${inquiry.value.product_name}</a>
+								<span hidden="hidden" class="inquiry-seq">${inquiry.pi_seq }</span>
+								<a href="/store/read?store_seq={inquiry.key.store_seq}">{inquiry.key.product_name}</a>
 								<!-- 상품 이름 출력 -->
 							</h5>
-							<p class="date">${inquiry.key.pi_type }</p>
+							<p class="date">${inquiry.pi_type }</p>
 							<!-- 상품 문의 유형 출력 -->
-							<p class="comment">${inquiry.key.pi_content }</p>
+							<p class="comment">${inquiry.pi_content }</p>
 							<!-- 상품 문의 내용 출력 -->
 						</div>
 					</div>
@@ -56,6 +56,27 @@
 					</div>
 				</div>
 			</div>
+
+			<!-- 위쪽: 고객의 문의 // 밑쪽: 운영사측 답변 -->
+
+			<%-- 			<c:if test="${inquiry.pi_answer != null }"> --%>
+			<!-- 				<div class="comment-list left-padding"> -->
+			<!-- 					<div class="single-comment justify-content-between d-flex"> -->
+			<!-- 						<div class="user justify-content-between d-flex"> -->
+			<!-- 												<div class="thumb"> -->
+			<!-- 													<img src="/resources/main_resource/img/blog/c2.jpg" alt=""> -->
+			<!-- 												</div> -->
+			<!-- 							<div class="desc"> -->
+			<!-- 								<h5> -->
+			<!-- 									<a href="#">답변된 내용</a> -->
+			<!-- 								</h5> -->
+			<!-- 								<p class="date"></p> -->
+			<%-- 								<p class="comment">${inquiry.pi_answer }</p> --%>
+			<!-- 							</div> -->
+			<!-- 						</div> -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+			<%-- 			</c:if> --%>
 		</c:forEach>
 	</div>
 
@@ -94,8 +115,9 @@
 							<textarea class="form-control" id="message-text"
 								name="pi_content"></textarea>
 						</div>
-<!-- 							<input hidden="hidden" name="member_seq" value=""> -->
-<!-- 							<input hidden="hidden" name="product_seq" value=""> -->
+						<!-- 						<input hidden="hidden" name="member_seq" value="22"> -->
+						<!-- value 값 추후 조정 필요 -->
+<!-- 						<input hidden="hidden" name="product_seq" value="1"> -->
 						<input
 							type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" id="security-tokken"/>
@@ -117,6 +139,7 @@
 	<!-- modal end -->
 
 
+	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

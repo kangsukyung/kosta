@@ -26,7 +26,7 @@
 	href="/main_resource/vendors/nouislider/nouislider.min.css">
 
 <link rel="stylesheet" href="../../main_resource/css/style.css">
-<link rel="stylesheet" href="../../../main_resource/css/store.css">
+<link rel="stylesheet" href="../../main_resource/css/store.css">
 </head>
 <%@include file="../includes/header.jsp"%>
 <body>

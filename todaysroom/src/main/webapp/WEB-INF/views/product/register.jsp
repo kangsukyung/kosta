@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/vendors/nouislider/nouislider.min.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/main_resource/css/style.css">
 
+  <script src="${pageContext.request.contextPath}/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/skrollr.min.js"></script>
   <script src="${pageContext.request.contextPath}/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -41,7 +42,7 @@
   
 </head>
 <body>
-	<style>
+<style>
 .uploadResult {
 	width: 60%;
     background-color: #f1eded;
@@ -164,12 +165,7 @@
 				            		</div>
 				            </div>
 				            
-				            
-				            
-							
-                            
-                            
-							
+	
 							<div class="col-md-12 form-group">
 								<label id="product_insert_label">상품가격 </label>
 								<input class="form-control" id="product_insert_input" name="store_price" 
@@ -193,9 +189,7 @@
 													
 								</ul>			
 							</div>
-				            
-							 
-							
+				
 					<section class="product_description_area">
 
 						<div class="container">
@@ -226,11 +220,7 @@
 													<label id="product_insert_label">가격 </label> 
 													<input class="form-control" id="product_insert_input" name="product_price" 
 													type="text" placeholder="가격을 입력하세요." required="">	
-													
-													
-												
-													
-													
+																
 													<div class="col-md-12 form-group">
 														 <!-- <label for="gdsImg">상품사진</label>
 														 <input type="file" id="gdsImg" name="product_fname" />
@@ -243,7 +233,7 @@
 														<input type="hidden" name="product_uploadpath">
 														<div class="select_img"><img src="" /></div>
 														 
-														 <script>
+<!-- 														 <script>
 														 
 														  $("#gdsImg").change(function(){
 														   if(this.files && this.files[0]) {
@@ -254,7 +244,7 @@
 														    reader.readAsDataURL(this.files[0]);
 														   }
 														  }); 
-														 </script>
+														 </script> -->
 														<input type="hidden" <%=request.getRealPath("/") %> />
 													</div>
 													
@@ -269,26 +259,8 @@
 												</div>
 												
 											</div>	
-											
-												<!-- <div class="form-group">
-													<label id="product_insert_label">파일 </label> <input
-														class="form-control" id="product_insert_input"
-														name='uploadFile' type="file" placeholder="상품명을 입력하세요."
-														required="" multiple>
-												</div>
-												
-												<div class="uploadResult">
-													<ul>
-													
-													</ul>			
-												</div> -->
-												
-
-
 											</div>
-										</div>
-										
-								
+										</div>						
 									</div>
 								</div>
 								<div class="row" id="ksk_row">
@@ -302,12 +274,8 @@
 				</div>
 			</div>
 						</div>
-
-
-
 					</section>
 
-							
 							<div class="col-md-12 form-group">
 								<button type="submit" value="submit" class="button button-register w-100">상품등록</button>
 							</div>
@@ -331,17 +299,6 @@
 <script>
 
 $(document).ready(function(e){
-
-	/* 
-  var formObj = $("form[role='form']");
-  
-  $("button[type='submit']").on("click", function(e){
-    
-    e.preventDefault();
-    
-    console.log("submit clicked");
-    
-  }); */
 
   
   var formObj = $("form[role='form']");
@@ -369,25 +326,6 @@ $(document).ready(function(e){
       str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
       
     });
-    
-    
-   /*  $(".uploadResult ul li").each(function(i, obj){
-        
-        var jobj = $(obj);
-        
-        console.dir(jobj);
-        console.log("-------------------------");
-        console.log(jobj.data("filename"));
-        
-        
-        str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
-        str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
-        str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
-        str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
-        
-      }); */
-    
-    
     
     console.log(str);
     
@@ -528,9 +466,7 @@ $(document).ready(function(e){
 	var index=1;
 	
 	$("#myTab").click(function() {	//추가버튼 누르면
-//		$(this).after(bb); 	//'#test3'뒤에 bb추가
-		
-		
+
 		var a = "";
 			a += "<div id='test"+index+"'>";
 	    	a += "<label id='product_insert_label'>상품명 </label>";
@@ -544,9 +480,7 @@ $(document).ready(function(e){
 	    	a += "<label id='product_insert_label'>상품사진 </label>";
 	    	a += "<input class='form-control' id='product_insert_input' name='product_fname'" ;
 	    	a += "type='file' id='gdsImg' placeholder='가격을 입력하세요.' required=''></div>";
-	    	/* a += "<input type='hidden' name='product_uuid' value='${product.product_uuid }'>"; */
-	    	
-	    	
+
 	    $("#product_register").append(a);
 	    
 	    index+=1;

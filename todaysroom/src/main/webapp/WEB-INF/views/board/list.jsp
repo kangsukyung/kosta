@@ -69,6 +69,9 @@
 								<li><a href="/board/list?filter=qa" class="d-flex justify-content-between">
 										<p>질문과답변</p><p><c:if test="${pageMaker.cri.filter eq 'qa' }"><c:out value="${pageMaker.total}"/></c:if></p>
 								</a></li>
+								<li><a href="/board/register" class="d-flex justify-content-between">
+										<p>글 등록 잠시만 쓸게욤~</p>
+								</a></li>
 							</ul>
 						</aside>
 					</div>
@@ -223,6 +226,7 @@
 
 
 
+	<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 	<script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 	<script src="/main_resource/vendors/skrollr.min.js"></script>
 	<script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>

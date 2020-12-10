@@ -1,11 +1,7 @@
 package kosta.todayroom.controller;
 
 import kosta.todayroom.domain.ProductInquiryVO;
-import kosta.todayroom.service.MemberService;
 import kosta.todayroom.service.ProductInquiryService;
-
-import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -27,9 +23,6 @@ public class ProductInquiryController {
 	@Setter(onMethod_=@Autowired)
 	ProductInquiryService service;
 	
-	@Setter(onMethod_=@Autowired)
-	MemberService memberService;
-	
 	@GetMapping("/read/{pi_seq}")
 	public void ProductInquiryRead(@PathVariable int pi_seq, Model model){
 		ProductInquiryVO result = service.read(pi_seq);
@@ -40,10 +33,8 @@ public class ProductInquiryController {
 	}
 	
 	@GetMapping("/list")
-	public void ProductInquiryList(Model model, Principal principal){
-		int member_seq = memberService.idCheck(principal.getName()).getMember_seq();
-		
-		model.addAttribute("list", service.list(member_seq));
+	public void ProductInquiryList(Model model){
+		model.addAttribute("list", service.list());		
 	}
 	
 	@GetMapping("/register")

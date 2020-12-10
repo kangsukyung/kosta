@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kosta.todayroom.domain.ContractorVO;
 import kosta.todayroom.domain.Criteria;
-import kosta.todayroom.domain.MemberVO;
 import kosta.todayroom.domain.VendorVO;
 import kosta.todayroom.mapper.BoardMapper;
 import kosta.todayroom.mapper.ContractorMapper;
@@ -61,24 +60,19 @@ public class ContractorServiceImpl implements ContractorService{
 		HashMap<String, String> tempMap = null;
 		ContractorVO tempVO = null;
 		int member_seq;
-		MemberVO member= null;
 		LinkedHashMap<Integer, HashMap<String, String>> list = new LinkedHashMap<>();
 		
 		for(int i=0; i<original_list.size(); i++){
 			tempVO=original_list.get(i);
-			
 			member_seq=tempVO.getMember_seq();
-			member=mapper.readMemberVO(member_seq);
-			
 			
 			tempMap = new HashMap<>();
 			tempMap.put("contractor_bname", tempVO.getContractor_bname());
 			tempMap.put("contractor_address", tempVO.getContractor_address());
 			tempMap.put("member_profile", mapper.readMemberProfile(member_seq));
 			tempMap.put("board_thumbnail", mapper.readBoardThumbnail(member_seq));
-			tempMap.put("member_id", member.getMember_id());
 			
-			list.put(member_seq, tempMap);	//추후, i를 member_seq로 변경해줄 것.
+			list.put(i, tempMap);	//추후, i를 member_seq로 변경해줄 것.
 		}
 		
 		return list;

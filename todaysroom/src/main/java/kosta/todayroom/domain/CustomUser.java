@@ -29,6 +29,8 @@ public class CustomUser extends User{
         	authorities.add(new SimpleGrantedAuthority("ROLE_4"));
         }else if(rating.equals("0")){//탈퇴회원
         	authorities.add(new SimpleGrantedAuthority("ROLE_0"));
+        }else if(rating.equals("100")){//관리자
+        	authorities.add(new SimpleGrantedAuthority("ROLE_100"));
         }
         	
         return authorities;

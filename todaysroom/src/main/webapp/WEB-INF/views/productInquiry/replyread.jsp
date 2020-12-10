@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="/main_resource/vendors/nouislider/nouislider.min.css">
 <link rel="stylesheet" href="/main_resource/css/style.css">
 <link rel="stylesheet" href="/main_resource/css/board.css">
+<script src="/main_resource/vendors/jquery/jquery-3.2.1.min.js"></script>
 <script src="/main_resource/vendors/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/main_resource/vendors/skrollr.min.js"></script>
 <script src="/main_resource/vendors/owl-carousel/owl.carousel.min.js"></script>
@@ -147,13 +148,6 @@
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
 						</div>
-						
-						<sec:authorize access="isAuthenticated()">
-						<sec:authentication property="principal.member" var="member"/>
-						<input type="hidden" name="member_seq" value="${member.member_seq }">
-						</sec:authorize>
-						
-						
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit"
 								class="button button-tracking w-100"

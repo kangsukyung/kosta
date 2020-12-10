@@ -112,9 +112,4 @@ public class MemberServiceImpl implements MemberService{
 		return mapper.memberList();
 	}
 
-	@Override
-	public List<MemberVO> adminread(int pageNum, int amount) {
-		return mapper.adminread(pageNum, amount);
-	}
-
 }

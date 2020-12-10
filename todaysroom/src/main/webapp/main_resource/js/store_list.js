@@ -19,11 +19,10 @@ $(function() {
 	$("#allsofa").click(function() {
 		var str = "";
 		var category = "";
-		$(".lattest-product-area").empty();		
+		$(".lattest-product-area").empty();
 		
-		$.getJSON("/store/pages/" + "living" + "/" + "1" + ".json", function(data) {
+		$.getJSON("/store/pages/" + "sofa" + "/" + "1" + ".json", function(data) {
 			$.each(data, function(i, item) {
-				console.log("몇개?")
 				str += '<div class="row row_product_hw col-lg-4">'
 				+'<div class="card text-center card-product">'
 				+'	<div class="card-product__img">'
@@ -49,12 +48,13 @@ $(function() {
 				+'	</div>'
 				+'</div>'
 				+'</div>'
+//				console.log(str);
+				$(".lattest-product-area").append(str);
 			})
-			$(".lattest-product-area").append(str);
 		}).fail(function(xhr, status, err) {
 			alert("fail");
 		});
-
+		
 		return false;
 	});
 
@@ -63,7 +63,7 @@ $(function() {
 		var category = "";
 		$(".lattest-product-area").empty();
 		
-		$.getJSON("/store/pages/" + "bed" + "/" + "1" + ".json", function(data) {
+		$.getJSON("/store/pages/" + "living" + "/" + "1" + ".json", function(data) {
 			$.each(data, function(i, item) {
 				str += '<div class="row row_product_hw col-lg-4">'
 				+'<div class="card text-center card-product">'
@@ -90,8 +90,9 @@ $(function() {
 				+'	</div>'
 				+'</div>'
 				+'</div>'
+//				console.log(str);
+				$(".lattest-product-area").append(str);
 			})
-			$(".lattest-product-area").append(str);
 		}).fail(function(xhr, status, err) {
 			alert("fail");
 		});

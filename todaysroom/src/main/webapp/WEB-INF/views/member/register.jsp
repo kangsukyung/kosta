@@ -22,7 +22,7 @@
 <body>
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
-		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;"> 
+		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>회원가입</h1>
@@ -155,7 +155,7 @@ $(document).ready(function() {
 				 $.ajax({
 	                   url:"/members/sendSms.do",
 	                   type:"get",
-	                   data:{phone: phoneb },
+	                   data:{phoneb: phoneb },
 	                 	success:function(data){
 	                 		  cerNum.value=data;
 	                 		  console.log(cerNum.value);

@@ -19,7 +19,7 @@
 	
   <!-- ================ start banner area ================= -->	
 	<section class="blog-banner-area" id="category">
-		<div class="container h-100" style="background: url('/main_resource/img/main-banner.jpg') no-repeat; background-size:cover;">
+		<div class="container h-100">
 			<div class="blog-banner">
 				<div class="text-center">
 					<h1>판매자 신청</h1>
@@ -62,7 +62,7 @@
 							<input type="hidden" name="member_seq" value="${member.member_seq }">
 							<div class="col-md-12 form-group"><input type="text" class="form-control" id="vendor_name" name="vendor_name" placeholder="회사이름" onfocus="this.placeholder = ''" onblur="this.placeholder = '회사이름'"></div>
 							<div class="col-md-12 form-group"><input type="text" class="form-control" style="margin-top: 50px;" id="vendor_license" name="vendor_license" placeholder="사업자등록번호" onfocus="this.placeholder = ''" onblur="this.placeholder = '사업자등록번호'"></div>
-							<div class="col-md-12 form-group member_signup"><input type="text" class="form-control-member_singup"  style="margin-top: 50px;" id="vendor_address" name="vendor_address" placeholder="사업지주소"  onblur="this.placeholder = '사업지주소'" readonly="readonly"><button type="button" onclick="openZipSearch(vendor_address)" style="margin-top: 55px;">주소찾기</button></div>
+							<div class="col-md-12 form-group member_signup"><input type="text" class="form-control-member_singup"  style="margin-top: 50px;" id="vendor_address" name="vendor_address" placeholder="사업지주소" onfocus="this.placeholder = ''" onblur="this.placeholder = '사업지주소'"><button type="button" onclick="openZipSearch(vendor_address)" style="margin-top: 55px;">주소찾기</button></div>
 			<div class="col-md-12 form-group"><div class="sorting" style="margin-top: 50px;">
               <select id="vendor_category"  name="vendor_category">
                 <option>선택해주세요</option>

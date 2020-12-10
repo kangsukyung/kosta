@@ -5,6 +5,7 @@ $(document).ready(function() {
 	var memValue = $("#comments_member_seq").val();
 	var myMemValue = $("#my_member_seq").val();
 	var myMemProfile = $("#my_member_profile").val();
+	var myMemNickname = $("#my_member_nickname").val();
 	
 	var replyUL = $(".chat");
 	
@@ -32,7 +33,7 @@ $(document).ready(function() {
 				str +="		<div class='user justify-content-between d-flex'>"
 				str +="			<div class='desc'>"
 				str +="			<h5>"
-				str +="				<a href='#'>"+commentsList[i].comments_seq+"</a>"
+				str +="				<a href='#'>"+myMemNickname+"</a>"
 				str +="			</h5>"
 				str +="			<p class='comment'>"+commentsList[i].comments_content+"</p>"
 				str +="			<p class='date'>"+commentsList[i].comments_date
